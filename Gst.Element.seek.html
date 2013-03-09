@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Element.prototype.seek</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Element.html" title="Gst.Element">Gst.Element</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Element.prototype.seek</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function seek(rate:Number, format:Gst.Format, flags:Gst.SeekFlags, start_type:Gst.SeekType, start:Number, stop_type:Gst.SeekType, stop:Number):Boolean {
+    // Gjs wrapper for gst_element_seek()
+}</pre></div></div></div></div></div>
+<p class="p">Sends a seek event to an element. See <span class=" link"><a href="Gst.new_seek.html" title="Gst.new_seek">Gst.new_seek</a></span> for the details of
+the parameters. The seek event is sent to the element using
+<span class=" link"><a href="Gst.send_event.html" title="Gst.send_event">Gst.send_event</a></span>.</p>
+<p class="p">MT safe.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">rate</span></dt>
+<dd class="terms"><p class="p">The new playback rate</p></dd>
+<dt class="terms"><span class=" code">format</span></dt>
+<dd class="terms"><p class="p">The format of the seek values</p></dd>
+<dt class="terms"><span class=" code">flags</span></dt>
+<dd class="terms"><p class="p">The optional seek flags.</p></dd>
+<dt class="terms"><span class=" code">start_type</span></dt>
+<dd class="terms"><p class="p">The type and flags for the new start position</p></dd>
+<dt class="terms"><span class=" code">start</span></dt>
+<dd class="terms"><p class="p">The value of the new start position</p></dd>
+<dt class="terms"><span class=" code">stop_type</span></dt>
+<dd class="terms"><p class="p">The type and flags for the new stop position</p></dd>
+<dt class="terms"><span class=" code">stop</span></dt>
+<dd class="terms"><p class="p">The value of the new stop position</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p"><span class=" code">true</span> if the event was handled. Flushing seeks will trigger a preroll, which will emit <span class=" link"><a href="Gst.MessageType.html" title="Gst.MessageType">Gst.MessageType</a></span>.async_done.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

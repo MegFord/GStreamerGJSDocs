@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Element.prototype.get_compatible_pad</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Element.html" title="Gst.Element">Gst.Element</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Element.prototype.get_compatible_pad</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function get_compatible_pad(pad:Gst.Pad, caps:Gst.Caps):Gst.Pad {
+    // Gjs wrapper for gst_element_get_compatible_pad()
+}</pre></div></div></div></div></div>
+<p class="p">Looks for an unlinked pad to which the given pad can link. It is not
+guaranteed that linking the pads will work, though it should work in most
+cases.</p>
+<p class="p">This function will first attempt to find a compatible unlinked ALWAYS pad,
+and if none can be found, it will request a compatible REQUEST pad by looking
+at the templates of <span class=" code">element</span>.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">pad</span></dt>
+<dd class="terms"><p class="p">the <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span> to find a compatible one for.</p></dd>
+<dt class="terms"><span class=" code">caps</span></dt>
+<dd class="terms"><p class="p">the <span class=" link"><a href="Gst.Caps.html" title="Gst.Caps">Gst.Caps</a></span> to use as a filter.</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">the <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span> to which a link can be made, or <span class=" code">null</span> if one cannot be found. <span class=" link"><a href="Gst.unref.html" title="Gst.unref">Gst.unref</a></span> after usage.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

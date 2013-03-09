@@ -1,0 +1,91 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.ControlBinding</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.ControlBinding</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let control_binding = new Gst.ControlBinding({
+    <span class=" link"><a href="Gst.ControlBinding-name.html" title="Gst.ControlBinding:name">name</a></span>: value,
+    <span class=" link"><a href="Gst.ControlBinding-object.html" title="Gst.ControlBinding:object">object</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">A base class for value mapping objects that attaches control sources to gobject
+properties. Such an object is taking one or more <span class=" link"><a href="Gst.ControlSource.html" title="Gst.ControlSource">Gst.ControlSource</a></span> instances,
+combines them and maps the resulting value to the type and value range of the
+bound property.</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.ControlBinding</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.ControlBinding.get_g_value_array.html" title="Gst.ControlBinding.prototype.get_g_value_array">Gst.ControlBinding.prototype.get_g_value_array</a></li>
+<li class="links "><a href="Gst.ControlBinding.get_value.html" title="Gst.ControlBinding.prototype.get_value">Gst.ControlBinding.prototype.get_value</a></li>
+<li class="links "><a href="Gst.ControlBinding.get_value_array.html" title="Gst.ControlBinding.prototype.get_value_array">Gst.ControlBinding.prototype.get_value_array</a></li>
+<li class="links "><a href="Gst.ControlBinding.is_disabled.html" title="Gst.ControlBinding.prototype.is_disabled">Gst.ControlBinding.prototype.is_disabled</a></li>
+<li class="links "><a href="Gst.ControlBinding.set_disabled.html" title="Gst.ControlBinding.prototype.set_disabled">Gst.ControlBinding.prototype.set_disabled</a></li>
+<li class="links "><a href="Gst.ControlBinding.sync_values.html" title="Gst.ControlBinding.prototype.sync_values">Gst.ControlBinding.prototype.sync_values</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.ControlBinding-name.html" title="Gst.ControlBinding:name">name</a></li>
+<li class="links "><a href="Gst.ControlBinding-object.html" title="Gst.ControlBinding:object">object</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.ControlBinding-get_g_value_array.html" title="Gst.ControlBinding::get_g_value_array">Gst.ControlBinding::get_g_value_array</a></li>
+<li class="links "><a href="Gst.ControlBinding-get_value.html" title="Gst.ControlBinding::get_value">Gst.ControlBinding::get_value</a></li>
+<li class="links "><a href="Gst.ControlBinding-get_value_array.html" title="Gst.ControlBinding::get_value_array">Gst.ControlBinding::get_value_array</a></li>
+<li class="links "><a href="Gst.ControlBinding-sync_values.html" title="Gst.ControlBinding::sync_values">Gst.ControlBinding::sync_values</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

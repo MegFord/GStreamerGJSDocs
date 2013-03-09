@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.TagSetter</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.TagSetter</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let tag_setter = new Gst.TagSetter();
+  </pre></div></div></div></div></div>
+<p class="p">Element interface that allows setting of media metadata.</p>
+<p class="p">Elements that support changing a stream's metadata will implement this
+interface. Examples of such elements are 'vorbisenc', 'theoraenc' and
+'id3v2mux'.</p>
+<p class="p">If you just want to retrieve metadata in your application then all you
+need to do is watch for tag messages on your pipeline's bus. This
+interface is only for setting metadata, not for extracting it. To set tags
+from the application, find tagsetter elements and set tags using e.g.
+<span class=" link"><a href="Gst.merge_tags.html" title="Gst.merge_tags">Gst.merge_tags</a></span> or <span class=" link"><a href="Gst.add_tags.html" title="Gst.add_tags">Gst.add_tags</a></span>. Also consider
+setting the <span class=" link"><a href="Gst.TagMergeMode.html" title="Gst.TagMergeMode">Gst.TagMergeMode</a></span> that is used for tag events that arrive at the
+tagsetter element (default mode is to keep existing tags).
+The application should do that before the element goes to <span class=" link"><a href="Gst.State.html" title="Gst.State">Gst.State</a></span>.paused.</p>
+<p class="p">Elements implementing the <span class=" link"><a href="Gst.TagSetter.html" title="Gst.TagSetter">Gst.TagSetter</a></span> interface often have to merge
+any tags received from upstream and the tags set by the application via
+the interface. This can be done like this:</p>
+<p class="p">|[
+GstTagMergeMode merge_mode;
+const GstTagList *application_tags;
+const GstTagList *event_tags;
+GstTagSetter *tagsetter;
+GstTagList *result;
+ 
+tagsetter = GST_TAG_SETTER (element);
+ 
+merge_mode = gst_tag_setter_get_tag_merge_mode (tagsetter);
+application_tags = gst_tag_setter_get_tag_list (tagsetter);
+event_tags = (const GstTagList *) element-&gt;event_tags;
+ 
+GST_LOG_OBJECT (tagsetter, "merging tags, merge mode = %d", merge_mode);
+GST_LOG_OBJECT (tagsetter, "event tags: %" GST_PTR_FORMAT, event_tags);
+GST_LOG_OBJECT (tagsetter, "set   tags: %" GST_PTR_FORMAT, application_tags);
+ 
+result = gst_tag_list_merge (application_tags, event_tags, merge_mode);
+ 
+GST_LOG_OBJECT (tagsetter, "final tags: %" GST_PTR_FORMAT, result);
+]|</p>
+<p class="p">Last reviewed on 2006-05-18 (0.10.6)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.TagSetter</span>
+      </div></li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.TagSetter.add_tag_value.html" title="Gst.TagSetter.prototype.add_tag_value">Gst.TagSetter.prototype.add_tag_value</a></li>
+<li class="links "><a href="Gst.TagSetter.get_tag_list.html" title="Gst.TagSetter.prototype.get_tag_list">Gst.TagSetter.prototype.get_tag_list</a></li>
+<li class="links "><a href="Gst.TagSetter.get_tag_merge_mode.html" title="Gst.TagSetter.prototype.get_tag_merge_mode">Gst.TagSetter.prototype.get_tag_merge_mode</a></li>
+<li class="links "><a href="Gst.TagSetter.merge_tags.html" title="Gst.TagSetter.prototype.merge_tags">Gst.TagSetter.prototype.merge_tags</a></li>
+<li class="links "><a href="Gst.TagSetter.reset_tags.html" title="Gst.TagSetter.prototype.reset_tags">Gst.TagSetter.prototype.reset_tags</a></li>
+<li class="links "><a href="Gst.TagSetter.set_tag_merge_mode.html" title="Gst.TagSetter.prototype.set_tag_merge_mode">Gst.TagSetter.prototype.set_tag_merge_mode</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

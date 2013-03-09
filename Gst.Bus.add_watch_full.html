@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Bus.prototype.add_watch_full</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Bus.prototype.add_watch_full</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function add_watch_full(priority:Number, func:Gst.BusFunc):Number {
+    // Gjs wrapper for gst_bus_add_watch_full()
+}</pre></div></div></div></div></div>
+<p class="p">Adds a bus watch to the default main context with the given <span class=" code">priority</span> (e.g.
+%G_PRIORITY_DEFAULT). It is also possible to use a non-default  main
+context set up using <span class=" link"><a href="GLib.push_thread_default.html" title="GLib.push_thread_default">GLib.push_thread_default</a></span> (before
+one had to create a bus watch source and attach it to the desired main
+context 'manually').</p>
+<p class="p">This function is used to receive asynchronous messages in the main loop.
+There can only be a single bus watch per bus, you must remove it before you
+can set a new one.</p>
+<p class="p">When <span class=" code">func</span> is called, the message belongs to the caller; if you want to
+keep a copy of it, call gst_message_ref() before leaving <span class=" code">func</span>.</p>
+<p class="p">The watch can be removed using <span class=" link"><a href="GLib.source_remove.html" title="GLib.source_remove">GLib.source_remove</a></span> or by returning FALSE
+from <span class=" code">func</span>.</p>
+<p class="p">MT safe.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">priority</span></dt>
+<dd class="terms"><p class="p">The priority of the watch.</p></dd>
+<dt class="terms"><span class=" code">func</span></dt>
+<dd class="terms"><p class="p">A function to call when a message is received.</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">The event source id.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>util_seqnum_next</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">util_seqnum_next</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function util_seqnum_next():guint32 {
+    // Gjs wrapper for gst_util_seqnum_next()
+}</pre></div></div></div></div></div>
+<p class="p">Return a constantly incrementing sequence number.</p>
+<p class="p">This function is used internally to GStreamer to be able to determine which
+events and messages are "the same". For example, elements may set the seqnum
+on a segment-done message to be the same as that of the last seek event, to
+indicate that event and the message correspond to the same segment.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">A constantly incrementing 32-bit unsigned integer, which might overflow back to 0 at some point. Use <span class=" link"><a href="Gst.util_seqnum_compare.html" title="util_seqnum_compare">util_seqnum_compare</a></span> to make sure you handle wraparound correctly.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

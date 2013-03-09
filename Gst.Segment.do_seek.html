@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Segment.prototype.do_seek</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Segment.html" title="Gst.Segment">Gst.Segment</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Segment.prototype.do_seek</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function do_seek(rate:Number, format:Gst.Format, flags:Gst.SeekFlags, start_type:Gst.SeekType, start:Number, stop_type:Gst.SeekType, stop:Number, update:Boolean):Boolean {
+    // Gjs wrapper for gst_segment_do_seek()
+}</pre></div></div></div></div></div>
+<p class="p">Update the segment structure with the field values of a seek event (see
+<span class=" link"><a href="Gst.Event.new_seek.html" title="Gst.Event.new_seek">Gst.Event.new_seek</a></span>).</p>
+<p class="p">After calling this method, the segment field position and time will
+contain the requested new position in the segment. The new requested
+position in the segment depends on <span class=" code">rate</span> and <span class=" code">start_type</span> and <span class=" code">stop_type</span>.</p>
+<p class="p">For positive <span class=" code">rate</span>, the new position in the segment is the new <span class=" code">segment</span>
+start field when it was updated with a <span class=" code">start_type</span> different from
+#GST_SEEK_TYPE_NONE. If no update was performed on <span class=" code">segment</span> start position
+(#GST_SEEK_TYPE_NONE), <span class=" code">start</span> is ignored and <span class=" code">segment</span> position is
+unmodified.</p>
+<p class="p">For negative <span class=" code">rate</span>, the new position in the segment is the new <span class=" code">segment</span>
+stop field when it was updated with a <span class=" code">stop_type</span> different from
+#GST_SEEK_TYPE_NONE. If no stop was previously configured in the segment, the
+duration of the segment will be used to update the stop position.
+If no update was performed on <span class=" code">segment</span> stop position (#GST_SEEK_TYPE_NONE),
+<span class=" code">stop</span> is ignored and <span class=" code">segment</span> position is unmodified.</p>
+<p class="p">The applied rate of the segment will be set to 1.0 by default.
+If the caller can apply a rate change, it should update <span class=" code">segment</span>
+rate and applied_rate after calling this function.</p>
+<p class="p"><span class=" code">update</span> will be set to TRUE if a seek should be performed to the segment
+position field. This field can be FALSE if, for example, only the <span class=" code">rate</span>
+has been changed but not the playback position.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">rate</span></dt>
+<dd class="terms"><p class="p">the rate of the segment.</p></dd>
+<dt class="terms"><span class=" code">format</span></dt>
+<dd class="terms"><p class="p">the format of the segment.</p></dd>
+<dt class="terms"><span class=" code">flags</span></dt>
+<dd class="terms"><p class="p">the segment flags for the segment</p></dd>
+<dt class="terms"><span class=" code">start_type</span></dt>
+<dd class="terms"><p class="p">the seek method</p></dd>
+<dt class="terms"><span class=" code">start</span></dt>
+<dd class="terms"><p class="p">the seek start value</p></dd>
+<dt class="terms"><span class=" code">stop_type</span></dt>
+<dd class="terms"><p class="p">the seek method</p></dd>
+<dt class="terms"><span class=" code">stop</span></dt>
+<dd class="terms"><p class="p">the seek stop value</p></dd>
+<dt class="terms"><span class=" code">update</span></dt>
+<dd class="terms"><p class="p">boolean holding whether position was updated.</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p"><span class=" code">true</span> if the seek could be performed.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Segment.html" title="Gst.Segment">Gst.Segment</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

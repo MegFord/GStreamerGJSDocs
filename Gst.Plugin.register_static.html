@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>register_static</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Plugin.html" title="Gst.Plugin">Gst.Plugin</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">register_static</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function register_static(major_version:Number, minor_version:Number, name:String, description:String, init_func:Gst.PluginInitFunc, version:String, license:String, source:String, package:String, origin:String):Boolean {
+    // Gjs wrapper for gst_plugin_register_static()
+}</pre></div></div></div></div></div>
+<p class="p">Registers a static plugin, ie. a plugin which is private to an application
+or library and contained within the application or library (as opposed to
+being shipped as a separate module file).</p>
+<p class="p">You must make sure that GStreamer has been initialised (with <span class=" link"><a href="Gst.init.html" title="init">init</a></span> or
+via <span class=" link"><a href="Gst.init_get_option_group.html" title="Gst.init_get_option_group">Gst.init_get_option_group</a></span>) before calling this function.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">major_version</span></dt>
+<dd class="terms"><p class="p">the major version number of the GStreamer core that the plugin was compiled for, you can just use GST_VERSION_MAJOR here</p></dd>
+<dt class="terms"><span class=" code">minor_version</span></dt>
+<dd class="terms"><p class="p">the minor version number of the GStreamer core that the plugin was compiled for, you can just use GST_VERSION_MINOR here</p></dd>
+<dt class="terms"><span class=" code">name</span></dt>
+<dd class="terms"><p class="p">a unique name of the plugin (ideally prefixed with an application- or library-specific namespace prefix in order to avoid name conflicts in case a similar plugin with the same name ever gets added to GStreamer)</p></dd>
+<dt class="terms"><span class=" code">description</span></dt>
+<dd class="terms"><p class="p">description of the plugin</p></dd>
+<dt class="terms"><span class=" code">init_func</span></dt>
+<dd class="terms"><p class="p">pointer to the init function of this plugin.</p></dd>
+<dt class="terms"><span class=" code">version</span></dt>
+<dd class="terms"><p class="p">version string of the plugin</p></dd>
+<dt class="terms"><span class=" code">license</span></dt>
+<dd class="terms"><p class="p">effective license of plugin. Must be one of the approved licenses (see <span class=" link"><a href="Gst.PluginDesc.html" title="Gst.PluginDesc">Gst.PluginDesc</a></span> above) or the plugin will not be registered.</p></dd>
+<dt class="terms"><span class=" code">source</span></dt>
+<dd class="terms"><p class="p">source module plugin belongs to</p></dd>
+<dt class="terms"><span class=" code">package</span></dt>
+<dd class="terms"><p class="p">shipped package plugin belongs to</p></dd>
+<dt class="terms"><span class=" code">origin</span></dt>
+<dd class="terms"><p class="p">URL to provider of plugin</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">TRUE if the plugin was registered correctly, otherwise FALSE.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Plugin.html" title="Gst.Plugin">Gst.Plugin</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

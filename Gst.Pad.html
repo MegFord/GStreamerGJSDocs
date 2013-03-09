@@ -1,0 +1,210 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Pad</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Pad</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let pad = new Gst.Pad({
+    <span class=" link"><a href="Gst.Pad-direction.html" title="Gst.Pad-direction">direction</a></span>: value,
+    <span class=" link"><a href="Gst.Pad-template.html" title="Gst.Pad:template">template</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">A <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> is linked to other elements via "pads", which are extremely
+light-weight generic link points.</p>
+<p class="p">Pads have a <span class=" link"><a href="Gst.PadDirection.html" title="Gst.PadDirection">Gst.PadDirection</a></span>, source pads produce data, sink pads consume
+data.</p>
+<p class="p">Pads are typically created from a <span class=" link"><a href="Gst.PadTemplate.html" title="Gst.PadTemplate">Gst.PadTemplate</a></span> with
+<span class=" link"><a href="Gst.new_from_template.html" title="Gst.new_from_template">Gst.new_from_template</a></span> and are then added to a <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span>. This usually
+happens when the element is created but it can also happen dynamically based
+on the data that the element is processing or based on the pads that the
+application requests.</p>
+<p class="p">Pads without pad templates can be created with <span class=" link"><a href="Gst.new.html" title="Gst.new">Gst.new</a></span>,
+which takes a direction and a name as an argument.  If the name is NULL,
+then a guaranteed unique name will be assigned to it.</p>
+<p class="p">A <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> creating a pad will typically use the various
+gst_pad_set_*_function() calls to register callbacks for events, queries or
+dataflow on the pads.</p>
+<p class="p">gst_pad_get_parent() will retrieve the <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> that owns the pad.</p>
+<p class="p">After two pads are retrieved from an element with gst_element_get_pad(),
+the pads can be linked with <span class=" link"><a href="Gst.link.html" title="Gst.link">Gst.link</a></span>. (For quick links,
+you can also use <span class=" link"><a href="Gst.Element.link.html" title="Gst.Element.prototype.link">Gst.Element.prototype.link</a></span>, which will make the obvious
+link for you if it's straightforward.). Pads can be unlinked again with
+<span class=" link"><a href="Gst.unlink.html" title="Gst.unlink">Gst.unlink</a></span>. <span class=" link"><a href="Gst.get_peer.html" title="Gst.get_peer">Gst.get_peer</a></span> can be used to check what the pad is
+linked to.</p>
+<p class="p">Before dataflow is possible on the pads, they need to be activated with
+<span class=" link"><a href="Gst.set_active.html" title="Gst.set_active">Gst.set_active</a></span>.</p>
+<p class="p"><span class=" link"><a href="Gst.query.html" title="Gst.query">Gst.query</a></span> and <span class=" link"><a href="Gst.peer_query.html" title="Gst.peer_query">Gst.peer_query</a></span> can be used to query various
+properties of the pad and the stream.</p>
+<p class="p">To send a <span class=" link"><a href="Gst.Event.html" title="Gst.Event">Gst.Event</a></span> on a pad, use <span class=" link"><a href="Gst.send_event.html" title="Gst.send_event">Gst.send_event</a></span> and
+<span class=" link"><a href="Gst.push_event.html" title="Gst.push_event">Gst.push_event</a></span>. Some events will be sticky on the pad, meaning that
+after they pass on the pad they can be queried later with
+<span class=" link"><a href="Gst.get_sticky_event.html" title="Gst.get_sticky_event">Gst.get_sticky_event</a></span> and <span class=" link"><a href="Gst.sticky_events_foreach.html" title="Gst.sticky_events_foreach">Gst.sticky_events_foreach</a></span>.
+<span class=" link"><a href="Gst.get_current_caps.html" title="Gst.get_current_caps">Gst.get_current_caps</a></span> and <span class=" link"><a href="Gst.has_current_caps.html" title="Gst.has_current_caps">Gst.has_current_caps</a></span> are convenience
+functions to query the current sticky CAPS event on a pad.</p>
+<p class="p">GstElements will use <span class=" link"><a href="Gst.push.html" title="Gst.push">Gst.push</a></span> and <span class=" link"><a href="Gst.pull_range.html" title="Gst.pull_range">Gst.pull_range</a></span> to push out
+or pull in a buffer.</p>
+<p class="p">The dataflow, events and queries that happen on a pad can be monitored with
+probes that can be installed with <span class=" link"><a href="Gst.add_probe.html" title="Gst.add_probe">Gst.add_probe</a></span>. <span class=" link"><a href="Gst.is_blocked.html" title="Gst.is_blocked">Gst.is_blocked</a></span>
+can be used to check if a block probe is installed on the pad.
+<span class=" link"><a href="Gst.is_blocking.html" title="Gst.is_blocking">Gst.is_blocking</a></span> checks if the blocking probe is currently blocking the
+pad. <span class=" link"><a href="Gst.remove_probe.html" title="Gst.remove_probe">Gst.remove_probe</a></span> is used to remove a previously installed probe
+and unblock blocking probes if any.</p>
+<p class="p">Pad have an offset that can be retrieved with <span class=" link"><a href="Gst.get_offset.html" title="Gst.get_offset">Gst.get_offset</a></span>. This
+offset will be applied to the running_time of all data passing over the pad.
+<span class=" link"><a href="Gst.set_offset.html" title="Gst.set_offset">Gst.set_offset</a></span> can be used to change the offset.</p>
+<p class="p">Convenience functions exist to start, pause and stop the task on a pad with
+<span class=" link"><a href="Gst.start_task.html" title="Gst.start_task">Gst.start_task</a></span>, <span class=" link"><a href="Gst.pause_task.html" title="Gst.pause_task">Gst.pause_task</a></span> and <span class=" link"><a href="Gst.stop_task.html" title="Gst.stop_task">Gst.stop_task</a></span>
+respectively.</p>
+<p class="p">Last reviewed on 2012-03-29 (0.11.3)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.Pad</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Pad.activate_mode.html" title="Gst.Pad.prototype.activate_mode">Gst.Pad.prototype.activate_mode</a></li>
+<li class="links "><a href="Gst.Pad.add_probe.html" title="Gst.Pad.prototype.add_probe">Gst.Pad.prototype.add_probe</a></li>
+<li class="links "><a href="Gst.Pad.can_link.html" title="Gst.Pad.prototype.can_link">Gst.Pad.prototype.can_link</a></li>
+<li class="links "><a href="Gst.Pad.chain.html" title="Gst.Pad.prototype.chain">Gst.Pad.prototype.chain</a></li>
+<li class="links "><a href="Gst.Pad.chain_list.html" title="Gst.Pad.prototype.chain_list">Gst.Pad.prototype.chain_list</a></li>
+<li class="links "><a href="Gst.Pad.check_reconfigure.html" title="Gst.Pad.prototype.check_reconfigure">Gst.Pad.prototype.check_reconfigure</a></li>
+<li class="links "><a href="Gst.Pad.create_stream_id.html" title="Gst.Pad.prototype.create_stream_id">Gst.Pad.prototype.create_stream_id</a></li>
+<li class="links "><a href="Gst.Pad.event_default.html" title="Gst.Pad.prototype.event_default">Gst.Pad.prototype.event_default</a></li>
+<li class="links "><a href="Gst.Pad.forward.html" title="Gst.Pad.prototype.forward">Gst.Pad.prototype.forward</a></li>
+<li class="links "><a href="Gst.Pad.get_allowed_caps.html" title="Gst.Pad.prototype.get_allowed_caps">Gst.Pad.prototype.get_allowed_caps</a></li>
+<li class="links "><a href="Gst.Pad.get_current_caps.html" title="Gst.Pad.prototype.get_current_caps">Gst.Pad.prototype.get_current_caps</a></li>
+<li class="links "><a href="Gst.Pad.get_direction.html" title="Gst.Pad.prototype.get_direction">Gst.Pad.prototype.get_direction</a></li>
+<li class="links "><a href="Gst.Pad.get_element_private.html" title="Gst.Pad.prototype.get_element_private">Gst.Pad.prototype.get_element_private</a></li>
+<li class="links "><a href="Gst.Pad.get_offset.html" title="Gst.Pad.prototype.get_offset">Gst.Pad.prototype.get_offset</a></li>
+<li class="links "><a href="Gst.Pad.get_pad_template.html" title="Gst.Pad.prototype.get_pad_template">Gst.Pad.prototype.get_pad_template</a></li>
+<li class="links "><a href="Gst.Pad.get_pad_template_caps.html" title="Gst.Pad.prototype.get_pad_template_caps">Gst.Pad.prototype.get_pad_template_caps</a></li>
+<li class="links "><a href="Gst.Pad.get_parent_element.html" title="Gst.Pad.prototype.get_parent_element">Gst.Pad.prototype.get_parent_element</a></li>
+<li class="links "><a href="Gst.Pad.get_peer.html" title="Gst.Pad.prototype.get_peer">Gst.Pad.prototype.get_peer</a></li>
+<li class="links "><a href="Gst.Pad.get_range.html" title="Gst.Pad.prototype.get_range">Gst.Pad.prototype.get_range</a></li>
+<li class="links "><a href="Gst.Pad.get_sticky_event.html" title="Gst.Pad.prototype.get_sticky_event">Gst.Pad.prototype.get_sticky_event</a></li>
+<li class="links "><a href="Gst.Pad.get_stream_id.html" title="Gst.Pad.prototype.get_stream_id">Gst.Pad.prototype.get_stream_id</a></li>
+<li class="links "><a href="Gst.Pad.has_current_caps.html" title="Gst.Pad.prototype.has_current_caps">Gst.Pad.prototype.has_current_caps</a></li>
+<li class="links "><a href="Gst.Pad.is_active.html" title="Gst.Pad.prototype.is_active">Gst.Pad.prototype.is_active</a></li>
+<li class="links "><a href="Gst.Pad.is_blocked.html" title="Gst.Pad.prototype.is_blocked">Gst.Pad.prototype.is_blocked</a></li>
+<li class="links "><a href="Gst.Pad.is_blocking.html" title="Gst.Pad.prototype.is_blocking">Gst.Pad.prototype.is_blocking</a></li>
+<li class="links "><a href="Gst.Pad.is_linked.html" title="Gst.Pad.prototype.is_linked">Gst.Pad.prototype.is_linked</a></li>
+<li class="links "><a href="Gst.Pad.iterate_internal_links.html" title="Gst.Pad.prototype.iterate_internal_links">Gst.Pad.prototype.iterate_internal_links</a></li>
+<li class="links "><a href="Gst.Pad.iterate_internal_links_default.html" title="Gst.Pad.prototype.iterate_internal_links_default">Gst.Pad.prototype.iterate_internal_links_default</a></li>
+<li class="links "><a href="Gst.Pad.link.html" title="Gst.Pad.prototype.link">Gst.Pad.prototype.link</a></li>
+<li class="links "><a href="Gst.Pad.link_full.html" title="Gst.Pad.prototype.link_full">Gst.Pad.prototype.link_full</a></li>
+<li class="links "><a href="Gst.Pad.mark_reconfigure.html" title="Gst.Pad.prototype.mark_reconfigure">Gst.Pad.prototype.mark_reconfigure</a></li>
+<li class="links "><a href="Gst.Pad.needs_reconfigure.html" title="Gst.Pad.prototype.needs_reconfigure">Gst.Pad.prototype.needs_reconfigure</a></li>
+<li class="links "><a href="Gst.Pad.pause_task.html" title="Gst.Pad.prototype.pause_task">Gst.Pad.prototype.pause_task</a></li>
+<li class="links "><a href="Gst.Pad.peer_query.html" title="Gst.Pad.prototype.peer_query">Gst.Pad.prototype.peer_query</a></li>
+<li class="links "><a href="Gst.Pad.peer_query_accept_caps.html" title="Gst.Pad.prototype.peer_query_accept_caps">Gst.Pad.prototype.peer_query_accept_caps</a></li>
+<li class="links "><a href="Gst.Pad.peer_query_caps.html" title="Gst.Pad.prototype.peer_query_caps">Gst.Pad.prototype.peer_query_caps</a></li>
+<li class="links "><a href="Gst.Pad.peer_query_convert.html" title="Gst.Pad.prototype.peer_query_convert">Gst.Pad.prototype.peer_query_convert</a></li>
+<li class="links "><a href="Gst.Pad.peer_query_duration.html" title="Gst.Pad.prototype.peer_query_duration">Gst.Pad.prototype.peer_query_duration</a></li>
+<li class="links "><a href="Gst.Pad.peer_query_position.html" title="Gst.Pad.prototype.peer_query_position">Gst.Pad.prototype.peer_query_position</a></li>
+<li class="links "><a href="Gst.Pad.proxy_query_accept_caps.html" title="Gst.Pad.prototype.proxy_query_accept_caps">Gst.Pad.prototype.proxy_query_accept_caps</a></li>
+<li class="links "><a href="Gst.Pad.proxy_query_caps.html" title="Gst.Pad.prototype.proxy_query_caps">Gst.Pad.prototype.proxy_query_caps</a></li>
+<li class="links "><a href="Gst.Pad.pull_range.html" title="Gst.Pad.prototype.pull_range">Gst.Pad.prototype.pull_range</a></li>
+<li class="links "><a href="Gst.Pad.push.html" title="Gst.Pad.prototype.push">Gst.Pad.prototype.push</a></li>
+<li class="links "><a href="Gst.Pad.push_event.html" title="Gst.Pad.prototype.push_event">Gst.Pad.prototype.push_event</a></li>
+<li class="links "><a href="Gst.Pad.push_list.html" title="Gst.Pad.prototype.push_list">Gst.Pad.prototype.push_list</a></li>
+<li class="links "><a href="Gst.Pad.query.html" title="Gst.Pad.prototype.query">Gst.Pad.prototype.query</a></li>
+<li class="links "><a href="Gst.Pad.query_accept_caps.html" title="Gst.Pad.prototype.query_accept_caps">Gst.Pad.prototype.query_accept_caps</a></li>
+<li class="links "><a href="Gst.Pad.query_caps.html" title="Gst.Pad.prototype.query_caps">Gst.Pad.prototype.query_caps</a></li>
+<li class="links "><a href="Gst.Pad.query_convert.html" title="Gst.Pad.prototype.query_convert">Gst.Pad.prototype.query_convert</a></li>
+<li class="links "><a href="Gst.Pad.query_default.html" title="Gst.Pad.prototype.query_default">Gst.Pad.prototype.query_default</a></li>
+<li class="links "><a href="Gst.Pad.query_duration.html" title="Gst.Pad.prototype.query_duration">Gst.Pad.prototype.query_duration</a></li>
+<li class="links "><a href="Gst.Pad.query_position.html" title="Gst.Pad.prototype.query_position">Gst.Pad.prototype.query_position</a></li>
+<li class="links "><a href="Gst.Pad.remove_probe.html" title="Gst.Pad.prototype.remove_probe">Gst.Pad.prototype.remove_probe</a></li>
+<li class="links "><a href="Gst.Pad.send_event.html" title="Gst.Pad.prototype.send_event">Gst.Pad.prototype.send_event</a></li>
+<li class="links "><a href="Gst.Pad.set_activate_function_full.html" title="Gst.Pad.prototype.set_activate_function_full">Gst.Pad.prototype.set_activate_function_full</a></li>
+<li class="links "><a href="Gst.Pad.set_activatemode_function_full.html" title="Gst.Pad.prototype.set_activatemode_function_full">Gst.Pad.prototype.set_activatemode_function_full</a></li>
+<li class="links "><a href="Gst.Pad.set_active.html" title="Gst.Pad.prototype.set_active">Gst.Pad.prototype.set_active</a></li>
+<li class="links "><a href="Gst.Pad.set_chain_function_full.html" title="Gst.Pad.prototype.set_chain_function_full">Gst.Pad.prototype.set_chain_function_full</a></li>
+<li class="links "><a href="Gst.Pad.set_chain_list_function_full.html" title="Gst.Pad.prototype.set_chain_list_function_full">Gst.Pad.prototype.set_chain_list_function_full</a></li>
+<li class="links "><a href="Gst.Pad.set_element_private.html" title="Gst.Pad.prototype.set_element_private">Gst.Pad.prototype.set_element_private</a></li>
+<li class="links "><a href="Gst.Pad.set_event_function_full.html" title="Gst.Pad.prototype.set_event_function_full">Gst.Pad.prototype.set_event_function_full</a></li>
+<li class="links "><a href="Gst.Pad.set_getrange_function_full.html" title="Gst.Pad.prototype.set_getrange_function_full">Gst.Pad.prototype.set_getrange_function_full</a></li>
+<li class="links "><a href="Gst.Pad.set_iterate_internal_links_function_full.html" title="Gst.Pad.prototype.set_iterate_internal_links_function_full">Gst.Pad.prototype.set_iterate_internal_links_function_full</a></li>
+<li class="links "><a href="Gst.Pad.set_link_function_full.html" title="Gst.Pad.prototype.set_link_function_full">Gst.Pad.prototype.set_link_function_full</a></li>
+<li class="links "><a href="Gst.Pad.set_offset.html" title="Gst.Pad.prototype.set_offset">Gst.Pad.prototype.set_offset</a></li>
+<li class="links "><a href="Gst.Pad.set_query_function_full.html" title="Gst.Pad.prototype.set_query_function_full">Gst.Pad.prototype.set_query_function_full</a></li>
+<li class="links "><a href="Gst.Pad.set_unlink_function_full.html" title="Gst.Pad.prototype.set_unlink_function_full">Gst.Pad.prototype.set_unlink_function_full</a></li>
+<li class="links "><a href="Gst.Pad.start_task.html" title="Gst.Pad.prototype.start_task">Gst.Pad.prototype.start_task</a></li>
+<li class="links "><a href="Gst.Pad.sticky_events_foreach.html" title="Gst.Pad.prototype.sticky_events_foreach">Gst.Pad.prototype.sticky_events_foreach</a></li>
+<li class="links "><a href="Gst.Pad.stop_task.html" title="Gst.Pad.prototype.stop_task">Gst.Pad.prototype.stop_task</a></li>
+<li class="links "><a href="Gst.Pad.unlink.html" title="Gst.Pad.prototype.unlink">Gst.Pad.prototype.unlink</a></li>
+<li class="links "><a href="Gst.Pad.use_fixed_caps.html" title="Gst.Pad.prototype.use_fixed_caps">Gst.Pad.prototype.use_fixed_caps</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Pad.mode_get_name.html" title="mode_get_name">mode_get_name</a></li></ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Pad-caps.html" title="Gst.Pad:caps">caps</a></li>
+<li class="links "><a href="Gst.Pad-template.html" title="Gst.Pad:template">template</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Signals</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Pad-linked.html" title="Gst.Pad::linked">linked</a></li>
+<li class="links "><a href="Gst.Pad-unlinked.html" title="Gst.Pad::unlinked">unlinked</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Other</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Pad.new.html" title="Gst.Pad.new">Gst.Pad.new</a></li>
+<li class="links "><a href="Gst.Pad.new_from_static_template.html" title="Gst.Pad.new_from_static_template">Gst.Pad.new_from_static_template</a></li>
+<li class="links "><a href="Gst.Pad.new_from_template.html" title="Gst.Pad.new_from_template">Gst.Pad.new_from_template</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

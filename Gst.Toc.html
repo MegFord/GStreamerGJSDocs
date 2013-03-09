@@ -1,0 +1,71 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Toc</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Toc</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p"><span class=" link"><a href="Gst.Toc.html" title="Gst.Toc">Gst.Toc</a></span> functions are used to create/free <span class=" link"><a href="Gst.Toc.html" title="Gst.Toc">Gst.Toc</a></span> and <span class=" link"><a href="Gst.TocEntry.html" title="Gst.TocEntry">Gst.TocEntry</a></span> structures.
+Also they are used to convert <span class=" link"><a href="Gst.Toc.html" title="Gst.Toc">Gst.Toc</a></span> into <span class=" link"><a href="Gst.Structure.html" title="Gst.Structure">Gst.Structure</a></span> and vice versa.</p>
+<p class="p"><span class=" link"><a href="Gst.Toc.html" title="Gst.Toc">Gst.Toc</a></span> lets you to inform other elements in pipeline or application that playing
+source has some kind of table of contents (TOC). These may be chapters, editions,
+angles or other types. For example: DVD chapters, Matroska chapters or cue sheet
+TOC. Such TOC will be useful for applications to display instead of just a
+playlist.</p>
+<p class="p">Using TOC is very easy. Firstly, create <span class=" link"><a href="Gst.Toc.html" title="Gst.Toc">Gst.Toc</a></span> structure which represents root
+contents of the source. You can also attach TOC-specific tags to it. Then fill
+it with <span class=" link"><a href="Gst.TocEntry.html" title="Gst.TocEntry">Gst.TocEntry</a></span> entries by appending them to the <span class=" link"><a href="Gst.Toc.html" title="Gst.Toc">Gst.Toc</a></span> using
+<span class=" link"><a href="Gst.append_entry.html" title="Gst.append_entry">Gst.append_entry</a></span>, and appending subentries to a <span class=" link"><a href="Gst.TocEntry.html" title="Gst.TocEntry">Gst.TocEntry</a></span> using
+<span class=" link"><a href="Gst.append_sub_entry.html" title="Gst.append_sub_entry">Gst.append_sub_entry</a></span>.</p>
+<p class="p">Note that root level of the TOC can contain only either editions or chapters. You
+should not mix them together at the same level. Otherwise you will get serialization
+/deserialization errors. Make sure that no one of the entries has negative start and
+ stop values.</p>
+<p class="p">Use <span class=" link"><a href="Gst.Event.new_toc.html" title="Gst.Event.new_toc">Gst.Event.new_toc</a></span> to create a new TOC <span class=" link"><a href="Gst.Event.html" title="Gst.Event">Gst.Event</a></span>, and <span class=" link"><a href="Gst.Event.parse_toc.html" title="Gst.Event.prototype.parse_toc">Gst.Event.prototype.parse_toc</a></span> to
+parse received TOC event. Use <span class=" link"><a href="Gst.Event.new_toc_select.html" title="Gst.Event.new_toc_select">Gst.Event.new_toc_select</a></span> to create a new TOC select <span class=" link"><a href="Gst.Event.html" title="Gst.Event">Gst.Event</a></span>,
+and <span class=" link"><a href="Gst.Event.parse_toc_select.html" title="Gst.Event.prototype.parse_toc_select">Gst.Event.prototype.parse_toc_select</a></span> to parse received TOC select event. The same rule for
+the <span class=" link"><a href="Gst.Message.html" title="Gst.Message">Gst.Message</a></span>: <span class=" link"><a href="Gst.Message.new_toc.html" title="Gst.Message.new_toc">Gst.Message.new_toc</a></span> to create new TOC <span class=" link"><a href="Gst.Message.html" title="Gst.Message">Gst.Message</a></span>, and
+<span class=" link"><a href="Gst.Message.parse_toc.html" title="Gst.Message.prototype.parse_toc">Gst.Message.prototype.parse_toc</a></span> to parse received TOC message.</p>
+<p class="p">TOCs can have global scope or current scope. Global scope TOCs contain
+all entries that can possibly be selected using a toc select event, and
+are what an application is usually interested in. TOCs with current scope
+only contain the parts of the TOC relevant to the currently selected/playing
+stream; the current scope TOC is used by downstream elements such as muxers
+to write correct TOC entries when transcoding files, for example. When
+playing a DVD, the global TOC would contain a hierarchy of all titles,
+chapters and angles, for example, while the current TOC would only contain
+the chapters for the currently playing title if playback of a specific
+title was requested.</p>
+<div class="links topiclinks"><div class="inner"><div class="region">
+<div class="linkdiv "><a class="linkdiv" href="Gst.Toc.new.html" title="Gst.Toc.new"><span class="title">Gst.Toc.new</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Toc.append_entry.html" title="Gst.Toc.prototype.append_entry"><span class="title">Gst.Toc.prototype.append_entry</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Toc.dump.html" title="Gst.Toc.prototype.dump"><span class="title">Gst.Toc.prototype.dump</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Toc.find_entry.html" title="Gst.Toc.prototype.find_entry"><span class="title">Gst.Toc.prototype.find_entry</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Toc.get_entries.html" title="Gst.Toc.prototype.get_entries"><span class="title">Gst.Toc.prototype.get_entries</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Toc.get_scope.html" title="Gst.Toc.prototype.get_scope"><span class="title">Gst.Toc.prototype.get_scope</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Toc.get_tags.html" title="Gst.Toc.prototype.get_tags"><span class="title">Gst.Toc.prototype.get_tags</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Toc.merge_tags.html" title="Gst.Toc.prototype.merge_tags"><span class="title">Gst.Toc.prototype.merge_tags</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Toc.set_tags.html" title="Gst.Toc.prototype.set_tags"><span class="title">Gst.Toc.prototype.set_tags</span></a></div>
+</div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

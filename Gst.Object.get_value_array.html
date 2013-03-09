@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Object.prototype.get_value_array</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Object.html" title="Gst.Object">Gst.Object</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Object.prototype.get_value_array</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function get_value_array(property_name:String, timestamp:Gst.ClockTime, interval:Gst.ClockTime, n_values:Number, values:gpointer):Boolean {
+    // Gjs wrapper for gst_object_get_value_array()
+}</pre></div></div></div></div></div>
+<p class="p">Gets a number of values for the given controlled property starting at the
+requested time. The array <span class=" code">values</span> need to hold enough space for <span class=" code">n_values</span> of
+the same type as the objects property's type.</p>
+<p class="p">This function is useful if one wants to e.g. draw a graph of the control
+curve or apply a control curve sample by sample.</p>
+<p class="p">The values are unboxed and ready to be used. The similar function 
+<span class=" link"><a href="Gst.Object.get_g_value_array.html" title="Gst.Object.prototype.get_g_value_array">Gst.Object.prototype.get_g_value_array</a></span> returns the array as #GValues and is
+better suites for bindings.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">property_name</span></dt>
+<dd class="terms"><p class="p">the name of the property to get</p></dd>
+<dt class="terms"><span class=" code">timestamp</span></dt>
+<dd class="terms"><p class="p">the time that should be processed</p></dd>
+<dt class="terms"><span class=" code">interval</span></dt>
+<dd class="terms"><p class="p">the time spacing between subsequent values</p></dd>
+<dt class="terms"><span class=" code">n_values</span></dt>
+<dd class="terms"><p class="p">the number of values</p></dd>
+<dt class="terms"><span class=" code">values</span></dt>
+<dd class="terms"><p class="p">array to put control-values in</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p"><span class=" code">true</span> if the given array could be filled, <span class=" code">false</span> otherwise</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Object.html" title="Gst.Object">Gst.Object</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

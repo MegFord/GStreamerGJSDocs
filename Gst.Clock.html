@@ -1,0 +1,174 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Clock</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Clock</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let clock = new Gst.Clock({
+    <span class=" link"><a href="Gst.Clock-timeout.html" title="Gst.Clock:timeout">timeout</a></span>: value,
+    <span class=" link"><a href="Gst.Clock-window-size.html" title="Gst.Clock:window-size">window_size</a></span>: value,
+    <span class=" link"><a href="Gst.Clock-window-threshold.html" title="Gst.Clock:window-threshold">window_threshold</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">GStreamer uses a global clock to synchronize the plugins in a pipeline.
+Different clock implementations are possible by implementing this abstract
+base class or, more conveniently, by subclassing <span class=" link"><a href="Gst.SystemClock.html" title="Gst.SystemClock">Gst.SystemClock</a></span>.</p>
+<p class="p">The <span class=" link"><a href="Gst.Clock.html" title="Gst.Clock">Gst.Clock</a></span> returns a monotonically increasing time with the method
+<span class=" link"><a href="Gst.get_time.html" title="Gst.get_time">Gst.get_time</a></span>. Its accuracy and base time depend on the specific
+clock implementation but time is always expressed in nanoseconds. Since the
+baseline of the clock is undefined, the clock time returned is not
+meaningful in itself, what matters are the deltas between two clock times.
+The time returned by a clock is called the absolute time.</p>
+<p class="p">The pipeline uses the clock to calculate the running time. Usually all
+renderers synchronize to the global clock using the buffer timestamps, the
+newsegment events and the element's base time, see <span class=" link"><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></span>.</p>
+<p class="p">A clock implementation can support periodic and single shot clock
+notifications both synchronous and asynchronous.</p>
+<p class="p">One first needs to create a <span class=" link"><a href="Gst.ClockID.html" title="Gst.ClockID">Gst.ClockID</a></span> for the periodic or single shot
+notification using <span class=" link"><a href="Gst.new_single_shot_id.html" title="Gst.new_single_shot_id">Gst.new_single_shot_id</a></span> or
+<span class=" link"><a href="Gst.new_periodic_id.html" title="Gst.new_periodic_id">Gst.new_periodic_id</a></span>.</p>
+<p class="p">To perform a blocking wait for the specific time of the <span class=" link"><a href="Gst.ClockID.html" title="Gst.ClockID">Gst.ClockID</a></span> use the
+<span class=" link"><a href="Gst.id_wait.html" title="Gst.id_wait">Gst.id_wait</a></span>. To receive a callback when the specific time is reached
+in the clock use <span class=" link"><a href="Gst.id_wait_async.html" title="Gst.id_wait_async">Gst.id_wait_async</a></span>. Both these calls can be
+interrupted with the <span class=" link"><a href="Gst.id_unschedule.html" title="Gst.id_unschedule">Gst.id_unschedule</a></span> call. If the blocking wait is
+unscheduled a return value of #GST_CLOCK_UNSCHEDULED is returned.</p>
+<p class="p">Periodic callbacks scheduled async will be repeatedly called automatically
+until it is unscheduled. To schedule a sync periodic callback,
+<span class=" link"><a href="Gst.id_wait.html" title="Gst.id_wait">Gst.id_wait</a></span> should be called repeatedly.</p>
+<p class="p">The async callbacks can happen from any thread, either provided by the core
+or from a streaming thread. The application should be prepared for this.</p>
+<p class="p">A <span class=" link"><a href="Gst.ClockID.html" title="Gst.ClockID">Gst.ClockID</a></span> that has been unscheduled cannot be used again for any wait
+operation, a new <span class=" link"><a href="Gst.ClockID.html" title="Gst.ClockID">Gst.ClockID</a></span> should be created and the old unscheduled one
+should be destroyed with <span class=" link"><a href="Gst.id_unref.html" title="Gst.id_unref">Gst.id_unref</a></span>.</p>
+<p class="p">It is possible to perform a blocking wait on the same <span class=" link"><a href="Gst.ClockID.html" title="Gst.ClockID">Gst.ClockID</a></span> from
+multiple threads. However, registering the same <span class=" link"><a href="Gst.ClockID.html" title="Gst.ClockID">Gst.ClockID</a></span> for multiple
+async notifications is not possible, the callback will only be called for
+the thread registering the entry last.</p>
+<p class="p">None of the wait operations unref the <span class=" link"><a href="Gst.ClockID.html" title="Gst.ClockID">Gst.ClockID</a></span>, the owner is responsible
+for unreffing the ids itself. This holds for both periodic and single shot
+notifications. The reason being that the owner of the <span class=" link"><a href="Gst.ClockID.html" title="Gst.ClockID">Gst.ClockID</a></span> has to
+keep a handle to the <span class=" link"><a href="Gst.ClockID.html" title="Gst.ClockID">Gst.ClockID</a></span> to unblock the wait on FLUSHING events or
+state changes and if the entry would be unreffed automatically, the handle 
+might become invalid without any notification.</p>
+<p class="p">These clock operations do not operate on the running time, so the callbacks
+will also occur when not in PLAYING state as if the clock just keeps on
+running. Some clocks however do not progress when the element that provided
+the clock is not PLAYING.</p>
+<p class="p">When a clock has the #GST_CLOCK_FLAG_CAN_SET_MASTER flag set, it can be
+slaved to another <span class=" link"><a href="Gst.Clock.html" title="Gst.Clock">Gst.Clock</a></span> with the <span class=" link"><a href="Gst.set_master.html" title="Gst.set_master">Gst.set_master</a></span>. The clock will
+then automatically be synchronized to this master clock by repeatedly
+sampling the master clock and the slave clock and recalibrating the slave
+clock with <span class=" link"><a href="Gst.set_calibration.html" title="Gst.set_calibration">Gst.set_calibration</a></span>. This feature is mostly useful for
+plugins that have an internal clock but must operate with another clock
+selected by the <span class=" link"><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></span>.  They can track the offset and rate difference
+of their internal clock relative to the master clock by using the
+<span class=" link"><a href="Gst.get_calibration.html" title="Gst.get_calibration">Gst.get_calibration</a></span> function. </p>
+<p class="p">The master/slave synchronisation can be tuned with the <span class=" link"><a href="Gst.timeout.html" title="Gst.timeout">Gst.timeout</a></span>,
+<span class=" link"><a href="Gst.window-size.html" title="Gst.window-size">Gst.window-size</a></span> and <span class=" link"><a href="Gst.window-threshold.html" title="Gst.window-threshold">Gst.window-threshold</a></span> properties.
+The <span class=" link"><a href="Gst.timeout.html" title="Gst.timeout">Gst.timeout</a></span> property defines the interval to sample the master
+clock and run the calibration functions. <span class=" link"><a href="Gst.window-size.html" title="Gst.window-size">Gst.window-size</a></span> defines the
+number of samples to use when calibrating and <span class=" link"><a href="Gst.window-threshold.html" title="Gst.window-threshold">Gst.window-threshold</a></span>
+defines the minimum number of samples before the calibration is performed.</p>
+<p class="p">Last reviewed on 2012-03-28 (0.11.3)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.Clock</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Clock.add_observation.html" title="Gst.Clock.prototype.add_observation">Gst.Clock.prototype.add_observation</a></li>
+<li class="links "><a href="Gst.Clock.adjust_unlocked.html" title="Gst.Clock.prototype.adjust_unlocked">Gst.Clock.prototype.adjust_unlocked</a></li>
+<li class="links "><a href="Gst.Clock.get_calibration.html" title="Gst.Clock.prototype.get_calibration">Gst.Clock.prototype.get_calibration</a></li>
+<li class="links "><a href="Gst.Clock.get_internal_time.html" title="Gst.Clock.prototype.get_internal_time">Gst.Clock.prototype.get_internal_time</a></li>
+<li class="links "><a href="Gst.Clock.get_master.html" title="Gst.Clock.prototype.get_master">Gst.Clock.prototype.get_master</a></li>
+<li class="links "><a href="Gst.Clock.get_resolution.html" title="Gst.Clock.prototype.get_resolution">Gst.Clock.prototype.get_resolution</a></li>
+<li class="links "><a href="Gst.Clock.get_time.html" title="Gst.Clock.prototype.get_time">Gst.Clock.prototype.get_time</a></li>
+<li class="links "><a href="Gst.Clock.get_timeout.html" title="Gst.Clock.prototype.get_timeout">Gst.Clock.prototype.get_timeout</a></li>
+<li class="links "><a href="Gst.Clock.new_periodic_id.html" title="Gst.Clock.prototype.new_periodic_id">Gst.Clock.prototype.new_periodic_id</a></li>
+<li class="links "><a href="Gst.Clock.new_single_shot_id.html" title="Gst.Clock.prototype.new_single_shot_id">Gst.Clock.prototype.new_single_shot_id</a></li>
+<li class="links "><a href="Gst.Clock.periodic_id_reinit.html" title="Gst.Clock.prototype.periodic_id_reinit">Gst.Clock.prototype.periodic_id_reinit</a></li>
+<li class="links "><a href="Gst.Clock.set_calibration.html" title="Gst.Clock.prototype.set_calibration">Gst.Clock.prototype.set_calibration</a></li>
+<li class="links "><a href="Gst.Clock.set_master.html" title="Gst.Clock.prototype.set_master">Gst.Clock.prototype.set_master</a></li>
+<li class="links "><a href="Gst.Clock.set_resolution.html" title="Gst.Clock.prototype.set_resolution">Gst.Clock.prototype.set_resolution</a></li>
+<li class="links "><a href="Gst.Clock.set_timeout.html" title="Gst.Clock.prototype.set_timeout">Gst.Clock.prototype.set_timeout</a></li>
+<li class="links "><a href="Gst.Clock.single_shot_id_reinit.html" title="Gst.Clock.prototype.single_shot_id_reinit">Gst.Clock.prototype.single_shot_id_reinit</a></li>
+<li class="links "><a href="Gst.Clock.unadjust_unlocked.html" title="Gst.Clock.prototype.unadjust_unlocked">Gst.Clock.prototype.unadjust_unlocked</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Clock.id_compare_func.html" title="id_compare_func">id_compare_func</a></li>
+<li class="links "><a href="Gst.Clock.id_get_time.html" title="id_get_time">id_get_time</a></li>
+<li class="links "><a href="Gst.Clock.id_ref.html" title="id_ref">id_ref</a></li>
+<li class="links "><a href="Gst.Clock.id_unref.html" title="id_unref">id_unref</a></li>
+<li class="links "><a href="Gst.Clock.id_unschedule.html" title="id_unschedule">id_unschedule</a></li>
+<li class="links "><a href="Gst.Clock.id_wait.html" title="id_wait">id_wait</a></li>
+<li class="links "><a href="Gst.Clock.id_wait_async.html" title="id_wait_async">id_wait_async</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Clock-timeout.html" title="Gst.Clock:timeout">timeout</a></li>
+<li class="links "><a href="Gst.Clock-window-size.html" title="Gst.Clock:window-size">window-size</a></li>
+<li class="links "><a href="Gst.Clock-window-threshold.html" title="Gst.Clock:window-threshold">window-threshold</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Clock-change_resolution.html" title="Gst.Clock::change_resolution">Gst.Clock::change_resolution</a></li>
+<li class="links "><a href="Gst.Clock-get_internal_time.html" title="Gst.Clock::get_internal_time">Gst.Clock::get_internal_time</a></li>
+<li class="links "><a href="Gst.Clock-get_resolution.html" title="Gst.Clock::get_resolution">Gst.Clock::get_resolution</a></li>
+<li class="links "><a href="Gst.Clock-unschedule.html" title="Gst.Clock::unschedule">Gst.Clock::unschedule</a></li>
+<li class="links "><a href="Gst.Clock-wait.html" title="Gst.Clock::wait">Gst.Clock::wait</a></li>
+<li class="links "><a href="Gst.Clock-wait_async.html" title="Gst.Clock::wait_async">Gst.Clock::wait_async</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

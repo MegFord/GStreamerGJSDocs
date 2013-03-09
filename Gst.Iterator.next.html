@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Iterator.prototype.next</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Iterator.html" title="Gst.Iterator">Gst.Iterator</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Iterator.prototype.next</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function next():Gst.IteratorResult {
+    // Gjs wrapper for gst_iterator_next()
+}</pre></div></div></div></div></div>
+<p class="p">Get the next item from the iterator in <span class=" code">elem</span>. </p>
+<p class="p">Only when this function returns <span class=" link"><a href="Gst.IteratorResult.html" title="Gst.IteratorResult">Gst.IteratorResult</a></span>.ok, <span class=" code">elem</span> will contain a valid
+value. <span class=" code">elem</span> must have been initialized to the type of the iterator or
+initialized to zeroes with <span class=" link"><a href="GObject.unset.html" title="GObject.unset">GObject.unset</a></span>. The caller is responsible for
+unsetting or resetting <span class=" code">elem</span> with <span class=" link"><a href="GObject.unset.html" title="GObject.unset">GObject.unset</a></span> or <span class=" link"><a href="GObject.reset.html" title="GObject.reset">GObject.reset</a></span>
+after usage.</p>
+<p class="p">When this function returns <span class=" link"><a href="Gst.IteratorResult.html" title="Gst.IteratorResult">Gst.IteratorResult</a></span>.done, no more elements can be
+retrieved from <span class=" code">it</span>.</p>
+<p class="p">A return value of <span class=" link"><a href="Gst.IteratorResult.html" title="Gst.IteratorResult">Gst.IteratorResult</a></span>.resync indicates that the element list was
+concurrently updated. The user of <span class=" code">it</span> should call <span class=" link"><a href="Gst.resync.html" title="Gst.resync">Gst.resync</a></span> to
+get the newly updated list. </p>
+<p class="p">A return value of <span class=" link"><a href="Gst.IteratorResult.html" title="Gst.IteratorResult">Gst.IteratorResult</a></span>.error indicates an unrecoverable fatal error.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">The result of the iteration. Unset <span class=" code">elem</span> after usage.  MT safe.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Iterator.html" title="Gst.Iterator">Gst.Iterator</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

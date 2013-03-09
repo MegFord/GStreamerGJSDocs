@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Pad.prototype.iterate_internal_links_default</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Pad.prototype.iterate_internal_links_default</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function iterate_internal_links_default(parent:Gst.Object):Gst.Iterator {
+    // Gjs wrapper for gst_pad_iterate_internal_links_default()
+}</pre></div></div></div></div></div>
+<p class="p">Iterate the list of pads to which the given pad is linked to inside of
+the parent element.
+This is the default handler, and thus returns an iterator of all of the
+pads inside the parent element with opposite direction.</p>
+<p class="p">The caller must free this iterator after use with <span class=" link"><a href="Gst.Iterator.free.html" title="Gst.Iterator.prototype.free">Gst.Iterator.prototype.free</a></span>.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">parent</span></dt>
+<dd class="terms"><p class="p">the parent of <span class=" code">pad</span> or NULL</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.Iterator.html" title="Gst.Iterator">Gst.Iterator</a></span> of <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span>, or NULL if <span class=" code">pad</span> has no parent. Unref each returned pad with <span class=" link"><a href="Gst.Object.unref.html" title="Gst.Object.prototype.unref">Gst.Object.prototype.unref</a></span>.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

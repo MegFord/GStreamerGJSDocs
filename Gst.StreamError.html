@@ -1,0 +1,62 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.StreamError</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.StreamError</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">Stream errors are for anything related to the stream being processed:
+format errors, media type errors, ...
+They're typically used by decoders, demuxers, converters, ...</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">StreamError.FAILED</span></dt>
+<dd class="terms"><p class="p">a general error which doesn't fit in any other category.  Make sure you add a custom message to the error call.</p></dd>
+<dt class="terms"><span class=" code">StreamError.TOO_LAZY</span></dt>
+<dd class="terms"><p class="p">do not use this except as a placeholder for deciding where to go while developing code.</p></dd>
+<dt class="terms"><span class=" code">StreamError.NOT_IMPLEMENTED</span></dt>
+<dd class="terms"><p class="p">use this when you do not want to implement this functionality yet.</p></dd>
+<dt class="terms"><span class=" code">StreamError.TYPE_NOT_FOUND</span></dt>
+<dd class="terms"><p class="p">used when the element doesn't know the stream's type.</p></dd>
+<dt class="terms"><span class=" code">StreamError.WRONG_TYPE</span></dt>
+<dd class="terms"><p class="p">used when the element doesn't handle this type of stream.</p></dd>
+<dt class="terms"><span class=" code">StreamError.CODEC_NOT_FOUND</span></dt>
+<dd class="terms"><p class="p">used when there's no codec to handle the stream's type.</p></dd>
+<dt class="terms"><span class=" code">StreamError.DECODE</span></dt>
+<dd class="terms"><p class="p">used when decoding fails.</p></dd>
+<dt class="terms"><span class=" code">StreamError.ENCODE</span></dt>
+<dd class="terms"><p class="p">used when encoding fails.</p></dd>
+<dt class="terms"><span class=" code">StreamError.DEMUX</span></dt>
+<dd class="terms"><p class="p">used when demuxing fails.</p></dd>
+<dt class="terms"><span class=" code">StreamError.MUX</span></dt>
+<dd class="terms"><p class="p">used when muxing fails.</p></dd>
+<dt class="terms"><span class=" code">StreamError.FORMAT</span></dt>
+<dd class="terms"><p class="p">used when the stream is of the wrong format (for example, wrong caps).</p></dd>
+<dt class="terms"><span class=" code">StreamError.DECRYPT</span></dt>
+<dd class="terms"><p class="p">used when the stream is encrypted and can't be decrypted because this is not supported by the element.</p></dd>
+<dt class="terms"><span class=" code">StreamError.DECRYPT_NOKEY</span></dt>
+<dd class="terms"><p class="p">used when the stream is encrypted and can't be decrypted because no suitable key is available.</p></dd>
+<dt class="terms"><span class=" code">StreamError.NUM_ERRORS</span></dt>
+<dd class="terms"><p class="p">the number of stream error types.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

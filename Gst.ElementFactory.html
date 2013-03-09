@@ -1,0 +1,113 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.ElementFactory</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.ElementFactory</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let element_factory = new Gst.ElementFactory();
+  </pre></div></div></div></div></div>
+<p class="p"><span class=" link"><a href="Gst.ElementFactory.html" title="Gst.ElementFactory">Gst.ElementFactory</a></span> is used to create instances of elements. A
+GstElementfactory can be added to a <span class=" link"><a href="Gst.Plugin.html" title="Gst.Plugin">Gst.Plugin</a></span> as it is also a
+<span class=" link"><a href="Gst.PluginFeature.html" title="Gst.PluginFeature">Gst.PluginFeature</a></span>.</p>
+<p class="p">Use the <span class=" link"><a href="Gst.find.html" title="Gst.find">Gst.find</a></span> and <span class=" link"><a href="Gst.create.html" title="Gst.create">Gst.create</a></span>
+functions to create element instances or use <span class=" link"><a href="Gst.make.html" title="Gst.make">Gst.make</a></span> as a
+convenient shortcut.</p>
+<p class="p">The following code example shows you how to create a GstFileSrc element.</p>
+<p class="p">&lt;example&gt;
+&lt;title&gt;Using an element factory&lt;/title&gt;
+&lt;programlisting language="c"&gt;
+  #include &amp;lt;gst/gst.h&amp;gt;</p>
+<p class="p">  GstElement *src;
+  GstElementFactory *srcfactory;</p>
+<p class="p">  gst_init (&amp;amp;argc, &amp;amp;argv);</p>
+<p class="p">  srcfactory = gst_element_factory_find ("filesrc");
+  g_return_if_fail (srcfactory != NULL);
+  src = gst_element_factory_create (srcfactory, "src");
+  g_return_if_fail (src != NULL);
+  ...
+&lt;/programlisting&gt;
+&lt;/example&gt;</p>
+<p class="p">Last reviewed on 2005-11-23 (0.9.5)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.PluginFeature</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.ElementFactory</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.ElementFactory.can_sink_all_caps.html" title="Gst.ElementFactory.prototype.can_sink_all_caps">Gst.ElementFactory.prototype.can_sink_all_caps</a></li>
+<li class="links "><a href="Gst.ElementFactory.can_sink_any_caps.html" title="Gst.ElementFactory.prototype.can_sink_any_caps">Gst.ElementFactory.prototype.can_sink_any_caps</a></li>
+<li class="links "><a href="Gst.ElementFactory.can_src_all_caps.html" title="Gst.ElementFactory.prototype.can_src_all_caps">Gst.ElementFactory.prototype.can_src_all_caps</a></li>
+<li class="links "><a href="Gst.ElementFactory.can_src_any_caps.html" title="Gst.ElementFactory.prototype.can_src_any_caps">Gst.ElementFactory.prototype.can_src_any_caps</a></li>
+<li class="links "><a href="Gst.ElementFactory.create.html" title="Gst.ElementFactory.prototype.create">Gst.ElementFactory.prototype.create</a></li>
+<li class="links "><a href="Gst.ElementFactory.get_element_type.html" title="Gst.ElementFactory.prototype.get_element_type">Gst.ElementFactory.prototype.get_element_type</a></li>
+<li class="links "><a href="Gst.ElementFactory.get_metadata.html" title="Gst.ElementFactory.prototype.get_metadata">Gst.ElementFactory.prototype.get_metadata</a></li>
+<li class="links "><a href="Gst.ElementFactory.get_metadata_keys.html" title="Gst.ElementFactory.prototype.get_metadata_keys">Gst.ElementFactory.prototype.get_metadata_keys</a></li>
+<li class="links "><a href="Gst.ElementFactory.get_num_pad_templates.html" title="Gst.ElementFactory.prototype.get_num_pad_templates">Gst.ElementFactory.prototype.get_num_pad_templates</a></li>
+<li class="links "><a href="Gst.ElementFactory.get_static_pad_templates.html" title="Gst.ElementFactory.prototype.get_static_pad_templates">Gst.ElementFactory.prototype.get_static_pad_templates</a></li>
+<li class="links "><a href="Gst.ElementFactory.get_uri_protocols.html" title="Gst.ElementFactory.prototype.get_uri_protocols">Gst.ElementFactory.prototype.get_uri_protocols</a></li>
+<li class="links "><a href="Gst.ElementFactory.get_uri_type.html" title="Gst.ElementFactory.prototype.get_uri_type">Gst.ElementFactory.prototype.get_uri_type</a></li>
+<li class="links "><a href="Gst.ElementFactory.has_interface.html" title="Gst.ElementFactory.prototype.has_interface">Gst.ElementFactory.prototype.has_interface</a></li>
+<li class="links "><a href="Gst.ElementFactory.list_is_type.html" title="Gst.ElementFactory.prototype.list_is_type">Gst.ElementFactory.prototype.list_is_type</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.ElementFactory.find.html" title="find">find</a></li>
+<li class="links "><a href="Gst.ElementFactory.list_filter.html" title="list_filter">list_filter</a></li>
+<li class="links "><a href="Gst.ElementFactory.list_get_elements.html" title="list_get_elements">list_get_elements</a></li>
+<li class="links "><a href="Gst.ElementFactory.make.html" title="make">make</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

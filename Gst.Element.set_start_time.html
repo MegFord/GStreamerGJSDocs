@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Element.prototype.set_start_time</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Element.html" title="Gst.Element">Gst.Element</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Element.prototype.set_start_time</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function set_start_time(time:Gst.ClockTime):void {
+    // Gjs wrapper for gst_element_set_start_time()
+}</pre></div></div></div></div></div>
+<p class="p">Set the start time of an element. The start time of the element is the
+running time of the element when it last went to the PAUSED state. In READY
+or after a flushing seek, it is set to 0.</p>
+<p class="p">Toplevel elements like <span class=" link"><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></span> will manage the start_time and
+base_time on its children. Setting the start_time to #GST_CLOCK_TIME_NONE
+on such a toplevel element will disable the distribution of the base_time to
+the children and can be useful if the application manages the base_time
+itself, for example if you want to synchronize capture from multiple
+pipelines, and you can also ensure that the pipelines have the same clock.</p>
+<p class="p">MT safe.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">time</span></dt>
+<dd class="terms"><p class="p">the base time to set.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

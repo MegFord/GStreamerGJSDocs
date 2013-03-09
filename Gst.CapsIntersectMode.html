@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.CapsIntersectMode</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.CapsIntersectMode</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">Modes of caps intersection</p>
+<p class="p">@GST_CAPS_INTERSECT_ZIG_ZAG tries to preserve overall order of both caps
+by iterating on the caps' structures as the following matrix shows:
+|[
+         caps1
+      +-------------
+      | 1  2  4  7
+caps2 | 3  5  8 10
+      | 6  9 11 12
+]|
+Used when there is no explicit precedence of one caps over the other. e.g.
+tee's sink pad getcaps function, it will probe its src pad peers' for their
+caps and intersect them with this mode.</p>
+<p class="p">@GST_CAPS_INTERSECT_FIRST is useful when an element wants to preserve
+another element's caps priority order when intersecting with its own caps.
+Example: If caps1 is [A, B, C] and caps2 is [E, B, D, A], the result
+would be [A, B], maintaining the first caps priority on the intersection.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">CapsIntersectMode.ZIG_ZAG</span></dt>
+<dd class="terms"><p class="p">Zig-zags over both caps.</p></dd>
+<dt class="terms"><span class=" code">CapsIntersectMode.FIRST</span></dt>
+<dd class="terms"><p class="p">Keeps the first caps order.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

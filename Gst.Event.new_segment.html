@@ -1,0 +1,63 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Event.new_segment</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Event.html" title="Gst.Event">Gst.Event</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Event.new_segment</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function new_segment(segment:Gst.Segment):Gst.Event {
+    // Gjs wrapper for gst_event_new_segment()
+}</pre></div></div></div></div></div>
+<p class="p">Create a new SEGMENT event for <span class=" code">segment</span>. The segment event can only travel
+downstream synchronized with the buffer flow and contains timing information
+and playback properties for the buffers that will follow.</p>
+<p class="p">The newsegment event marks the range of buffers to be processed. All
+data not within the segment range is not to be processed. This can be
+used intelligently by plugins to apply more efficient methods of skipping
+unneeded data. The valid range is expressed with the @start and @stop
+values.</p>
+<p class="p">The time value of the segment is used in conjunction with the start
+value to convert the buffer timestamps into the stream time. This is
+usually done in sinks to report the current stream_time.
+@time represents the stream_time of a buffer carrying a timestamp of
+@start. @time cannot be -1.</p>
+<p class="p">@start cannot be -1, @stop can be -1. If there
+is a valid @stop given, it must be greater or equal the @start, including
+when the indicated playback @rate is &lt; 0.</p>
+<p class="p">The @applied_rate value provides information about any rate adjustment that
+has already been made to the timestamps and content on the buffers of the
+stream. (@rate * @applied_rate) should always equal the rate that has been
+requested for playback. For example, if an element has an input segment
+with intended playback @rate of 2.0 and applied_rate of 1.0, it can adjust
+incoming timestamps and buffer content by half and output a newsegment event
+with @rate of 1.0 and @applied_rate of 2.0</p>
+<p class="p">After a newsegment event, the buffer stream time is calculated with:</p>
+<p class="p">  time + (TIMESTAMP(buf) - start) * ABS (rate * applied_rate)</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">segment</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.Segment.html" title="Gst.Segment">Gst.Segment</a></span></p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">the new SEGMENT event.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Event.html" title="Gst.Event">Gst.Event</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

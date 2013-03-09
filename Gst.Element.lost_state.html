@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Element.prototype.lost_state</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Element.html" title="Gst.Element">Gst.Element</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Element.prototype.lost_state</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function lost_state():void {
+    // Gjs wrapper for gst_element_lost_state()
+}</pre></div></div></div></div></div>
+<p class="p">Brings the element to the lost state. The current state of the
+element is copied to the pending state so that any call to
+<span class=" link"><a href="Gst.Element.get_state.html" title="Gst.Element.prototype.get_state">Gst.Element.prototype.get_state</a></span> will return <span class=" link"><a href="Gst.StateChangeReturn.html" title="Gst.StateChangeReturn">Gst.StateChangeReturn</a></span>.async.</p>
+<p class="p">An ASYNC_START message is posted. If the element was PLAYING, it will
+go to PAUSED. The element will be restored to its PLAYING state by
+the parent pipeline when it prerolls again.</p>
+<p class="p">This is mostly used for elements that lost their preroll buffer
+in the <span class=" link"><a href="Gst.State.html" title="Gst.State">Gst.State</a></span>.paused or <span class=" link"><a href="Gst.State.html" title="Gst.State">Gst.State</a></span>.playing state after a flush,
+they will go to their pending state again when a new preroll buffer is
+queued. This function can only be called when the element is currently
+not in error or an async state change.</p>
+<p class="p">This function is used internally and should normally not be called from
+plugins or applications.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms"></dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

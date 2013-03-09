@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>list_get_elements</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.ElementFactory.html" title="Gst.ElementFactory">Gst.ElementFactory</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">list_get_elements</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function list_get_elements(type:Gst.ElementFactoryListType, minrank:Gst.Rank):[Gst.ElementFactory] {
+    // Gjs wrapper for gst_element_factory_list_get_elements()
+}</pre></div></div></div></div></div>
+<p class="p">Get a list of factories that match the given <span class=" code">type</span>. Only elements
+with a rank greater or equal to <span class=" code">minrank</span> will be returned.
+The list of factories is returned by decreasing rank.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">type</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.ElementFactoryListType.html" title="Gst.ElementFactoryListType">Gst.ElementFactoryListType</a></span></p></dd>
+<dt class="terms"><span class=" code">minrank</span></dt>
+<dd class="terms"><p class="p">Minimum rank</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="GLib.List.html" title="GLib.List">GLib.List</a></span> of <span class=" link"><a href="Gst.ElementFactory.html" title="Gst.ElementFactory">Gst.ElementFactory</a></span> elements. Use <span class=" link"><a href="Gst.list_free.html" title="Gst.list_free">Gst.list_free</a></span> after usage.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.ElementFactory.html" title="Gst.ElementFactory">Gst.ElementFactory</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

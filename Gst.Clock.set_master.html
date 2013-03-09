@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Clock.prototype.set_master</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Clock.html" title="Gst.Clock">Gst.Clock</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Clock.prototype.set_master</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function set_master(master:Gst.Clock):Boolean {
+    // Gjs wrapper for gst_clock_set_master()
+}</pre></div></div></div></div></div>
+<p class="p">Set <span class=" code">master</span> as the master clock for <span class=" code">clock</span>. <span class=" code">clock</span> will be automatically
+calibrated so that <span class=" link"><a href="Gst.Clock.get_time.html" title="Gst.Clock.prototype.get_time">Gst.Clock.prototype.get_time</a></span> reports the same time as the
+master clock.  </p>
+<p class="p">A clock provider that slaves its clock to a master can get the current
+calibration values with <span class=" link"><a href="Gst.Clock.get_calibration.html" title="Gst.Clock.prototype.get_calibration">Gst.Clock.prototype.get_calibration</a></span>.</p>
+<p class="p"><span class=" code">master</span> can be <span class=" code">null</span> in which case <span class=" code">clock</span> will not be slaved anymore. It will
+however keep reporting its time adjusted with the last configured rate 
+and time offsets.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">master</span></dt>
+<dd class="terms"><p class="p">a master <span class=" link"><a href="Gst.Clock.html" title="Gst.Clock">Gst.Clock</a></span></p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p"><span class=" code">true</span> if the clock is capable of being slaved to a master clock. Trying to set a master on a clock without the #GST_CLOCK_FLAG_CAN_SET_MASTER flag will make this function return <span class=" code">false</span>.  MT safe.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Clock.html" title="Gst.Clock">Gst.Clock</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

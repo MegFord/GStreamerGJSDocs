@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Buffer.prototype.map_range</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Buffer.html" title="Gst.Buffer">Gst.Buffer</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Buffer.prototype.map_range</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function map_range(idx:Number, length:Number, flags:Gst.MapFlags):Boolean {
+    // Gjs wrapper for gst_buffer_map_range()
+}</pre></div></div></div></div></div>
+<p class="p">This function fills <span class=" code">info</span> with the <span class=" link"><a href="Gst.MapInfo.html" title="Gst.MapInfo">Gst.MapInfo</a></span> of <span class=" code">length</span> merged memory blocks
+starting at <span class=" code">idx</span> in <span class=" code">buffer</span>. When <span class=" code">length</span> is -1, all memory blocks starting
+from <span class=" code">idx</span> are merged and mapped.</p>
+<p class="p"><span class=" code">flags</span> describe the desired access of the memory. When <span class=" code">flags</span> is
+#GST_MAP_WRITE, <span class=" code">buffer</span> should be writable (as returned from
+gst_buffer_is_writable()).</p>
+<p class="p">When <span class=" code">buffer</span> is writable but the memory isn't, a writable copy will
+automatically be created and returned. The readonly copy of the buffer memory
+will then also be replaced with this writable copy.</p>
+<p class="p">The memory in <span class=" code">info</span> should be unmapped with <span class=" link"><a href="Gst.unmap.html" title="Gst.unmap">Gst.unmap</a></span> after usage.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">idx</span></dt>
+<dd class="terms"><p class="p">an index</p></dd>
+<dt class="terms"><span class=" code">length</span></dt>
+<dd class="terms"><p class="p">a length</p></dd>
+<dt class="terms"><span class=" code">flags</span></dt>
+<dd class="terms"><p class="p">flags for the mapping</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p"><span class=" code">true</span> if the map succeeded and <span class=" code">info</span> contains valid data.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Buffer.html" title="Gst.Buffer">Gst.Buffer</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,132 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Query</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Query</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">Queries can be performed on pads (<span class=" link"><a href="Gst.Pad.query.html" title="Gst.Pad.prototype.query">Gst.Pad.prototype.query</a></span>) and elements
+(<span class=" link"><a href="Gst.Element.query.html" title="Gst.Element.prototype.query">Gst.Element.prototype.query</a></span>). Please note that some queries might need a running
+pipeline to work.</p>
+<p class="p">Queries can be created using the gst_query_new_*() functions.
+Query values can be set using gst_query_set_*(), and parsed using
+gst_query_parse_*() helpers.</p>
+<p class="p">The following example shows how to query the duration of a pipeline:</p>
+<p class="p">&lt;example&gt;
+ &lt;title&gt;Query duration on a pipeline&lt;/title&gt;
+ &lt;programlisting&gt;
+ GstQuery *query;
+ gboolean res;
+ query = gst_query_new_duration (GST_FORMAT_TIME);
+ res = gst_element_query (pipeline, query);
+ if (res) {
+   gint64 duration;
+   gst_query_parse_duration (query, NULL, &amp;amp;duration);
+   g_print ("duration = %"GST_TIME_FORMAT, GST_TIME_ARGS (duration));
+ }
+ else {
+   g_print ("duration query failed...");
+ }
+ gst_query_unref (query);
+ &lt;/programlisting&gt;
+&lt;/example&gt;</p>
+<p class="p">Last reviewed on 2012-03-29 (0.11.3)</p>
+<div class="links topiclinks"><div class="inner"><div class="region">
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_accept_caps.html" title="Gst.Query.new_accept_caps"><span class="title">Gst.Query.new_accept_caps</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_allocation.html" title="Gst.Query.new_allocation"><span class="title">Gst.Query.new_allocation</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_buffering.html" title="Gst.Query.new_buffering"><span class="title">Gst.Query.new_buffering</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_caps.html" title="Gst.Query.new_caps"><span class="title">Gst.Query.new_caps</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_convert.html" title="Gst.Query.new_convert"><span class="title">Gst.Query.new_convert</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_custom.html" title="Gst.Query.new_custom"><span class="title">Gst.Query.new_custom</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_drain.html" title="Gst.Query.new_drain"><span class="title">Gst.Query.new_drain</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_duration.html" title="Gst.Query.new_duration"><span class="title">Gst.Query.new_duration</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_formats.html" title="Gst.Query.new_formats"><span class="title">Gst.Query.new_formats</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_latency.html" title="Gst.Query.new_latency"><span class="title">Gst.Query.new_latency</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_position.html" title="Gst.Query.new_position"><span class="title">Gst.Query.new_position</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_scheduling.html" title="Gst.Query.new_scheduling"><span class="title">Gst.Query.new_scheduling</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_seeking.html" title="Gst.Query.new_seeking"><span class="title">Gst.Query.new_seeking</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_segment.html" title="Gst.Query.new_segment"><span class="title">Gst.Query.new_segment</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.new_uri.html" title="Gst.Query.new_uri"><span class="title">Gst.Query.new_uri</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.add_allocation_meta.html" title="Gst.Query.prototype.add_allocation_meta"><span class="title">Gst.Query.prototype.add_allocation_meta</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.add_allocation_param.html" title="Gst.Query.prototype.add_allocation_param"><span class="title">Gst.Query.prototype.add_allocation_param</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.add_allocation_pool.html" title="Gst.Query.prototype.add_allocation_pool"><span class="title">Gst.Query.prototype.add_allocation_pool</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.add_buffering_range.html" title="Gst.Query.prototype.add_buffering_range"><span class="title">Gst.Query.prototype.add_buffering_range</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.add_scheduling_mode.html" title="Gst.Query.prototype.add_scheduling_mode"><span class="title">Gst.Query.prototype.add_scheduling_mode</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.find_allocation_meta.html" title="Gst.Query.prototype.find_allocation_meta"><span class="title">Gst.Query.prototype.find_allocation_meta</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.get_n_allocation_metas.html" title="Gst.Query.prototype.get_n_allocation_metas"><span class="title">Gst.Query.prototype.get_n_allocation_metas</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.get_n_allocation_params.html" title="Gst.Query.prototype.get_n_allocation_params"><span class="title">Gst.Query.prototype.get_n_allocation_params</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.get_n_allocation_pools.html" title="Gst.Query.prototype.get_n_allocation_pools"><span class="title">Gst.Query.prototype.get_n_allocation_pools</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.get_n_buffering_ranges.html" title="Gst.Query.prototype.get_n_buffering_ranges"><span class="title">Gst.Query.prototype.get_n_buffering_ranges</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.get_n_scheduling_modes.html" title="Gst.Query.prototype.get_n_scheduling_modes"><span class="title">Gst.Query.prototype.get_n_scheduling_modes</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.get_structure.html" title="Gst.Query.prototype.get_structure"><span class="title">Gst.Query.prototype.get_structure</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.has_scheduling_mode.html" title="Gst.Query.prototype.has_scheduling_mode"><span class="title">Gst.Query.prototype.has_scheduling_mode</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.has_scheduling_mode_with_flags.html" title="Gst.Query.prototype.has_scheduling_mode_with_flags"><span class="title">Gst.Query.prototype.has_scheduling_mode_with_flags</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_accept_caps.html" title="Gst.Query.prototype.parse_accept_caps"><span class="title">Gst.Query.prototype.parse_accept_caps</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_accept_caps_result.html" title="Gst.Query.prototype.parse_accept_caps_result"><span class="title">Gst.Query.prototype.parse_accept_caps_result</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_allocation.html" title="Gst.Query.prototype.parse_allocation"><span class="title">Gst.Query.prototype.parse_allocation</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_buffering_percent.html" title="Gst.Query.prototype.parse_buffering_percent"><span class="title">Gst.Query.prototype.parse_buffering_percent</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_buffering_range.html" title="Gst.Query.prototype.parse_buffering_range"><span class="title">Gst.Query.prototype.parse_buffering_range</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_buffering_stats.html" title="Gst.Query.prototype.parse_buffering_stats"><span class="title">Gst.Query.prototype.parse_buffering_stats</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_caps.html" title="Gst.Query.prototype.parse_caps"><span class="title">Gst.Query.prototype.parse_caps</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_caps_result.html" title="Gst.Query.prototype.parse_caps_result"><span class="title">Gst.Query.prototype.parse_caps_result</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_convert.html" title="Gst.Query.prototype.parse_convert"><span class="title">Gst.Query.prototype.parse_convert</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_duration.html" title="Gst.Query.prototype.parse_duration"><span class="title">Gst.Query.prototype.parse_duration</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_latency.html" title="Gst.Query.prototype.parse_latency"><span class="title">Gst.Query.prototype.parse_latency</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_n_formats.html" title="Gst.Query.prototype.parse_n_formats"><span class="title">Gst.Query.prototype.parse_n_formats</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_nth_allocation_meta.html" title="Gst.Query.prototype.parse_nth_allocation_meta"><span class="title">Gst.Query.prototype.parse_nth_allocation_meta</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_nth_allocation_param.html" title="Gst.Query.prototype.parse_nth_allocation_param"><span class="title">Gst.Query.prototype.parse_nth_allocation_param</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_nth_allocation_pool.html" title="Gst.Query.prototype.parse_nth_allocation_pool"><span class="title">Gst.Query.prototype.parse_nth_allocation_pool</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_nth_buffering_range.html" title="Gst.Query.prototype.parse_nth_buffering_range"><span class="title">Gst.Query.prototype.parse_nth_buffering_range</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_nth_format.html" title="Gst.Query.prototype.parse_nth_format"><span class="title">Gst.Query.prototype.parse_nth_format</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_nth_scheduling_mode.html" title="Gst.Query.prototype.parse_nth_scheduling_mode"><span class="title">Gst.Query.prototype.parse_nth_scheduling_mode</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_position.html" title="Gst.Query.prototype.parse_position"><span class="title">Gst.Query.prototype.parse_position</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_scheduling.html" title="Gst.Query.prototype.parse_scheduling"><span class="title">Gst.Query.prototype.parse_scheduling</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_seeking.html" title="Gst.Query.prototype.parse_seeking"><span class="title">Gst.Query.prototype.parse_seeking</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_segment.html" title="Gst.Query.prototype.parse_segment"><span class="title">Gst.Query.prototype.parse_segment</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.parse_uri.html" title="Gst.Query.prototype.parse_uri"><span class="title">Gst.Query.prototype.parse_uri</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.remove_nth_allocation_meta.html" title="Gst.Query.prototype.remove_nth_allocation_meta"><span class="title">Gst.Query.prototype.remove_nth_allocation_meta</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.remove_nth_allocation_param.html" title="Gst.Query.prototype.remove_nth_allocation_param"><span class="title">Gst.Query.prototype.remove_nth_allocation_param</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.remove_nth_allocation_pool.html" title="Gst.Query.prototype.remove_nth_allocation_pool"><span class="title">Gst.Query.prototype.remove_nth_allocation_pool</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_accept_caps_result.html" title="Gst.Query.prototype.set_accept_caps_result"><span class="title">Gst.Query.prototype.set_accept_caps_result</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_buffering_percent.html" title="Gst.Query.prototype.set_buffering_percent"><span class="title">Gst.Query.prototype.set_buffering_percent</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_buffering_range.html" title="Gst.Query.prototype.set_buffering_range"><span class="title">Gst.Query.prototype.set_buffering_range</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_buffering_stats.html" title="Gst.Query.prototype.set_buffering_stats"><span class="title">Gst.Query.prototype.set_buffering_stats</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_caps_result.html" title="Gst.Query.prototype.set_caps_result"><span class="title">Gst.Query.prototype.set_caps_result</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_convert.html" title="Gst.Query.prototype.set_convert"><span class="title">Gst.Query.prototype.set_convert</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_duration.html" title="Gst.Query.prototype.set_duration"><span class="title">Gst.Query.prototype.set_duration</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_formatsv.html" title="Gst.Query.prototype.set_formatsv"><span class="title">Gst.Query.prototype.set_formatsv</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_latency.html" title="Gst.Query.prototype.set_latency"><span class="title">Gst.Query.prototype.set_latency</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_nth_allocation_param.html" title="Gst.Query.prototype.set_nth_allocation_param"><span class="title">Gst.Query.prototype.set_nth_allocation_param</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_nth_allocation_pool.html" title="Gst.Query.prototype.set_nth_allocation_pool"><span class="title">Gst.Query.prototype.set_nth_allocation_pool</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_position.html" title="Gst.Query.prototype.set_position"><span class="title">Gst.Query.prototype.set_position</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_scheduling.html" title="Gst.Query.prototype.set_scheduling"><span class="title">Gst.Query.prototype.set_scheduling</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_seeking.html" title="Gst.Query.prototype.set_seeking"><span class="title">Gst.Query.prototype.set_seeking</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_segment.html" title="Gst.Query.prototype.set_segment"><span class="title">Gst.Query.prototype.set_segment</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.set_uri.html" title="Gst.Query.prototype.set_uri"><span class="title">Gst.Query.prototype.set_uri</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.writable_structure.html" title="Gst.Query.prototype.writable_structure"><span class="title">Gst.Query.prototype.writable_structure</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.type_get_flags.html" title="type_get_flags"><span class="title">type_get_flags</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.type_get_name.html" title="type_get_name"><span class="title">type_get_name</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Query.type_to_quark.html" title="type_to_quark"><span class="title">type_to_quark</span></a></div>
+</div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

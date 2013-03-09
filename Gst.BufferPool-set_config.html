@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.BufferPool::set_config</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.BufferPool.html" title="Gst.BufferPool">Gst.BufferPool</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.BufferPool::set_config</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function vfunc_set_config(config:Gst.Structure):Boolean {
+}</pre></div></div></div></div></div>
+<p class="p">Set the configuration of the pool. The pool must be inactive and all buffers
+allocated form this pool must be returned or else this function will do
+nothing and return FALSE.</p>
+<p class="p"><span class=" code">config</span> is a <span class=" link"><a href="Gst.Structure.html" title="Gst.Structure">Gst.Structure</a></span> that contains the configuration parameters for
+the pool. A default and mandatory set of parameters can be configured with
+<span class=" link"><a href="Gst.config_set_params.html" title="Gst.config_set_params">Gst.config_set_params</a></span>, <span class=" link"><a href="Gst.config_set_allocator.html" title="Gst.config_set_allocator">Gst.config_set_allocator</a></span>
+and <span class=" link"><a href="Gst.config_add_option.html" title="Gst.config_add_option">Gst.config_add_option</a></span>.</p>
+<p class="p">If the parameters in <span class=" code">config</span> can not be set exactly, this function returns
+FALSE and will try to update as much state as possible. The new state can
+then be retrieved and refined with <span class=" link"><a href="Gst.BufferPool.get_config.html" title="Gst.BufferPool.prototype.get_config">Gst.BufferPool.prototype.get_config</a></span>.</p>
+<p class="p">This function takes ownership of <span class=" code">config</span>.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">config</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.Structure.html" title="Gst.Structure">Gst.Structure</a></span></p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">TRUE when the configuration could be set.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.BufferPool.html" title="Gst.BufferPool">Gst.BufferPool</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

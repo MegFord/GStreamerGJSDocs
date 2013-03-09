@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>register</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Meta.html" title="Gst.Meta">Gst.Meta</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">register</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function register(api:GType, impl:String, size:gsize, init_func:Gst.MetaInitFunction, free_func:Gst.MetaFreeFunction, transform_func:Gst.MetaTransformFunction):Gst.MetaInfo {
+    // Gjs wrapper for gst_meta_register()
+}</pre></div></div></div></div></div>
+<p class="p">Register a new <span class=" link"><a href="Gst.Meta.html" title="Gst.Meta">Gst.Meta</a></span> implementation.</p>
+<p class="p">The same @info can be retrieved later with <span class=" link"><a href="Gst.meta_get_info.html" title="Gst.meta_get_info">Gst.meta_get_info</a></span> by using
+<span class=" code">impl</span> as the key.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">api</span></dt>
+<dd class="terms"><p class="p">the type of the <span class=" link"><a href="Gst.Meta.html" title="Gst.Meta">Gst.Meta</a></span> API</p></dd>
+<dt class="terms"><span class=" code">impl</span></dt>
+<dd class="terms"><p class="p">the name of the <span class=" link"><a href="Gst.Meta.html" title="Gst.Meta">Gst.Meta</a></span> implementation</p></dd>
+<dt class="terms"><span class=" code">size</span></dt>
+<dd class="terms"><p class="p">the size of the <span class=" link"><a href="Gst.Meta.html" title="Gst.Meta">Gst.Meta</a></span> structure</p></dd>
+<dt class="terms"><span class=" code">init_func</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.MetaInitFunction.html" title="Gst.MetaInitFunction">Gst.MetaInitFunction</a></span></p></dd>
+<dt class="terms"><span class=" code">free_func</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.MetaFreeFunction.html" title="Gst.MetaFreeFunction">Gst.MetaFreeFunction</a></span></p></dd>
+<dt class="terms"><span class=" code">transform_func</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.MetaTransformFunction.html" title="Gst.MetaTransformFunction">Gst.MetaTransformFunction</a></span></p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.MetaInfo.html" title="Gst.MetaInfo">Gst.MetaInfo</a></span> that can be used to access metadata.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Meta.html" title="Gst.Meta">Gst.Meta</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

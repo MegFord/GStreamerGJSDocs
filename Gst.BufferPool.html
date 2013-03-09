@@ -1,0 +1,130 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.BufferPool</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.BufferPool</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let buffer_pool = new Gst.BufferPool();
+  </pre></div></div></div></div></div>
+<p class="p">a <span class=" link"><a href="Gst.BufferPool.html" title="Gst.BufferPool">Gst.BufferPool</a></span> is an object that can be used to pre-allocate and recycle
+buffers of the same size and with the same properties.</p>
+<p class="p">A <span class=" link"><a href="Gst.BufferPool.html" title="Gst.BufferPool">Gst.BufferPool</a></span> is created with <span class=" link"><a href="Gst.new.html" title="Gst.new">Gst.new</a></span>.</p>
+<p class="p">After the buffer is created, it needs to be configured.
+<span class=" link"><a href="Gst.get_config.html" title="Gst.get_config">Gst.get_config</a></span> get the current configuration structure from the
+pool. With <span class=" link"><a href="Gst.config_set_params.html" title="Gst.config_set_params">Gst.config_set_params</a></span> and
+<span class=" link"><a href="Gst.config_set_allocator.html" title="Gst.config_set_allocator">Gst.config_set_allocator</a></span> the bufferpool parameters and allocator
+can be configured. Other properties can be configured in the pool depending
+on the pool implementation.</p>
+<p class="p">A bufferpool can have extra options that can be enabled with
+<span class=" link"><a href="Gst.config_add_option.html" title="Gst.config_add_option">Gst.config_add_option</a></span>. The available options can be retrieved
+with <span class=" link"><a href="Gst.get_options.html" title="Gst.get_options">Gst.get_options</a></span>. Some options allow for additional
+configuration properties to be set.</p>
+<p class="p">After the configuration structure has been configured,
+<span class=" link"><a href="Gst.set_config.html" title="Gst.set_config">Gst.set_config</a></span> updates the configuration in the pool. This can
+fail when the configuration structure is not accepted.</p>
+<p class="p">After the a pool has been configured, it can be activated with
+<span class=" link"><a href="Gst.set_active.html" title="Gst.set_active">Gst.set_active</a></span>. This will preallocate the configured resources
+in the pool.</p>
+<p class="p">When the pool is active, <span class=" link"><a href="Gst.acquire_buffer.html" title="Gst.acquire_buffer">Gst.acquire_buffer</a></span> can be used to
+retrieve a buffer from the pool.</p>
+<p class="p">Buffer allocated from a bufferpool will automatically be returned to the pool
+with <span class=" link"><a href="Gst.release_buffer.html" title="Gst.release_buffer">Gst.release_buffer</a></span> when their refcount drops to 0.</p>
+<p class="p">The bufferpool can be deactivated again with <span class=" link"><a href="Gst.set_active.html" title="Gst.set_active">Gst.set_active</a></span>.
+All further <span class=" link"><a href="Gst.acquire_buffer.html" title="Gst.acquire_buffer">Gst.acquire_buffer</a></span> calls will return an error. When
+all buffers are returned to the pool they will be freed.</p>
+<p class="p">Use <span class=" link"><a href="Gst.unref.html" title="Gst.unref">Gst.unref</a></span> to release the reference to a bufferpool. If the
+refcount of the pool reaches 0, the pool will be freed.</p>
+<p class="p">Last reviewed on 2012-03-28 (0.11.3)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.BufferPool</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.BufferPool.acquire_buffer.html" title="Gst.BufferPool.prototype.acquire_buffer">Gst.BufferPool.prototype.acquire_buffer</a></li>
+<li class="links "><a href="Gst.BufferPool.get_config.html" title="Gst.BufferPool.prototype.get_config">Gst.BufferPool.prototype.get_config</a></li>
+<li class="links "><a href="Gst.BufferPool.get_options.html" title="Gst.BufferPool.prototype.get_options">Gst.BufferPool.prototype.get_options</a></li>
+<li class="links "><a href="Gst.BufferPool.has_option.html" title="Gst.BufferPool.prototype.has_option">Gst.BufferPool.prototype.has_option</a></li>
+<li class="links "><a href="Gst.BufferPool.is_active.html" title="Gst.BufferPool.prototype.is_active">Gst.BufferPool.prototype.is_active</a></li>
+<li class="links "><a href="Gst.BufferPool.release_buffer.html" title="Gst.BufferPool.prototype.release_buffer">Gst.BufferPool.prototype.release_buffer</a></li>
+<li class="links "><a href="Gst.BufferPool.set_active.html" title="Gst.BufferPool.prototype.set_active">Gst.BufferPool.prototype.set_active</a></li>
+<li class="links "><a href="Gst.BufferPool.set_config.html" title="Gst.BufferPool.prototype.set_config">Gst.BufferPool.prototype.set_config</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.BufferPool.config_add_option.html" title="config_add_option">config_add_option</a></li>
+<li class="links "><a href="Gst.BufferPool.config_get_allocator.html" title="config_get_allocator">config_get_allocator</a></li>
+<li class="links "><a href="Gst.BufferPool.config_get_option.html" title="config_get_option">config_get_option</a></li>
+<li class="links "><a href="Gst.BufferPool.config_get_params.html" title="config_get_params">config_get_params</a></li>
+<li class="links "><a href="Gst.BufferPool.config_has_option.html" title="config_has_option">config_has_option</a></li>
+<li class="links "><a href="Gst.BufferPool.config_n_options.html" title="config_n_options">config_n_options</a></li>
+<li class="links "><a href="Gst.BufferPool.config_set_allocator.html" title="config_set_allocator">config_set_allocator</a></li>
+<li class="links "><a href="Gst.BufferPool.config_set_params.html" title="config_set_params">config_set_params</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.BufferPool-acquire_buffer.html" title="Gst.BufferPool::acquire_buffer">Gst.BufferPool::acquire_buffer</a></li>
+<li class="links "><a href="Gst.BufferPool-alloc_buffer.html" title="Gst.BufferPool::alloc_buffer">Gst.BufferPool::alloc_buffer</a></li>
+<li class="links "><a href="Gst.BufferPool-free_buffer.html" title="Gst.BufferPool::free_buffer">Gst.BufferPool::free_buffer</a></li>
+<li class="links "><a href="Gst.BufferPool-get_options.html" title="Gst.BufferPool::get_options">Gst.BufferPool::get_options</a></li>
+<li class="links "><a href="Gst.BufferPool-release_buffer.html" title="Gst.BufferPool::release_buffer">Gst.BufferPool::release_buffer</a></li>
+<li class="links "><a href="Gst.BufferPool-reset_buffer.html" title="Gst.BufferPool::reset_buffer">Gst.BufferPool::reset_buffer</a></li>
+<li class="links "><a href="Gst.BufferPool-set_config.html" title="Gst.BufferPool::set_config">Gst.BufferPool::set_config</a></li>
+<li class="links "><a href="Gst.BufferPool-start.html" title="Gst.BufferPool::start">Gst.BufferPool::start</a></li>
+<li class="links "><a href="Gst.BufferPool-stop.html" title="Gst.BufferPool::stop">Gst.BufferPool::stop</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Other</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.BufferPool.new.html" title="Gst.BufferPool.new">Gst.BufferPool.new</a></li></ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

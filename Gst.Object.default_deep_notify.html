@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>default_deep_notify</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Object.html" title="Gst.Object">Gst.Object</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">default_deep_notify</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function default_deep_notify(object:GObject.Object, orig:Gst.Object, pspec:GObject.ParamSpec, excluded_props:[String]):void {
+    // Gjs wrapper for gst_object_default_deep_notify()
+}</pre></div></div></div></div></div>
+<p class="p">A default deep_notify signal callback for an object. The user data
+should contain a pointer to an array of strings that should be excluded
+from the notify. The default handler will print the new value of the property
+using g_print.</p>
+<p class="p">MT safe. This function grabs and releases <span class=" code">object</span>'s LOCK for getting its
+         path string.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">object</span></dt>
+<dd class="terms"><p class="p">the <span class=" link"><a href="GObject.Object.html" title="GObject.Object">GObject.Object</a></span> that signalled the notify.</p></dd>
+<dt class="terms"><span class=" code">orig</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.Object.html" title="Gst.Object">Gst.Object</a></span> that initiated the notify.</p></dd>
+<dt class="terms"><span class=" code">pspec</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="GObject.ParamSpec.html" title="GObject.ParamSpec">GObject.ParamSpec</a></span> of the property.</p></dd>
+<dt class="terms"><span class=" code">excluded_props</span></dt>
+<dd class="terms"><p class="p">a set of user-specified properties to exclude or NULL to show all changes.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Object.html" title="Gst.Object">Gst.Object</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

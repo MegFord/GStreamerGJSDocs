@@ -1,0 +1,58 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.TocSetter</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.TocSetter</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let toc_setter = new Gst.TocSetter();
+  </pre></div></div></div></div></div>
+<p class="p">Element interface that allows setting of the TOC.</p>
+<p class="p">Elements that support some kind of chapters or editions (or tracks like in
+the FLAC cue sheet) will implement this interface.</p>
+<p class="p">If you just want to retrieve the TOC in your application then all you
+need to do is watch for TOC messages on your pipeline's bus (or you can
+perform TOC query). This interface is only for setting TOC data, not for
+extracting it. To set TOC from the application, find proper tocsetter element
+and set TOC using <span class=" link"><a href="Gst.set_toc.html" title="Gst.set_toc">Gst.set_toc</a></span>.</p>
+<p class="p">Elements implementing the <span class=" link"><a href="Gst.TocSetter.html" title="Gst.TocSetter">Gst.TocSetter</a></span> interface can extend existing TOC
+by getting extend UID for that (you can use <span class=" link"><a href="Gst.Toc.find_entry.html" title="Gst.Toc.prototype.find_entry">Gst.Toc.prototype.find_entry</a></span> to retrieve it)
+with any TOC entries received from downstream.</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.TocSetter</span>
+      </div></li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.TocSetter.get_toc.html" title="Gst.TocSetter.prototype.get_toc">Gst.TocSetter.prototype.get_toc</a></li>
+<li class="links "><a href="Gst.TocSetter.reset.html" title="Gst.TocSetter.prototype.reset">Gst.TocSetter.prototype.reset</a></li>
+<li class="links "><a href="Gst.TocSetter.set_toc.html" title="Gst.TocSetter.prototype.set_toc">Gst.TocSetter.prototype.set_toc</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

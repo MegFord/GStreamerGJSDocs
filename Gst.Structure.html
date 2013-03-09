@@ -1,0 +1,102 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Structure</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Structure</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">A <span class=" link"><a href="Gst.Structure.html" title="Gst.Structure">Gst.Structure</a></span> is a collection of key/value pairs. The keys are expressed
+as GQuarks and the values can be of any GType.</p>
+<p class="p">In addition to the key/value pairs, a <span class=" link"><a href="Gst.Structure.html" title="Gst.Structure">Gst.Structure</a></span> also has a name. The name
+starts with a letter and can be filled by letters, numbers and any of "/-_.:".</p>
+<p class="p"><span class=" link"><a href="Gst.Structure.html" title="Gst.Structure">Gst.Structure</a></span> is used by various GStreamer subsystems to store information
+in a flexible and extensible way. A <span class=" link"><a href="Gst.Structure.html" title="Gst.Structure">Gst.Structure</a></span> does not have a refcount
+because it usually is part of a higher level object such as <span class=" link"><a href="Gst.Caps.html" title="Gst.Caps">Gst.Caps</a></span>,
+<span class=" link"><a href="Gst.Message.html" title="Gst.Message">Gst.Message</a></span>, <span class=" link"><a href="Gst.Event.html" title="Gst.Event">Gst.Event</a></span>, <span class=" link"><a href="Gst.Query.html" title="Gst.Query">Gst.Query</a></span>. It provides a means to enforce mutability
+using the refcount of the parent with the <span class=" link"><a href="Gst.set_parent_refcount.html" title="Gst.set_parent_refcount">Gst.set_parent_refcount</a></span>
+method.</p>
+<p class="p">A <span class=" link"><a href="Gst.Structure.html" title="Gst.Structure">Gst.Structure</a></span> can be created with <span class=" link"><a href="Gst.new_empty.html" title="Gst.new_empty">Gst.new_empty</a></span> or
+<span class=" link"><a href="Gst.new.html" title="Gst.new">Gst.new</a></span>, which both take a name and an optional set of
+key/value pairs along with the types of the values.</p>
+<p class="p">Field values can be changed with <span class=" link"><a href="Gst.set_value.html" title="Gst.set_value">Gst.set_value</a></span> or
+<span class=" link"><a href="Gst.set.html" title="Gst.set">Gst.set</a></span>.</p>
+<p class="p">Field values can be retrieved with <span class=" link"><a href="Gst.get_value.html" title="Gst.get_value">Gst.get_value</a></span> or the more
+convenient gst_structure_get_*() functions.</p>
+<p class="p">Fields can be removed with <span class=" link"><a href="Gst.remove_field.html" title="Gst.remove_field">Gst.remove_field</a></span> or
+<span class=" link"><a href="Gst.remove_fields.html" title="Gst.remove_fields">Gst.remove_fields</a></span>.</p>
+<p class="p">Strings in structures must be ASCII or UTF-8 encoded. Other encodings are
+not allowed. Strings must not be empty either, but may be NULL.</p>
+<p class="p">Last reviewed on 2012-03-29 (0.11.3)</p>
+<div class="links topiclinks"><div class="inner"><div class="region">
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.new_empty.html" title="Gst.Structure.new_empty"><span class="title">Gst.Structure.new_empty</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.new_id_empty.html" title="Gst.Structure.new_id_empty"><span class="title">Gst.Structure.new_id_empty</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.can_intersect.html" title="Gst.Structure.prototype.can_intersect"><span class="title">Gst.Structure.prototype.can_intersect</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.copy.html" title="Gst.Structure.prototype.copy"><span class="title">Gst.Structure.prototype.copy</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.fixate.html" title="Gst.Structure.prototype.fixate"><span class="title">Gst.Structure.prototype.fixate</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.fixate_field.html" title="Gst.Structure.prototype.fixate_field"><span class="title">Gst.Structure.prototype.fixate_field</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.fixate_field_boolean.html" title="Gst.Structure.prototype.fixate_field_boolean"><span class="title">Gst.Structure.prototype.fixate_field_boolean</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.fixate_field_nearest_double.html" title="Gst.Structure.prototype.fixate_field_nearest_double"><span class="title">Gst.Structure.prototype.fixate_field_nearest_double</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.fixate_field_nearest_fraction.html" title="Gst.Structure.prototype.fixate_field_nearest_fraction"><span class="title">Gst.Structure.prototype.fixate_field_nearest_fraction</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.fixate_field_nearest_int.html" title="Gst.Structure.prototype.fixate_field_nearest_int"><span class="title">Gst.Structure.prototype.fixate_field_nearest_int</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.fixate_field_string.html" title="Gst.Structure.prototype.fixate_field_string"><span class="title">Gst.Structure.prototype.fixate_field_string</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.foreach.html" title="Gst.Structure.prototype.foreach"><span class="title">Gst.Structure.prototype.foreach</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.free.html" title="Gst.Structure.prototype.free"><span class="title">Gst.Structure.prototype.free</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_boolean.html" title="Gst.Structure.prototype.get_boolean"><span class="title">Gst.Structure.prototype.get_boolean</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_clock_time.html" title="Gst.Structure.prototype.get_clock_time"><span class="title">Gst.Structure.prototype.get_clock_time</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_date.html" title="Gst.Structure.prototype.get_date"><span class="title">Gst.Structure.prototype.get_date</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_date_time.html" title="Gst.Structure.prototype.get_date_time"><span class="title">Gst.Structure.prototype.get_date_time</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_double.html" title="Gst.Structure.prototype.get_double"><span class="title">Gst.Structure.prototype.get_double</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_enum.html" title="Gst.Structure.prototype.get_enum"><span class="title">Gst.Structure.prototype.get_enum</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_field_type.html" title="Gst.Structure.prototype.get_field_type"><span class="title">Gst.Structure.prototype.get_field_type</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_fraction.html" title="Gst.Structure.prototype.get_fraction"><span class="title">Gst.Structure.prototype.get_fraction</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_int.html" title="Gst.Structure.prototype.get_int"><span class="title">Gst.Structure.prototype.get_int</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_name.html" title="Gst.Structure.prototype.get_name"><span class="title">Gst.Structure.prototype.get_name</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_name_id.html" title="Gst.Structure.prototype.get_name_id"><span class="title">Gst.Structure.prototype.get_name_id</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_string.html" title="Gst.Structure.prototype.get_string"><span class="title">Gst.Structure.prototype.get_string</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_uint.html" title="Gst.Structure.prototype.get_uint"><span class="title">Gst.Structure.prototype.get_uint</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.get_value.html" title="Gst.Structure.prototype.get_value"><span class="title">Gst.Structure.prototype.get_value</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.has_field.html" title="Gst.Structure.prototype.has_field"><span class="title">Gst.Structure.prototype.has_field</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.has_field_typed.html" title="Gst.Structure.prototype.has_field_typed"><span class="title">Gst.Structure.prototype.has_field_typed</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.has_name.html" title="Gst.Structure.prototype.has_name"><span class="title">Gst.Structure.prototype.has_name</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.id_get_value.html" title="Gst.Structure.prototype.id_get_value"><span class="title">Gst.Structure.prototype.id_get_value</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.id_has_field.html" title="Gst.Structure.prototype.id_has_field"><span class="title">Gst.Structure.prototype.id_has_field</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.id_has_field_typed.html" title="Gst.Structure.prototype.id_has_field_typed"><span class="title">Gst.Structure.prototype.id_has_field_typed</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.id_set_value.html" title="Gst.Structure.prototype.id_set_value"><span class="title">Gst.Structure.prototype.id_set_value</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.id_take_value.html" title="Gst.Structure.prototype.id_take_value"><span class="title">Gst.Structure.prototype.id_take_value</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.intersect.html" title="Gst.Structure.prototype.intersect"><span class="title">Gst.Structure.prototype.intersect</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.is_equal.html" title="Gst.Structure.prototype.is_equal"><span class="title">Gst.Structure.prototype.is_equal</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.is_subset.html" title="Gst.Structure.prototype.is_subset"><span class="title">Gst.Structure.prototype.is_subset</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.map_in_place.html" title="Gst.Structure.prototype.map_in_place"><span class="title">Gst.Structure.prototype.map_in_place</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.n_fields.html" title="Gst.Structure.prototype.n_fields"><span class="title">Gst.Structure.prototype.n_fields</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.nth_field_name.html" title="Gst.Structure.prototype.nth_field_name"><span class="title">Gst.Structure.prototype.nth_field_name</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.remove_all_fields.html" title="Gst.Structure.prototype.remove_all_fields"><span class="title">Gst.Structure.prototype.remove_all_fields</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.remove_field.html" title="Gst.Structure.prototype.remove_field"><span class="title">Gst.Structure.prototype.remove_field</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.set_name.html" title="Gst.Structure.prototype.set_name"><span class="title">Gst.Structure.prototype.set_name</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.set_parent_refcount.html" title="Gst.Structure.prototype.set_parent_refcount"><span class="title">Gst.Structure.prototype.set_parent_refcount</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.set_value.html" title="Gst.Structure.prototype.set_value"><span class="title">Gst.Structure.prototype.set_value</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.take_value.html" title="Gst.Structure.prototype.take_value"><span class="title">Gst.Structure.prototype.take_value</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.to_string.html" title="Gst.Structure.prototype.to_string"><span class="title">Gst.Structure.prototype.to_string</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Structure.from_string.html" title="from_string"><span class="title">from_string</span></a></div>
+</div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

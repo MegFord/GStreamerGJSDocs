@@ -1,0 +1,78 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Iterator</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Iterator</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">A GstIterator is used to retrieve multiple objects from another object in
+a threadsafe way.</p>
+<p class="p">Various GStreamer objects provide access to their internal structures using
+an iterator.</p>
+<p class="p">In general, whenever calling a GstIterator function results in your code
+receiving a refcounted object, the refcount for that object will have been
+increased.  Your code is responsible for unrefing that object after use.</p>
+<p class="p">The basic use pattern of an iterator is as follows:</p>
+<p class="p">&lt;example&gt;
+&lt;title&gt;Using an iterator&lt;/title&gt;
+  &lt;programlisting&gt;
+   it = _get_iterator(object);
+   done = FALSE;
+   while (!done) {
+     switch (gst_iterator_next (it, &amp;amp;item)) {
+       case GST_ITERATOR_OK:
+         ... use/change item here...
+         g_value_reset (&amp;amp;item);
+         break;
+       case GST_ITERATOR_RESYNC:
+         ...rollback changes to items...
+         gst_iterator_resync (it);
+         break;
+       case GST_ITERATOR_ERROR:
+         ...wrong parameters were given...
+         done = TRUE;
+         break;
+       case GST_ITERATOR_DONE:
+         done = TRUE;
+         break;
+     }
+   }
+   g_value_unset (&amp;amp;item);
+   gst_iterator_free (it);
+  &lt;/programlisting&gt;
+&lt;/example&gt;</p>
+<p class="p">Last reviewed on 2009-06-16 (0.10.24)</p>
+<div class="links topiclinks"><div class="inner"><div class="region">
+<div class="linkdiv "><a class="linkdiv" href="Gst.Iterator.new_single.html" title="Gst.Iterator.new_single"><span class="title">Gst.Iterator.new_single</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Iterator.copy.html" title="Gst.Iterator.prototype.copy"><span class="title">Gst.Iterator.prototype.copy</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Iterator.filter.html" title="Gst.Iterator.prototype.filter"><span class="title">Gst.Iterator.prototype.filter</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Iterator.find_custom.html" title="Gst.Iterator.prototype.find_custom"><span class="title">Gst.Iterator.prototype.find_custom</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Iterator.fold.html" title="Gst.Iterator.prototype.fold"><span class="title">Gst.Iterator.prototype.fold</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Iterator.foreach.html" title="Gst.Iterator.prototype.foreach"><span class="title">Gst.Iterator.prototype.foreach</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Iterator.free.html" title="Gst.Iterator.prototype.free"><span class="title">Gst.Iterator.prototype.free</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Iterator.next.html" title="Gst.Iterator.prototype.next"><span class="title">Gst.Iterator.prototype.next</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Iterator.push.html" title="Gst.Iterator.prototype.push"><span class="title">Gst.Iterator.prototype.push</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Iterator.resync.html" title="Gst.Iterator.prototype.resync"><span class="title">Gst.Iterator.prototype.resync</span></a></div>
+</div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

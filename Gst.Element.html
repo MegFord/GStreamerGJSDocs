@@ -1,0 +1,190 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Element</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Element</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let element = new Gst.Element();
+  </pre></div></div></div></div></div>
+<p class="p">GstElement is the abstract base class needed to construct an element that
+can be used in a GStreamer pipeline. Please refer to the plugin writers
+guide for more information on creating <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> subclasses.</p>
+<p class="p">The name of a <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> can be get with gst_element_get_name() and set with
+gst_element_set_name().  For speed, GST_ELEMENT_NAME() can be used in the
+core when using the appropriate locking. Do not use this in plug-ins or
+applications in order to retain ABI compatibility.</p>
+<p class="p">Elements can have pads (of the type <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span>).  These pads link to pads on
+other elements.  <span class=" link"><a href="Gst.Buffer.html" title="Gst.Buffer">Gst.Buffer</a></span> flow between these linked pads.
+A <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> has a <span class=" link"><a href="GLib.List.html" title="GLib.List">GLib.List</a></span> of <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span> structures for all their input (or sink)
+and output (or source) pads.
+Core and plug-in writers can add and remove pads with <span class=" link"><a href="Gst.add_pad.html" title="Gst.add_pad">Gst.add_pad</a></span>
+and <span class=" link"><a href="Gst.remove_pad.html" title="Gst.remove_pad">Gst.remove_pad</a></span>.</p>
+<p class="p">An existing pad of an element can be retrieved by name with
+<span class=" link"><a href="Gst.get_static_pad.html" title="Gst.get_static_pad">Gst.get_static_pad</a></span>. A new dynamic pad can be created using
+<span class=" link"><a href="Gst.request_pad.html" title="Gst.request_pad">Gst.request_pad</a></span> with a <span class=" link"><a href="Gst.PadTemplate.html" title="Gst.PadTemplate">Gst.PadTemplate</a></span> or 
+<span class=" link"><a href="Gst.get_request_pad.html" title="Gst.get_request_pad">Gst.get_request_pad</a></span> with the template name such as "src_\%u".
+An iterator of all pads can be retrieved with <span class=" link"><a href="Gst.iterate_pads.html" title="Gst.iterate_pads">Gst.iterate_pads</a></span>.</p>
+<p class="p">Elements can be linked through their pads.
+If the link is straightforward, use the <span class=" link"><a href="Gst.link.html" title="Gst.link">Gst.link</a></span>
+convenience function to link two elements, or <span class=" link"><a href="Gst.link_many.html" title="Gst.link_many">Gst.link_many</a></span>
+for more elements in a row.
+Use <span class=" link"><a href="Gst.link_filtered.html" title="Gst.link_filtered">Gst.link_filtered</a></span> to link two elements constrained by
+a specified set of <span class=" link"><a href="Gst.Caps.html" title="Gst.Caps">Gst.Caps</a></span>.
+For finer control, use <span class=" link"><a href="Gst.link_pads.html" title="Gst.link_pads">Gst.link_pads</a></span> and
+<span class=" link"><a href="Gst.link_pads_filtered.html" title="Gst.link_pads_filtered">Gst.link_pads_filtered</a></span> to specify the pads to link on
+each element by name.</p>
+<p class="p">Each element has a state (see <span class=" link"><a href="Gst.State.html" title="Gst.State">Gst.State</a></span>).  You can get and set the state
+of an element with <span class=" link"><a href="Gst.get_state.html" title="Gst.get_state">Gst.get_state</a></span> and <span class=" link"><a href="Gst.set_state.html" title="Gst.set_state">Gst.set_state</a></span>.
+Setting a state triggers a <span class=" link"><a href="Gst.StateChange.html" title="Gst.StateChange">Gst.StateChange</a></span>. To get a string representation
+of a <span class=" link"><a href="Gst.State.html" title="Gst.State">Gst.State</a></span>, use <span class=" link"><a href="Gst.state_get_name.html" title="Gst.state_get_name">Gst.state_get_name</a></span>.</p>
+<p class="p">You can get and set a <span class=" link"><a href="Gst.Clock.html" title="Gst.Clock">Gst.Clock</a></span> on an element using <span class=" link"><a href="Gst.get_clock.html" title="Gst.get_clock">Gst.get_clock</a></span>
+and <span class=" link"><a href="Gst.set_clock.html" title="Gst.set_clock">Gst.set_clock</a></span>.
+Some elements can provide a clock for the pipeline if
+the #GST_ELEMENT_FLAG_PROVIDE_CLOCK flag is set. With the
+<span class=" link"><a href="Gst.provide_clock.html" title="Gst.provide_clock">Gst.provide_clock</a></span> method one can retrieve the clock provided by
+such an element.
+Not all elements require a clock to operate correctly. If the
+#GST_ELEMENT_FLAG_REQUIRE_CLOCK() flag is set, a clock should be set on the
+element with <span class=" link"><a href="Gst.set_clock.html" title="Gst.set_clock">Gst.set_clock</a></span>.</p>
+<p class="p">Note that clock slection and distribution is normally handled by the
+toplevel <span class=" link"><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></span> so the clock functions are only to be used in very
+specific situations.</p>
+<p class="p">Last reviewed on 2012-03-28 (0.11.3)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.Element</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Element.abort_state.html" title="Gst.Element.prototype.abort_state">Gst.Element.prototype.abort_state</a></li>
+<li class="links "><a href="Gst.Element.add_pad.html" title="Gst.Element.prototype.add_pad">Gst.Element.prototype.add_pad</a></li>
+<li class="links "><a href="Gst.Element.change_state.html" title="Gst.Element.prototype.change_state">Gst.Element.prototype.change_state</a></li>
+<li class="links "><a href="Gst.Element.continue_state.html" title="Gst.Element.prototype.continue_state">Gst.Element.prototype.continue_state</a></li>
+<li class="links "><a href="Gst.Element.create_all_pads.html" title="Gst.Element.prototype.create_all_pads">Gst.Element.prototype.create_all_pads</a></li>
+<li class="links "><a href="Gst.Element.get_base_time.html" title="Gst.Element.prototype.get_base_time">Gst.Element.prototype.get_base_time</a></li>
+<li class="links "><a href="Gst.Element.get_bus.html" title="Gst.Element.prototype.get_bus">Gst.Element.prototype.get_bus</a></li>
+<li class="links "><a href="Gst.Element.get_clock.html" title="Gst.Element.prototype.get_clock">Gst.Element.prototype.get_clock</a></li>
+<li class="links "><a href="Gst.Element.get_compatible_pad.html" title="Gst.Element.prototype.get_compatible_pad">Gst.Element.prototype.get_compatible_pad</a></li>
+<li class="links "><a href="Gst.Element.get_compatible_pad_template.html" title="Gst.Element.prototype.get_compatible_pad_template">Gst.Element.prototype.get_compatible_pad_template</a></li>
+<li class="links "><a href="Gst.Element.get_factory.html" title="Gst.Element.prototype.get_factory">Gst.Element.prototype.get_factory</a></li>
+<li class="links "><a href="Gst.Element.get_request_pad.html" title="Gst.Element.prototype.get_request_pad">Gst.Element.prototype.get_request_pad</a></li>
+<li class="links "><a href="Gst.Element.get_start_time.html" title="Gst.Element.prototype.get_start_time">Gst.Element.prototype.get_start_time</a></li>
+<li class="links "><a href="Gst.Element.get_state.html" title="Gst.Element.prototype.get_state">Gst.Element.prototype.get_state</a></li>
+<li class="links "><a href="Gst.Element.get_static_pad.html" title="Gst.Element.prototype.get_static_pad">Gst.Element.prototype.get_static_pad</a></li>
+<li class="links "><a href="Gst.Element.is_locked_state.html" title="Gst.Element.prototype.is_locked_state">Gst.Element.prototype.is_locked_state</a></li>
+<li class="links "><a href="Gst.Element.iterate_pads.html" title="Gst.Element.prototype.iterate_pads">Gst.Element.prototype.iterate_pads</a></li>
+<li class="links "><a href="Gst.Element.iterate_sink_pads.html" title="Gst.Element.prototype.iterate_sink_pads">Gst.Element.prototype.iterate_sink_pads</a></li>
+<li class="links "><a href="Gst.Element.iterate_src_pads.html" title="Gst.Element.prototype.iterate_src_pads">Gst.Element.prototype.iterate_src_pads</a></li>
+<li class="links "><a href="Gst.Element.link.html" title="Gst.Element.prototype.link">Gst.Element.prototype.link</a></li>
+<li class="links "><a href="Gst.Element.link_filtered.html" title="Gst.Element.prototype.link_filtered">Gst.Element.prototype.link_filtered</a></li>
+<li class="links "><a href="Gst.Element.link_pads.html" title="Gst.Element.prototype.link_pads">Gst.Element.prototype.link_pads</a></li>
+<li class="links "><a href="Gst.Element.link_pads_filtered.html" title="Gst.Element.prototype.link_pads_filtered">Gst.Element.prototype.link_pads_filtered</a></li>
+<li class="links "><a href="Gst.Element.link_pads_full.html" title="Gst.Element.prototype.link_pads_full">Gst.Element.prototype.link_pads_full</a></li>
+<li class="links "><a href="Gst.Element.lost_state.html" title="Gst.Element.prototype.lost_state">Gst.Element.prototype.lost_state</a></li>
+<li class="links "><a href="Gst.Element.message_full.html" title="Gst.Element.prototype.message_full">Gst.Element.prototype.message_full</a></li>
+<li class="links "><a href="Gst.Element.no_more_pads.html" title="Gst.Element.prototype.no_more_pads">Gst.Element.prototype.no_more_pads</a></li>
+<li class="links "><a href="Gst.Element.post_message.html" title="Gst.Element.prototype.post_message">Gst.Element.prototype.post_message</a></li>
+<li class="links "><a href="Gst.Element.provide_clock.html" title="Gst.Element.prototype.provide_clock">Gst.Element.prototype.provide_clock</a></li>
+<li class="links "><a href="Gst.Element.query.html" title="Gst.Element.prototype.query">Gst.Element.prototype.query</a></li>
+<li class="links "><a href="Gst.Element.query_convert.html" title="Gst.Element.prototype.query_convert">Gst.Element.prototype.query_convert</a></li>
+<li class="links "><a href="Gst.Element.query_duration.html" title="Gst.Element.prototype.query_duration">Gst.Element.prototype.query_duration</a></li>
+<li class="links "><a href="Gst.Element.query_position.html" title="Gst.Element.prototype.query_position">Gst.Element.prototype.query_position</a></li>
+<li class="links "><a href="Gst.Element.release_request_pad.html" title="Gst.Element.prototype.release_request_pad">Gst.Element.prototype.release_request_pad</a></li>
+<li class="links "><a href="Gst.Element.remove_pad.html" title="Gst.Element.prototype.remove_pad">Gst.Element.prototype.remove_pad</a></li>
+<li class="links "><a href="Gst.Element.request_pad.html" title="Gst.Element.prototype.request_pad">Gst.Element.prototype.request_pad</a></li>
+<li class="links "><a href="Gst.Element.seek.html" title="Gst.Element.prototype.seek">Gst.Element.prototype.seek</a></li>
+<li class="links "><a href="Gst.Element.seek_simple.html" title="Gst.Element.prototype.seek_simple">Gst.Element.prototype.seek_simple</a></li>
+<li class="links "><a href="Gst.Element.send_event.html" title="Gst.Element.prototype.send_event">Gst.Element.prototype.send_event</a></li>
+<li class="links "><a href="Gst.Element.set_base_time.html" title="Gst.Element.prototype.set_base_time">Gst.Element.prototype.set_base_time</a></li>
+<li class="links "><a href="Gst.Element.set_bus.html" title="Gst.Element.prototype.set_bus">Gst.Element.prototype.set_bus</a></li>
+<li class="links "><a href="Gst.Element.set_clock.html" title="Gst.Element.prototype.set_clock">Gst.Element.prototype.set_clock</a></li>
+<li class="links "><a href="Gst.Element.set_locked_state.html" title="Gst.Element.prototype.set_locked_state">Gst.Element.prototype.set_locked_state</a></li>
+<li class="links "><a href="Gst.Element.set_start_time.html" title="Gst.Element.prototype.set_start_time">Gst.Element.prototype.set_start_time</a></li>
+<li class="links "><a href="Gst.Element.set_state.html" title="Gst.Element.prototype.set_state">Gst.Element.prototype.set_state</a></li>
+<li class="links "><a href="Gst.Element.sync_state_with_parent.html" title="Gst.Element.prototype.sync_state_with_parent">Gst.Element.prototype.sync_state_with_parent</a></li>
+<li class="links "><a href="Gst.Element.unlink.html" title="Gst.Element.prototype.unlink">Gst.Element.prototype.unlink</a></li>
+<li class="links "><a href="Gst.Element.unlink_pads.html" title="Gst.Element.prototype.unlink_pads">Gst.Element.prototype.unlink_pads</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Element.make_from_uri.html" title="make_from_uri">make_from_uri</a></li>
+<li class="links "><a href="Gst.Element.register.html" title="register">register</a></li>
+<li class="links "><a href="Gst.Element.state_change_return_get_name.html" title="state_change_return_get_name">state_change_return_get_name</a></li>
+<li class="links "><a href="Gst.Element.state_get_name.html" title="state_get_name">state_get_name</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Signals</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Element-no-more-pads.html" title="Gst.Element::no-more-pads">no-more-pads</a></li>
+<li class="links "><a href="Gst.Element-pad-added.html" title="Gst.Element::pad-added">pad-added</a></li>
+<li class="links "><a href="Gst.Element-pad-removed.html" title="Gst.Element::pad-removed">pad-removed</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Element-change_state.html" title="Gst.Element::change_state">Gst.Element::change_state</a></li>
+<li class="links "><a href="Gst.Element-get_state.html" title="Gst.Element::get_state">Gst.Element::get_state</a></li>
+<li class="links "><a href="Gst.Element-no_more_pads.html" title="Gst.Element::no_more_pads">Gst.Element::no_more_pads</a></li>
+<li class="links "><a href="Gst.Element-pad_added.html" title="Gst.Element::pad_added">Gst.Element::pad_added</a></li>
+<li class="links "><a href="Gst.Element-pad_removed.html" title="Gst.Element::pad_removed">Gst.Element::pad_removed</a></li>
+<li class="links "><a href="Gst.Element-post_message.html" title="Gst.Element::post_message">Gst.Element::post_message</a></li>
+<li class="links "><a href="Gst.Element-provide_clock.html" title="Gst.Element::provide_clock">Gst.Element::provide_clock</a></li>
+<li class="links "><a href="Gst.Element-query.html" title="Gst.Element::query">Gst.Element::query</a></li>
+<li class="links "><a href="Gst.Element-release_pad.html" title="Gst.Element::release_pad">Gst.Element::release_pad</a></li>
+<li class="links "><a href="Gst.Element-send_event.html" title="Gst.Element::send_event">Gst.Element::send_event</a></li>
+<li class="links "><a href="Gst.Element-set_bus.html" title="Gst.Element::set_bus">Gst.Element::set_bus</a></li>
+<li class="links "><a href="Gst.Element-set_clock.html" title="Gst.Element::set_clock">Gst.Element::set_clock</a></li>
+<li class="links "><a href="Gst.Element-set_state.html" title="Gst.Element::set_state">Gst.Element::set_state</a></li>
+<li class="links "><a href="Gst.Element-state_changed.html" title="Gst.Element::state_changed">Gst.Element::state_changed</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

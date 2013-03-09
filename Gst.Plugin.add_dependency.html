@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Plugin.prototype.add_dependency</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Plugin.html" title="Gst.Plugin">Gst.Plugin</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Plugin.prototype.add_dependency</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function add_dependency(env_vars:String, paths:String, names:String, flags:Gst.PluginDependencyFlags):void {
+    // Gjs wrapper for gst_plugin_add_dependency()
+}</pre></div></div></div></div></div>
+<p class="p">Make GStreamer aware of external dependencies which affect the feature
+set of this plugin (ie. the elements or typefinders associated with it).</p>
+<p class="p">GStreamer will re-inspect plugins with external dependencies whenever any
+of the external dependencies change. This is useful for plugins which wrap
+other plugin systems, e.g. a plugin which wraps a plugin-based visualisation
+library and makes visualisations available as GStreamer elements, or a
+codec loader which exposes elements and/or caps dependent on what external
+codec libraries are currently installed.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">env_vars</span></dt>
+<dd class="terms"><p class="p">NULL-terminated array of environment variables affecting the feature set of the plugin (e.g. an environment variable containing paths where to look for additional modules/plugins of a library), or NULL. Environment variable names may be followed by a path component which will be added to the content of the environment variable, e.g. "HOME/.mystuff/plugins".</p></dd>
+<dt class="terms"><span class=" code">paths</span></dt>
+<dd class="terms"><p class="p">NULL-terminated array of directories/paths where dependent files may be.</p></dd>
+<dt class="terms"><span class=" code">names</span></dt>
+<dd class="terms"><p class="p">NULL-terminated array of file names (or file name suffixes, depending on <span class=" code">flags</span>) to be used in combination with the paths from <span class=" code">paths</span> and/or the paths extracted from the environment variables in <span class=" code">env_vars</span>, or NULL.</p></dd>
+<dt class="terms"><span class=" code">flags</span></dt>
+<dd class="terms"><p class="p">optional flags, or #GST_PLUGIN_DEPENDENCY_FLAG_NONE</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Plugin.html" title="Gst.Plugin">Gst.Plugin</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

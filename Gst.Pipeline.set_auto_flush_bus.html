@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Pipeline.prototype.set_auto_flush_bus</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Pipeline.prototype.set_auto_flush_bus</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function set_auto_flush_bus(auto_flush:Boolean):void {
+    // Gjs wrapper for gst_pipeline_set_auto_flush_bus()
+}</pre></div></div></div></div></div>
+<p class="p">Usually, when a pipeline goes from READY to NULL state, it automatically
+flushes all pending messages on the bus, which is done for refcounting
+purposes, to break circular references.</p>
+<p class="p">This means that applications that update state using (async) bus messages
+(e.g. do certain things when a pipeline goes from PAUSED to READY) might
+not get to see messages when the pipeline is shut down, because they might
+be flushed before they can be dispatched in the main thread. This behaviour
+can be disabled using this function.</p>
+<p class="p">It is important that all messages on the bus are handled when the
+automatic flushing is disabled else memory leaks will be introduced.</p>
+<p class="p">MT safe.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">auto_flush</span></dt>
+<dd class="terms"><p class="p">whether or not to automatically flush the bus when the pipeline goes from READY to NULL state</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

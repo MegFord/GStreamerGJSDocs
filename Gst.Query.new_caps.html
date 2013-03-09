@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Query.new_caps</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Query.html" title="Gst.Query">Gst.Query</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Query.new_caps</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function new_caps(filter:Gst.Caps):Gst.Query {
+    // Gjs wrapper for gst_query_new_caps()
+}</pre></div></div></div></div></div>
+<p class="p">Constructs a new query object for querying the caps.</p>
+<p class="p">The CAPS query should return the allowable caps for a pad in the context
+of the element's state, its link to other elements, and the devices or files
+it has opened. These caps must be a subset of the pad template caps. In the
+NULL state with no links, the CAPS query should ideally return the same caps
+as the pad template. In rare circumstances, an object property can affect
+the caps returned by the CAPS query, but this is discouraged.</p>
+<p class="p">For most filters, the caps returned by CAPS query is directly affected by the
+allowed caps on other pads. For demuxers and decoders, the caps returned by
+the srcpad's getcaps function is directly related to the stream data. Again,
+the CAPS query should return the most specific caps it reasonably can, since this
+helps with autoplugging.</p>
+<p class="p">The <span class=" code">filter</span> is used to restrict the result caps, only the caps matching
+<span class=" code">filter</span> should be returned from the CAPS query. Specifying a filter might
+greatly reduce the amount of processing an element needs to do.</p>
+<p class="p">Free-function: gst_query_unref</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">filter</span></dt>
+<dd class="terms"><p class="p">a filter</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">a new <span class=" link"><a href="Gst.Query.html" title="Gst.Query">Gst.Query</a></span></p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Query.html" title="Gst.Query">Gst.Query</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

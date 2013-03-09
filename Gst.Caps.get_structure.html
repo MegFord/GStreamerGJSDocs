@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Caps.prototype.get_structure</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Caps.html" title="Gst.Caps">Gst.Caps</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Caps.prototype.get_structure</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function get_structure(index:Number):Gst.Structure {
+    // Gjs wrapper for gst_caps_get_structure()
+}</pre></div></div></div></div></div>
+<p class="p">Finds the structure in <span class=" code">caps</span> that has the index <span class=" code">index</span>, and
+returns it.</p>
+<p class="p">WARNING: This function takes a const GstCaps *, but returns a
+non-const GstStructure *.  This is for programming convenience --
+the caller should be aware that structures inside a constant
+<span class=" link"><a href="Gst.Caps.html" title="Gst.Caps">Gst.Caps</a></span> should not be modified. However, if you know the caps
+are writable, either because you have just copied them or made
+them writable with gst_caps_make_writable(), you may modify the
+structure returned in the usual way, e.g. with functions like
+<span class=" link"><a href="Gst.set.html" title="Gst.set">Gst.set</a></span>.</p>
+<p class="p">You do not need to free or unref the structure returned, it
+belongs to the <span class=" link"><a href="Gst.Caps.html" title="Gst.Caps">Gst.Caps</a></span>.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">index</span></dt>
+<dd class="terms"><p class="p">the index of the structure</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">a pointer to the <span class=" link"><a href="Gst.Structure.html" title="Gst.Structure">Gst.Structure</a></span> corresponding to <span class=" code">index</span></p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Caps.html" title="Gst.Caps">Gst.Caps</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

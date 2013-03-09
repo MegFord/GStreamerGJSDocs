@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Iterator.prototype.fold</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Iterator.html" title="Gst.Iterator">Gst.Iterator</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Iterator.prototype.fold</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function fold(func:Gst.IteratorFoldFunction, ret:GObject.Value):Gst.IteratorResult {
+    // Gjs wrapper for gst_iterator_fold()
+}</pre></div></div></div></div></div>
+<p class="p">Folds <span class=" code">func</span> over the elements of @iter. That is to say, <span class=" code">func</span> will be called
+as <span class=" code">func</span> (object, <span class=" code">ret</span>, <span class=" code">user_data</span>) for each object in <span class=" code">it</span>. The normal use
+of this procedure is to accumulate the results of operating on the objects in
+<span class=" code">ret</span>.</p>
+<p class="p">This procedure can be used (and is used internally) to implement the
+<span class=" link"><a href="Gst.foreach.html" title="Gst.foreach">Gst.foreach</a></span> and <span class=" link"><a href="Gst.Iterator.find_custom.html" title="Gst.Iterator.prototype.find_custom">Gst.Iterator.prototype.find_custom</a></span> operations.</p>
+<p class="p">The fold will proceed as long as <span class=" code">func</span> returns TRUE. When the iterator has no
+more arguments, <span class=" link"><a href="Gst.IteratorResult.html" title="Gst.IteratorResult">Gst.IteratorResult</a></span>.done will be returned. If <span class=" code">func</span> returns FALSE,
+the fold will stop, and <span class=" link"><a href="Gst.IteratorResult.html" title="Gst.IteratorResult">Gst.IteratorResult</a></span>.ok will be returned. Errors or resyncs
+will cause fold to return <span class=" link"><a href="Gst.IteratorResult.html" title="Gst.IteratorResult">Gst.IteratorResult</a></span>.error or <span class=" link"><a href="Gst.IteratorResult.html" title="Gst.IteratorResult">Gst.IteratorResult</a></span>.resync as
+appropriate.</p>
+<p class="p">The iterator will not be freed.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">func</span></dt>
+<dd class="terms"><p class="p">the fold function</p></dd>
+<dt class="terms"><span class=" code">ret</span></dt>
+<dd class="terms"><p class="p">the seed value passed to the fold function</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">A <span class=" link"><a href="Gst.IteratorResult.html" title="Gst.IteratorResult">Gst.IteratorResult</a></span>, as described above.  MT safe.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Iterator.html" title="Gst.Iterator">Gst.Iterator</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

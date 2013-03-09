@@ -1,0 +1,163 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Object</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Object</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let object = new Gst.Object({
+    <span class=" link"><a href="Gst.Object-name.html" title="Gst.Object:name">name</a></span>: value,
+    <span class=" link"><a href="Gst.Object-parent.html" title="Gst.Object:parent">parent</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p"><span class=" link"><a href="Gst.Object.html" title="Gst.Object">Gst.Object</a></span> provides a root for the object hierarchy tree filed in by the
+GStreamer library.  It is currently a thin wrapper on top of
+<span class=" link"><a href="GObject.InitiallyUnowned.html" title="GObject.InitiallyUnowned">GObject.InitiallyUnowned</a></span>. It is an abstract class that is not very usable on its own.</p>
+<p class="p"><span class=" link"><a href="Gst.Object.html" title="Gst.Object">Gst.Object</a></span> gives us basic refcounting, parenting functionality and locking.
+Most of the function are just extended for special GStreamer needs and can be
+found under the same name in the base class of <span class=" link"><a href="Gst.Object.html" title="Gst.Object">Gst.Object</a></span> which is <span class=" link"><a href="GObject.Object.html" title="GObject.Object">GObject.Object</a></span>
+(e.g. <span class=" link"><a href="GObject.ref.html" title="GObject.ref">GObject.ref</a></span> becomes <span class=" link"><a href="Gst.ref.html" title="Gst.ref">Gst.ref</a></span>).</p>
+<p class="p">Since <span class=" link"><a href="Gst.Object.html" title="Gst.Object">Gst.Object</a></span> dereives from <span class=" link"><a href="GObject.InitiallyUnowned.html" title="GObject.InitiallyUnowned">GObject.InitiallyUnowned</a></span>, it also inherits the
+floating reference. Be aware that functions such as <span class=" link"><a href="Gst.Bin.add.html" title="Gst.Bin.prototype.add">Gst.Bin.prototype.add</a></span> and
+<span class=" link"><a href="Gst.Element.add_pad.html" title="Gst.Element.prototype.add_pad">Gst.Element.prototype.add_pad</a></span> take ownership of the floating reference.</p>
+<p class="p">In contrast to <span class=" link"><a href="GObject.Object.html" title="GObject.Object">GObject.Object</a></span> instances, <span class=" link"><a href="Gst.Object.html" title="Gst.Object">Gst.Object</a></span> adds a name property. The functions
+<span class=" link"><a href="Gst.set_name.html" title="Gst.set_name">Gst.set_name</a></span> and <span class=" link"><a href="Gst.get_name.html" title="Gst.get_name">Gst.get_name</a></span> are used to set/get the name
+of the object.</p>
+<p class="p">&lt;refsect2&gt;
+&lt;title&gt;controlled properties&lt;/title&gt;
+&lt;para&gt;
+Controlled properties offers a lightweight way to adjust gobject
+properties over stream-time. It works by using time-stamped value pairs that
+are queued for element-properties. At run-time the elements continuously pull
+values changes for the current stream-time.</p>
+<p class="p">What needs to be changed in a <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span>?
+Very little - it is just two steps to make a plugin controllable!
+&lt;orderedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    mark gobject-properties paramspecs that make sense to be controlled,
+    by GST_PARAM_CONTROLLABLE.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    when processing data (get, chain, loop function) at the beginning call
+    gst_object_sync_values(element,timestamp).
+    This will made the controller to update all gobject properties that are under
+    control with the current values based on timestamp.
+  &lt;/para&gt;&lt;/listitem&gt;
+&lt;/orderedlist&gt;</p>
+<p class="p">What needs to be done in applications?
+Again it's not a lot to change.
+&lt;orderedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    create a <span class=" link"><a href="Gst.ControlSource.html" title="Gst.ControlSource">Gst.ControlSource</a></span>.
+    csource = gst_interpolation_control_source_new ();
+    g_object_set (csource, "mode", GST_INTERPOLATION_MODE_LINEAR, NULL);
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Attach the <span class=" link"><a href="Gst.ControlSource.html" title="Gst.ControlSource">Gst.ControlSource</a></span> on the controller to a property.
+    gst_object_add_control_binding (object, gst_direct_control_binding_new (object, "prop1", csource));
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Set the control values
+    gst_timed_value_control_source_set ((GstTimedValueControlSource *)csource,0 * GST_SECOND, value1);
+    gst_timed_value_control_source_set ((GstTimedValueControlSource *)csource,1 * GST_SECOND, value2);
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    start your pipeline
+  &lt;/para&gt;&lt;/listitem&gt;
+&lt;/orderedlist&gt;
+&lt;/para&gt;
+&lt;/refsect2&gt;</p>
+<p class="p">Last reviewed on 2012-03-29 (0.11.3)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.Object</span>
+      </div></li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Object.add_control_binding.html" title="Gst.Object.prototype.add_control_binding">Gst.Object.prototype.add_control_binding</a></li>
+<li class="links "><a href="Gst.Object.default_error.html" title="Gst.Object.prototype.default_error">Gst.Object.prototype.default_error</a></li>
+<li class="links "><a href="Gst.Object.get_control_binding.html" title="Gst.Object.prototype.get_control_binding">Gst.Object.prototype.get_control_binding</a></li>
+<li class="links "><a href="Gst.Object.get_control_rate.html" title="Gst.Object.prototype.get_control_rate">Gst.Object.prototype.get_control_rate</a></li>
+<li class="links "><a href="Gst.Object.get_g_value_array.html" title="Gst.Object.prototype.get_g_value_array">Gst.Object.prototype.get_g_value_array</a></li>
+<li class="links "><a href="Gst.Object.get_name.html" title="Gst.Object.prototype.get_name">Gst.Object.prototype.get_name</a></li>
+<li class="links "><a href="Gst.Object.get_parent.html" title="Gst.Object.prototype.get_parent">Gst.Object.prototype.get_parent</a></li>
+<li class="links "><a href="Gst.Object.get_path_string.html" title="Gst.Object.prototype.get_path_string">Gst.Object.prototype.get_path_string</a></li>
+<li class="links "><a href="Gst.Object.get_value.html" title="Gst.Object.prototype.get_value">Gst.Object.prototype.get_value</a></li>
+<li class="links "><a href="Gst.Object.get_value_array.html" title="Gst.Object.prototype.get_value_array">Gst.Object.prototype.get_value_array</a></li>
+<li class="links "><a href="Gst.Object.has_active_control_bindings.html" title="Gst.Object.prototype.has_active_control_bindings">Gst.Object.prototype.has_active_control_bindings</a></li>
+<li class="links "><a href="Gst.Object.has_ancestor.html" title="Gst.Object.prototype.has_ancestor">Gst.Object.prototype.has_ancestor</a></li>
+<li class="links "><a href="Gst.Object.ref.html" title="Gst.Object.prototype.ref">Gst.Object.prototype.ref</a></li>
+<li class="links "><a href="Gst.Object.remove_control_binding.html" title="Gst.Object.prototype.remove_control_binding">Gst.Object.prototype.remove_control_binding</a></li>
+<li class="links "><a href="Gst.Object.set_control_binding_disabled.html" title="Gst.Object.prototype.set_control_binding_disabled">Gst.Object.prototype.set_control_binding_disabled</a></li>
+<li class="links "><a href="Gst.Object.set_control_bindings_disabled.html" title="Gst.Object.prototype.set_control_bindings_disabled">Gst.Object.prototype.set_control_bindings_disabled</a></li>
+<li class="links "><a href="Gst.Object.set_control_rate.html" title="Gst.Object.prototype.set_control_rate">Gst.Object.prototype.set_control_rate</a></li>
+<li class="links "><a href="Gst.Object.set_name.html" title="Gst.Object.prototype.set_name">Gst.Object.prototype.set_name</a></li>
+<li class="links "><a href="Gst.Object.set_parent.html" title="Gst.Object.prototype.set_parent">Gst.Object.prototype.set_parent</a></li>
+<li class="links "><a href="Gst.Object.suggest_next_sync.html" title="Gst.Object.prototype.suggest_next_sync">Gst.Object.prototype.suggest_next_sync</a></li>
+<li class="links "><a href="Gst.Object.sync_values.html" title="Gst.Object.prototype.sync_values">Gst.Object.prototype.sync_values</a></li>
+<li class="links "><a href="Gst.Object.unparent.html" title="Gst.Object.prototype.unparent">Gst.Object.prototype.unparent</a></li>
+<li class="links "><a href="Gst.Object.unref.html" title="Gst.Object.prototype.unref">Gst.Object.prototype.unref</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Object.check_uniqueness.html" title="check_uniqueness">check_uniqueness</a></li>
+<li class="links "><a href="Gst.Object.default_deep_notify.html" title="default_deep_notify">default_deep_notify</a></li>
+<li class="links "><a href="Gst.Object.replace.html" title="replace">replace</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Object-name.html" title="Gst.Object:name">name</a></li>
+<li class="links "><a href="Gst.Object-parent.html" title="Gst.Object:parent">parent</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Signals</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Object-deep-notify.html" title="Gst.Object::deep-notify">deep-notify</a></li></ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Object-deep_notify.html" title="Gst.Object::deep_notify">Gst.Object::deep_notify</a></li></ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

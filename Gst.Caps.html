@@ -1,0 +1,91 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Caps</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Caps</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">Caps (capabilities) are lightweight refcounted objects describing media types.
+They are composed of an array of <span class=" link"><a href="Gst.Structure.html" title="Gst.Structure">Gst.Structure</a></span>.</p>
+<p class="p">Caps are exposed on <span class=" link"><a href="Gst.PadTemplate.html" title="Gst.PadTemplate">Gst.PadTemplate</a></span> to describe all possible types a
+given pad can handle. They are also stored in the <span class=" link"><a href="Gst.Registry.html" title="Gst.Registry">Gst.Registry</a></span> along with
+a description of the <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span>.</p>
+<p class="p">Caps are exposed on the element pads using the <span class=" link"><a href="Gst.query_caps.html" title="Gst.query_caps">Gst.query_caps</a></span> pad
+function. This function describes the possible types that the pad can
+handle or produce at runtime.</p>
+<p class="p">A <span class=" link"><a href="Gst.Caps.html" title="Gst.Caps">Gst.Caps</a></span> can be constructed with the following code fragment:</p>
+<p class="p">&lt;example&gt;
+ &lt;title&gt;Creating caps&lt;/title&gt;
+ &lt;programlisting&gt;
+ GstCaps *caps;
+ caps = gst_caps_new_simple ("video/x-raw",
+      "format", G_TYPE_STRING, "I420",
+      "framerate", GST_TYPE_FRACTION, 25, 1,
+      "pixel-aspect-ratio", GST_TYPE_FRACTION, 1, 1,
+      "width", G_TYPE_INT, 320,
+      "height", G_TYPE_INT, 240,
+      NULL);
+ &lt;/programlisting&gt;
+&lt;/example&gt;</p>
+<p class="p">A <span class=" link"><a href="Gst.Caps.html" title="Gst.Caps">Gst.Caps</a></span> is fixed when it has no properties with ranges or lists. Use
+<span class=" link"><a href="Gst.is_fixed.html" title="Gst.is_fixed">Gst.is_fixed</a></span> to test for fixed caps. Fixed caps can be used in a
+caps event to notify downstream elements of the current media type.</p>
+<p class="p">Various methods exist to work with the media types such as subtracting
+or intersecting.</p>
+<p class="p">Last reviewed on 2011-03-28 (0.11.3)</p>
+<div class="links topiclinks"><div class="inner"><div class="region">
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.new_any.html" title="Gst.Caps.new_any"><span class="title">Gst.Caps.new_any</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.new_empty.html" title="Gst.Caps.new_empty"><span class="title">Gst.Caps.new_empty</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.new_empty_simple.html" title="Gst.Caps.new_empty_simple"><span class="title">Gst.Caps.new_empty_simple</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.append.html" title="Gst.Caps.prototype.append"><span class="title">Gst.Caps.prototype.append</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.append_structure.html" title="Gst.Caps.prototype.append_structure"><span class="title">Gst.Caps.prototype.append_structure</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.can_intersect.html" title="Gst.Caps.prototype.can_intersect"><span class="title">Gst.Caps.prototype.can_intersect</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.copy_nth.html" title="Gst.Caps.prototype.copy_nth"><span class="title">Gst.Caps.prototype.copy_nth</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.fixate.html" title="Gst.Caps.prototype.fixate"><span class="title">Gst.Caps.prototype.fixate</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.get_size.html" title="Gst.Caps.prototype.get_size"><span class="title">Gst.Caps.prototype.get_size</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.get_structure.html" title="Gst.Caps.prototype.get_structure"><span class="title">Gst.Caps.prototype.get_structure</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.intersect.html" title="Gst.Caps.prototype.intersect"><span class="title">Gst.Caps.prototype.intersect</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.intersect_full.html" title="Gst.Caps.prototype.intersect_full"><span class="title">Gst.Caps.prototype.intersect_full</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.is_always_compatible.html" title="Gst.Caps.prototype.is_always_compatible"><span class="title">Gst.Caps.prototype.is_always_compatible</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.is_any.html" title="Gst.Caps.prototype.is_any"><span class="title">Gst.Caps.prototype.is_any</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.is_empty.html" title="Gst.Caps.prototype.is_empty"><span class="title">Gst.Caps.prototype.is_empty</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.is_equal.html" title="Gst.Caps.prototype.is_equal"><span class="title">Gst.Caps.prototype.is_equal</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.is_equal_fixed.html" title="Gst.Caps.prototype.is_equal_fixed"><span class="title">Gst.Caps.prototype.is_equal_fixed</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.is_fixed.html" title="Gst.Caps.prototype.is_fixed"><span class="title">Gst.Caps.prototype.is_fixed</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.is_strictly_equal.html" title="Gst.Caps.prototype.is_strictly_equal"><span class="title">Gst.Caps.prototype.is_strictly_equal</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.is_subset.html" title="Gst.Caps.prototype.is_subset"><span class="title">Gst.Caps.prototype.is_subset</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.is_subset_structure.html" title="Gst.Caps.prototype.is_subset_structure"><span class="title">Gst.Caps.prototype.is_subset_structure</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.merge.html" title="Gst.Caps.prototype.merge"><span class="title">Gst.Caps.prototype.merge</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.merge_structure.html" title="Gst.Caps.prototype.merge_structure"><span class="title">Gst.Caps.prototype.merge_structure</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.normalize.html" title="Gst.Caps.prototype.normalize"><span class="title">Gst.Caps.prototype.normalize</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.remove_structure.html" title="Gst.Caps.prototype.remove_structure"><span class="title">Gst.Caps.prototype.remove_structure</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.set_value.html" title="Gst.Caps.prototype.set_value"><span class="title">Gst.Caps.prototype.set_value</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.simplify.html" title="Gst.Caps.prototype.simplify"><span class="title">Gst.Caps.prototype.simplify</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.steal_structure.html" title="Gst.Caps.prototype.steal_structure"><span class="title">Gst.Caps.prototype.steal_structure</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.subtract.html" title="Gst.Caps.prototype.subtract"><span class="title">Gst.Caps.prototype.subtract</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.to_string.html" title="Gst.Caps.prototype.to_string"><span class="title">Gst.Caps.prototype.to_string</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.truncate.html" title="Gst.Caps.prototype.truncate"><span class="title">Gst.Caps.prototype.truncate</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Caps.from_string.html" title="from_string"><span class="title">from_string</span></a></div>
+</div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

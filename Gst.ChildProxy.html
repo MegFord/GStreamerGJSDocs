@@ -1,0 +1,80 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.ChildProxy</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.ChildProxy</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let child_proxy = new Gst.ChildProxy();
+  </pre></div></div></div></div></div>
+<p class="p">This interface abstracts handling of property sets for elements with
+children. Imagine elements such as mixers or polyphonic generators. They all
+have multiple <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span> or some kind of voice objects. Another use case are
+container elements like <span class=" link"><a href="Gst.Bin.html" title="Gst.Bin">Gst.Bin</a></span>.
+The element implementing the interface acts as a parent for those child
+objects.</p>
+<p class="p">By implementing this interface the child properties can be accessed from the
+parent element by using <span class=" link"><a href="Gst.get.html" title="Gst.get">Gst.get</a></span> and <span class=" link"><a href="Gst.set.html" title="Gst.set">Gst.set</a></span>.</p>
+<p class="p">Property names are written as "child-name::property-name". The whole naming
+scheme is recursive. Thus "child1::child2::property" is valid too, if
+"child1" and "child2" implement the <span class=" link"><a href="Gst.ChildProxy.html" title="Gst.ChildProxy">Gst.ChildProxy</a></span> interface.</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.ChildProxy</span>
+      </div></li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.ChildProxy.child_added.html" title="Gst.ChildProxy.prototype.child_added">Gst.ChildProxy.prototype.child_added</a></li>
+<li class="links "><a href="Gst.ChildProxy.child_removed.html" title="Gst.ChildProxy.prototype.child_removed">Gst.ChildProxy.prototype.child_removed</a></li>
+<li class="links "><a href="Gst.ChildProxy.get_child_by_index.html" title="Gst.ChildProxy.prototype.get_child_by_index">Gst.ChildProxy.prototype.get_child_by_index</a></li>
+<li class="links "><a href="Gst.ChildProxy.get_child_by_name.html" title="Gst.ChildProxy.prototype.get_child_by_name">Gst.ChildProxy.prototype.get_child_by_name</a></li>
+<li class="links "><a href="Gst.ChildProxy.get_children_count.html" title="Gst.ChildProxy.prototype.get_children_count">Gst.ChildProxy.prototype.get_children_count</a></li>
+<li class="links "><a href="Gst.ChildProxy.get_property.html" title="Gst.ChildProxy.prototype.get_property">Gst.ChildProxy.prototype.get_property</a></li>
+<li class="links "><a href="Gst.ChildProxy.lookup.html" title="Gst.ChildProxy.prototype.lookup">Gst.ChildProxy.prototype.lookup</a></li>
+<li class="links "><a href="Gst.ChildProxy.set_property.html" title="Gst.ChildProxy.prototype.set_property">Gst.ChildProxy.prototype.set_property</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Signals</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.ChildProxy-child-added.html" title="Gst.ChildProxy::child-added">child-added</a></li>
+<li class="links "><a href="Gst.ChildProxy-child-removed.html" title="Gst.ChildProxy::child-removed">child-removed</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.ChildProxy-child_added.html" title="Gst.ChildProxy::child_added">Gst.ChildProxy::child_added</a></li>
+<li class="links "><a href="Gst.ChildProxy-child_removed.html" title="Gst.ChildProxy::child_removed">Gst.ChildProxy::child_removed</a></li>
+<li class="links "><a href="Gst.ChildProxy-get_child_by_index.html" title="Gst.ChildProxy::get_child_by_index">Gst.ChildProxy::get_child_by_index</a></li>
+<li class="links "><a href="Gst.ChildProxy-get_child_by_name.html" title="Gst.ChildProxy::get_child_by_name">Gst.ChildProxy::get_child_by_name</a></li>
+<li class="links "><a href="Gst.ChildProxy-get_children_count.html" title="Gst.ChildProxy::get_children_count">Gst.ChildProxy::get_children_count</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

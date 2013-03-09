@@ -1,0 +1,75 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.ControlSource</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.ControlSource</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let control_source = new Gst.ControlSource();
+  </pre></div></div></div></div></div>
+<p class="p">The <span class=" link"><a href="Gst.ControlSource.html" title="Gst.ControlSource">Gst.ControlSource</a></span> is a base class for control value sources that could
+be used by #GstController to get timestamp-value pairs. A control source
+essentially is a function over time, returning gloat values between 0.0 and 1.0.</p>
+<p class="p">A <span class=" link"><a href="Gst.ControlSource.html" title="Gst.ControlSource">Gst.ControlSource</a></span> is used by first getting an instance of a specific
+control-source, creating a binding for the control-source to the target property
+of the element and then adding the binding to the element. The binding will
+convert the data types and value range to fit to the bound property.</p>
+<p class="p">For implementing a new <span class=" link"><a href="Gst.ControlSource.html" title="Gst.ControlSource">Gst.ControlSource</a></span> one has to implement
+<span class=" link"><a href="Gst.ControlSourceGetValue.html" title="Gst.ControlSourceGetValue">Gst.ControlSourceGetValue</a></span> and <span class=" link"><a href="Gst.ControlSourceGetValueArray.html" title="Gst.ControlSourceGetValueArray">Gst.ControlSourceGetValueArray</a></span> functions.
+These are then used by <span class=" link"><a href="Gst.get_value.html" title="Gst.get_value">Gst.get_value</a></span> and
+<span class=" link"><a href="Gst.get_value_array.html" title="Gst.get_value_array">Gst.get_value_array</a></span> to get values for specific timestamps.</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.ControlSource</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.ControlSource.get_value.html" title="Gst.ControlSource.prototype.get_value">Gst.ControlSource.prototype.get_value</a></li>
+<li class="links "><a href="Gst.ControlSource.get_value_array.html" title="Gst.ControlSource.prototype.get_value_array">Gst.ControlSource.prototype.get_value_array</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

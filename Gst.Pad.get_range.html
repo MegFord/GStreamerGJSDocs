@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Pad.prototype.get_range</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Pad.prototype.get_range</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function get_range(offset:Number, size:Number):Gst.FlowReturn {
+    // Gjs wrapper for gst_pad_get_range()
+}</pre></div></div></div></div></div>
+<p class="p">When <span class=" code">pad</span> is flushing this function returns #GST_FLOW_FLUSHING
+immediately and <span class=" code">buffer</span> is <span class=" code">null</span>.</p>
+<p class="p">Calls the getrange function of <span class=" code">pad</span>, see <span class=" link"><a href="Gst.PadGetRangeFunction.html" title="Gst.PadGetRangeFunction">Gst.PadGetRangeFunction</a></span> for a
+description of a getrange function. If <span class=" code">pad</span> has no getrange function
+installed (see gst_pad_set_getrange_function()) this function returns
+#GST_FLOW_NOT_SUPPORTED.</p>
+<p class="p">If <span class=" code">buffer</span> points to a variable holding NULL, a valid new <span class=" link"><a href="Gst.Buffer.html" title="Gst.Buffer">Gst.Buffer</a></span> will be
+placed in <span class=" code">buffer</span> when this function returns #GST_FLOW_OK. The new buffer
+must be freed with gst_buffer_unref() after usage.</p>
+<p class="p">When <span class=" code">buffer</span> points to a variable that points to a valid <span class=" link"><a href="Gst.Buffer.html" title="Gst.Buffer">Gst.Buffer</a></span>, the
+buffer will be filled with the result data when this function returns
+#GST_FLOW_OK. If the provided buffer is larger than <span class=" code">size</span>, only
+<span class=" code">size</span> bytes will be filled in the result buffer and its size will be updated
+accordingly.</p>
+<p class="p">Note that less than <span class=" code">size</span> bytes can be returned in <span class=" code">buffer</span> when, for example,
+an EOS condition is near or when <span class=" code">buffer</span> is not large enough to hold <span class=" code">size</span>
+bytes. The caller should check the result buffer size to get the result size.</p>
+<p class="p">When this function returns any other result value than #GST_FLOW_OK, <span class=" code">buffer</span>
+will be unchanged.</p>
+<p class="p">This is a lowlevel function. Usualy <span class=" link"><a href="Gst.pull_range.html" title="Gst.pull_range">Gst.pull_range</a></span> is used.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">offset</span></dt>
+<dd class="terms"><p class="p">The start offset of the buffer</p></dd>
+<dt class="terms"><span class=" code">size</span></dt>
+<dd class="terms"><p class="p">The length of the buffer</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.FlowReturn.html" title="Gst.FlowReturn">Gst.FlowReturn</a></span> from the pad.  MT safe.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

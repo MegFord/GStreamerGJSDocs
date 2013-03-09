@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Pad.prototype.send_event</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Pad.prototype.send_event</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function send_event(event:Gst.Event):Boolean {
+    // Gjs wrapper for gst_pad_send_event()
+}</pre></div></div></div></div></div>
+<p class="p">Sends the event to the pad. This function can be used
+by applications to send events in the pipeline.</p>
+<p class="p">If <span class=" code">pad</span> is a source pad, <span class=" code">event</span> should be an upstream event. If <span class=" code">pad</span> is a
+sink pad, <span class=" code">event</span> should be a downstream event. For example, you would not
+send a #GST_EVENT_EOS on a src pad; EOS events only propagate downstream.
+Furthermore, some downstream events have to be serialized with data flow,
+like EOS, while some can travel out-of-band, like #GST_EVENT_FLUSH_START. If
+the event needs to be serialized with data flow, this function will take the
+pad's stream lock while calling its event function.</p>
+<p class="p">To find out whether an event type is upstream, downstream, or downstream and
+serialized, see <span class=" link"><a href="Gst.EventTypeFlags.html" title="Gst.EventTypeFlags">Gst.EventTypeFlags</a></span>, <span class=" link"><a href="Gst.event_type_get_flags.html" title="Gst.event_type_get_flags">Gst.event_type_get_flags</a></span>,
+#GST_EVENT_IS_UPSTREAM, #GST_EVENT_IS_DOWNSTREAM, and
+#GST_EVENT_IS_SERIALIZED. Note that in practice that an application or
+plugin doesn't need to bother itself with this information; the core handles
+all necessary locks and checks.</p>
+<p class="p">This function takes owership of the provided event so you should
+gst_event_ref() it if you want to reuse the event after this call.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">event</span></dt>
+<dd class="terms"><p class="p">the <span class=" link"><a href="Gst.Event.html" title="Gst.Event">Gst.Event</a></span> to send to the pad.</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">TRUE if the event was handled.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

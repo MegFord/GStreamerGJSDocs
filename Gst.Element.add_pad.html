@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Element.prototype.add_pad</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Element.html" title="Gst.Element">Gst.Element</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Element.prototype.add_pad</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function add_pad(pad:Gst.Pad):Boolean {
+    // Gjs wrapper for gst_element_add_pad()
+}</pre></div></div></div></div></div>
+<p class="p">Adds a pad (link point) to <span class=" code">element</span>. <span class=" code">pad</span>'s parent will be set to <span class=" code">element</span>;
+see <span class=" link"><a href="Gst.set_parent.html" title="Gst.set_parent">Gst.set_parent</a></span> for refcounting information.</p>
+<p class="p">Pads are not automatically activated so elements should perform the needed
+steps to activate the pad in case this pad is added in the PAUSED or PLAYING
+state. See <span class=" link"><a href="Gst.set_active.html" title="Gst.set_active">Gst.set_active</a></span> for more information about activating pads.</p>
+<p class="p">The pad and the element should be unlocked when calling this function.</p>
+<p class="p">This function will emit the <span class=" link"><a href="Gst.pad-added.html" title="Gst.pad-added">Gst.pad-added</a></span> signal on the element.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">pad</span></dt>
+<dd class="terms"><p class="p">the <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span> to add to the element.</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p"><span class=" code">true</span> if the pad could be added. This function can fail when a pad with the same name already existed or the pad already had another parent.  MT safe.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

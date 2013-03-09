@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Iterator.prototype.find_custom</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Iterator.html" title="Gst.Iterator">Gst.Iterator</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Iterator.prototype.find_custom</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function find_custom(func:GLib.CompareFunc):Boolean {
+    // Gjs wrapper for gst_iterator_find_custom()
+}</pre></div></div></div></div></div>
+<p class="p">Find the first element in <span class=" code">it</span> that matches the compare function <span class=" code">func</span>.
+<span class=" code">func</span> should return 0 when the element is found. The first parameter
+to <span class=" code">func</span> will be the current element of the iterator and the
+second parameter will be <span class=" code">user_data</span>.
+The result will be stored in <span class=" code">elem</span> if a result is found.</p>
+<p class="p">The iterator will not be freed.</p>
+<p class="p">This function will return FALSE if an error happened to the iterator
+or if the element wasn't found.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">func</span></dt>
+<dd class="terms"><p class="p">the compare function to use</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">Returns TRUE if the element was found, else FALSE.  MT safe.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Iterator.html" title="Gst.Iterator">Gst.Iterator</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

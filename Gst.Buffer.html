@@ -1,0 +1,141 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Buffer</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Buffer</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">Buffers are the basic unit of data transfer in GStreamer. They contain the
+timing and offset along with other arbitrary metadata that is associated
+with the <span class=" link"><a href="Gst.Memory.html" title="Gst.Memory">Gst.Memory</a></span> blocks that the buffer contains.</p>
+<p class="p">Buffers are usually created with <span class=" link"><a href="Gst.new.html" title="Gst.new">Gst.new</a></span>. After a buffer has been
+created one will typically allocate memory for it and add it to the buffer.
+The following example creates a buffer that can hold a given video frame
+with a given width, height and bits per plane.
+&lt;example&gt;
+&lt;title&gt;Creating a buffer for a video frame&lt;/title&gt;
+  &lt;programlisting&gt;
+  GstBuffer *buffer;
+  GstMemory *memory;
+  gint size, width, height, bpp;
+  ...
+  size = width * height * bpp;
+  buffer = gst_buffer_new ();
+  memory = gst_allocator_alloc (NULL, size, NULL);
+  gst_buffer_insert_memory (buffer, -1, memory);
+  ...
+  &lt;/programlisting&gt;
+&lt;/example&gt;</p>
+<p class="p">Alternatively, use <span class=" link"><a href="Gst.new_allocate.html" title="Gst.new_allocate">Gst.new_allocate</a></span>
+to create a buffer with preallocated data of a given size.</p>
+<p class="p">Buffers can contain a list of <span class=" link"><a href="Gst.Memory.html" title="Gst.Memory">Gst.Memory</a></span> objects. You can retrieve how many
+memory objects with <span class=" link"><a href="Gst.n_memory.html" title="Gst.n_memory">Gst.n_memory</a></span> and you can get a pointer
+to memory with <span class=" link"><a href="Gst.peek_memory.html" title="Gst.peek_memory">Gst.peek_memory</a></span></p>
+<p class="p">A buffer will usually have timestamps, and a duration, but neither of these
+are guaranteed (they may be set to #GST_CLOCK_TIME_NONE). Whenever a
+meaningful value can be given for these, they should be set. The timestamps
+and duration are measured in nanoseconds (they are <span class=" link"><a href="Gst.ClockTime.html" title="Gst.ClockTime">Gst.ClockTime</a></span> values).</p>
+<p class="p">The buffer DTS refers to the timestamp when the buffer should be decoded and
+is usually monotonically increasing. The buffer PTS refers to the timestamp when
+the buffer content should be presented to the user and is not always
+monotonically increasing.</p>
+<p class="p">A buffer can also have one or both of a start and an end offset. These are
+media-type specific. For video buffers, the start offset will generally be
+the frame number. For audio buffers, it will be the number of samples
+produced so far. For compressed data, it could be the byte offset in a
+source or destination file. Likewise, the end offset will be the offset of
+the end of the buffer. These can only be meaningfully interpreted if you
+know the media type of the buffer (the preceeding CAPS event). Either or both
+can be set to #GST_BUFFER_OFFSET_NONE.</p>
+<p class="p">gst_buffer_ref() is used to increase the refcount of a buffer. This must be
+done when you want to keep a handle to the buffer after pushing it to the
+next element. The buffer refcount determines the writability of the buffer, a
+buffer is only writable when the refcount is exactly 1, i.e. when the caller
+has the only reference to the buffer.</p>
+<p class="p">To efficiently create a smaller buffer out of an existing one, you can
+use <span class=" link"><a href="Gst.copy_region.html" title="Gst.copy_region">Gst.copy_region</a></span>. This method tries to share the memory objects
+between the two buffers.</p>
+<p class="p">If a plug-in wants to modify the buffer data or metadata in-place, it should
+first obtain a buffer that is safe to modify by using
+gst_buffer_make_writable().  This function is optimized so that a copy will
+only be made when it is necessary.</p>
+<p class="p">Several flags of the buffer can be set and unset with the
+GST_BUFFER_FLAG_SET() and GST_BUFFER_FLAG_UNSET() macros. Use
+GST_BUFFER_FLAG_IS_SET() to test if a certain #GstBufferFlag is set.</p>
+<p class="p">Buffers can be efficiently merged into a larger buffer with
+<span class=" link"><a href="Gst.append.html" title="Gst.append">Gst.append</a></span>. Copying of memory will only be done when absolutely
+needed.</p>
+<p class="p">Arbitrary extra metadata can be set on a buffer with <span class=" link"><a href="Gst.add_meta.html" title="Gst.add_meta">Gst.add_meta</a></span>.
+Metadata can be retrieved with <span class=" link"><a href="Gst.get_meta.html" title="Gst.get_meta">Gst.get_meta</a></span>. See also <span class=" link"><a href="Gst.Meta.html" title="Gst.Meta">Gst.Meta</a></span></p>
+<p class="p">An element should either unref the buffer or push it out on a src pad
+using <span class=" link"><a href="Gst.push.html" title="Gst.push">Gst.push</a></span> (see <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span>).</p>
+<p class="p">Buffers are usually freed by unreffing them with gst_buffer_unref(). When
+the refcount drops to 0, any memory and metadata pointed to by the buffer is
+unreffed as well. Buffers allocated from a <span class=" link"><a href="Gst.BufferPool.html" title="Gst.BufferPool">Gst.BufferPool</a></span> will be returned to
+the pool when the refcount drops to 0.</p>
+<p class="p">Last reviewed on 2012-03-28 (0.11.3)</p>
+<div class="links topiclinks"><div class="inner"><div class="region">
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.new.html" title="Gst.Buffer.new"><span class="title">Gst.Buffer.new</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.new_allocate.html" title="Gst.Buffer.new_allocate"><span class="title">Gst.Buffer.new_allocate</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.new_wrapped.html" title="Gst.Buffer.new_wrapped"><span class="title">Gst.Buffer.new_wrapped</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.new_wrapped_full.html" title="Gst.Buffer.new_wrapped_full"><span class="title">Gst.Buffer.new_wrapped_full</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.add_meta.html" title="Gst.Buffer.prototype.add_meta"><span class="title">Gst.Buffer.prototype.add_meta</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.append.html" title="Gst.Buffer.prototype.append"><span class="title">Gst.Buffer.prototype.append</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.append_memory.html" title="Gst.Buffer.prototype.append_memory"><span class="title">Gst.Buffer.prototype.append_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.append_region.html" title="Gst.Buffer.prototype.append_region"><span class="title">Gst.Buffer.prototype.append_region</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.copy_into.html" title="Gst.Buffer.prototype.copy_into"><span class="title">Gst.Buffer.prototype.copy_into</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.copy_region.html" title="Gst.Buffer.prototype.copy_region"><span class="title">Gst.Buffer.prototype.copy_region</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.extract.html" title="Gst.Buffer.prototype.extract"><span class="title">Gst.Buffer.prototype.extract</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.fill.html" title="Gst.Buffer.prototype.fill"><span class="title">Gst.Buffer.prototype.fill</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.find_memory.html" title="Gst.Buffer.prototype.find_memory"><span class="title">Gst.Buffer.prototype.find_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.foreach_meta.html" title="Gst.Buffer.prototype.foreach_meta"><span class="title">Gst.Buffer.prototype.foreach_meta</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.get_all_memory.html" title="Gst.Buffer.prototype.get_all_memory"><span class="title">Gst.Buffer.prototype.get_all_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.get_memory.html" title="Gst.Buffer.prototype.get_memory"><span class="title">Gst.Buffer.prototype.get_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.get_memory_range.html" title="Gst.Buffer.prototype.get_memory_range"><span class="title">Gst.Buffer.prototype.get_memory_range</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.get_meta.html" title="Gst.Buffer.prototype.get_meta"><span class="title">Gst.Buffer.prototype.get_meta</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.get_size.html" title="Gst.Buffer.prototype.get_size"><span class="title">Gst.Buffer.prototype.get_size</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.get_sizes.html" title="Gst.Buffer.prototype.get_sizes"><span class="title">Gst.Buffer.prototype.get_sizes</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.get_sizes_range.html" title="Gst.Buffer.prototype.get_sizes_range"><span class="title">Gst.Buffer.prototype.get_sizes_range</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.insert_memory.html" title="Gst.Buffer.prototype.insert_memory"><span class="title">Gst.Buffer.prototype.insert_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.iterate_meta.html" title="Gst.Buffer.prototype.iterate_meta"><span class="title">Gst.Buffer.prototype.iterate_meta</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.map.html" title="Gst.Buffer.prototype.map"><span class="title">Gst.Buffer.prototype.map</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.map_range.html" title="Gst.Buffer.prototype.map_range"><span class="title">Gst.Buffer.prototype.map_range</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.memcmp.html" title="Gst.Buffer.prototype.memcmp"><span class="title">Gst.Buffer.prototype.memcmp</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.memset.html" title="Gst.Buffer.prototype.memset"><span class="title">Gst.Buffer.prototype.memset</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.n_memory.html" title="Gst.Buffer.prototype.n_memory"><span class="title">Gst.Buffer.prototype.n_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.peek_memory.html" title="Gst.Buffer.prototype.peek_memory"><span class="title">Gst.Buffer.prototype.peek_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.prepend_memory.html" title="Gst.Buffer.prototype.prepend_memory"><span class="title">Gst.Buffer.prototype.prepend_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.remove_all_memory.html" title="Gst.Buffer.prototype.remove_all_memory"><span class="title">Gst.Buffer.prototype.remove_all_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.remove_memory.html" title="Gst.Buffer.prototype.remove_memory"><span class="title">Gst.Buffer.prototype.remove_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.remove_memory_range.html" title="Gst.Buffer.prototype.remove_memory_range"><span class="title">Gst.Buffer.prototype.remove_memory_range</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.remove_meta.html" title="Gst.Buffer.prototype.remove_meta"><span class="title">Gst.Buffer.prototype.remove_meta</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.replace_all_memory.html" title="Gst.Buffer.prototype.replace_all_memory"><span class="title">Gst.Buffer.prototype.replace_all_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.replace_memory.html" title="Gst.Buffer.prototype.replace_memory"><span class="title">Gst.Buffer.prototype.replace_memory</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.replace_memory_range.html" title="Gst.Buffer.prototype.replace_memory_range"><span class="title">Gst.Buffer.prototype.replace_memory_range</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.resize.html" title="Gst.Buffer.prototype.resize"><span class="title">Gst.Buffer.prototype.resize</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.resize_range.html" title="Gst.Buffer.prototype.resize_range"><span class="title">Gst.Buffer.prototype.resize_range</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.set_size.html" title="Gst.Buffer.prototype.set_size"><span class="title">Gst.Buffer.prototype.set_size</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Buffer.unmap.html" title="Gst.Buffer.prototype.unmap"><span class="title">Gst.Buffer.prototype.unmap</span></a></div>
+</div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

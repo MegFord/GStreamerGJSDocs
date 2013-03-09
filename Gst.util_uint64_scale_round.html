@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>util_uint64_scale_round</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">util_uint64_scale_round</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function util_uint64_scale_round(val:Number, num:Number, denom:Number):Number {
+    // Gjs wrapper for gst_util_uint64_scale_round()
+}</pre></div></div></div></div></div>
+<p class="p">Scale <span class=" code">val</span> by the rational number <span class=" code">num</span> / <span class=" code">denom</span>, avoiding overflows and
+underflows and without loss of precision.</p>
+<p class="p">This function can potentially be very slow if val and num are both
+greater than G_MAXUINT32.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">val</span></dt>
+<dd class="terms"><p class="p">the number to scale</p></dd>
+<dt class="terms"><span class=" code">num</span></dt>
+<dd class="terms"><p class="p">the numerator of the scale ratio</p></dd>
+<dt class="terms"><span class=" code">denom</span></dt>
+<dd class="terms"><p class="p">the denominator of the scale ratio</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p"><span class=" code">val</span> * <span class=" code">num</span> / <span class=" code">denom</span>.  In the case of an overflow, this function returns G_MAXUINT64.  If the result is not exactly representable as an integer, it is rounded to the nearest integer (half-way cases are rounded up).  See also <span class=" link"><a href="Gst.util_uint64_scale.html" title="util_uint64_scale">util_uint64_scale</a></span>, <span class=" link"><a href="Gst.util_uint64_scale_ceil.html" title="util_uint64_scale_ceil">util_uint64_scale_ceil</a></span>, <span class=" link"><a href="Gst.util_uint64_scale_int.html" title="util_uint64_scale_int">util_uint64_scale_int</a></span>, <span class=" link"><a href="Gst.util_uint64_scale_int_round.html" title="util_uint64_scale_int_round">util_uint64_scale_int_round</a></span>, <span class=" link"><a href="Gst.util_uint64_scale_int_ceil.html" title="util_uint64_scale_int_ceil">util_uint64_scale_int_ceil</a></span>.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

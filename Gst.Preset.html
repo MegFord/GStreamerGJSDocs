@@ -1,0 +1,88 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Preset</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Preset</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let preset = new Gst.Preset();
+  </pre></div></div></div></div></div>
+<p class="p">This interface offers methods to query and manipulate parameter preset sets.
+A preset is a bunch of property settings, together with meta data and a name.
+The name of a preset serves as key for subsequent method calls to manipulate
+single presets.
+All instances of one type will share the list of presets. The list is created
+on demand, if presets are not used, the list is not created.</p>
+<p class="p">The interface comes with a default implementation that serves most plugins.
+Wrapper plugins will override most methods to implement support for the
+native preset format of those wrapped plugins.
+One method that is useful to be overridden is <span class=" link"><a href="Gst.get_property_names.html" title="Gst.get_property_names">Gst.get_property_names</a></span>.
+With that one can control which properties are saved and in which order.</p>
+<p class="p">The default implementation supports presets located in a system directory, 
+application specific directory and in the users home directory. When getting
+a list of presets individual presets are read and overlaid in 1) system, 
+2) application and 3) user order. Whenever an earlier entry is newer, the
+later entries will be updated.</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.Preset</span>
+      </div></li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Preset.delete_preset.html" title="Gst.Preset.prototype.delete_preset">Gst.Preset.prototype.delete_preset</a></li>
+<li class="links "><a href="Gst.Preset.get_meta.html" title="Gst.Preset.prototype.get_meta">Gst.Preset.prototype.get_meta</a></li>
+<li class="links "><a href="Gst.Preset.get_preset_names.html" title="Gst.Preset.prototype.get_preset_names">Gst.Preset.prototype.get_preset_names</a></li>
+<li class="links "><a href="Gst.Preset.get_property_names.html" title="Gst.Preset.prototype.get_property_names">Gst.Preset.prototype.get_property_names</a></li>
+<li class="links "><a href="Gst.Preset.load_preset.html" title="Gst.Preset.prototype.load_preset">Gst.Preset.prototype.load_preset</a></li>
+<li class="links "><a href="Gst.Preset.rename_preset.html" title="Gst.Preset.prototype.rename_preset">Gst.Preset.prototype.rename_preset</a></li>
+<li class="links "><a href="Gst.Preset.save_preset.html" title="Gst.Preset.prototype.save_preset">Gst.Preset.prototype.save_preset</a></li>
+<li class="links "><a href="Gst.Preset.set_meta.html" title="Gst.Preset.prototype.set_meta">Gst.Preset.prototype.set_meta</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Preset.get_app_dir.html" title="get_app_dir">get_app_dir</a></li>
+<li class="links "><a href="Gst.Preset.set_app_dir.html" title="set_app_dir">set_app_dir</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Preset-delete_preset.html" title="Gst.Preset::delete_preset">Gst.Preset::delete_preset</a></li>
+<li class="links "><a href="Gst.Preset-get_meta.html" title="Gst.Preset::get_meta">Gst.Preset::get_meta</a></li>
+<li class="links "><a href="Gst.Preset-get_preset_names.html" title="Gst.Preset::get_preset_names">Gst.Preset::get_preset_names</a></li>
+<li class="links "><a href="Gst.Preset-get_property_names.html" title="Gst.Preset::get_property_names">Gst.Preset::get_property_names</a></li>
+<li class="links "><a href="Gst.Preset-load_preset.html" title="Gst.Preset::load_preset">Gst.Preset::load_preset</a></li>
+<li class="links "><a href="Gst.Preset-rename_preset.html" title="Gst.Preset::rename_preset">Gst.Preset::rename_preset</a></li>
+<li class="links "><a href="Gst.Preset-save_preset.html" title="Gst.Preset::save_preset">Gst.Preset::save_preset</a></li>
+<li class="links "><a href="Gst.Preset-set_meta.html" title="Gst.Preset::set_meta">Gst.Preset::set_meta</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

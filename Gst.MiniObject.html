@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.MiniObject</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.MiniObject</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p"><span class=" link"><a href="Gst.MiniObject.html" title="Gst.MiniObject">Gst.MiniObject</a></span> is a simple structure that can be used to implement refcounted
+types.</p>
+<p class="p">Subclasses will include <span class=" link"><a href="Gst.MiniObject.html" title="Gst.MiniObject">Gst.MiniObject</a></span> as the first member in their structure
+and then call <span class=" link"><a href="Gst.init.html" title="init">init</a></span> to initialize the <span class=" link"><a href="Gst.MiniObject.html" title="Gst.MiniObject">Gst.MiniObject</a></span> fields.</p>
+<p class="p"><span class=" link"><a href="Gst.ref.html" title="Gst.ref">Gst.ref</a></span> and <span class=" link"><a href="Gst.unref.html" title="Gst.unref">Gst.unref</a></span> increment and decrement the
+refcount respectively. When the refcount of a mini-object reaches 0, the
+dispose function is called first and when this returns <span class=" code">true</span>, the free
+function of the miniobject is called.</p>
+<p class="p">A copy can be made with <span class=" link"><a href="Gst.copy.html" title="Gst.copy">Gst.copy</a></span>.</p>
+<p class="p"><span class=" link"><a href="Gst.is_writable.html" title="Gst.is_writable">Gst.is_writable</a></span> will return <span class=" code">true</span> when the refcount of the
+object is exactly 1, meaning the current caller has the only reference to the
+object. <span class=" link"><a href="Gst.make_writable.html" title="Gst.make_writable">Gst.make_writable</a></span> will return a writable version of the
+object, which might be a new copy when the refcount was not 1.</p>
+<p class="p">Opaque data can be associated with a <span class=" link"><a href="Gst.MiniObject.html" title="Gst.MiniObject">Gst.MiniObject</a></span> with
+<span class=" link"><a href="Gst.set_qdata.html" title="Gst.set_qdata">Gst.set_qdata</a></span> and <span class=" link"><a href="Gst.get_qdata.html" title="Gst.get_qdata">Gst.get_qdata</a></span>. The data is
+meant to be specific to the particular object and is not automatically copied
+with <span class=" link"><a href="Gst.copy.html" title="Gst.copy">Gst.copy</a></span> or similar methods.</p>
+<p class="p">A weak reference can be added and remove with <span class=" link"><a href="Gst.weak_ref.html" title="Gst.weak_ref">Gst.weak_ref</a></span>
+and <span class=" link"><a href="Gst.weak_unref.html" title="Gst.weak_unref">Gst.weak_unref</a></span> respectively.</p>
+<p class="p">Last reviewed on 2012-06-15 (0.11.93)</p>
+<div class="links topiclinks"><div class="inner"><div class="region">
+<div class="linkdiv "><a class="linkdiv" href="Gst.MiniObject.get_qdata.html" title="Gst.MiniObject.prototype.get_qdata"><span class="title">Gst.MiniObject.prototype.get_qdata</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.MiniObject.is_writable.html" title="Gst.MiniObject.prototype.is_writable"><span class="title">Gst.MiniObject.prototype.is_writable</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.MiniObject.lock.html" title="Gst.MiniObject.prototype.lock"><span class="title">Gst.MiniObject.prototype.lock</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.MiniObject.set_qdata.html" title="Gst.MiniObject.prototype.set_qdata"><span class="title">Gst.MiniObject.prototype.set_qdata</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.MiniObject.steal_qdata.html" title="Gst.MiniObject.prototype.steal_qdata"><span class="title">Gst.MiniObject.prototype.steal_qdata</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.MiniObject.unlock.html" title="Gst.MiniObject.prototype.unlock"><span class="title">Gst.MiniObject.prototype.unlock</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.MiniObject.unref.html" title="Gst.MiniObject.prototype.unref"><span class="title">Gst.MiniObject.prototype.unref</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.MiniObject.replace.html" title="replace"><span class="title">replace</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.MiniObject.take.html" title="take"><span class="title">take</span></a></div>
+</div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

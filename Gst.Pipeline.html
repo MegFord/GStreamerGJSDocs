@@ -1,0 +1,136 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Pipeline</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Pipeline</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let pipeline = new Gst.Pipeline({
+    <span class=" link"><a href="Gst.Pipeline-auto-flush-bus.html" title="Gst.Pipeline:auto-flush-bus">auto_flush_bus</a></span>: value,
+    <span class=" link"><a href="Gst.Pipeline-delay.html" title="Gst.Pipeline:delay">delay</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">A <span class=" link"><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></span> is a special <span class=" link"><a href="Gst.Bin.html" title="Gst.Bin">Gst.Bin</a></span> used as the toplevel container for
+the filter graph. The <span class=" link"><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></span> will manage the selection and
+distribution of a global <span class=" link"><a href="Gst.Clock.html" title="Gst.Clock">Gst.Clock</a></span> as well as provide a <span class=" link"><a href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a></span> to the
+application.</p>
+<p class="p"><span class=" link"><a href="Gst.new.html" title="Gst.new">Gst.new</a></span> is used to create a pipeline. when you are done with
+the pipeline, use <span class=" link"><a href="Gst.Object.unref.html" title="Gst.Object.prototype.unref">Gst.Object.prototype.unref</a></span> to free its resources including all
+added <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> objects (if not otherwise referenced).</p>
+<p class="p">Elements are added and removed from the pipeline using the <span class=" link"><a href="Gst.Bin.html" title="Gst.Bin">Gst.Bin</a></span>
+methods like <span class=" link"><a href="Gst.Bin.add.html" title="Gst.Bin.prototype.add">Gst.Bin.prototype.add</a></span> and <span class=" link"><a href="Gst.Bin.remove.html" title="Gst.Bin.prototype.remove">Gst.Bin.prototype.remove</a></span> (see <span class=" link"><a href="Gst.Bin.html" title="Gst.Bin">Gst.Bin</a></span>).</p>
+<p class="p">Before changing the state of the <span class=" link"><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></span> (see <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span>) a <span class=" link"><a href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a></span>
+can be retrieved with <span class=" link"><a href="Gst.get_bus.html" title="Gst.get_bus">Gst.get_bus</a></span>. This bus can then be
+used to receive <span class=" link"><a href="Gst.Message.html" title="Gst.Message">Gst.Message</a></span> from the elements in the pipeline.</p>
+<p class="p">By default, a <span class=" link"><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></span> will automatically flush the pending <span class=" link"><a href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a></span>
+messages when going to the NULL state to ensure that no circular
+references exist when no messages are read from the <span class=" link"><a href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a></span>. This
+behaviour can be changed with <span class=" link"><a href="Gst.set_auto_flush_bus.html" title="Gst.set_auto_flush_bus">Gst.set_auto_flush_bus</a></span>.</p>
+<p class="p">When the <span class=" link"><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></span> performs the PAUSED to PLAYING state change it will
+select a clock for the elements. The clock selection algorithm will by
+default select a clock provided by an element that is most upstream
+(closest to the source). For live pipelines (ones that return
+#GST_STATE_CHANGE_NO_PREROLL from the <span class=" link"><a href="Gst.Element.set_state.html" title="Gst.Element.prototype.set_state">Gst.Element.prototype.set_state</a></span> call) this
+will select the clock provided by the live source. For normal pipelines
+this will select a clock provided by the sinks (most likely the audio
+sink). If no element provides a clock, a default <span class=" link"><a href="Gst.SystemClock.html" title="Gst.SystemClock">Gst.SystemClock</a></span> is used.</p>
+<p class="p">The clock selection can be controlled with the <span class=" link"><a href="Gst.use_clock.html" title="Gst.use_clock">Gst.use_clock</a></span>
+method, which will enforce a given clock on the pipeline. With
+<span class=" link"><a href="Gst.auto_clock.html" title="Gst.auto_clock">Gst.auto_clock</a></span> the default clock selection algorithm can be
+restored.</p>
+<p class="p">A <span class=" link"><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></span> maintains a running time for the elements. The running
+time is defined as the difference between the current clock time and
+the base time. When the pipeline goes to READY or a flushing seek is
+performed on it, the running time is reset to 0. When the pipeline is
+set from PLAYING to PAUSED, the current clock time is sampled and used to
+configure the base time for the elements when the pipeline is set
+to PLAYING again. The effect is that the running time (as the difference
+between the clock time and the base time) will count how much time was spent
+in the PLAYING state. This default behaviour can be changed with the
+<span class=" link"><a href="Gst.Element.set_start_time.html" title="Gst.Element.prototype.set_start_time">Gst.Element.prototype.set_start_time</a></span> method.</p>
+<p class="p">Last reviewed on 2012-03-29 (0.11.3)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Bin</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.Pipeline</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Pipeline.auto_clock.html" title="Gst.Pipeline.prototype.auto_clock">Gst.Pipeline.prototype.auto_clock</a></li>
+<li class="links "><a href="Gst.Pipeline.get_auto_flush_bus.html" title="Gst.Pipeline.prototype.get_auto_flush_bus">Gst.Pipeline.prototype.get_auto_flush_bus</a></li>
+<li class="links "><a href="Gst.Pipeline.get_bus.html" title="Gst.Pipeline.prototype.get_bus">Gst.Pipeline.prototype.get_bus</a></li>
+<li class="links "><a href="Gst.Pipeline.get_clock.html" title="Gst.Pipeline.prototype.get_clock">Gst.Pipeline.prototype.get_clock</a></li>
+<li class="links "><a href="Gst.Pipeline.get_delay.html" title="Gst.Pipeline.prototype.get_delay">Gst.Pipeline.prototype.get_delay</a></li>
+<li class="links "><a href="Gst.Pipeline.set_auto_flush_bus.html" title="Gst.Pipeline.prototype.set_auto_flush_bus">Gst.Pipeline.prototype.set_auto_flush_bus</a></li>
+<li class="links "><a href="Gst.Pipeline.set_clock.html" title="Gst.Pipeline.prototype.set_clock">Gst.Pipeline.prototype.set_clock</a></li>
+<li class="links "><a href="Gst.Pipeline.set_delay.html" title="Gst.Pipeline.prototype.set_delay">Gst.Pipeline.prototype.set_delay</a></li>
+<li class="links "><a href="Gst.Pipeline.use_clock.html" title="Gst.Pipeline.prototype.use_clock">Gst.Pipeline.prototype.use_clock</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Pipeline-auto-flush-bus.html" title="Gst.Pipeline:auto-flush-bus">auto-flush-bus</a></li>
+<li class="links "><a href="Gst.Pipeline-delay.html" title="Gst.Pipeline:delay">delay</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Other</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Pipeline.new.html" title="Gst.Pipeline.new">Gst.Pipeline.new</a></li></ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,58 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.SeekFlags</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.SeekFlags</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">Flags to be used with <span class=" link"><a href="Gst.Element.seek.html" title="Gst.Element.prototype.seek">Gst.Element.prototype.seek</a></span> or <span class=" link"><a href="Gst.Event.new_seek.html" title="Gst.Event.new_seek">Gst.Event.new_seek</a></span>. All flags
+can be used together.</p>
+<p class="p">A non flushing seek might take some time to perform as the currently
+playing data in the pipeline will not be cleared.</p>
+<p class="p">An accurate seek might be slower for formats that don't have any indexes
+or timestamp markers in the stream. Specifying this flag might require a
+complete scan of the file in those cases.</p>
+<p class="p">When performing a segment seek: after the playback of the segment completes,
+no EOS will be emmited by the element that performed the seek, but a
+#GST_MESSAGE_SEGMENT_DONE message will be posted on the bus by the element.
+When this message is posted, it is possible to send a new seek event to
+continue playback. With this seek method it is possible to perform seamless
+looping or simple linear editing.</p>
+<p class="p">When doing fast forward (rate &gt; 1.0) or fast reverse (rate &lt; -1.0) trickmode
+playback, the @GST_SEEK_FLAG_SKIP flag can be used to instruct decoders
+and demuxers to adjust the playback rate by skipping frames. This can improve
+performance and decrease CPU usage because not all frames need to be decoded.</p>
+<p class="p">The @GST_SEEK_FLAG_SNAP_BEFORE flag can be used to snap to the previous
+relevant location, and the @GST_SEEK_FLAG_SNAP_AFTER flag can be used to
+select the next relevant location. If KEY_UNIT is specified, the relevant
+location is a keyframe. If both flags are specified, the nearest of these
+locations will be selected. If none are specified, the implementation is
+free to select whichever it wants.
+The before and after here are in running time, so when playing backwards,
+the next location refers to the one that will played in next, and not the
+one that is located after in the actual source stream.</p>
+<p class="p">Also see part-seeking.txt in the GStreamer design documentation for more
+details on the meaning of these flags and the behaviour expected of
+elements that handle them.</p>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

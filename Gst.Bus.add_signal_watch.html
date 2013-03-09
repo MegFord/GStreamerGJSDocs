@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Bus.prototype.add_signal_watch</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Bus.prototype.add_signal_watch</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function add_signal_watch():void {
+    // Gjs wrapper for gst_bus_add_signal_watch()
+}</pre></div></div></div></div></div>
+<p class="p">Adds a bus signal watch to the default main context with the default priority
+(%G_PRIORITY_DEFAULT). It is also possible to use a non-default
+main context set up using <span class=" link"><a href="GLib.push_thread_default.html" title="GLib.push_thread_default">GLib.push_thread_default</a></span> (before
+one had to create a bus watch source and attach it to the desired main
+context 'manually').</p>
+<p class="p">After calling this statement, the bus will emit the "message" signal for each
+message posted on the bus.</p>
+<p class="p">This function may be called multiple times. To clean up, the caller is
+responsible for calling <span class=" link"><a href="Gst.remove_signal_watch.html" title="Gst.remove_signal_watch">Gst.remove_signal_watch</a></span> as many times as this
+function is called.</p>
+<p class="p">MT safe.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms"></dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,128 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.TypeFindFactory</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.TypeFindFactory</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let type_find_factory = new Gst.TypeFindFactory();
+  </pre></div></div></div></div></div>
+<p class="p">These functions allow querying informations about registered typefind
+functions. How to create and register these functions is described in
+the section &lt;link linkend="gstreamer-Writing-typefind-functions"&gt;
+"Writing typefind functions"&lt;/link&gt;.</p>
+<p class="p">&lt;example&gt;
+  &lt;title&gt;how to write a simple typefinder&lt;/title&gt;
+  &lt;programlisting&gt;
+  typedef struct {
+    guint8 *data;
+    guint size;
+    guint probability;
+    GstCaps *data;
+  } MyTypeFind;
+  static void
+  my_peek (gpointer data, gint64 offset, guint size)
+  {
+    MyTypeFind *find = (MyTypeFind *) data;
+    if (offset &amp;gt;= 0 &amp;amp;&amp;amp; offset + size &amp;lt;= find-&gt;size) {
+      return find-&gt;data + offset;
+    }
+    return NULL;
+  }
+  static void
+  my_suggest (gpointer data, guint probability, GstCaps *caps)
+  {
+    MyTypeFind *find = (MyTypeFind *) data;
+    if (probability &amp;gt; find-&gt;probability) {
+      find-&gt;probability = probability;
+      gst_caps_replace (&amp;amp;find-&gt;caps, caps);
+    }
+  }
+  static GstCaps *
+  find_type (guint8 *data, guint size)
+  {
+    GList *walk, *type_list;
+    MyTypeFind find = {data, size, 0, NULL};
+    GstTypeFind gst_find = {my_peek, my_suggest, &amp;amp;find, };
+    walk = type_list = gst_type_find_factory_get_list ();
+    while (walk) {
+      GstTypeFindFactory *factory = GST_TYPE_FIND_FACTORY (walk-&gt;data);
+      walk = g_list_next (walk)
+      gst_type_find_factory_call_function (factory, &amp;amp;gst_find);
+    }
+    g_list_free (type_list);
+    return find.caps;
+  };
+  &lt;/programlisting&gt;
+&lt;/example&gt;</p>
+<p class="p">The above example shows how to write a very simple typefinder that
+identifies the given data. You can get quite a bit more complicated than
+that though.</p>
+<p class="p">Last reviewed on 2005-11-09 (0.9.4)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.PluginFeature</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.TypeFindFactory</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.TypeFindFactory.call_function.html" title="Gst.TypeFindFactory.prototype.call_function">Gst.TypeFindFactory.prototype.call_function</a></li>
+<li class="links "><a href="Gst.TypeFindFactory.get_caps.html" title="Gst.TypeFindFactory.prototype.get_caps">Gst.TypeFindFactory.prototype.get_caps</a></li>
+<li class="links "><a href="Gst.TypeFindFactory.get_extensions.html" title="Gst.TypeFindFactory.prototype.get_extensions">Gst.TypeFindFactory.prototype.get_extensions</a></li>
+<li class="links "><a href="Gst.TypeFindFactory.has_function.html" title="Gst.TypeFindFactory.prototype.has_function">Gst.TypeFindFactory.prototype.has_function</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.TypeFindFactory.get_list.html" title="get_list">get_list</a></li></ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

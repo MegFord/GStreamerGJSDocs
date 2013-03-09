@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Element.prototype.request_pad</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Element.html" title="Gst.Element">Gst.Element</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Element.prototype.request_pad</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function request_pad(templ:Gst.PadTemplate, name:String, caps:Gst.Caps):Gst.Pad {
+    // Gjs wrapper for gst_element_request_pad()
+}</pre></div></div></div></div></div>
+<p class="p">Retrieves a request pad from the element according to the provided template.
+Pad templates can be looked up using
+<span class=" link"><a href="Gst.get_static_pad_templates.html" title="Gst.get_static_pad_templates">Gst.get_static_pad_templates</a></span>.</p>
+<p class="p">The pad should be released with <span class=" link"><a href="Gst.Element.release_request_pad.html" title="Gst.Element.prototype.release_request_pad">Gst.Element.prototype.release_request_pad</a></span>.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">templ</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.PadTemplate.html" title="Gst.PadTemplate">Gst.PadTemplate</a></span> of which we want a pad of.</p></dd>
+<dt class="terms"><span class=" code">name</span></dt>
+<dd class="terms"><p class="p">the name of the request <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span> to retrieve. Can be <span class=" code">null</span>.</p></dd>
+<dt class="terms"><span class=" code">caps</span></dt>
+<dd class="terms"><p class="p">the caps of the pad we want to request. Can be <span class=" code">null</span>.</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">requested <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span> if found, otherwise <span class=" code">null</span>. Release after usage.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

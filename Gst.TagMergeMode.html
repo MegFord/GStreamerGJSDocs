@@ -1,0 +1,112 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.TagMergeMode</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.TagMergeMode</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">The different tag merging modes are basically replace, overwrite and append,
+but they can be seen from two directions. Given two taglists: (A) the tags
+already in the element and (B) the ones that are supplied to the element (
+e.g. via <span class=" link"><a href="Gst.merge_tags.html" title="Gst.merge_tags">Gst.merge_tags</a></span> / <span class=" link"><a href="Gst.add_tags.html" title="Gst.add_tags">Gst.add_tags</a></span> or a
+<span class=" link"><a href="Gst.EventType.html" title="Gst.EventType">Gst.EventType</a></span>.tag), how are these tags merged?
+In the table below this is shown for the cases that a tag exists in the list
+(A) or does not exists (!A) and combinations thereof.</p>
+<p class="p">&lt;table frame="all" colsep="1" rowsep="1"&gt;
+  &lt;title&gt;merge mode&lt;/title&gt;
+  &lt;tgroup cols='5' align='left'&gt;
+    &lt;thead&gt;
+      &lt;row&gt;
+        &lt;entry&gt;merge mode&lt;/entry&gt;
+        &lt;entry&gt;A + B&lt;/entry&gt;
+        &lt;entry&gt;A + !B&lt;/entry&gt;
+        &lt;entry&gt;!A + B&lt;/entry&gt;
+        &lt;entry&gt;!A + !B&lt;/entry&gt;
+      &lt;/row&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;row&gt;
+        &lt;entry&gt;REPLACE_ALL&lt;/entry&gt;
+        &lt;entry&gt;B&lt;/entry&gt;
+        &lt;entry&gt;-&lt;/entry&gt;
+        &lt;entry&gt;B&lt;/entry&gt;
+        &lt;entry&gt;-&lt;/entry&gt;
+      &lt;/row&gt;
+      &lt;row&gt;
+        &lt;entry&gt;REPLACE&lt;/entry&gt;
+        &lt;entry&gt;B&lt;/entry&gt;
+        &lt;entry&gt;A&lt;/entry&gt;
+        &lt;entry&gt;B&lt;/entry&gt;
+        &lt;entry&gt;-&lt;/entry&gt;
+      &lt;/row&gt;
+      &lt;row&gt;
+        &lt;entry&gt;APPEND&lt;/entry&gt;
+        &lt;entry&gt;A, B&lt;/entry&gt;
+        &lt;entry&gt;A&lt;/entry&gt;
+        &lt;entry&gt;B&lt;/entry&gt;
+        &lt;entry&gt;-&lt;/entry&gt;
+      &lt;/row&gt;
+      &lt;row&gt;
+        &lt;entry&gt;PREPEND&lt;/entry&gt;
+        &lt;entry&gt;B, A&lt;/entry&gt;
+        &lt;entry&gt;A&lt;/entry&gt;
+        &lt;entry&gt;B&lt;/entry&gt;
+        &lt;entry&gt;-&lt;/entry&gt;
+      &lt;/row&gt;
+      &lt;row&gt;
+        &lt;entry&gt;KEEP&lt;/entry&gt;
+        &lt;entry&gt;A&lt;/entry&gt;
+        &lt;entry&gt;A&lt;/entry&gt;
+        &lt;entry&gt;B&lt;/entry&gt;
+        &lt;entry&gt;-&lt;/entry&gt;
+      &lt;/row&gt;
+      &lt;row&gt;
+        &lt;entry&gt;KEEP_ALL&lt;/entry&gt;
+        &lt;entry&gt;A&lt;/entry&gt;
+        &lt;entry&gt;A&lt;/entry&gt;
+        &lt;entry&gt;-&lt;/entry&gt;
+        &lt;entry&gt;-&lt;/entry&gt;
+      &lt;/row&gt;
+    &lt;/tbody&gt;
+  &lt;/tgroup&gt;
+&lt;/table&gt;</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">TagMergeMode.UNDEFINED</span></dt>
+<dd class="terms"><p class="p">undefined merge mode</p></dd>
+<dt class="terms"><span class=" code">TagMergeMode.REPLACE_ALL</span></dt>
+<dd class="terms"><p class="p">replace all tags (clear list and append)</p></dd>
+<dt class="terms"><span class=" code">TagMergeMode.REPLACE</span></dt>
+<dd class="terms"><p class="p">replace tags</p></dd>
+<dt class="terms"><span class=" code">TagMergeMode.APPEND</span></dt>
+<dd class="terms"><p class="p">append tags</p></dd>
+<dt class="terms"><span class=" code">TagMergeMode.PREPEND</span></dt>
+<dd class="terms"><p class="p">prepend tags</p></dd>
+<dt class="terms"><span class=" code">TagMergeMode.KEEP</span></dt>
+<dd class="terms"><p class="p">keep existing tags</p></dd>
+<dt class="terms"><span class=" code">TagMergeMode.KEEP_ALL</span></dt>
+<dd class="terms"><p class="p">keep all existing tags</p></dd>
+<dt class="terms"><span class=" code">TagMergeMode.COUNT</span></dt>
+<dd class="terms"><p class="p">the number of merge modes</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

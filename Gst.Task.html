@@ -1,0 +1,112 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Task</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Task</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let task = new Gst.Task();
+  </pre></div></div></div></div></div>
+<p class="p"><span class=" link"><a href="Gst.Task.html" title="Gst.Task">Gst.Task</a></span> is used by <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> and <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span> to provide the data passing
+threads in a <span class=" link"><a href="Gst.Pipeline.html" title="Gst.Pipeline">Gst.Pipeline</a></span>.</p>
+<p class="p">A <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span> will typically start a <span class=" link"><a href="Gst.Task.html" title="Gst.Task">Gst.Task</a></span> to push or pull data to/from the
+peer pads. Most source elements start a <span class=" link"><a href="Gst.Task.html" title="Gst.Task">Gst.Task</a></span> to push data. In some cases
+a demuxer element can start a <span class=" link"><a href="Gst.Task.html" title="Gst.Task">Gst.Task</a></span> to pull data from a peer element. This
+is typically done when the demuxer can perform random access on the upstream
+peer element for improved performance.</p>
+<p class="p">Although convenience functions exist on <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span> to start/pause/stop tasks, it
+might sometimes be needed to create a <span class=" link"><a href="Gst.Task.html" title="Gst.Task">Gst.Task</a></span> manually if it is not related to
+a <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span>.</p>
+<p class="p">Before the <span class=" link"><a href="Gst.Task.html" title="Gst.Task">Gst.Task</a></span> can be run, it needs a <span class=" link"><a href="GLib.RecMutex.html" title="GLib.RecMutex">GLib.RecMutex</a></span> that can be set with
+<span class=" link"><a href="Gst.set_lock.html" title="Gst.set_lock">Gst.set_lock</a></span>.</p>
+<p class="p">The task can be started, paused and stopped with <span class=" link"><a href="Gst.start.html" title="Gst.start">Gst.start</a></span>, <span class=" link"><a href="Gst.pause.html" title="Gst.pause">Gst.pause</a></span>
+and <span class=" link"><a href="Gst.stop.html" title="Gst.stop">Gst.stop</a></span> respectively or with the <span class=" link"><a href="Gst.set_state.html" title="Gst.set_state">Gst.set_state</a></span> function.</p>
+<p class="p">A <span class=" link"><a href="Gst.Task.html" title="Gst.Task">Gst.Task</a></span> will repeatedly call the <span class=" link"><a href="Gst.TaskFunction.html" title="Gst.TaskFunction">Gst.TaskFunction</a></span> with the user data
+that was provided when creating the task with <span class=" link"><a href="Gst.new.html" title="Gst.new">Gst.new</a></span>. While calling
+the function it will acquire the provided lock. The provided lock is released
+when the task pauses or stops.</p>
+<p class="p">Stopping a task with <span class=" link"><a href="Gst.stop.html" title="Gst.stop">Gst.stop</a></span> will not immediately make sure the task is
+not running anymore. Use <span class=" link"><a href="Gst.join.html" title="Gst.join">Gst.join</a></span> to make sure the task is completely
+stopped and the thread is stopped.</p>
+<p class="p">After creating a <span class=" link"><a href="Gst.Task.html" title="Gst.Task">Gst.Task</a></span>, use <span class=" link"><a href="Gst.Object.unref.html" title="Gst.Object.prototype.unref">Gst.Object.prototype.unref</a></span> to free its resources. This can
+only be done when the task is not running anymore.</p>
+<p class="p">Task functions can send a <span class=" link"><a href="Gst.Message.html" title="Gst.Message">Gst.Message</a></span> to send out-of-band data to the
+application. The application can receive messages from the <span class=" link"><a href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a></span> in its
+mainloop.</p>
+<p class="p">For debugging purposes, the task will configure its object name as the thread
+name on Linux. Please note that the object name should be configured before the
+task is started; changing the object name after the task has been started, has
+no effect on the thread name.</p>
+<p class="p">Last reviewed on 2012-03-29 (0.11.3)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.Task</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Task.get_pool.html" title="Gst.Task.prototype.get_pool">Gst.Task.prototype.get_pool</a></li>
+<li class="links "><a href="Gst.Task.get_state.html" title="Gst.Task.prototype.get_state">Gst.Task.prototype.get_state</a></li>
+<li class="links "><a href="Gst.Task.join.html" title="Gst.Task.prototype.join">Gst.Task.prototype.join</a></li>
+<li class="links "><a href="Gst.Task.pause.html" title="Gst.Task.prototype.pause">Gst.Task.prototype.pause</a></li>
+<li class="links "><a href="Gst.Task.set_enter_callback.html" title="Gst.Task.prototype.set_enter_callback">Gst.Task.prototype.set_enter_callback</a></li>
+<li class="links "><a href="Gst.Task.set_leave_callback.html" title="Gst.Task.prototype.set_leave_callback">Gst.Task.prototype.set_leave_callback</a></li>
+<li class="links "><a href="Gst.Task.set_lock.html" title="Gst.Task.prototype.set_lock">Gst.Task.prototype.set_lock</a></li>
+<li class="links "><a href="Gst.Task.set_pool.html" title="Gst.Task.prototype.set_pool">Gst.Task.prototype.set_pool</a></li>
+<li class="links "><a href="Gst.Task.set_state.html" title="Gst.Task.prototype.set_state">Gst.Task.prototype.set_state</a></li>
+<li class="links "><a href="Gst.Task.start.html" title="Gst.Task.prototype.start">Gst.Task.prototype.start</a></li>
+<li class="links "><a href="Gst.Task.stop.html" title="Gst.Task.prototype.stop">Gst.Task.prototype.stop</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Task.cleanup_all.html" title="cleanup_all">cleanup_all</a></li></ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Other</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Task.new.html" title="Gst.Task.new">Gst.Task.new</a></li></ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

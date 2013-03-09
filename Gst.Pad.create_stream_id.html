@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Pad.prototype.create_stream_id</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Pad.prototype.create_stream_id</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function create_stream_id(parent:Gst.Element, stream_id:String):String {
+    // Gjs wrapper for gst_pad_create_stream_id()
+}</pre></div></div></div></div></div>
+<p class="p">Creates a stream-id for the source <span class=" link"><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></span> <span class=" code">pad</span> by combining the
+upstream information with the optional <span class=" code">stream_id</span> of the stream
+of <span class=" code">pad</span>. <span class=" code">pad</span> must have a parent <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> and which must have zero
+or one sinkpad. <span class=" code">stream_id</span> can only be <span class=" code">null</span> if the parent element
+of <span class=" code">pad</span> has only a single source pad.</p>
+<p class="p">This function generates an unique stream-id by getting the upstream
+stream-start event stream ID and appending <span class=" code">stream_id</span> to it. If the
+element has no sinkpad it will generate an upstream stream-id by
+doing an URI query on the element and in the worst case just uses
+a random number. Source elements that don't implement the URI
+handler interface should ideally generate a unique, deterministic
+stream-id manually instead.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">parent</span></dt>
+<dd class="terms"><p class="p">Parent <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> of <span class=" code">pad</span></p></dd>
+<dt class="terms"><span class=" code">stream_id</span></dt>
+<dd class="terms"><p class="p">The stream-id</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">A stream-id for <span class=" code">pad</span>. <span class=" link"><a href="GLib.free.html" title="GLib.free">GLib.free</a></span> after usage.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

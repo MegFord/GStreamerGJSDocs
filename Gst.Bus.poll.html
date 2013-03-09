@@ -1,0 +1,66 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Bus.prototype.poll</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Bus.prototype.poll</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function poll(events:Gst.MessageType, timeout:Gst.ClockTime):Gst.Message {
+    // Gjs wrapper for gst_bus_poll()
+}</pre></div></div></div></div></div>
+<p class="p">Poll the bus for messages. Will block while waiting for messages to come.
+You can specify a maximum time to poll with the <span class=" code">timeout</span> parameter. If
+<span class=" code">timeout</span> is negative, this function will block indefinitely.</p>
+<p class="p">All messages not in <span class=" code">events</span> will be popped off the bus and will be ignored.</p>
+<p class="p">Because poll is implemented using the "message" signal enabled by
+<span class=" link"><a href="Gst.Bus.add_signal_watch.html" title="Gst.Bus.prototype.add_signal_watch">Gst.Bus.prototype.add_signal_watch</a></span>, calling <span class=" link"><a href="Gst.Bus.poll.html" title="Gst.Bus.prototype.poll">Gst.Bus.prototype.poll</a></span> will cause the "message"
+signal to be emitted for every message that poll sees. Thus a "message"
+signal handler will see the same messages that this function sees -- neither
+will steal messages from the other.</p>
+<p class="p">This function will run a main loop from the default main context when
+polling.</p>
+<p class="p">You should never use this function, since it is pure evil. This is
+especially true for GUI applications based on Gtk+ or Qt, but also for any
+other non-trivial application that uses the GLib main loop. As this function
+runs a GLib main loop, any callback attached to the default GLib main
+context may be invoked. This could be timeouts, GUI events, I/O events etc.;
+even if <span class=" link"><a href="Gst.Bus.poll.html" title="Gst.Bus.prototype.poll">Gst.Bus.prototype.poll</a></span> is called with a 0 timeout. Any of these callbacks
+may do things you do not expect, e.g. destroy the main application window or
+some other resource; change other application state; display a dialog and
+run another main loop until the user clicks it away. In short, using this
+function may add a lot of complexity to your code through unexpected
+re-entrancy and unexpected changes to your application's state.</p>
+<p class="p">For 0 timeouts use <span class=" link"><a href="Gst.pop_filtered.html" title="Gst.pop_filtered">Gst.pop_filtered</a></span> instead of this function; for
+other short timeouts use <span class=" link"><a href="Gst.timed_pop_filtered.html" title="Gst.timed_pop_filtered">Gst.timed_pop_filtered</a></span>; everything else is
+better handled by setting up an asynchronous bus watch and doing things
+from there.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">events</span></dt>
+<dd class="terms"><p class="p">a mask of <span class=" link"><a href="Gst.MessageType.html" title="Gst.MessageType">Gst.MessageType</a></span>, representing the set of message types to poll for.</p></dd>
+<dt class="terms"><span class=" code">timeout</span></dt>
+<dd class="terms"><p class="p">the poll timeout, as a <span class=" link"><a href="Gst.ClockTime.html" title="Gst.ClockTime">Gst.ClockTime</a></span>, or #GST_CLOCK_TIME_NONE to poll indefinitely.</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">the message that was received, or NULL if the poll timed out. The message is taken from the bus and needs to be unreffed with gst_message_unref() after usage.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Message.new_buffering</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Message.html" title="Gst.Message">Gst.Message</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Message.new_buffering</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function new_buffering(src:Gst.Object, percent:Number):Gst.Message {
+    // Gjs wrapper for gst_message_new_buffering()
+}</pre></div></div></div></div></div>
+<p class="p">Create a new buffering message. This message can be posted by an element that
+needs to buffer data before it can continue processing. <span class=" code">percent</span> should be a
+value between 0 and 100. A value of 100 means that the buffering completed.</p>
+<p class="p">When <span class=" code">percent</span> is &lt; 100 the application should PAUSE a PLAYING pipeline. When
+<span class=" code">percent</span> is 100, the application can set the pipeline (back) to PLAYING.
+The application must be prepared to receive BUFFERING messages in the
+PREROLLING state and may only set the pipeline to PLAYING after receiving a
+message with <span class=" code">percent</span> set to 100, which can happen after the pipeline
+completed prerolling.</p>
+<p class="p">MT safe.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">src</span></dt>
+<dd class="terms"><p class="p">The object originating the message.</p></dd>
+<dt class="terms"><span class=" code">percent</span></dt>
+<dd class="terms"><p class="p">The buffering percent</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">The new buffering message.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Message.html" title="Gst.Message">Gst.Message</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

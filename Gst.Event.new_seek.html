@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Event.new_seek</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Event.html" title="Gst.Event">Gst.Event</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Event.new_seek</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function new_seek(rate:Number, format:Gst.Format, flags:Gst.SeekFlags, start_type:Gst.SeekType, start:Number, stop_type:Gst.SeekType, stop:Number):Gst.Event {
+    // Gjs wrapper for gst_event_new_seek()
+}</pre></div></div></div></div></div>
+<p class="p">Allocate a new seek event with the given parameters.</p>
+<p class="p">The seek event configures playback of the pipeline between <span class=" code">start</span> to <span class=" code">stop</span>
+at the speed given in <span class=" code">rate</span>, also called a playback segment.
+The <span class=" code">start</span> and <span class=" code">stop</span> values are expressed in <span class=" code">format</span>.</p>
+<p class="p">A <span class=" code">rate</span> of 1.0 means normal playback rate, 2.0 means double speed.
+Negatives values means backwards playback. A value of 0.0 for the
+rate is not allowed and should be accomplished instead by PAUSING the
+pipeline.</p>
+<p class="p">A pipeline has a default playback segment configured with a start
+position of 0, a stop position of -1 and a rate of 1.0. The currently
+configured playback segment can be queried with #GST_QUERY_SEGMENT. </p>
+<p class="p"><span class=" code">start_type</span> and <span class=" code">stop_type</span> specify how to adjust the currently configured 
+start and stop fields in playback segment. Adjustments can be made relative
+or absolute to the last configured values. A type of #GST_SEEK_TYPE_NONE
+means that the position should not be updated.</p>
+<p class="p">When the rate is positive and <span class=" code">start</span> has been updated, playback will start
+from the newly configured start position. </p>
+<p class="p">For negative rates, playback will start from the newly configured stop
+position (if any). If the stop position is updated, it must be different from
+-1 (#GST_CLOCK_TIME_NONE) for negative rates.</p>
+<p class="p">It is not possible to seek relative to the current playback position, to do
+this, PAUSE the pipeline, query the current playback position with
+#GST_QUERY_POSITION and update the playback segment current position with a
+#GST_SEEK_TYPE_SET to the desired position.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">rate</span></dt>
+<dd class="terms"><p class="p">The new playback rate</p></dd>
+<dt class="terms"><span class=" code">format</span></dt>
+<dd class="terms"><p class="p">The format of the seek values</p></dd>
+<dt class="terms"><span class=" code">flags</span></dt>
+<dd class="terms"><p class="p">The optional seek flags</p></dd>
+<dt class="terms"><span class=" code">start_type</span></dt>
+<dd class="terms"><p class="p">The type and flags for the new start position</p></dd>
+<dt class="terms"><span class=" code">start</span></dt>
+<dd class="terms"><p class="p">The value of the new start position</p></dd>
+<dt class="terms"><span class=" code">stop_type</span></dt>
+<dd class="terms"><p class="p">The type and flags for the new stop position</p></dd>
+<dt class="terms"><span class=" code">stop</span></dt>
+<dd class="terms"><p class="p">The value of the new stop position</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">a new seek event.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Event.html" title="Gst.Event">Gst.Event</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

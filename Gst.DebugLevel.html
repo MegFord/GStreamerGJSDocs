@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.DebugLevel</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.DebugLevel</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">The level defines the importance of a debugging message. The more important a
+message is, the greater the probability that the debugging system outputs it.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">DebugLevel.NONE</span></dt>
+<dd class="terms"><p class="p">No debugging level specified or desired. Used to deactivate debugging output.</p></dd>
+<dt class="terms"><span class=" code">DebugLevel.ERROR</span></dt>
+<dd class="terms"><p class="p">Error messages are to be used only when an error occured that stops the application from keeping working correctly. An examples is gst_element_error, which outputs a message with this priority. It does not mean that the application is terminating as with g_errror.</p></dd>
+<dt class="terms"><span class=" code">DebugLevel.WARNING</span></dt>
+<dd class="terms"><p class="p">Warning messages are to inform about abnormal behaviour that could lead to problems or weird behaviour later on. An example of this would be clocking issues ("your computer is pretty slow") or broken input data ("Can't synchronize to stream.")</p></dd>
+<dt class="terms"><span class=" code">DebugLevel.FIXME</span></dt>
+<dd class="terms"><p class="p">Fixme messages are messages that indicate that something in the executed code path is not fully implemented or handled yet. Note that this does not replace proper error handling in any way, the purpose of this message is to make it easier to spot incomplete/unfinished pieces of code when reading the debug log.</p></dd>
+<dt class="terms"><span class=" code">DebugLevel.INFO</span></dt>
+<dd class="terms"><p class="p">Informational messages should be used to keep the developer updated about what is happening. Examples where this should be used are when a typefind function has successfully determined the type of the stream or when an mp3 plugin detects the format to be used. ("This file has mono sound.")</p></dd>
+<dt class="terms"><span class=" code">DebugLevel.DEBUG</span></dt>
+<dd class="terms"><p class="p">Debugging messages should be used when something common happens that is not the expected default behavior, or something that's useful to know but doesn't happen all the time (ie. per loop iteration or buffer processed or event handled). An example would be notifications about state changes or receiving/sending of events.</p></dd>
+<dt class="terms"><span class=" code">DebugLevel.LOG</span></dt>
+<dd class="terms"><p class="p">Log messages are messages that are very common but might be useful to know. As a rule of thumb a pipeline that is iterating as expected should never output anything else but LOG messages. Use this log level to log recurring information in chain functions and loop functions, for example.</p></dd>
+<dt class="terms"><span class=" code">DebugLevel.TRACE</span></dt>
+<dd class="terms"><p class="p">Tracing-related messages. Examples for this are referencing/dereferencing of objects.</p></dd>
+<dt class="terms"><span class=" code">DebugLevel.MEMDUMP</span></dt>
+<dd class="terms"><p class="p">memory dump messages are used to log (small) chunks of data as memory dumps in the log. They will be displayed as hexdump with ASCII characters.</p></dd>
+<dt class="terms"><span class=" code">DebugLevel.COUNT</span></dt>
+<dd class="terms"><p class="p">The number of defined debugging levels.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

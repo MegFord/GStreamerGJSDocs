@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Pad.prototype.set_active</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Pad.prototype.set_active</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function set_active(active:Boolean):Boolean {
+    // Gjs wrapper for gst_pad_set_active()
+}</pre></div></div></div></div></div>
+<p class="p">Activates or deactivates the given pad.
+Normally called from within core state change functions.</p>
+<p class="p">If <span class=" code">active</span>, makes sure the pad is active. If it is already active, either in
+push or pull mode, just return. Otherwise dispatches to the pad's activate
+function to perform the actual activation.</p>
+<p class="p">If not <span class=" code">active</span>, calls <span class=" link"><a href="Gst.Pad.activate_mode.html" title="Gst.Pad.prototype.activate_mode">Gst.Pad.prototype.activate_mode</a></span> with the pad's current mode
+and a FALSE argument.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">active</span></dt>
+<dd class="terms"><p class="p">whether or not the pad should be active.</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">#TRUE if the operation was successful.  MT safe.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Pad.html" title="Gst.Pad">Gst.Pad</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

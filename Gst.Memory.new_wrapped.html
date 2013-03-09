@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Memory.new_wrapped</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Memory.html" title="Gst.Memory">Gst.Memory</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Memory.new_wrapped</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function new_wrapped(flags:Gst.MemoryFlags, data:gpointer, maxsize:gsize, offset:gsize, size:gsize, user_data:gpointer, notify:GLib.DestroyNotify):Gst.Memory {
+    // Gjs wrapper for gst_memory_new_wrapped()
+}</pre></div></div></div></div></div>
+<p class="p">Allocate a new memory block that wraps the given <span class=" code">data</span>.</p>
+<p class="p">The prefix/padding must be filled with 0 if <span class=" code">flags</span> contains
+#GST_MEMORY_FLAG_ZERO_PREFIXED and #GST_MEMORY_FLAG_ZERO_PADDED respectively.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">flags</span></dt>
+<dd class="terms"><p class="p"><span class=" link"><a href="Gst.MemoryFlags.html" title="Gst.MemoryFlags">Gst.MemoryFlags</a></span></p></dd>
+<dt class="terms"><span class=" code">data</span></dt>
+<dd class="terms"><p class="p">data to wrap</p></dd>
+<dt class="terms"><span class=" code">maxsize</span></dt>
+<dd class="terms"><p class="p">allocated size of <span class=" code">data</span></p></dd>
+<dt class="terms"><span class=" code">offset</span></dt>
+<dd class="terms"><p class="p">offset in <span class=" code">data</span></p></dd>
+<dt class="terms"><span class=" code">size</span></dt>
+<dd class="terms"><p class="p">size of valid data</p></dd>
+<dt class="terms"><span class=" code">user_data</span></dt>
+<dd class="terms"><p class="p">user_data</p></dd>
+<dt class="terms"><span class=" code">notify</span></dt>
+<dd class="terms"><p class="p">called with <span class=" code">user_data</span> when the memory is freed</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">a new <span class=" link"><a href="Gst.Memory.html" title="Gst.Memory">Gst.Memory</a></span>.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Memory.html" title="Gst.Memory">Gst.Memory</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

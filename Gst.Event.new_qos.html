@@ -1,0 +1,80 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Event.new_qos</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Event.html" title="Gst.Event">Gst.Event</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Event.new_qos</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function new_qos(type:Gst.QOSType, proportion:Number, diff:Gst.ClockTimeDiff, timestamp:Gst.ClockTime):Gst.Event {
+    // Gjs wrapper for gst_event_new_qos()
+}</pre></div></div></div></div></div>
+<p class="p">Allocate a new qos event with the given values.
+The QOS event is generated in an element that wants an upstream
+element to either reduce or increase its rate because of
+high/low CPU load or other resource usage such as network performance or
+throttling. Typically sinks generate these events for each buffer
+they receive.</p>
+<p class="p"><span class=" code">type</span> indicates the reason for the QoS event. #GST_QOS_TYPE_OVERFLOW is
+used when a buffer arrived in time or when the sink cannot keep up with
+the upstream datarate. #GST_QOS_TYPE_UNDERFLOW is when the sink is not
+receiving buffers fast enough and thus has to drop late buffers. 
+#GST_QOS_TYPE_THROTTLE is used when the datarate is artificially limited
+by the application, for example to reduce power consumption.</p>
+<p class="p"><span class=" code">proportion</span> indicates the real-time performance of the streaming in the
+element that generated the QoS event (usually the sink). The value is
+generally computed based on more long term statistics about the streams
+timestamps compared to the clock.
+A value &lt; 1.0 indicates that the upstream element is producing data faster
+than real-time. A value &gt; 1.0 indicates that the upstream element is not
+producing data fast enough. 1.0 is the ideal <span class=" code">proportion</span> value. The
+proportion value can safely be used to lower or increase the quality of
+the element.</p>
+<p class="p"><span class=" code">diff</span> is the difference against the clock in running time of the last
+buffer that caused the element to generate the QOS event. A negative value
+means that the buffer with <span class=" code">timestamp</span> arrived in time. A positive value
+indicates how late the buffer with <span class=" code">timestamp</span> was. When throttling is
+enabled, <span class=" code">diff</span> will be set to the requested throttling interval.</p>
+<p class="p"><span class=" code">timestamp</span> is the timestamp of the last buffer that cause the element
+to generate the QOS event. It is expressed in running time and thus an ever
+increasing value.</p>
+<p class="p">The upstream element can use the <span class=" code">diff</span> and <span class=" code">timestamp</span> values to decide
+whether to process more buffers. For possitive <span class=" code">diff</span>, all buffers with
+timestamp &lt;= <span class=" code">timestamp</span> + <span class=" code">diff</span> will certainly arrive late in the sink
+as well. A (negative) <span class=" code">diff</span> value so that <span class=" code">timestamp</span> + <span class=" code">diff</span> would yield a
+result smaller than 0 is not allowed.</p>
+<p class="p">The application can use general event probes to intercept the QoS
+event and implement custom application specific QoS handling.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">type</span></dt>
+<dd class="terms"><p class="p">the QoS type</p></dd>
+<dt class="terms"><span class=" code">proportion</span></dt>
+<dd class="terms"><p class="p">the proportion of the qos message</p></dd>
+<dt class="terms"><span class=" code">diff</span></dt>
+<dd class="terms"><p class="p">The time difference of the last Clock sync</p></dd>
+<dt class="terms"><span class=" code">timestamp</span></dt>
+<dd class="terms"><p class="p">The timestamp of the buffer</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">a new QOS event.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Event.html" title="Gst.Event">Gst.Event</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

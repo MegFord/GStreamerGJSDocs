@@ -1,0 +1,80 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Segment</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Segment</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">This helper structure holds the relevant values for tracking the region of
+interest in a media file, called a segment.</p>
+<p class="p">The structure can be used for two purposes:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;performing seeks (handling seek events)&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;tracking playback regions (handling newsegment events)&lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+<p class="p">The segment is usually configured by the application with a seek event which
+is propagated upstream and eventually handled by an element that performs the seek.</p>
+<p class="p">The configured segment is then propagated back downstream with a newsegment event.
+This information is then used to clip media to the segment boundaries.</p>
+<p class="p">A segment structure is initialized with <span class=" link"><a href="Gst.init.html" title="init">init</a></span>, which takes a <span class=" link"><a href="Gst.Format.html" title="Gst.Format">Gst.Format</a></span>
+that will be used as the format of the segment values. The segment will be configured
+with a start value of 0 and a stop/duration of -1, which is undefined. The default
+rate and applied_rate is 1.0.</p>
+<p class="p">The public duration field contains the duration of the segment. When using
+the segment for seeking, the start and time members should normally be left
+to their default 0 value. The stop position is left to -1 unless explicitly
+configured to a different value after a seek event.</p>
+<p class="p">The current position in the segment should be set by changing the position
+member in the structure.</p>
+<p class="p">For elements that perform seeks, the current segment should be updated with the
+<span class=" link"><a href="Gst.do_seek.html" title="Gst.do_seek">Gst.do_seek</a></span> and the values from the seek event. This method will update
+all the segment fields. The position field will contain the new playback position.
+If the start_type was different from GST_SEEK_TYPE_NONE, playback continues from
+the position position, possibly with updated flags or rate.</p>
+<p class="p">For elements that want to use <span class=" link"><a href="Gst.Segment.html" title="Gst.Segment">Gst.Segment</a></span> to track the playback region,
+update the segment fields with the information from the newsegment event.
+The <span class=" link"><a href="Gst.clip.html" title="Gst.clip">Gst.clip</a></span> method can be used to check and clip
+the media data to the segment boundaries.</p>
+<p class="p">For elements that want to synchronize to the pipeline clock, <span class=" link"><a href="Gst.to_running_time.html" title="Gst.to_running_time">Gst.to_running_time</a></span>
+can be used to convert a timestamp to a value that can be used to synchronize
+to the clock. This function takes into account the base as well as
+any rate or applied_rate conversions.</p>
+<p class="p">For elements that need to perform operations on media data in stream_time,
+<span class=" link"><a href="Gst.to_stream_time.html" title="Gst.to_stream_time">Gst.to_stream_time</a></span> can be used to convert a timestamp and the segment
+info to stream time (which is always between 0 and the duration of the stream).</p>
+<p class="p">Last reviewed on 2012-03-29 (0.11.3)</p>
+<div class="links topiclinks"><div class="inner"><div class="region">
+<div class="linkdiv "><a class="linkdiv" href="Gst.Segment.new.html" title="Gst.Segment.new"><span class="title">Gst.Segment.new</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Segment.clip.html" title="Gst.Segment.prototype.clip"><span class="title">Gst.Segment.prototype.clip</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Segment.copy.html" title="Gst.Segment.prototype.copy"><span class="title">Gst.Segment.prototype.copy</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Segment.copy_into.html" title="Gst.Segment.prototype.copy_into"><span class="title">Gst.Segment.prototype.copy_into</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Segment.do_seek.html" title="Gst.Segment.prototype.do_seek"><span class="title">Gst.Segment.prototype.do_seek</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Segment.free.html" title="Gst.Segment.prototype.free"><span class="title">Gst.Segment.prototype.free</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Segment.init.html" title="Gst.Segment.prototype.init"><span class="title">Gst.Segment.prototype.init</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Segment.set_running_time.html" title="Gst.Segment.prototype.set_running_time"><span class="title">Gst.Segment.prototype.set_running_time</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Segment.to_position.html" title="Gst.Segment.prototype.to_position"><span class="title">Gst.Segment.prototype.to_position</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Segment.to_running_time.html" title="Gst.Segment.prototype.to_running_time"><span class="title">Gst.Segment.prototype.to_running_time</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="Gst.Segment.to_stream_time.html" title="Gst.Segment.prototype.to_stream_time"><span class="title">Gst.Segment.prototype.to_stream_time</span></a></div>
+</div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

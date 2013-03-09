@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>take</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.MiniObject.html" title="Gst.MiniObject">Gst.MiniObject</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">take</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function take(olddata:Gst.MiniObject, newdata:Gst.MiniObject):Boolean {
+    // Gjs wrapper for gst_mini_object_take()
+}</pre></div></div></div></div></div>
+<p class="p">Modifies a pointer to point to a new mini-object. The modification
+is done atomically. This version is similar to <span class=" link"><a href="Gst.mini_object_replace.html" title="Gst.mini_object_replace">Gst.mini_object_replace</a></span>
+except that it does not increase the refcount of <span class=" code">newdata</span> and thus
+takes ownership of <span class=" code">newdata</span>.</p>
+<p class="p">Either <span class=" code">newdata</span> and the value pointed to by <span class=" code">olddata</span> may be NULL.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">olddata</span></dt>
+<dd class="terms"><p class="p">pointer to a pointer to a mini-object to be replaced</p></dd>
+<dt class="terms"><span class=" code">newdata</span></dt>
+<dd class="terms"><p class="p">pointer to new mini-object</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">TRUE if <span class=" code">newdata</span> was different from <span class=" code">olddata</span></p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.MiniObject.html" title="Gst.MiniObject">Gst.MiniObject</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

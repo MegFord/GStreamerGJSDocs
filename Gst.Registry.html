@@ -1,0 +1,157 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Registry</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Registry</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const Gst = imports.gi.Gst;
+
+let registry = new Gst.Registry();
+  </pre></div></div></div></div></div>
+<p class="p">One registry holds the metadata of a set of plugins.</p>
+<p class="p">&lt;emphasis role="bold"&gt;Design:&lt;/emphasis&gt;</p>
+<p class="p">The <span class=" link"><a href="Gst.Registry.html" title="Gst.Registry">Gst.Registry</a></span> object is a list of plugins and some functions for dealing
+with them. Each <span class=" link"><a href="Gst.Plugin.html" title="Gst.Plugin">Gst.Plugin</a></span> is matched 1-1 with a file on disk, and may or may
+not be loaded at a given time.</p>
+<p class="p">The primary source, at all times, of plugin information is each plugin file
+itself. Thus, if an application wants information about a particular plugin,
+or wants to search for a feature that satisfies given criteria, the primary
+means of doing so is to load every plugin and look at the resulting
+information that is gathered in the default registry. Clearly, this is a time
+consuming process, so we cache information in the registry file. The format
+and location of the cache file is internal to gstreamer.</p>
+<p class="p">On startup, plugins are searched for in the plugin search path. The following
+locations are checked in this order:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;
+    &lt;para&gt;location from --gst-plugin-path commandline option.&lt;/para&gt;
+  &lt;/listitem&gt;
+  &lt;listitem&gt;
+    &lt;para&gt;the GST_PLUGIN_PATH environment variable.&lt;/para&gt;
+  &lt;/listitem&gt;
+  &lt;listitem&gt;
+    &lt;para&gt;the GST_PLUGIN_SYSTEM_PATH environment variable.&lt;/para&gt;
+  &lt;/listitem&gt;
+  &lt;listitem&gt;
+    &lt;para&gt;default locations (if GST_PLUGIN_SYSTEM_PATH is not set). Those
+      default locations are:
+      &lt;filename&gt;~/.gstreamer-$GST_API_VERSION/plugins/&lt;/filename&gt;
+      and &lt;filename&gt;$prefix/libs/gstreamer-$GST_API_VERSION/&lt;/filename&gt;.
+    &lt;/para&gt;
+  &lt;/listitem&gt;
+&lt;/itemizedlist&gt;
+The registry cache file is loaded from
+&lt;filename&gt;~/.gstreamer-$GST_API_VERSION/registry-$ARCH.bin&lt;/filename&gt; or the
+file listed in the GST_REGISTRY env var. One reason to change the registry
+location is for testing.</p>
+<p class="p">For each plugin that is found in the plugin search path, there could be 3
+possibilities for cached information:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;
+    &lt;para&gt;the cache may not contain information about a given file.&lt;/para&gt;
+  &lt;/listitem&gt;
+  &lt;listitem&gt;
+    &lt;para&gt;the cache may have stale information.&lt;/para&gt;
+  &lt;/listitem&gt;
+  &lt;listitem&gt;
+    &lt;para&gt;the cache may have current information.&lt;/para&gt;
+  &lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+<p class="p">In the first two cases, the plugin is loaded and the cache updated. In
+addition to these cases, the cache may have entries for plugins that are not
+relevant to the current process. These are marked as not available to the
+current process. If the cache is updated for whatever reason, it is marked
+dirty.</p>
+<p class="p">A dirty cache is written out at the end of initialization. Each entry is
+checked to make sure the information is minimally valid. If not, the entry is
+simply dropped.</p>
+<p class="p">&lt;emphasis role="bold"&gt;Implementation notes:&lt;/emphasis&gt;</p>
+<p class="p">The "cache" and "registry" are different concepts and can represent
+different sets of plugins. For various reasons, at init time, the cache is
+stored in the default registry, and plugins not relevant to the current
+process are marked with the <span class=" link"><a href="Gst.PluginFlags.html" title="Gst.PluginFlags">Gst.PluginFlags</a></span>.cached bit. These plugins are
+removed at the end of initialization.</p>
+<p class="p">Last reviewed on 2012-03-29 (0.11.3)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">Gst.Registry</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Registry.add_feature.html" title="Gst.Registry.prototype.add_feature">Gst.Registry.prototype.add_feature</a></li>
+<li class="links "><a href="Gst.Registry.add_plugin.html" title="Gst.Registry.prototype.add_plugin">Gst.Registry.prototype.add_plugin</a></li>
+<li class="links "><a href="Gst.Registry.check_feature_version.html" title="Gst.Registry.prototype.check_feature_version">Gst.Registry.prototype.check_feature_version</a></li>
+<li class="links "><a href="Gst.Registry.feature_filter.html" title="Gst.Registry.prototype.feature_filter">Gst.Registry.prototype.feature_filter</a></li>
+<li class="links "><a href="Gst.Registry.find_feature.html" title="Gst.Registry.prototype.find_feature">Gst.Registry.prototype.find_feature</a></li>
+<li class="links "><a href="Gst.Registry.find_plugin.html" title="Gst.Registry.prototype.find_plugin">Gst.Registry.prototype.find_plugin</a></li>
+<li class="links "><a href="Gst.Registry.get_feature_list.html" title="Gst.Registry.prototype.get_feature_list">Gst.Registry.prototype.get_feature_list</a></li>
+<li class="links "><a href="Gst.Registry.get_feature_list_by_plugin.html" title="Gst.Registry.prototype.get_feature_list_by_plugin">Gst.Registry.prototype.get_feature_list_by_plugin</a></li>
+<li class="links "><a href="Gst.Registry.get_feature_list_cookie.html" title="Gst.Registry.prototype.get_feature_list_cookie">Gst.Registry.prototype.get_feature_list_cookie</a></li>
+<li class="links "><a href="Gst.Registry.get_plugin_list.html" title="Gst.Registry.prototype.get_plugin_list">Gst.Registry.prototype.get_plugin_list</a></li>
+<li class="links "><a href="Gst.Registry.lookup.html" title="Gst.Registry.prototype.lookup">Gst.Registry.prototype.lookup</a></li>
+<li class="links "><a href="Gst.Registry.lookup_feature.html" title="Gst.Registry.prototype.lookup_feature">Gst.Registry.prototype.lookup_feature</a></li>
+<li class="links "><a href="Gst.Registry.plugin_filter.html" title="Gst.Registry.prototype.plugin_filter">Gst.Registry.prototype.plugin_filter</a></li>
+<li class="links "><a href="Gst.Registry.remove_feature.html" title="Gst.Registry.prototype.remove_feature">Gst.Registry.prototype.remove_feature</a></li>
+<li class="links "><a href="Gst.Registry.remove_plugin.html" title="Gst.Registry.prototype.remove_plugin">Gst.Registry.prototype.remove_plugin</a></li>
+<li class="links "><a href="Gst.Registry.scan_path.html" title="Gst.Registry.prototype.scan_path">Gst.Registry.prototype.scan_path</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Registry.fork_is_enabled.html" title="fork_is_enabled">fork_is_enabled</a></li>
+<li class="links "><a href="Gst.Registry.fork_set_enabled.html" title="fork_set_enabled">fork_set_enabled</a></li>
+<li class="links "><a href="Gst.Registry.get.html" title="get">get</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Signals</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="Gst.Registry-feature-added.html" title="Gst.Registry::feature-added">feature-added</a></li>
+<li class="links "><a href="Gst.Registry-plugin-added.html" title="Gst.Registry::plugin-added">plugin-added</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

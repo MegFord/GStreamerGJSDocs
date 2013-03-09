@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>id_wait</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Clock.html" title="Gst.Clock">Gst.Clock</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">id_wait</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function id_wait(id:Gst.ClockID):Gst.ClockReturn {
+    // Gjs wrapper for gst_clock_id_wait()
+}</pre></div></div></div></div></div>
+<p class="p">Perform a blocking wait on <span class=" code">id</span>. 
+<span class=" code">id</span> should have been created with <span class=" link"><a href="Gst.Clock.new_single_shot_id.html" title="Gst.Clock.prototype.new_single_shot_id">Gst.Clock.prototype.new_single_shot_id</a></span>
+or <span class=" link"><a href="Gst.Clock.new_periodic_id.html" title="Gst.Clock.prototype.new_periodic_id">Gst.Clock.prototype.new_periodic_id</a></span> and should not have been unscheduled
+with a call to <span class=" link"><a href="Gst.Clock.id_unschedule.html" title="id_unschedule">id_unschedule</a></span>. </p>
+<p class="p">If the <span class=" code">jitter</span> argument is not <span class=" code">null</span> and this function returns #GST_CLOCK_OK
+or #GST_CLOCK_EARLY, it will contain the difference
+against the clock and the time of <span class=" code">id</span> when this method was
+called. 
+Positive values indicate how late <span class=" code">id</span> was relative to the clock
+(in which case this function will return #GST_CLOCK_EARLY). 
+Negative values indicate how much time was spent waiting on the clock 
+before this function returned.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">id</span></dt>
+<dd class="terms"><p class="p">The <span class=" link"><a href="Gst.ClockID.html" title="Gst.ClockID">Gst.ClockID</a></span> to wait on</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">the result of the blocking wait. #GST_CLOCK_EARLY will be returned if the current clock time is past the time of <span class=" code">id</span>, #GST_CLOCK_OK if <span class=" code">id</span> was scheduled in time. #GST_CLOCK_UNSCHEDULED if <span class=" code">id</span> was unscheduled with <span class=" link"><a href="Gst.Clock.id_unschedule.html" title="id_unschedule">id_unschedule</a></span>.  MT safe.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Clock.html" title="Gst.Clock">Gst.Clock</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

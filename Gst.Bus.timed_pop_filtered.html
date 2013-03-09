@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Gst.Bus.prototype.timed_pop_filtered</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">Gst.Bus.prototype.timed_pop_filtered</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function timed_pop_filtered(timeout:Gst.ClockTime, types:Gst.MessageType):Gst.Message {
+    // Gjs wrapper for gst_bus_timed_pop_filtered()
+}</pre></div></div></div></div></div>
+<p class="p">Get a message from the bus whose type matches the message type mask <span class=" code">types</span>,
+waiting up to the specified timeout (and discarding any messages that do not
+match the mask provided).</p>
+<p class="p">If <span class=" code">timeout</span> is 0, this function behaves like <span class=" link"><a href="Gst.Bus.pop_filtered.html" title="Gst.Bus.prototype.pop_filtered">Gst.Bus.prototype.pop_filtered</a></span>. If
+<span class=" code">timeout</span> is #GST_CLOCK_TIME_NONE, this function will block forever until a
+matching message was posted on the bus.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">timeout</span></dt>
+<dd class="terms"><p class="p">a timeout in nanoseconds, or GST_CLOCK_TIME_NONE to wait forever</p></dd>
+<dt class="terms"><span class=" code">types</span></dt>
+<dd class="terms"><p class="p">message types to take into account, GST_MESSAGE_ANY for any type</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.Message.html" title="Gst.Message">Gst.Message</a></span> matching the filter in <span class=" code">types</span>, or NULL if no matching message was found on the bus until the timeout expired. The message is taken from the bus and needs to be unreffed with gst_message_unref() after usage.  MT safe.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>config_set_allocator</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="Gst.BufferPool.html" title="Gst.BufferPool">Gst.BufferPool</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">config_set_allocator</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function config_set_allocator(config:Gst.Structure, allocator:Gst.Allocator, params:Gst.AllocationParams):void {
+    // Gjs wrapper for gst_buffer_pool_config_set_allocator()
+}</pre></div></div></div></div></div>
+<p class="p">Set the <span class=" code">allocator</span> and <span class=" code">params</span> on <span class=" code">config</span>.</p>
+<p class="p">One of <span class=" code">allocator</span> and <span class=" code">params</span> can be NULL, but not both. When <span class=" code">allocator</span>
+is NULL, the default allocator of the pool will use the values in @param
+to perform its allocation. When @param is NULL, the pool will use the
+provided allocator with its default <span class=" link"><a href="Gst.AllocationParams.html" title="Gst.AllocationParams">Gst.AllocationParams</a></span>.</p>
+<p class="p">A call to <span class=" link"><a href="Gst.BufferPool.set_config.html" title="Gst.BufferPool.prototype.set_config">Gst.BufferPool.prototype.set_config</a></span> can update the allocator and params
+with the values that it is able to do. Some pools are, for example, not able
+to operate with different allocators or cannot allocate with the values
+specified in <span class=" code">params</span>. Use <span class=" link"><a href="Gst.BufferPool.get_config.html" title="Gst.BufferPool.prototype.get_config">Gst.BufferPool.prototype.get_config</a></span> to get the currently
+used values.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">config</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.BufferPool.html" title="Gst.BufferPool">Gst.BufferPool</a></span> configuration</p></dd>
+<dt class="terms"><span class=" code">allocator</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.Allocator.html" title="Gst.Allocator">Gst.Allocator</a></span></p></dd>
+<dt class="terms"><span class=" code">params</span></dt>
+<dd class="terms"><p class="p"><span class=" link"><a href="Gst.AllocationParams.html" title="Gst.AllocationParams">Gst.AllocationParams</a></span></p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="Gst.BufferPool.html" title="Gst.BufferPool">Gst.BufferPool</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>
