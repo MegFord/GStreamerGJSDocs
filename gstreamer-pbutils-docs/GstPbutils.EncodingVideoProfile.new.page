@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.EncodingVideoProfile.new"
+      type="topic"
+      style="constructor"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.EncodingVideoProfile" group="constructor" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>GstPbutils.EncodingVideoProfile</api:type>
+      </api:returns>
+      <api:name>gst_encoding_video_profile_new</api:name>
+      <api:arg>
+        <api:type>Gst.Caps</api:type>
+        <api:name>format</api:name>
+      </api:arg>
+      <api:arg>
+        <api:type>String</api:type>
+        <api:name>preset</api:name>
+      </api:arg>
+      <api:arg>
+        <api:type>Gst.Caps</api:type>
+        <api:name>restriction</api:name>
+      </api:arg>
+      <api:arg>
+        <api:type>Number</api:type>
+        <api:name>presence</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.EncodingVideoProfile.new</title>
+  
+<synopsis><code mime="text/x-gjs">
+function new(format:Gst.Caps, preset:String, restriction:Gst.Caps, presence:Number):GstPbutils.EncodingVideoProfile {
+    // Gjs wrapper for gst_encoding_video_profile_new()
+}
+</code></synopsis>
+
+  
+    <p>Creates a new <link xref="GstPbutils.EncodingVideoProfile"/></p><p>All provided allocatable arguments will be internally copied, so can be
+safely freed/unreferenced after calling this method.</p><p>If you wish to control the pass number (in case of multi-pass scenarios),
+please refer to the <link xref="GstPbutils.EncodingVideoProfile.set_pass"/> documentation.</p><p>If you wish to use/force a constant framerate please refer to the
+<link xref="GstPbutils.EncodingVideoProfile.set_variableframerate"/> documentation.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>format</code></title>
+<p>the <link xref="Gst.Caps"/></p>
+</item>
+<item>
+<title><code>preset</code></title>
+<p>the preset(s) to use on the encoder, can be #NULL</p>
+</item>
+<item>
+<title><code>restriction</code></title>
+<p>the <link xref="Gst.Caps"/> used to restrict the input to the encoder, can be NULL. See <link xref="GstPbutils.EncodingProfile.get_restriction"/> for more details.</p>
+</item>
+<item>
+<title><code>presence</code></title>
+<p>the number of time this stream must be used. 0 means any number of times (including never)</p>
+</item>
+<item>
+<title><code>Returns</code></title>
+<p>the newly created <link xref="GstPbutils.EncodingVideoProfile"/>.</p>
+</item>
+</terms>
+
+  
+  
+</page>

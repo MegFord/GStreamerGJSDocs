@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.EncodingProfile.get_format"
+      type="topic"
+      style="method"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.EncodingProfile" group="method" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>Gst.Caps</api:type>
+      </api:returns>
+      <api:name>gst_encoding_profile_get_format</api:name>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.EncodingProfile.prototype.get_format</title>
+  
+<synopsis><code mime="text/x-gjs">
+function get_format():Gst.Caps {
+    // Gjs wrapper for gst_encoding_profile_get_format()
+}
+</code></synopsis>
+
+  
+    
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>Returns</code></title>
+<p>the <link xref="Gst.Caps"/> corresponding to the media format used in the profile. Unref after usage.</p>
+</item>
+</terms>
+
+  
+  
+</page>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.DiscovererStreamInfo.list_free"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.DiscovererStreamInfo" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>void</api:type>
+      </api:returns>
+      <api:name>gst_discoverer_stream_info_list_free</api:name>
+      <api:arg>
+        <api:type>[GstPbutils.DiscovererStreamInfo]</api:type>
+        <api:name>infos</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>list_free</title>
+  
+<synopsis><code mime="text/x-gjs">
+function list_free(infos:[GstPbutils.DiscovererStreamInfo]):void {
+    // Gjs wrapper for gst_discoverer_stream_info_list_free()
+}
+</code></synopsis>
+
+  
+    <p>Decrements the reference count of all contained <link xref="GstPbutils.DiscovererStreamInfo"/>
+and fress the <link xref="GLib.List"/>.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>infos</code></title>
+<p>a <link xref="GLib.List"/> of <link xref="GstPbutils.DiscovererStreamInfo"/></p>
+</item>
+</terms>
+
+  
+  
+</page>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.EncodingVideoProfile.set_pass"
+      type="topic"
+      style="method"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.EncodingVideoProfile" group="method" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>void</api:type>
+      </api:returns>
+      <api:name>gst_encoding_video_profile_set_pass</api:name>
+      <api:arg>
+        <api:type>Number</api:type>
+        <api:name>pass</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.EncodingVideoProfile.prototype.set_pass</title>
+  
+<synopsis><code mime="text/x-gjs">
+function set_pass(pass:Number):void {
+    // Gjs wrapper for gst_encoding_video_profile_set_pass()
+}
+</code></synopsis>
+
+  
+    <p>Sets the pass number of this video profile. The first pass profile should have
+this value set to 1. If this video profile isn't part of a multi-pass profile,
+you may set it to 0 (the default value).</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>pass</code></title>
+<p>the pass number for this profile</p>
+</item>
+</terms>
+
+  
+  
+</page>

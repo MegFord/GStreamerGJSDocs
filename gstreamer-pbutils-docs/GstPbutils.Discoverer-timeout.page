@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.Discoverer-timeout"
+      type="topic"
+      style="property"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.Discoverer" group="property" type="guide"/>
+    <title type="link" role="topic">timeout</title>
+
+  </info>
+  <title>GstPbutils.Discoverer:timeout</title>
+  
+<synopsis><code mime="text/x-python">
+"timeout"             Number                : Read / Write / Construct
+</code></synopsis>
+
+  
+    <p>The duration (in nanoseconds) after which the discovery of an individual
+URI will timeout.</p><p>If the discovery of a URI times out, the <link xref="GstPbutils.DiscovererResult"/>.timeout will be
+set on the result flags.</p>
+  
+  
+  
+  
+  
+  
+  
+</page>

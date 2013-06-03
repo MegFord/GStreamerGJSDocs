@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.EncodingProfile.from_discoverer"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.EncodingProfile" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>GstPbutils.EncodingProfile</api:type>
+      </api:returns>
+      <api:name>gst_encoding_profile_from_discoverer</api:name>
+      <api:arg>
+        <api:type>GstPbutils.DiscovererInfo</api:type>
+        <api:name>info</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>from_discoverer</title>
+  
+<synopsis><code mime="text/x-gjs">
+function from_discoverer(info:GstPbutils.DiscovererInfo):GstPbutils.EncodingProfile {
+    // Gjs wrapper for gst_encoding_profile_from_discoverer()
+}
+</code></synopsis>
+
+  
+    <p>Creates a <link xref="GstPbutils.EncodingProfile"/> matching the formats from the given
+<link xref="GstPbutils.EncodingProfile"/>. Streams other than audio or video (eg,
+subtitles), are currently ignored.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>info</code></title>
+<p>The <link xref="GstPbutils.DiscovererInfo"/> to read from</p>
+</item>
+<item>
+<title><code>Returns</code></title>
+<p>The new <link xref="GstPbutils.EncodingProfile"/> or <code>null</code>.</p>
+</item>
+</terms>
+
+  
+  
+</page>

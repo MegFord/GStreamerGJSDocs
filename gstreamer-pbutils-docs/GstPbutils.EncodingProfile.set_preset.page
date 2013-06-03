@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.EncodingProfile.set_preset"
+      type="topic"
+      style="method"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.EncodingProfile" group="method" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>void</api:type>
+      </api:returns>
+      <api:name>gst_encoding_profile_set_preset</api:name>
+      <api:arg>
+        <api:type>String</api:type>
+        <api:name>preset</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.EncodingProfile.prototype.set_preset</title>
+  
+<synopsis><code mime="text/x-gjs">
+function set_preset(preset:String):void {
+    // Gjs wrapper for gst_encoding_profile_set_preset()
+}
+</code></synopsis>
+
+  
+    <p>Sets the name of the <link xref="Gst.Element"/> that implements the <link xref="Gst.Preset"/> interface
+to use for the profile.
+This is the name that has been set when saving the preset.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>preset</code></title>
+<p>the element preset to use</p>
+</item>
+</terms>
+
+  
+  
+</page>

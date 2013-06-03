@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.EncodingProfile.set_name"
+      type="topic"
+      style="method"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.EncodingProfile" group="method" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>void</api:type>
+      </api:returns>
+      <api:name>gst_encoding_profile_set_name</api:name>
+      <api:arg>
+        <api:type>String</api:type>
+        <api:name>name</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.EncodingProfile.prototype.set_name</title>
+  
+<synopsis><code mime="text/x-gjs">
+function set_name(name:String):void {
+    // Gjs wrapper for gst_encoding_profile_set_name()
+}
+</code></synopsis>
+
+  
+    <p>Set <code>name</code> as the given name for the <code>profile</code>. A copy of <code>name</code> will be made
+internally.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>name</code></title>
+<p>the name to set on the profile</p>
+</item>
+</terms>
+
+  
+  
+</page>

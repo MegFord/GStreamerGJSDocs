@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.Discoverer-starting"
+      type="topic"
+      style="signal"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.Discoverer" group="signal" type="guide"/>
+    <title type="link" role="topic">starting</title>
+
+  </info>
+  <title>GstPbutils.Discoverer::starting</title>
+  
+<synopsis><code mime="text/x-python">
+function callback(discoverer, ):void;
+</code></synopsis>
+
+  
+    <p>Will be emitted when the discover starts analyzing the pending URIs</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>discoverer</code></title>
+<p>instance of <link xref="GstPbutils.Discoverer"/> that is emitting the signal</p>
+</item>
+</terms>
+
+  
+  
+</page>

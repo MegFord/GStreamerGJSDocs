@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.missing_uri_source_installer_detail_new"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="index" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>String</api:type>
+      </api:returns>
+      <api:name>gst_missing_uri_source_installer_detail_new</api:name>
+      <api:arg>
+        <api:type>String</api:type>
+        <api:name>protocol</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>missing_uri_source_installer_detail_new</title>
+  
+<synopsis><code mime="text/x-gjs">
+function missing_uri_source_installer_detail_new(protocol:String):String {
+    // Gjs wrapper for gst_missing_uri_source_installer_detail_new()
+}
+</code></synopsis>
+
+  
+    <p>Returns an opaque string containing all the details about the missing
+element to be passed to an external installer called via
+<link xref="GstPbutils.install_plugins_async"/> or <link xref="GstPbutils.install_plugins_sync"/>.</p><p>This function is mainly for applications that call external plugin
+installation mechanisms using one of the two above-mentioned functions in
+the case where the application knows exactly what kind of plugin it is
+missing.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>protocol</code></title>
+<p>the URI protocol the missing source needs to implement, e.g. "http" or "mms"</p>
+</item>
+<item>
+<title><code>Returns</code></title>
+<p>a newly-allocated detail string, or NULL on error. Free string with <link xref="GLib.free"/> when not needed any longer.</p>
+</item>
+</terms>
+
+  
+  
+</page>

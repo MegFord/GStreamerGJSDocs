@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.InstallPluginsReturn"
+      type="topic"
+      style="enum"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+      <link xref="index" group="enum" type="guide"/>
+    
+  </info>
+  <title>GstPbutils.InstallPluginsReturn</title>
+  
+  
+  
+    <p>Result codes returned by <link xref="GstPbutils.install_plugins_async"/> and
+<link xref="GstPbutils.install_plugins_sync"/>, and also the result code passed to the
+<link xref="GstPbutils.InstallPluginsResultFunc"/> specified with <link xref="GstPbutils.install_plugins_async"/>.</p><p>These codes indicate success or failure of starting an external installer
+program and to what extent the requested plugins could be installed.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>InstallPluginsReturn.SUCCESS</code></title>
+<p>all of the requested plugins could be installed</p>
+</item>
+<item>
+<title><code>InstallPluginsReturn.NOT_FOUND</code></title>
+<p>no appropriate installation candidate for any of the requested plugins could be found. Only return this if nothing has been installed. Return #GST_INSTALL_PLUGINS_PARTIAL_SUCCESS if some (but not all) of the requested plugins could be installed.</p>
+</item>
+<item>
+<title><code>InstallPluginsReturn.ERROR</code></title>
+<p>an error occured during the installation. If this happens, the  user has already seen an error message and another one should not be displayed</p>
+</item>
+<item>
+<title><code>InstallPluginsReturn.PARTIAL_SUCCESS</code></title>
+<p>some of the requested plugins could be installed, but not all</p>
+</item>
+<item>
+<title><code>InstallPluginsReturn.USER_ABORT</code></title>
+<p>the user has aborted the installation</p>
+</item>
+<item>
+<title><code>InstallPluginsReturn.CRASHED</code></title>
+<p>the installer had an unclean exit code (ie. death by signal)</p>
+</item>
+<item>
+<title><code>InstallPluginsReturn.INVALID</code></title>
+<p>the helper returned an invalid status code</p>
+</item>
+<item>
+<title><code>InstallPluginsReturn.STARTED_OK</code></title>
+<p>returned by <link xref="GstPbutils.install_plugins_async"/> to indicate that everything went fine so far and the provided callback will be called with the result of the installation later</p>
+</item>
+<item>
+<title><code>InstallPluginsReturn.INTERNAL_FAILURE</code></title>
+<p>some internal failure has occured when trying to start the installer</p>
+</item>
+<item>
+<title><code>InstallPluginsReturn.HELPER_MISSING</code></title>
+<p>the helper script to call the actual installer is not installed</p>
+</item>
+<item>
+<title><code>InstallPluginsReturn.INSTALL_IN_PROGRESS</code></title>
+<p>a previously-started plugin installation is still in progress, try again later</p>
+</item>
+</terms>
+
+  
+  
+</page>

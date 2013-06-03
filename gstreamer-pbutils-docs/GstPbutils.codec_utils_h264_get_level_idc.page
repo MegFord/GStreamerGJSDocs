@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.codec_utils_h264_get_level_idc"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="index" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>guint8</api:type>
+      </api:returns>
+      <api:name>gst_codec_utils_h264_get_level_idc</api:name>
+      <api:arg>
+        <api:type>String</api:type>
+        <api:name>level</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>codec_utils_h264_get_level_idc</title>
+  
+<synopsis><code mime="text/x-gjs">
+function codec_utils_h264_get_level_idc(level:String):guint8 {
+    // Gjs wrapper for gst_codec_utils_h264_get_level_idc()
+}
+</code></synopsis>
+
+  
+    <p>Transform a level string from the caps into the level_idc</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>level</code></title>
+<p>A level string from caps</p>
+</item>
+<item>
+<title><code>Returns</code></title>
+<p>the level_idc or 0 if the level is unknown</p>
+</item>
+</terms>
+
+  
+  
+</page>

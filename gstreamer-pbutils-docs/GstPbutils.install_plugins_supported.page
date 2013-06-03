@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.install_plugins_supported"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="index" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>Boolean</api:type>
+      </api:returns>
+      <api:name>gst_install_plugins_supported</api:name>
+    </api:function>
+
+  </info>
+  <title>install_plugins_supported</title>
+  
+<synopsis><code mime="text/x-gjs">
+function install_plugins_supported():Boolean {
+    // Gjs wrapper for gst_install_plugins_supported()
+}
+</code></synopsis>
+
+  
+    <p>Checks whether plugin installation is likely to be supported by the
+current environment. This currently only checks whether the helper script
+that is to be provided by the distribution or operating system vendor
+exists.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>Returns</code></title>
+<p>TRUE if plugin installation is likely to be supported.</p>
+</item>
+</terms>
+
+  
+  
+</page>

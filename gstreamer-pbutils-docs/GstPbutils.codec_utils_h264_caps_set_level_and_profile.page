@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.codec_utils_h264_caps_set_level_and_profile"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="index" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>Boolean</api:type>
+      </api:returns>
+      <api:name>gst_codec_utils_h264_caps_set_level_and_profile</api:name>
+      <api:arg>
+        <api:type>Gst.Caps</api:type>
+        <api:name>caps</api:name>
+      </api:arg>
+      <api:arg>
+        <api:type>guint8</api:type>
+        <api:name>sps</api:name>
+      </api:arg>
+      <api:arg>
+        <api:type>Number</api:type>
+        <api:name>len</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>codec_utils_h264_caps_set_level_and_profile</title>
+  
+<synopsis><code mime="text/x-gjs">
+function codec_utils_h264_caps_set_level_and_profile(caps:Gst.Caps, sps:guint8, len:Number):Boolean {
+    // Gjs wrapper for gst_codec_utils_h264_caps_set_level_and_profile()
+}
+</code></synopsis>
+
+  
+    <p>Sets the level and profile in <code>caps</code> if it can be determined from <code>sps</code>. See
+<link xref="GstPbutils.codec_utils_h264_get_level"/> and <link xref="GstPbutils.codec_utils_h264_get_profile"/>
+for more details on the parameters.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>caps</code></title>
+<p>the <link xref="Gst.Caps"/> to which the level and profile are to be added</p>
+</item>
+<item>
+<title><code>sps</code></title>
+<p>Pointer to the sequence parameter set for the stream.</p>
+</item>
+<item>
+<title><code>len</code></title>
+<p>Length of the data available in <code>sps</code>.</p>
+</item>
+<item>
+<title><code>Returns</code></title>
+<p><code>true</code> if the level and profile could be set, <code>false</code> otherwise.</p>
+</item>
+</terms>
+
+  
+  
+</page>

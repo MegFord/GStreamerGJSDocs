@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.EncodingProfile.get_presence"
+      type="topic"
+      style="method"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.EncodingProfile" group="method" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>Number</api:type>
+      </api:returns>
+      <api:name>gst_encoding_profile_get_presence</api:name>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.EncodingProfile.prototype.get_presence</title>
+  
+<synopsis><code mime="text/x-gjs">
+function get_presence():Number {
+    // Gjs wrapper for gst_encoding_profile_get_presence()
+}
+</code></synopsis>
+
+  
+    
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>Returns</code></title>
+<p>The number of times the profile is used in its parent container profile. If 0, it is not a mandatory stream.</p>
+</item>
+</terms>
+
+  
+  
+</page>

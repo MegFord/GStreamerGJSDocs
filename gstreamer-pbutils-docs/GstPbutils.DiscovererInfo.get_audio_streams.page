@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.DiscovererInfo.get_audio_streams"
+      type="topic"
+      style="method"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.DiscovererInfo" group="method" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>[GstPbutils.DiscovererStreamInfo]</api:type>
+      </api:returns>
+      <api:name>gst_discoverer_info_get_audio_streams</api:name>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.DiscovererInfo.prototype.get_audio_streams</title>
+  
+<synopsis><code mime="text/x-gjs">
+function get_audio_streams():[GstPbutils.DiscovererStreamInfo] {
+    // Gjs wrapper for gst_discoverer_info_get_audio_streams()
+}
+</code></synopsis>
+
+  
+    <p>Finds all the <link xref="GstPbutils.DiscovererAudioInfo"/> contained in <code>info</code></p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>Returns</code></title>
+<p>A <link xref="GLib.List"/> of matching <link xref="GstPbutils.DiscovererStreamInfo"/>. The caller should free it with <link xref="GstPbutils.list_free"/>.</p>
+</item>
+</terms>
+
+  
+  
+</page>

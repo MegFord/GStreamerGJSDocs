@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.DiscovererInfo.copy"
+      type="topic"
+      style="method"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.DiscovererInfo" group="method" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>GstPbutils.DiscovererInfo</api:type>
+      </api:returns>
+      <api:name>gst_discoverer_info_copy</api:name>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.DiscovererInfo.prototype.copy</title>
+  
+<synopsis><code mime="text/x-gjs">
+function copy():GstPbutils.DiscovererInfo {
+    // Gjs wrapper for gst_discoverer_info_copy()
+}
+</code></synopsis>
+
+  
+    
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>Returns</code></title>
+<p>A copy of the <link xref="GstPbutils.DiscovererInfo"/></p>
+</item>
+</terms>
+
+  
+  
+</page>

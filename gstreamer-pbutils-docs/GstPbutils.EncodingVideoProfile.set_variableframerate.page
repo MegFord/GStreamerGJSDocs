@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.EncodingVideoProfile.set_variableframerate"
+      type="topic"
+      style="method"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.EncodingVideoProfile" group="method" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>void</api:type>
+      </api:returns>
+      <api:name>gst_encoding_video_profile_set_variableframerate</api:name>
+      <api:arg>
+        <api:type>Boolean</api:type>
+        <api:name>variableframerate</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.EncodingVideoProfile.prototype.set_variableframerate</title>
+  
+<synopsis><code mime="text/x-gjs">
+function set_variableframerate(variableframerate:Boolean):void {
+    // Gjs wrapper for gst_encoding_video_profile_set_variableframerate()
+}
+</code></synopsis>
+
+  
+    <p>If set to <code>true</code>, then the incoming stream will be allowed to have non-constant
+framerate. If set to <code>false</code> (default value), then the incoming stream will
+be normalized by dropping/duplicating frames in order to produce a
+constance framerate.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>variableframerate</code></title>
+<p>a boolean</p>
+</item>
+</terms>
+
+  
+  
+</page>

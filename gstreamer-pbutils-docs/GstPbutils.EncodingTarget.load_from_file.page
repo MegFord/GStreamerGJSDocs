@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.EncodingTarget.load_from_file"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.EncodingTarget" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>GstPbutils.EncodingTarget</api:type>
+      </api:returns>
+      <api:name>gst_encoding_target_load_from_file</api:name>
+      <api:arg>
+        <api:type>String</api:type>
+        <api:name>filepath</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>load_from_file</title>
+  
+<synopsis><code mime="text/x-gjs">
+function load_from_file(filepath:String):GstPbutils.EncodingTarget {
+    // Gjs wrapper for gst_encoding_target_load_from_file()
+}
+</code></synopsis>
+
+  
+    <p>Opens the provided file and returns the contained <link xref="GstPbutils.EncodingTarget"/>.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>filepath</code></title>
+<p>The file location to load the <link xref="GstPbutils.EncodingTarget"/> from</p>
+</item>
+<item>
+<title><code>Returns</code></title>
+<p>The <link xref="GstPbutils.EncodingTarget"/> contained in the file, else <code>null</code></p>
+</item>
+</terms>
+
+  
+  
+</page>

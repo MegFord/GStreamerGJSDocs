@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.codec_utils_aac_get_profile"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="index" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>String</api:type>
+      </api:returns>
+      <api:name>gst_codec_utils_aac_get_profile</api:name>
+      <api:arg>
+        <api:type>guint8</api:type>
+        <api:name>audio_config</api:name>
+      </api:arg>
+      <api:arg>
+        <api:type>Number</api:type>
+        <api:name>len</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>codec_utils_aac_get_profile</title>
+  
+<synopsis><code mime="text/x-gjs">
+function codec_utils_aac_get_profile(audio_config:guint8, len:Number):String {
+    // Gjs wrapper for gst_codec_utils_aac_get_profile()
+}
+</code></synopsis>
+
+  
+    <p>Returns the profile of the given AAC stream as a string. The profile is
+determined using the AudioObjectType field which is in the first 5 bits of
+<code>audio_config</code>.</p><p>&lt;note&gt;
+HE-AAC support has not yet been implemented.
+&lt;/note&gt;</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>audio_config</code></title>
+<p>a pointer to the AudioSpecificConfig as specified in the Elementary Stream Descriptor (esds) in ISO/IEC 14496-1 (see <link xref="GstPbutils.codec_utils_aac_get_level"/> for a more details).</p>
+</item>
+<item>
+<title><code>len</code></title>
+<p>Length of <code>audio_config</code> in bytes</p>
+</item>
+<item>
+<title><code>Returns</code></title>
+<p>The profile as a const string and <code>null</code> if the profile could not be determined.</p>
+</item>
+</terms>
+
+  
+  
+</page>

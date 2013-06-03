@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.codec_utils_h264_get_profile"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="index" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>String</api:type>
+      </api:returns>
+      <api:name>gst_codec_utils_h264_get_profile</api:name>
+      <api:arg>
+        <api:type>guint8</api:type>
+        <api:name>sps</api:name>
+      </api:arg>
+      <api:arg>
+        <api:type>Number</api:type>
+        <api:name>len</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>codec_utils_h264_get_profile</title>
+  
+<synopsis><code mime="text/x-gjs">
+function codec_utils_h264_get_profile(sps:guint8, len:Number):String {
+    // Gjs wrapper for gst_codec_utils_h264_get_profile()
+}
+</code></synopsis>
+
+  
+    <p>Converts the profile indication (profile_idc) in the stream's
+sequence parameter set into a string. The SPS is expected to have the
+following format, as defined in the H.264 specification. The SPS is viewed
+as a bitstream here, with bit 0 being the most significant bit of the first
+byte.</p><p>&lt;itemizedlist&gt;
+&lt;listitem&gt;&lt;para&gt;Bit 0:7   - Profile indication&lt;/para&gt;&lt;/listitem&gt;
+&lt;listitem&gt;&lt;para&gt;Bit 8     - constraint_set0_flag&lt;/para&gt;&lt;/listitem&gt;
+&lt;listitem&gt;&lt;para&gt;Bit 9     - constraint_set1_flag&lt;/para&gt;&lt;/listitem&gt;
+&lt;listitem&gt;&lt;para&gt;Bit 10    - constraint_set2_flag&lt;/para&gt;&lt;/listitem&gt;
+&lt;listitem&gt;&lt;para&gt;Bit 11    - constraint_set3_flag&lt;/para&gt;&lt;/listitem&gt;
+&lt;listitem&gt;&lt;para&gt;Bit 12    - constraint_set3_flag&lt;/para&gt;&lt;/listitem&gt;
+&lt;listitem&gt;&lt;para&gt;Bit 13:15 - Reserved&lt;/para&gt;&lt;/listitem&gt;
+&lt;listitem&gt;&lt;para&gt;Bit 16:24 - Level indication&lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>sps</code></title>
+<p>Pointer to the sequence parameter set for the stream.</p>
+</item>
+<item>
+<title><code>len</code></title>
+<p>Length of the data available in <code>sps</code>.</p>
+</item>
+<item>
+<title><code>Returns</code></title>
+<p>The profile as a const string, or <code>null</code> if there is an error.</p>
+</item>
+</terms>
+
+  
+  
+</page>

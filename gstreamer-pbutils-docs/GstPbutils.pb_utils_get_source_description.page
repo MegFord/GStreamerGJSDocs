@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.pb_utils_get_source_description"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="index" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>String</api:type>
+      </api:returns>
+      <api:name>gst_pb_utils_get_source_description</api:name>
+      <api:arg>
+        <api:type>String</api:type>
+        <api:name>protocol</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>pb_utils_get_source_description</title>
+  
+<synopsis><code mime="text/x-gjs">
+function pb_utils_get_source_description(protocol:String):String {
+    // Gjs wrapper for gst_pb_utils_get_source_description()
+}
+</code></synopsis>
+
+  
+    <p>Returns a localised string describing a source element handling the protocol
+specified in <code>protocol</code>, for use in error dialogs or other messages to be
+seen by the user. Should never return NULL unless <code>protocol</code> is invalid.</p><p>This function is mainly for internal use, applications would typically
+use <link xref="GstPbutils.missing_plugin_message_get_description"/> to get a description of
+a missing feature from a missing-plugin message.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>protocol</code></title>
+<p>the protocol the source element needs to handle, e.g. "http"</p>
+</item>
+<item>
+<title><code>Returns</code></title>
+<p>a newly-allocated description string, or NULL on error. Free string with <link xref="GLib.free"/> when not needed any longer.</p>
+</item>
+</terms>
+
+  
+  
+</page>

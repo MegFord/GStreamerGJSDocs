@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.Discoverer.start"
+      type="topic"
+      style="method"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.Discoverer" group="method" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>void</api:type>
+      </api:returns>
+      <api:name>gst_discoverer_start</api:name>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.Discoverer.prototype.start</title>
+  
+<synopsis><code mime="text/x-gjs">
+function start():void {
+    // Gjs wrapper for gst_discoverer_start()
+}
+</code></synopsis>
+
+  
+    <p>Allow asynchronous discovering of URIs to take place.
+A <link xref="GLib.MainLoop"/> must be available for <link xref="GstPbutils.Discoverer"/> to properly work in
+asynchronous mode.</p>
+  
+  
+  
+  
+<terms>
+</terms>
+
+  
+  
+</page>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.pb_utils_init"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="index" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>void</api:type>
+      </api:returns>
+      <api:name>gst_pb_utils_init</api:name>
+    </api:function>
+
+  </info>
+  <title>pb_utils_init</title>
+  
+<synopsis><code mime="text/x-gjs">
+function pb_utils_init():void {
+    // Gjs wrapper for gst_pb_utils_init()
+}
+</code></synopsis>
+
+  
+    <p>Initialises the base utils support library. This function is not
+thread-safe. Applications should call it after calling <link xref="Gst.init"/>,
+plugins should call it from their plugin_init function.</p><p>This function may be called multiple times. It will do nothing if the
+library has already been initialised.</p>
+  
+  
+  
+  
+<terms>
+</terms>
+
+  
+  
+</page>

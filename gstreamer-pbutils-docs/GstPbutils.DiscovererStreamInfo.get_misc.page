@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.DiscovererStreamInfo.get_misc"
+      type="topic"
+      style="method"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.DiscovererStreamInfo" group="method" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>Gst.Structure</api:type>
+      </api:returns>
+      <api:name>gst_discoverer_stream_info_get_misc</api:name>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.DiscovererStreamInfo.prototype.get_misc</title>
+  
+<synopsis><code mime="text/x-gjs">
+function get_misc():Gst.Structure {
+    // Gjs wrapper for gst_discoverer_stream_info_get_misc()
+}
+</code></synopsis>
+
+  
+    
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>Returns</code></title>
+<p>additional information regarding the stream (for example codec version, profile, etc..). If you wish to use the <link xref="Gst.Structure"/> after the life-time of <code>info</code> you will need to copy it.</p>
+</item>
+</terms>
+
+  
+  
+</page>

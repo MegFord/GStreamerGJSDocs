@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.Discoverer.new"
+      type="topic"
+      style="constructor"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.Discoverer" group="constructor" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>GstPbutils.Discoverer</api:type>
+      </api:returns>
+      <api:name>gst_discoverer_new</api:name>
+      <api:arg>
+        <api:type>Gst.ClockTime</api:type>
+        <api:name>timeout</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.Discoverer.new</title>
+  
+<synopsis><code mime="text/x-gjs">
+function new(timeout:Gst.ClockTime):GstPbutils.Discoverer {
+    // Gjs wrapper for gst_discoverer_new()
+}
+</code></synopsis>
+
+  
+    <p>Creates a new <link xref="GstPbutils.Discoverer"/> with the provided timeout.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>timeout</code></title>
+<p>timeout per file, in nanoseconds. Allowed are values between one second (#GST_SECOND) and one hour (3600 * #GST_SECOND)</p>
+</item>
+<item>
+<title><code>Returns</code></title>
+<p>The new <link xref="GstPbutils.Discoverer"/>. If an error occurred when creating the discoverer, @err will be set accordingly and <code>null</code> will be returned. If @err is set, the caller must free it when no longer needed using <link xref="GLib.free"/>.</p>
+</item>
+</terms>
+
+  
+  
+</page>

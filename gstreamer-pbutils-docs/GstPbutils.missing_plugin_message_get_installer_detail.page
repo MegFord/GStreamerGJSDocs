@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.missing_plugin_message_get_installer_detail"
+      type="topic"
+      style="function"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="index" group="function" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>String</api:type>
+      </api:returns>
+      <api:name>gst_missing_plugin_message_get_installer_detail</api:name>
+      <api:arg>
+        <api:type>Gst.Message</api:type>
+        <api:name>msg</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>missing_plugin_message_get_installer_detail</title>
+  
+<synopsis><code mime="text/x-gjs">
+function missing_plugin_message_get_installer_detail(msg:Gst.Message):String {
+    // Gjs wrapper for gst_missing_plugin_message_get_installer_detail()
+}
+</code></synopsis>
+
+  
+    <p>Returns an opaque string containing all the details about the missing
+element to be passed to an external installer called via
+<link xref="GstPbutils.install_plugins_async"/> or <link xref="GstPbutils.install_plugins_sync"/>.</p><p>This function is mainly for applications that call external plugin
+installation mechanisms using one of the two above-mentioned functions.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>msg</code></title>
+<p>a missing-plugin <link xref="Gst.Message"/> of type #GST_MESSAGE_ELEMENT</p>
+</item>
+<item>
+<title><code>Returns</code></title>
+<p>a newly-allocated detail string, or NULL on error. Free string with <link xref="GLib.free"/> when not needed any longer.</p>
+</item>
+</terms>
+
+  
+  
+</page>

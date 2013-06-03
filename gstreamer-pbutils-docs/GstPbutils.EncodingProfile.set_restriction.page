@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<page id="GstPbutils.EncodingProfile.set_restriction"
+      type="topic"
+      style="method"
+      xmlns="http://projectmallard.org/1.0/"
+      xmlns:api="http://projectmallard.org/experimental/api/"
+      xmlns:ui="http://projectmallard.org/1.0/ui/">
+  <info>
+    
+    <link xref="GstPbutils.EncodingProfile" group="method" type="guide"/>
+    <api:function>
+      <api:returns>
+        <api:type>void</api:type>
+      </api:returns>
+      <api:name>gst_encoding_profile_set_restriction</api:name>
+      <api:arg>
+        <api:type>Gst.Caps</api:type>
+        <api:name>restriction</api:name>
+      </api:arg>
+    </api:function>
+
+  </info>
+  <title>GstPbutils.EncodingProfile.prototype.set_restriction</title>
+  
+<synopsis><code mime="text/x-gjs">
+function set_restriction(restriction:Gst.Caps):void {
+    // Gjs wrapper for gst_encoding_profile_set_restriction()
+}
+</code></synopsis>
+
+  
+    <p>Set the restriction <link xref="Gst.Caps"/> to apply before the encoder
+that will be used in the profile. See <link xref="GstPbutils.EncodingProfile.set_restriction"/>
+for more about restrictions. Does not apply to <link xref="GstPbutils.EncodingContainerProfile"/>.</p>
+  
+  
+  
+  
+<terms>
+<item>
+<title><code>restriction</code></title>
+<p>the restriction to apply</p>
+</item>
+</terms>
+
+  
+  
+</page>
