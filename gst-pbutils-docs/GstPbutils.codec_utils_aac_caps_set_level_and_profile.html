@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>codec_utils_aac_caps_set_level_and_profile</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">codec_utils_aac_caps_set_level_and_profile</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function codec_utils_aac_caps_set_level_and_profile(caps:Gst.Caps, audio_config:guint8, len:Number):Boolean {
+    // Gjs wrapper for gst_codec_utils_aac_caps_set_level_and_profile()
+}</pre></div></div></div></div></div>
+<p class="p">Sets the level and profile on <span class=" code">caps</span> if it can be determined from
+<span class=" code">audio_config</span>. See <span class=" link"><a href="GstPbutils.codec_utils_aac_get_level.html" title="codec_utils_aac_get_level">codec_utils_aac_get_level</a></span> and
+<span class=" link"><a href="GstPbutils.codec_utils_aac_get_profile.html" title="codec_utils_aac_get_profile">codec_utils_aac_get_profile</a></span> for more details on the parameters.
+<span class=" code">caps</span> must be audio/mpeg caps with an "mpegversion" field of either 2 or 4.
+If mpegversion is 4, the "base-profile" field is also set in <span class=" code">caps</span>.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">caps</span></dt>
+<dd class="terms"><p class="p">the <span class=" link"><a href="Gst.Caps.html" title="Gst.Caps">Gst.Caps</a></span> to which level and profile fields are to be added</p></dd>
+<dt class="terms"><span class=" code">audio_config</span></dt>
+<dd class="terms"><p class="p">a pointer to the AudioSpecificConfig as specified in the Elementary Stream Descriptor (esds) in ISO/IEC 14496-1 (see below for a more details).</p></dd>
+<dt class="terms"><span class=" code">len</span></dt>
+<dd class="terms"><p class="p">Length of <span class=" code">audio_config</span> in bytes</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p"><span class=" code">true</span> if the level and profile could be set, <span class=" code">false</span> otherwise.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

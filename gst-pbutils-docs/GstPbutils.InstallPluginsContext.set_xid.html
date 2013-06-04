@@ -1,0 +1,56 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstPbutils.InstallPluginsContext.prototype.set_xid</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstPbutils.InstallPluginsContext.html" title="GstPbutils.InstallPluginsContext">GstPbutils.InstallPluginsContext</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstPbutils.InstallPluginsContext.prototype.set_xid</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function set_xid(xid:Number):void {
+    // Gjs wrapper for gst_install_plugins_context_set_xid()
+}</pre></div></div></div></div></div>
+<p class="p">This function is for X11-based applications (such as most Gtk/Qt
+applications on linux/unix) only. You can use it to tell the external
+installer the XID of your main application window. That way the installer
+can make its own window transient to your application window during the
+installation.</p>
+<p class="p">If set, the XID will be passed to the installer via a --transient-for=XID
+command line option.</p>
+<p class="p">Gtk+/Gnome application should be able to obtain the XID of the top-level
+window like this:
+&lt;programlisting&gt;
+##include &amp;lt;gtk/gtk.h&amp;gt;
+##ifdef GDK_WINDOWING_X11
+##include &amp;lt;gdk/gdkx.h&amp;gt;
+##endif
+...
+##ifdef GDK_WINDOWING_X11
+  xid = GDK_WINDOW_XWINDOW (GTK_WIDGET (application_window)-&amp;gt;window);
+##endif
+...
+&lt;/programlisting&gt;</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">xid</span></dt>
+<dd class="terms"><p class="p">the XWindow ID (XID) of the top-level application</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstPbutils.InstallPluginsContext.html" title="GstPbutils.InstallPluginsContext">GstPbutils.InstallPluginsContext</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

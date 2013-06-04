@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstPbutils.Discoverer</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstPbutils.Discoverer</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstPbutils = imports.gi.GstPbutils;
+
+let discoverer = new GstPbutils.Discoverer({
+    <span class=" link"><a href="GstPbutils.Discoverer-timeout.html" title="GstPbutils.Discoverer:timeout">timeout</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">The <span class=" link"><a href="GstPbutils.Discoverer.html" title="GstPbutils.Discoverer">GstPbutils.Discoverer</a></span> is a utility object which allows to get as much
+information as possible from one or many URIs.</p>
+<p class="p">It provides two APIs, allowing usage in blocking or non-blocking mode.</p>
+<p class="p">The blocking mode just requires calling <span class=" link"><a href="GstPbutils.discover_uri.html" title="GstPbutils.discover_uri">GstPbutils.discover_uri</a></span>
+with the URI one wishes to discover.</p>
+<p class="p">The non-blocking mode requires a running <span class=" link"><a href="GLib.MainLoop.html" title="GLib.MainLoop">GLib.MainLoop</a></span> in the default
+<span class=" link"><a href="GLib.MainContext.html" title="GLib.MainContext">GLib.MainContext</a></span>, where one connects to the various signals, appends the
+URIs to be processed (through <span class=" link"><a href="GstPbutils.discover_uri_async.html" title="GstPbutils.discover_uri_async">GstPbutils.discover_uri_async</a></span>) and then
+asks for the discovery to begin (through <span class=" link"><a href="GstPbutils.start.html" title="GstPbutils.start">GstPbutils.start</a></span>).</p>
+<p class="p">All the information is returned in a <span class=" link"><a href="GstPbutils.DiscovererInfo.html" title="GstPbutils.DiscovererInfo">GstPbutils.DiscovererInfo</a></span> structure.</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstPbutils.Discoverer</span>
+      </div></li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstPbutils.Discoverer.discover_uri.html" title="GstPbutils.Discoverer.prototype.discover_uri">GstPbutils.Discoverer.prototype.discover_uri</a></li>
+<li class="links "><a href="GstPbutils.Discoverer.discover_uri_async.html" title="GstPbutils.Discoverer.prototype.discover_uri_async">GstPbutils.Discoverer.prototype.discover_uri_async</a></li>
+<li class="links "><a href="GstPbutils.Discoverer.start.html" title="GstPbutils.Discoverer.prototype.start">GstPbutils.Discoverer.prototype.start</a></li>
+<li class="links "><a href="GstPbutils.Discoverer.stop.html" title="GstPbutils.Discoverer.prototype.stop">GstPbutils.Discoverer.prototype.stop</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstPbutils.Discoverer-timeout.html" title="GstPbutils.Discoverer:timeout">timeout</a></li></ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Signals</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstPbutils.Discoverer-discovered.html" title="GstPbutils.Discoverer::discovered">discovered</a></li>
+<li class="links "><a href="GstPbutils.Discoverer-finished.html" title="GstPbutils.Discoverer::finished">finished</a></li>
+<li class="links "><a href="GstPbutils.Discoverer-source-setup.html" title="GstPbutils.Discoverer::source-setup">source-setup</a></li>
+<li class="links "><a href="GstPbutils.Discoverer-starting.html" title="GstPbutils.Discoverer::starting">starting</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstPbutils.Discoverer-source_setup.html" title="GstPbutils.Discoverer::source_setup">GstPbutils.Discoverer::source_setup</a></li></ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Other</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstPbutils.Discoverer.new.html" title="GstPbutils.Discoverer.new">GstPbutils.Discoverer.new</a></li></ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

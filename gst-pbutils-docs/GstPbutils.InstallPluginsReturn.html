@@ -1,0 +1,58 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstPbutils.InstallPluginsReturn</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstPbutils.InstallPluginsReturn</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p">Result codes returned by <span class=" link"><a href="GstPbutils.install_plugins_async.html" title="install_plugins_async">install_plugins_async</a></span> and
+<span class=" link"><a href="GstPbutils.install_plugins_sync.html" title="install_plugins_sync">install_plugins_sync</a></span>, and also the result code passed to the
+<span class=" link"><a href="GstPbutils.InstallPluginsResultFunc.html" title="GstPbutils.InstallPluginsResultFunc">GstPbutils.InstallPluginsResultFunc</a></span> specified with <span class=" link"><a href="GstPbutils.install_plugins_async.html" title="install_plugins_async">install_plugins_async</a></span>.</p>
+<p class="p">These codes indicate success or failure of starting an external installer
+program and to what extent the requested plugins could be installed.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">InstallPluginsReturn.SUCCESS</span></dt>
+<dd class="terms"><p class="p">all of the requested plugins could be installed</p></dd>
+<dt class="terms"><span class=" code">InstallPluginsReturn.NOT_FOUND</span></dt>
+<dd class="terms"><p class="p">no appropriate installation candidate for any of the requested plugins could be found. Only return this if nothing has been installed. Return #GST_INSTALL_PLUGINS_PARTIAL_SUCCESS if some (but not all) of the requested plugins could be installed.</p></dd>
+<dt class="terms"><span class=" code">InstallPluginsReturn.ERROR</span></dt>
+<dd class="terms"><p class="p">an error occured during the installation. If this happens, the  user has already seen an error message and another one should not be displayed</p></dd>
+<dt class="terms"><span class=" code">InstallPluginsReturn.PARTIAL_SUCCESS</span></dt>
+<dd class="terms"><p class="p">some of the requested plugins could be installed, but not all</p></dd>
+<dt class="terms"><span class=" code">InstallPluginsReturn.USER_ABORT</span></dt>
+<dd class="terms"><p class="p">the user has aborted the installation</p></dd>
+<dt class="terms"><span class=" code">InstallPluginsReturn.CRASHED</span></dt>
+<dd class="terms"><p class="p">the installer had an unclean exit code (ie. death by signal)</p></dd>
+<dt class="terms"><span class=" code">InstallPluginsReturn.INVALID</span></dt>
+<dd class="terms"><p class="p">the helper returned an invalid status code</p></dd>
+<dt class="terms"><span class=" code">InstallPluginsReturn.STARTED_OK</span></dt>
+<dd class="terms"><p class="p">returned by <span class=" link"><a href="GstPbutils.install_plugins_async.html" title="install_plugins_async">install_plugins_async</a></span> to indicate that everything went fine so far and the provided callback will be called with the result of the installation later</p></dd>
+<dt class="terms"><span class=" code">InstallPluginsReturn.INTERNAL_FAILURE</span></dt>
+<dd class="terms"><p class="p">some internal failure has occured when trying to start the installer</p></dd>
+<dt class="terms"><span class=" code">InstallPluginsReturn.HELPER_MISSING</span></dt>
+<dd class="terms"><p class="p">the helper script to call the actual installer is not installed</p></dd>
+<dt class="terms"><span class=" code">InstallPluginsReturn.INSTALL_IN_PROGRESS</span></dt>
+<dd class="terms"><p class="p">a previously-started plugin installation is still in progress, try again later</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>
