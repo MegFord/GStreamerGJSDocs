@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstTag.TagXmpWriter</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstTag.TagXmpWriter</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstTag = imports.gi.GstTag;
+
+let tag_xmp_writer = new GstTag.TagXmpWriter();
+  </pre></div></div></div></div></div>
+<p class="p">&lt;refsect2&gt;
+&lt;para&gt;
+This interface is implemented by elements that are able to do XMP serialization. Examples for
+such elements are #jifmux and #qtmux.
+&lt;/para&gt;
+&lt;para&gt;
+Applications can use this interface to configure which XMP schemas should be used when serializing
+tags into XMP. Schemas are represented by their names, a full list of the supported schemas can be
+obtained from <span class=" link"><a href="GstTag.tag_xmp_list_schemas.html" title="tag_xmp_list_schemas">tag_xmp_list_schemas</a></span>. By default, all schemas are used.
+&lt;/para&gt;
+&lt;/refsect2&gt;</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree"><div>
+        <span class=" code">GstTag.TagXmpWriter</span>
+      </div></li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstTag.TagXmpWriter.add_all_schemas.html" title="GstTag.TagXmpWriter.prototype.add_all_schemas">GstTag.TagXmpWriter.prototype.add_all_schemas</a></li>
+<li class="links "><a href="GstTag.TagXmpWriter.add_schema.html" title="GstTag.TagXmpWriter.prototype.add_schema">GstTag.TagXmpWriter.prototype.add_schema</a></li>
+<li class="links "><a href="GstTag.TagXmpWriter.has_schema.html" title="GstTag.TagXmpWriter.prototype.has_schema">GstTag.TagXmpWriter.prototype.has_schema</a></li>
+<li class="links "><a href="GstTag.TagXmpWriter.remove_all_schemas.html" title="GstTag.TagXmpWriter.prototype.remove_all_schemas">GstTag.TagXmpWriter.prototype.remove_all_schemas</a></li>
+<li class="links "><a href="GstTag.TagXmpWriter.remove_schema.html" title="GstTag.TagXmpWriter.prototype.remove_schema">GstTag.TagXmpWriter.prototype.remove_schema</a></li>
+<li class="links "><a href="GstTag.TagXmpWriter.tag_list_to_xmp_buffer.html" title="GstTag.TagXmpWriter.prototype.tag_list_to_xmp_buffer">GstTag.TagXmpWriter.prototype.tag_list_to_xmp_buffer</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

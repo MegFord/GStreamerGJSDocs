@@ -1,0 +1,187 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstApp.AppSrc</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstApp.AppSrc</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstApp = imports.gi.GstApp;
+
+let app_src = new GstApp.AppSrc({
+    <span class=" link"><a href="GstApp.AppSrc-block.html" title="GstApp.AppSrc:block">block</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSrc-caps.html" title="GstApp.AppSrc:caps">caps</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSrc-emit-signals.html" title="GstApp.AppSrc:emit-signals">emit_signals</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSrc-format.html" title="GstApp.AppSrc:format">format</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSrc-is-live.html" title="GstApp.AppSrc:is-live">is_live</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSrc-max-bytes.html" title="GstApp.AppSrc:max-bytes">max_bytes</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSrc-max-latency.html" title="GstApp.AppSrc:max-latency">max_latency</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSrc-min-latency.html" title="GstApp.AppSrc:min-latency">min_latency</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSrc-min-percent.html" title="GstApp.AppSrc:min-percent">min_percent</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSrc-size.html" title="GstApp.AppSrc:size">size</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSrc-stream-type.html" title="GstApp.AppSrc:stream-type">stream_type</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">The appsrc element can be used by applications to insert data into a
+GStreamer pipeline. Unlike most GStreamer elements, Appsrc provides
+external API functions.</p>
+<p class="p">appsrc can be used by linking with the libgstapp library to access the
+methods directly or by using the appsrc action signals.</p>
+<p class="p">Before operating appsrc, the caps property must be set to a fixed caps
+describing the format of the data that will be pushed with appsrc. An
+exception to this is when pushing buffers with unknown caps, in which case no
+caps should be set. This is typically true of file-like sources that push raw
+byte buffers.</p>
+<p class="p">The main way of handing data to the appsrc element is by calling the
+<span class=" link"><a href="GstApp.push_buffer.html" title="GstApp.push_buffer">GstApp.push_buffer</a></span> method or by emitting the push-buffer action signal.
+This will put the buffer onto a queue from which appsrc will read from in its
+streaming thread. It is important to note that data transport will not happen
+from the thread that performed the push-buffer call.</p>
+<p class="p">The "max-bytes" property controls how much data can be queued in appsrc
+before appsrc considers the queue full. A filled internal queue will always
+signal the "enough-data" signal, which signals the application that it should
+stop pushing data into appsrc. The "block" property will cause appsrc to
+block the push-buffer method until free data becomes available again.</p>
+<p class="p">When the internal queue is running out of data, the "need-data" signal is
+emitted, which signals the application that it should start pushing more data
+into appsrc.</p>
+<p class="p">In addition to the "need-data" and "enough-data" signals, appsrc can emit the
+"seek-data" signal when the "stream-mode" property is set to "seekable" or
+"random-access". The signal argument will contain the new desired position in
+the stream expressed in the unit set with the "format" property. After
+receiving the seek-data signal, the application should push-buffers from the
+new position.</p>
+<p class="p">These signals allow the application to operate the appsrc in two different
+ways:</p>
+<p class="p">The push model, in which the application repeatedly calls the push-buffer method
+with a new buffer. Optionally, the queue size in the appsrc can be controlled
+with the enough-data and need-data signals by respectively stopping/starting
+the push-buffer calls. This is a typical mode of operation for the
+stream-type "stream" and "seekable". Use this model when implementing various
+network protocols or hardware devices.</p>
+<p class="p">The pull model where the need-data signal triggers the next push-buffer call.
+This mode is typically used in the "random-access" stream-type. Use this
+model for file access or other randomly accessable sources. In this mode, a
+buffer of exactly the amount of bytes given by the need-data signal should be
+pushed into appsrc.</p>
+<p class="p">In all modes, the size property on appsrc should contain the total stream
+size in bytes. Setting this property is mandatory in the random-access mode.
+For the stream and seekable modes, setting this property is optional but
+recommended.</p>
+<p class="p">When the application is finished pushing data into appsrc, it should call
+<span class=" link"><a href="GstApp.end_of_stream.html" title="GstApp.end_of_stream">GstApp.end_of_stream</a></span> or emit the end-of-stream action signal. After
+this call, no more buffers can be pushed into appsrc until a flushing seek
+happened or the state of the appsrc has gone through READY.</p>
+<p class="p">Last reviewed on 2008-12-17 (0.10.10)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstBase.BaseSrc</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstApp.AppSrc</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstApp.AppSrc.end_of_stream.html" title="GstApp.AppSrc.prototype.end_of_stream">GstApp.AppSrc.prototype.end_of_stream</a></li>
+<li class="links "><a href="GstApp.AppSrc.get_caps.html" title="GstApp.AppSrc.prototype.get_caps">GstApp.AppSrc.prototype.get_caps</a></li>
+<li class="links "><a href="GstApp.AppSrc.get_emit_signals.html" title="GstApp.AppSrc.prototype.get_emit_signals">GstApp.AppSrc.prototype.get_emit_signals</a></li>
+<li class="links "><a href="GstApp.AppSrc.get_latency.html" title="GstApp.AppSrc.prototype.get_latency">GstApp.AppSrc.prototype.get_latency</a></li>
+<li class="links "><a href="GstApp.AppSrc.get_max_bytes.html" title="GstApp.AppSrc.prototype.get_max_bytes">GstApp.AppSrc.prototype.get_max_bytes</a></li>
+<li class="links "><a href="GstApp.AppSrc.get_size.html" title="GstApp.AppSrc.prototype.get_size">GstApp.AppSrc.prototype.get_size</a></li>
+<li class="links "><a href="GstApp.AppSrc.get_stream_type.html" title="GstApp.AppSrc.prototype.get_stream_type">GstApp.AppSrc.prototype.get_stream_type</a></li>
+<li class="links "><a href="GstApp.AppSrc.push_buffer.html" title="GstApp.AppSrc.prototype.push_buffer">GstApp.AppSrc.prototype.push_buffer</a></li>
+<li class="links "><a href="GstApp.AppSrc.set_caps.html" title="GstApp.AppSrc.prototype.set_caps">GstApp.AppSrc.prototype.set_caps</a></li>
+<li class="links "><a href="GstApp.AppSrc.set_emit_signals.html" title="GstApp.AppSrc.prototype.set_emit_signals">GstApp.AppSrc.prototype.set_emit_signals</a></li>
+<li class="links "><a href="GstApp.AppSrc.set_latency.html" title="GstApp.AppSrc.prototype.set_latency">GstApp.AppSrc.prototype.set_latency</a></li>
+<li class="links "><a href="GstApp.AppSrc.set_max_bytes.html" title="GstApp.AppSrc.prototype.set_max_bytes">GstApp.AppSrc.prototype.set_max_bytes</a></li>
+<li class="links "><a href="GstApp.AppSrc.set_size.html" title="GstApp.AppSrc.prototype.set_size">GstApp.AppSrc.prototype.set_size</a></li>
+<li class="links "><a href="GstApp.AppSrc.set_stream_type.html" title="GstApp.AppSrc.prototype.set_stream_type">GstApp.AppSrc.prototype.set_stream_type</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstApp.AppSrc-block.html" title="GstApp.AppSrc:block">block</a></li>
+<li class="links "><a href="GstApp.AppSrc-caps.html" title="GstApp.AppSrc:caps">caps</a></li>
+<li class="links "><a href="GstApp.AppSrc-emit-signals.html" title="GstApp.AppSrc:emit-signals">emit-signals</a></li>
+<li class="links "><a href="GstApp.AppSrc-format.html" title="GstApp.AppSrc:format">format</a></li>
+<li class="links "><a href="GstApp.AppSrc-is-live.html" title="GstApp.AppSrc:is-live">is-live</a></li>
+<li class="links "><a href="GstApp.AppSrc-max-bytes.html" title="GstApp.AppSrc:max-bytes">max-bytes</a></li>
+<li class="links "><a href="GstApp.AppSrc-max-latency.html" title="GstApp.AppSrc:max-latency">max-latency</a></li>
+<li class="links "><a href="GstApp.AppSrc-min-latency.html" title="GstApp.AppSrc:min-latency">min-latency</a></li>
+<li class="links "><a href="GstApp.AppSrc-min-percent.html" title="GstApp.AppSrc:min-percent">min-percent</a></li>
+<li class="links "><a href="GstApp.AppSrc-size.html" title="GstApp.AppSrc:size">size</a></li>
+<li class="links "><a href="GstApp.AppSrc-stream-type.html" title="GstApp.AppSrc:stream-type">stream-type</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Signals</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstApp.AppSrc-end-of-stream.html" title="GstApp.AppSrc::end-of-stream">end-of-stream</a></li>
+<li class="links "><a href="GstApp.AppSrc-enough-data.html" title="GstApp.AppSrc::enough-data">enough-data</a></li>
+<li class="links "><a href="GstApp.AppSrc-need-data.html" title="GstApp.AppSrc::need-data">need-data</a></li>
+<li class="links "><a href="GstApp.AppSrc-push-buffer.html" title="GstApp.AppSrc::push-buffer">push-buffer</a></li>
+<li class="links "><a href="GstApp.AppSrc-seek-data.html" title="GstApp.AppSrc::seek-data">seek-data</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstApp.AppSrc-end_of_stream.html" title="GstApp.AppSrc::end_of_stream">GstApp.AppSrc::end_of_stream</a></li>
+<li class="links "><a href="GstApp.AppSrc-enough_data.html" title="GstApp.AppSrc::enough_data">GstApp.AppSrc::enough_data</a></li>
+<li class="links "><a href="GstApp.AppSrc-need_data.html" title="GstApp.AppSrc::need_data">GstApp.AppSrc::need_data</a></li>
+<li class="links "><a href="GstApp.AppSrc-push_buffer.html" title="GstApp.AppSrc::push_buffer">GstApp.AppSrc::push_buffer</a></li>
+<li class="links "><a href="GstApp.AppSrc-seek_data.html" title="GstApp.AppSrc::seek_data">GstApp.AppSrc::seek_data</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

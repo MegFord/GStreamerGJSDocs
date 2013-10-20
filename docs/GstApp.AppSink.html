@@ -1,0 +1,146 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstApp.AppSink</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstApp.AppSink</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstApp = imports.gi.GstApp;
+
+let app_sink = new GstApp.AppSink({
+    <span class=" link"><a href="GstApp.AppSink-caps.html" title="GstApp.AppSink:caps">caps</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSink-drop.html" title="GstApp.AppSink:drop">drop</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSink-emit-signals.html" title="GstApp.AppSink:emit-signals">emit_signals</a></span>: value,
+    <span class=" link"><a href="GstApp.AppSink-max-buffers.html" title="GstApp.AppSink:max-buffers">max_buffers</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">Appsink is a sink plugin that supports many different methods for making
+the application get a handle on the GStreamer data in a pipeline. Unlike
+most GStreamer elements, Appsink provides external API functions.</p>
+<p class="p">appsink can be used by linking to the gstappsink.h header file to access the
+methods or by using the appsink action signals and properties.</p>
+<p class="p">The normal way of retrieving samples from appsink is by using the
+<span class=" link"><a href="GstApp.pull_sample.html" title="GstApp.pull_sample">GstApp.pull_sample</a></span> and <span class=" link"><a href="GstApp.pull_preroll.html" title="GstApp.pull_preroll">GstApp.pull_preroll</a></span> methods.
+These methods block until a sample becomes available in the sink or when the
+sink is shut down or reaches EOS.</p>
+<p class="p">Appsink will internally use a queue to collect buffers from the streaming
+thread. If the application is not pulling samples fast enough, this queue
+will consume a lot of memory over time. The "max-buffers" property can be
+used to limit the queue size. The "drop" property controls whether the
+streaming thread blocks or if older buffers are dropped when the maximum
+queue size is reached. Note that blocking the streaming thread can negatively
+affect real-time performance and should be avoided.</p>
+<p class="p">If a blocking behaviour is not desirable, setting the "emit-signals" property
+to <span class=" code">true</span> will make appsink emit the "new-sample" and "new-preroll" signals
+when a sample can be pulled without blocking.</p>
+<p class="p">The "caps" property on appsink can be used to control the formats that
+appsink can receive. This property can contain non-fixed caps, the format of
+the pulled samples can be obtained by getting the sample caps.</p>
+<p class="p">If one of the pull-preroll or pull-sample methods return <span class=" code">null</span>, the appsink
+is stopped or in the EOS state. You can check for the EOS state with the
+"eos" property or with the <span class=" link"><a href="GstApp.is_eos.html" title="GstApp.is_eos">GstApp.is_eos</a></span> method.</p>
+<p class="p">The eos signal can also be used to be informed when the EOS state is reached
+to avoid polling.</p>
+<p class="p">Last reviewed on 2008-12-17 (0.10.22)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstBase.BaseSink</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstApp.AppSink</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstApp.AppSink.get_caps.html" title="GstApp.AppSink.prototype.get_caps">GstApp.AppSink.prototype.get_caps</a></li>
+<li class="links "><a href="GstApp.AppSink.get_drop.html" title="GstApp.AppSink.prototype.get_drop">GstApp.AppSink.prototype.get_drop</a></li>
+<li class="links "><a href="GstApp.AppSink.get_emit_signals.html" title="GstApp.AppSink.prototype.get_emit_signals">GstApp.AppSink.prototype.get_emit_signals</a></li>
+<li class="links "><a href="GstApp.AppSink.get_max_buffers.html" title="GstApp.AppSink.prototype.get_max_buffers">GstApp.AppSink.prototype.get_max_buffers</a></li>
+<li class="links "><a href="GstApp.AppSink.is_eos.html" title="GstApp.AppSink.prototype.is_eos">GstApp.AppSink.prototype.is_eos</a></li>
+<li class="links "><a href="GstApp.AppSink.pull_preroll.html" title="GstApp.AppSink.prototype.pull_preroll">GstApp.AppSink.prototype.pull_preroll</a></li>
+<li class="links "><a href="GstApp.AppSink.pull_sample.html" title="GstApp.AppSink.prototype.pull_sample">GstApp.AppSink.prototype.pull_sample</a></li>
+<li class="links "><a href="GstApp.AppSink.set_caps.html" title="GstApp.AppSink.prototype.set_caps">GstApp.AppSink.prototype.set_caps</a></li>
+<li class="links "><a href="GstApp.AppSink.set_drop.html" title="GstApp.AppSink.prototype.set_drop">GstApp.AppSink.prototype.set_drop</a></li>
+<li class="links "><a href="GstApp.AppSink.set_emit_signals.html" title="GstApp.AppSink.prototype.set_emit_signals">GstApp.AppSink.prototype.set_emit_signals</a></li>
+<li class="links "><a href="GstApp.AppSink.set_max_buffers.html" title="GstApp.AppSink.prototype.set_max_buffers">GstApp.AppSink.prototype.set_max_buffers</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstApp.AppSink-caps.html" title="GstApp.AppSink:caps">caps</a></li>
+<li class="links "><a href="GstApp.AppSink-drop.html" title="GstApp.AppSink:drop">drop</a></li>
+<li class="links "><a href="GstApp.AppSink-emit-signals.html" title="GstApp.AppSink:emit-signals">emit-signals</a></li>
+<li class="links "><a href="GstApp.AppSink-eos.html" title="GstApp.AppSink:eos">eos</a></li>
+<li class="links "><a href="GstApp.AppSink-max-buffers.html" title="GstApp.AppSink:max-buffers">max-buffers</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Signals</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstApp.AppSink-new-preroll.html" title="GstApp.AppSink::new-preroll">new-preroll</a></li>
+<li class="links "><a href="GstApp.AppSink-new-sample.html" title="GstApp.AppSink::new-sample">new-sample</a></li>
+<li class="links "><a href="GstApp.AppSink-pull-preroll.html" title="GstApp.AppSink::pull-preroll">pull-preroll</a></li>
+<li class="links "><a href="GstApp.AppSink-pull-sample.html" title="GstApp.AppSink::pull-sample">pull-sample</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstApp.AppSink-new_preroll.html" title="GstApp.AppSink::new_preroll">GstApp.AppSink::new_preroll</a></li>
+<li class="links "><a href="GstApp.AppSink-new_sample.html" title="GstApp.AppSink::new_sample">GstApp.AppSink::new_sample</a></li>
+<li class="links "><a href="GstApp.AppSink-pull_preroll.html" title="GstApp.AppSink::pull_preroll">GstApp.AppSink::pull_preroll</a></li>
+<li class="links "><a href="GstApp.AppSink-pull_sample.html" title="GstApp.AppSink::pull_sample">GstApp.AppSink::pull_sample</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

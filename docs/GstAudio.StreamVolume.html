@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.StreamVolume</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.StreamVolume</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstAudio = imports.gi.GstAudio;
+
+let stream_volume = new GstAudio.StreamVolume({
+    <span class=" link"><a href="GstAudio.StreamVolume-mute.html" title="GstAudio.StreamVolume-mute">mute</a></span>: value,
+    <span class=" link"><a href="GstAudio.StreamVolume-volume.html" title="GstAudio.StreamVolume-volume">volume</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">&lt;refsect2&gt;
+&lt;para&gt;
+This interface is implemented by elements that provide a stream volume. Examples for
+such elements are #volume and #playbin.
+&lt;/para&gt;
+&lt;para&gt;
+Applications can use this interface to get or set the current stream volume. For this
+the "volume" <span class=" link"><a href="GObject.Object.html" title="GObject.Object">GObject.Object</a></span> property can be used or the helper functions <span class=" link"><a href="GstAudio.set_volume.html" title="GstAudio.set_volume">GstAudio.set_volume</a></span>
+and <span class=" link"><a href="GstAudio.get_volume.html" title="GstAudio.get_volume">GstAudio.get_volume</a></span>. This volume is always a linear factor, i.e. 0.0 is muted
+1.0 is 100%. For showing the volume in a GUI it might make sense to convert it to
+a different format by using <span class=" link"><a href="GstAudio.stream_volume_convert_volume.html" title="GstAudio.stream_volume_convert_volume">GstAudio.stream_volume_convert_volume</a></span>. Volume sliders should usually
+use a cubic volume.</p>
+<p class="p">Separate from the volume the stream can also be muted by the "mute" <span class=" link"><a href="GObject.Object.html" title="GObject.Object">GObject.Object</a></span> property or
+<span class=" link"><a href="GstAudio.set_mute.html" title="GstAudio.set_mute">GstAudio.set_mute</a></span> and <span class=" link"><a href="GstAudio.get_mute.html" title="GstAudio.get_mute">GstAudio.get_mute</a></span>.
+&lt;/para&gt;
+&lt;para&gt;
+Elements that provide some kind of stream volume should implement the "volume" and
+"mute" <span class=" link"><a href="GObject.Object.html" title="GObject.Object">GObject.Object</a></span> properties and handle setting and getting of them properly.
+The volume property is defined to be a linear volume factor.
+&lt;/para&gt;
+&lt;/refsect2&gt;</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree"><div>
+        <span class=" code">GstAudio.StreamVolume</span>
+      </div></li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.StreamVolume.get_mute.html" title="GstAudio.StreamVolume.prototype.get_mute">GstAudio.StreamVolume.prototype.get_mute</a></li>
+<li class="links "><a href="GstAudio.StreamVolume.get_volume.html" title="GstAudio.StreamVolume.prototype.get_volume">GstAudio.StreamVolume.prototype.get_volume</a></li>
+<li class="links "><a href="GstAudio.StreamVolume.set_mute.html" title="GstAudio.StreamVolume.prototype.set_mute">GstAudio.StreamVolume.prototype.set_mute</a></li>
+<li class="links "><a href="GstAudio.StreamVolume.set_volume.html" title="GstAudio.StreamVolume.prototype.set_volume">GstAudio.StreamVolume.prototype.set_volume</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstAudio.StreamVolume.convert_volume.html" title="convert_volume">convert_volume</a></li></ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,235 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioDecoder</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioDecoder</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstAudio = imports.gi.GstAudio;
+
+let audio_decoder = new GstAudio.AudioDecoder({
+    <span class=" link"><a href="GstAudio.AudioDecoder-min-latency.html" title="GstAudio.AudioDecoder:min-latency">min_latency</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioDecoder-plc.html" title="GstAudio.AudioDecoder:plc">plc</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioDecoder-tolerance.html" title="GstAudio.AudioDecoder:tolerance">tolerance</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">This base class is for audio decoders turning encoded data into
+raw audio samples.</p>
+<p class="p">GstAudioDecoder and subclass should cooperate as follows.
+&lt;orderedlist&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;&lt;title&gt;Configuration&lt;/title&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Initially, GstAudioDecoder calls @start when the decoder element
+    is activated, which allows subclass to perform any global setup.
+    Base class (context) parameters can already be set according to subclass
+    capabilities (or possibly upon receive more information in subsequent
+    @set_format).
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    GstAudioDecoder calls @set_format to inform subclass of the format
+    of input audio data that it is about to receive.
+    While unlikely, it might be called more than once, if changing input
+    parameters require reconfiguration.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    GstAudioDecoder calls @stop at end of all processing.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+As of configuration stage, and throughout processing, GstAudioDecoder
+provides various (context) parameters, e.g. describing the format of
+output audio data (valid when output caps have been set) or current parsing state.
+Conversely, subclass can and should configure context to inform
+base class of its expectation w.r.t. buffer handling.
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;
+  &lt;title&gt;Data processing&lt;/title&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      Base class gathers input data, and optionally allows subclass
+      to parse this into subsequently manageable (as defined by subclass)
+      chunks.  Such chunks are subsequently referred to as 'frames',
+      though they may or may not correspond to 1 (or more) audio format frame.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      Input frame is provided to subclass' @handle_frame.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      If codec processing results in decoded data, subclass should call
+      @gst_audio_decoder_finish_frame to have decoded data pushed
+      downstream.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      Just prior to actually pushing a buffer downstream,
+      it is passed to @pre_push.  Subclass should either use this callback
+      to arrange for additional downstream pushing or otherwise ensure such
+      custom pushing occurs after at least a method call has finished since
+      setting src pad caps.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      During the parsing process GstAudioDecoderClass will handle both
+      srcpad and sinkpad events. Sink events will be passed to subclass
+      if @event callback has been provided.
+    &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;&lt;title&gt;Shutdown phase&lt;/title&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    GstAudioDecoder class calls @stop to inform the subclass that data
+    parsing will be stopped.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+&lt;/orderedlist&gt;</p>
+<p class="p">Subclass is responsible for providing pad template caps for
+source and sink pads. The pads need to be named "sink" and "src". It also
+needs to set the fixed caps on srcpad, when the format is ensured.  This
+is typically when base class calls subclass' @set_format function, though
+it might be delayed until calling @gst_audio_decoder_finish_frame.</p>
+<p class="p">In summary, above process should have subclass concentrating on
+codec data processing while leaving other matters to base class,
+such as most notably timestamp handling.  While it may exert more control
+in this area (see e.g. @pre_push), it is very much not recommended.</p>
+<p class="p">In particular, base class will try to arrange for perfect output timestamps
+as much as possible while tracking upstream timestamps.
+To this end, if deviation between the next ideal expected perfect timestamp
+and upstream exceeds <span class=" link"><a href="GstAudio.tolerance.html" title="GstAudio.tolerance">GstAudio.tolerance</a></span>, then resync to upstream
+occurs (which would happen always if the tolerance mechanism is disabled).</p>
+<p class="p">In non-live pipelines, baseclass can also (configurably) arrange for
+output buffer aggregation which may help to redue large(r) numbers of
+small(er) buffers being pushed and processed downstream.</p>
+<p class="p">On the other hand, it should be noted that baseclass only provides limited
+seeking support (upon explicit subclass request), as full-fledged support
+should rather be left to upstream demuxer, parser or alike.  This simple
+approach caters for seeking and duration reporting using estimated input
+bitrates.</p>
+<p class="p">Things that subclass need to take care of:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;Provide pad templates&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Set source pad caps when appropriate
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Set user-configurable properties to sane defaults for format and
+     implementing codec at hand, and convey some subclass capabilities and
+     expectations in context.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Accept data in @handle_frame and provide encoded results to
+     @gst_audio_decoder_finish_frame.  If it is prepared to perform
+     PLC, it should also accept NULL data in @handle_frame and provide for
+     data for indicated duration.
+  &lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstAudio.AudioDecoder</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioDecoder.allocate_output_buffer.html" title="GstAudio.AudioDecoder.prototype.allocate_output_buffer">GstAudio.AudioDecoder.prototype.allocate_output_buffer</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.finish_frame.html" title="GstAudio.AudioDecoder.prototype.finish_frame">GstAudio.AudioDecoder.prototype.finish_frame</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_allocator.html" title="GstAudio.AudioDecoder.prototype.get_allocator">GstAudio.AudioDecoder.prototype.get_allocator</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_audio_info.html" title="GstAudio.AudioDecoder.prototype.get_audio_info">GstAudio.AudioDecoder.prototype.get_audio_info</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_delay.html" title="GstAudio.AudioDecoder.prototype.get_delay">GstAudio.AudioDecoder.prototype.get_delay</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_drainable.html" title="GstAudio.AudioDecoder.prototype.get_drainable">GstAudio.AudioDecoder.prototype.get_drainable</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_estimate_rate.html" title="GstAudio.AudioDecoder.prototype.get_estimate_rate">GstAudio.AudioDecoder.prototype.get_estimate_rate</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_latency.html" title="GstAudio.AudioDecoder.prototype.get_latency">GstAudio.AudioDecoder.prototype.get_latency</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_max_errors.html" title="GstAudio.AudioDecoder.prototype.get_max_errors">GstAudio.AudioDecoder.prototype.get_max_errors</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_min_latency.html" title="GstAudio.AudioDecoder.prototype.get_min_latency">GstAudio.AudioDecoder.prototype.get_min_latency</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_needs_format.html" title="GstAudio.AudioDecoder.prototype.get_needs_format">GstAudio.AudioDecoder.prototype.get_needs_format</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_parse_state.html" title="GstAudio.AudioDecoder.prototype.get_parse_state">GstAudio.AudioDecoder.prototype.get_parse_state</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_plc.html" title="GstAudio.AudioDecoder.prototype.get_plc">GstAudio.AudioDecoder.prototype.get_plc</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_plc_aware.html" title="GstAudio.AudioDecoder.prototype.get_plc_aware">GstAudio.AudioDecoder.prototype.get_plc_aware</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.get_tolerance.html" title="GstAudio.AudioDecoder.prototype.get_tolerance">GstAudio.AudioDecoder.prototype.get_tolerance</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.merge_tags.html" title="GstAudio.AudioDecoder.prototype.merge_tags">GstAudio.AudioDecoder.prototype.merge_tags</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.negotiate.html" title="GstAudio.AudioDecoder.prototype.negotiate">GstAudio.AudioDecoder.prototype.negotiate</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.set_drainable.html" title="GstAudio.AudioDecoder.prototype.set_drainable">GstAudio.AudioDecoder.prototype.set_drainable</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.set_estimate_rate.html" title="GstAudio.AudioDecoder.prototype.set_estimate_rate">GstAudio.AudioDecoder.prototype.set_estimate_rate</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.set_latency.html" title="GstAudio.AudioDecoder.prototype.set_latency">GstAudio.AudioDecoder.prototype.set_latency</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.set_max_errors.html" title="GstAudio.AudioDecoder.prototype.set_max_errors">GstAudio.AudioDecoder.prototype.set_max_errors</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.set_min_latency.html" title="GstAudio.AudioDecoder.prototype.set_min_latency">GstAudio.AudioDecoder.prototype.set_min_latency</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.set_needs_format.html" title="GstAudio.AudioDecoder.prototype.set_needs_format">GstAudio.AudioDecoder.prototype.set_needs_format</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.set_output_format.html" title="GstAudio.AudioDecoder.prototype.set_output_format">GstAudio.AudioDecoder.prototype.set_output_format</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.set_plc.html" title="GstAudio.AudioDecoder.prototype.set_plc">GstAudio.AudioDecoder.prototype.set_plc</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.set_plc_aware.html" title="GstAudio.AudioDecoder.prototype.set_plc_aware">GstAudio.AudioDecoder.prototype.set_plc_aware</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder.set_tolerance.html" title="GstAudio.AudioDecoder.prototype.set_tolerance">GstAudio.AudioDecoder.prototype.set_tolerance</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioDecoder-min-latency.html" title="GstAudio.AudioDecoder:min-latency">min-latency</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-plc.html" title="GstAudio.AudioDecoder:plc">plc</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-tolerance.html" title="GstAudio.AudioDecoder:tolerance">tolerance</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioDecoder-close.html" title="GstAudio.AudioDecoder::close">GstAudio.AudioDecoder::close</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-decide_allocation.html" title="GstAudio.AudioDecoder::decide_allocation">GstAudio.AudioDecoder::decide_allocation</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-flush.html" title="GstAudio.AudioDecoder::flush">GstAudio.AudioDecoder::flush</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-handle_frame.html" title="GstAudio.AudioDecoder::handle_frame">GstAudio.AudioDecoder::handle_frame</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-negotiate.html" title="GstAudio.AudioDecoder::negotiate">GstAudio.AudioDecoder::negotiate</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-open.html" title="GstAudio.AudioDecoder::open">GstAudio.AudioDecoder::open</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-parse.html" title="GstAudio.AudioDecoder::parse">GstAudio.AudioDecoder::parse</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-pre_push.html" title="GstAudio.AudioDecoder::pre_push">GstAudio.AudioDecoder::pre_push</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-propose_allocation.html" title="GstAudio.AudioDecoder::propose_allocation">GstAudio.AudioDecoder::propose_allocation</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-set_format.html" title="GstAudio.AudioDecoder::set_format">GstAudio.AudioDecoder::set_format</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-sink_event.html" title="GstAudio.AudioDecoder::sink_event">GstAudio.AudioDecoder::sink_event</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-src_event.html" title="GstAudio.AudioDecoder::src_event">GstAudio.AudioDecoder::src_event</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-start.html" title="GstAudio.AudioDecoder::start">GstAudio.AudioDecoder::start</a></li>
+<li class="links "><a href="GstAudio.AudioDecoder-stop.html" title="GstAudio.AudioDecoder::stop">GstAudio.AudioDecoder::stop</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

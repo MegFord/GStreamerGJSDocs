@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.Adapter.prototype.take_buffer</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstBase.Adapter.html" title="GstBase.Adapter">GstBase.Adapter</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.Adapter.prototype.take_buffer</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function take_buffer(nbytes:gsize):Gst.Buffer {
+    // Gjs wrapper for gst_adapter_take_buffer()
+}</pre></div></div></div></div></div>
+<p class="p">Returns a <span class=" link"><a href="Gst.Buffer.html" title="Gst.Buffer">Gst.Buffer</a></span> containing the first <span class=" code">nbytes</span> bytes of the
+@adapter. The returned bytes will be flushed from the adapter.
+This function is potentially more performant than <span class=" link"><a href="GstBase.Adapter.take.html" title="GstBase.Adapter.prototype.take">GstBase.Adapter.prototype.take</a></span>
+since it can reuse the memory in pushed buffers by subbuffering
+or merging.</p>
+<p class="p">Note that no assumptions should be made as to whether certain buffer
+flags such as the DISCONT flag are set on the returned buffer, or not.
+The caller needs to explicitly set or unset flags that should be set or
+unset.</p>
+<p class="p">Caller owns a reference to the returned buffer. gst_buffer_unref() after
+usage.</p>
+<p class="p">Free-function: gst_buffer_unref</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">nbytes</span></dt>
+<dd class="terms"><p class="p">the number of bytes to take</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.Buffer.html" title="Gst.Buffer">Gst.Buffer</a></span> containing the first <span class=" code">nbytes</span> of the adapter, or #NULL if <span class=" code">nbytes</span> bytes are not available. gst_buffer_unref() when no longer needed.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstBase.Adapter.html" title="GstBase.Adapter">GstBase.Adapter</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

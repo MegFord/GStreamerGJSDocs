@@ -1,0 +1,118 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioBaseSink</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioBaseSink</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstAudio = imports.gi.GstAudio;
+
+let audio_base_sink = new GstAudio.AudioBaseSink({
+    <span class=" link"><a href="GstAudio.AudioBaseSink-alignment-threshold.html" title="GstAudio.AudioBaseSink:alignment-threshold">alignment_threshold</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioBaseSink-buffer-time.html" title="GstAudio.AudioBaseSink:buffer-time">buffer_time</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioBaseSink-can-activate-pull.html" title="GstAudio.AudioBaseSink:can-activate-pull">can_activate_pull</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioBaseSink-discont-wait.html" title="GstAudio.AudioBaseSink:discont-wait">discont_wait</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioBaseSink-drift-tolerance.html" title="GstAudio.AudioBaseSink:drift-tolerance">drift_tolerance</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioBaseSink-latency-time.html" title="GstAudio.AudioBaseSink:latency-time">latency_time</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioBaseSink-provide-clock.html" title="GstAudio.AudioBaseSink:provide-clock">provide_clock</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioBaseSink-slave-method.html" title="GstAudio.AudioBaseSink:slave-method">slave_method</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">This is the base class for audio sinks. Subclasses need to implement the
+::create_ringbuffer vmethod. This base class will then take care of
+writing samples to the ringbuffer, synchronisation, clipping and flushing.</p>
+<p class="p">Last reviewed on 2006-09-27 (0.10.12)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstBase.BaseSink</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstAudio.AudioBaseSink</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioBaseSink.create_ringbuffer.html" title="GstAudio.AudioBaseSink.prototype.create_ringbuffer">GstAudio.AudioBaseSink.prototype.create_ringbuffer</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink.get_alignment_threshold.html" title="GstAudio.AudioBaseSink.prototype.get_alignment_threshold">GstAudio.AudioBaseSink.prototype.get_alignment_threshold</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink.get_discont_wait.html" title="GstAudio.AudioBaseSink.prototype.get_discont_wait">GstAudio.AudioBaseSink.prototype.get_discont_wait</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink.get_drift_tolerance.html" title="GstAudio.AudioBaseSink.prototype.get_drift_tolerance">GstAudio.AudioBaseSink.prototype.get_drift_tolerance</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink.get_provide_clock.html" title="GstAudio.AudioBaseSink.prototype.get_provide_clock">GstAudio.AudioBaseSink.prototype.get_provide_clock</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink.get_slave_method.html" title="GstAudio.AudioBaseSink.prototype.get_slave_method">GstAudio.AudioBaseSink.prototype.get_slave_method</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink.set_alignment_threshold.html" title="GstAudio.AudioBaseSink.prototype.set_alignment_threshold">GstAudio.AudioBaseSink.prototype.set_alignment_threshold</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink.set_discont_wait.html" title="GstAudio.AudioBaseSink.prototype.set_discont_wait">GstAudio.AudioBaseSink.prototype.set_discont_wait</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink.set_drift_tolerance.html" title="GstAudio.AudioBaseSink.prototype.set_drift_tolerance">GstAudio.AudioBaseSink.prototype.set_drift_tolerance</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink.set_provide_clock.html" title="GstAudio.AudioBaseSink.prototype.set_provide_clock">GstAudio.AudioBaseSink.prototype.set_provide_clock</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink.set_slave_method.html" title="GstAudio.AudioBaseSink.prototype.set_slave_method">GstAudio.AudioBaseSink.prototype.set_slave_method</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioBaseSink-alignment-threshold.html" title="GstAudio.AudioBaseSink:alignment-threshold">alignment-threshold</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink-buffer-time.html" title="GstAudio.AudioBaseSink:buffer-time">buffer-time</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink-can-activate-pull.html" title="GstAudio.AudioBaseSink:can-activate-pull">can-activate-pull</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink-discont-wait.html" title="GstAudio.AudioBaseSink:discont-wait">discont-wait</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink-drift-tolerance.html" title="GstAudio.AudioBaseSink:drift-tolerance">drift-tolerance</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink-latency-time.html" title="GstAudio.AudioBaseSink:latency-time">latency-time</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink-provide-clock.html" title="GstAudio.AudioBaseSink:provide-clock">provide-clock</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink-slave-method.html" title="GstAudio.AudioBaseSink:slave-method">slave-method</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioBaseSink-create_ringbuffer.html" title="GstAudio.AudioBaseSink::create_ringbuffer">GstAudio.AudioBaseSink::create_ringbuffer</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSink-payload.html" title="GstAudio.AudioBaseSink::payload">GstAudio.AudioBaseSink::payload</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

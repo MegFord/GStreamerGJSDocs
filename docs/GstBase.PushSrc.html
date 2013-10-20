@@ -1,0 +1,93 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.PushSrc</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.PushSrc</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstBase = imports.gi.GstBase;
+
+let push_src = new GstBase.PushSrc();
+  </pre></div></div></div></div></div>
+<p class="p">This class is mostly useful for elements that cannot do
+random access, or at least very slowly. The source usually
+prefers to push out a fixed size buffer.</p>
+<p class="p">Subclasses usually operate in a format that is different from the
+default GST_FORMAT_BYTES format of <span class=" link"><a href="GstBase.BaseSrc.html" title="GstBase.BaseSrc">GstBase.BaseSrc</a></span>.</p>
+<p class="p">Classes extending this base class will usually be scheduled
+in a push based mode. If the peer accepts to operate without
+offsets and within the limits of the allowed block size, this
+class can operate in getrange based mode automatically. To make
+this possible, the subclass should implement and override the
+SCHEDULING query.</p>
+<p class="p">The subclass should extend the methods from the baseclass in
+addition to the ::create method.</p>
+<p class="p">Seeking, flushing, scheduling and sync is all handled by this
+base class.</p>
+<p class="p">Last reviewed on 2006-07-04 (0.10.9)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstBase.BaseSrc</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstBase.PushSrc</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.PushSrc-alloc.html" title="GstBase.PushSrc::alloc">GstBase.PushSrc::alloc</a></li>
+<li class="links "><a href="GstBase.PushSrc-create.html" title="GstBase.PushSrc::create">GstBase.PushSrc::create</a></li>
+<li class="links "><a href="GstBase.PushSrc-fill.html" title="GstBase.PushSrc::fill">GstBase.PushSrc::fill</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

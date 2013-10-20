@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.BaseSink.prototype.wait_clock</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.BaseSink.prototype.wait_clock</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function wait_clock(time:Gst.ClockTime):Gst.ClockReturn {
+    // Gjs wrapper for gst_base_sink_wait_clock()
+}</pre></div></div></div></div></div>
+<p class="p">This function will block until <span class=" code">time</span> is reached. It is usually called by
+subclasses that use their own internal synchronisation.</p>
+<p class="p">If <span class=" code">time</span> is not valid, no sycnhronisation is done and #GST_CLOCK_BADTIME is
+returned. Likewise, if synchronisation is disabled in the element or there
+is no clock, no synchronisation is done and #GST_CLOCK_BADTIME is returned.</p>
+<p class="p">This function should only be called with the PREROLL_LOCK held, like when
+receiving an EOS event in the <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.event() vmethod or when
+receiving a buffer in
+the <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.render() vmethod.</p>
+<p class="p">The <span class=" code">time</span> argument should be the running_time of when this method should
+return and is not adjusted with any latency or offset configured in the
+sink.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">time</span></dt>
+<dd class="terms"><p class="p">the running_time to be reached</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p"><span class=" link"><a href="Gst.ClockReturn.html" title="Gst.ClockReturn">Gst.ClockReturn</a></span></p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

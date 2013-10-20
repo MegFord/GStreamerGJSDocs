@@ -1,0 +1,237 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.BaseSrc</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.BaseSrc</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstBase = imports.gi.GstBase;
+
+let base_src = new GstBase.BaseSrc({
+    <span class=" link"><a href="GstBase.BaseSrc-blocksize.html" title="GstBase.BaseSrc:blocksize">blocksize</a></span>: value,
+    <span class=" link"><a href="GstBase.BaseSrc-do-timestamp.html" title="GstBase.BaseSrc:do-timestamp">do_timestamp</a></span>: value,
+    <span class=" link"><a href="GstBase.BaseSrc-num-buffers.html" title="GstBase.BaseSrc:num-buffers">num_buffers</a></span>: value,
+    <span class=" link"><a href="GstBase.BaseSrc-typefind.html" title="GstBase.BaseSrc:typefind">typefind</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">This is a generice base class for source elements. The following
+types of sources are supported:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;random access sources like files&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;seekable sources&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;live sources&lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+<p class="p">The source can be configured to operate in any <span class=" link"><a href="Gst.Format.html" title="Gst.Format">Gst.Format</a></span> with the
+<span class=" link"><a href="GstBase.set_format.html" title="GstBase.set_format">GstBase.set_format</a></span> method. The currently set format determines
+the format of the internal <span class=" link"><a href="Gst.Segment.html" title="Gst.Segment">Gst.Segment</a></span> and any #GST_EVENT_SEGMENT
+events. The default format for <span class=" link"><a href="GstBase.BaseSrc.html" title="GstBase.BaseSrc">GstBase.BaseSrc</a></span> is #GST_FORMAT_BYTES.</p>
+<p class="p"><span class=" link"><a href="GstBase.BaseSrc.html" title="GstBase.BaseSrc">GstBase.BaseSrc</a></span> always supports push mode scheduling. If the following
+conditions are met, it also supports pull mode scheduling:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;The format is set to #GST_FORMAT_BYTES (default).&lt;/para&gt;
+  &lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;<span class=" link"><a href="GstBase.BaseSrcClass.html" title="GstBase.BaseSrcClass">GstBase.BaseSrcClass</a></span>.is_seekable() returns <span class=" code">true</span>.&lt;/para&gt;
+  &lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+<p class="p">If all the conditions are met for operating in pull mode, <span class=" link"><a href="GstBase.BaseSrc.html" title="GstBase.BaseSrc">GstBase.BaseSrc</a></span> is
+automatically seekable in push mode as well. The following conditions must
+be met to make the element seekable in push mode when the format is not
+#GST_FORMAT_BYTES:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    <span class=" link"><a href="GstBase.BaseSrcClass.html" title="GstBase.BaseSrcClass">GstBase.BaseSrcClass</a></span>.is_seekable() returns <span class=" code">true</span>.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    <span class=" link"><a href="GstBase.BaseSrcClass.html" title="GstBase.BaseSrcClass">GstBase.BaseSrcClass</a></span>.query() can convert all supported seek formats to the
+    internal format as set with <span class=" link"><a href="GstBase.set_format.html" title="GstBase.set_format">GstBase.set_format</a></span>.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    <span class=" link"><a href="GstBase.BaseSrcClass.html" title="GstBase.BaseSrcClass">GstBase.BaseSrcClass</a></span>.do_seek() is implemented, performs the seek and returns
+     <span class=" code">true</span>.
+  &lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+<p class="p">When the element does not meet the requirements to operate in pull mode, the
+offset and length in the <span class=" link"><a href="GstBase.BaseSrcClass.html" title="GstBase.BaseSrcClass">GstBase.BaseSrcClass</a></span>.create() method should be ignored.
+It is recommended to subclass <span class=" link"><a href="GstBase.PushSrc.html" title="GstBase.PushSrc">GstBase.PushSrc</a></span> instead, in this situation. If the
+element can operate in pull mode but only with specific offsets and
+lengths, it is allowed to generate an error when the wrong values are passed
+to the <span class=" link"><a href="GstBase.BaseSrcClass.html" title="GstBase.BaseSrcClass">GstBase.BaseSrcClass</a></span>.create() function.</p>
+<p class="p"><span class=" link"><a href="GstBase.BaseSrc.html" title="GstBase.BaseSrc">GstBase.BaseSrc</a></span> has support for live sources. Live sources are sources that when
+paused discard data, such as audio or video capture devices. A typical live
+source also produces data at a fixed rate and thus provides a clock to publish
+this rate.
+Use <span class=" link"><a href="GstBase.set_live.html" title="GstBase.set_live">GstBase.set_live</a></span> to activate the live source mode.</p>
+<p class="p">A live source does not produce data in the PAUSED state. This means that the
+<span class=" link"><a href="GstBase.BaseSrcClass.html" title="GstBase.BaseSrcClass">GstBase.BaseSrcClass</a></span>.create() method will not be called in PAUSED but only in
+PLAYING. To signal the pipeline that the element will not produce data, the
+return value from the READY to PAUSED state will be
+#GST_STATE_CHANGE_NO_PREROLL.</p>
+<p class="p">A typical live source will timestamp the buffers it creates with the
+current running time of the pipeline. This is one reason why a live source
+can only produce data in the PLAYING state, when the clock is actually
+distributed and running.</p>
+<p class="p">Live sources that synchronize and block on the clock (an audio source, for
+example) can use <span class=" link"><a href="GstBase.wait_playing.html" title="GstBase.wait_playing">GstBase.wait_playing</a></span> when the
+<span class=" link"><a href="GstBase.BaseSrcClass.html" title="GstBase.BaseSrcClass">GstBase.BaseSrcClass</a></span>.create() function was interrupted by a state change to
+PAUSED.</p>
+<p class="p">The <span class=" link"><a href="GstBase.BaseSrcClass.html" title="GstBase.BaseSrcClass">GstBase.BaseSrcClass</a></span>.get_times() method can be used to implement pseudo-live
+sources. It only makes sense to implement the <span class=" link"><a href="GstBase.BaseSrcClass.html" title="GstBase.BaseSrcClass">GstBase.BaseSrcClass</a></span>.get_times()
+function if the source is a live source. The <span class=" link"><a href="GstBase.BaseSrcClass.html" title="GstBase.BaseSrcClass">GstBase.BaseSrcClass</a></span>.get_times()
+function should return timestamps starting from 0, as if it were a non-live
+source. The base class will make sure that the timestamps are transformed
+into the current running_time. The base source will then wait for the
+calculated running_time before pushing out the buffer.</p>
+<p class="p">For live sources, the base class will by default report a latency of 0.
+For pseudo live sources, the base class will by default measure the difference
+between the first buffer timestamp and the start time of get_times and will
+report this value as the latency.
+Subclasses should override the query function when this behaviour is not
+acceptable.</p>
+<p class="p">There is only support in <span class=" link"><a href="GstBase.BaseSrc.html" title="GstBase.BaseSrc">GstBase.BaseSrc</a></span> for exactly one source pad, which
+should be named "src". A source implementation (subclass of <span class=" link"><a href="GstBase.BaseSrc.html" title="GstBase.BaseSrc">GstBase.BaseSrc</a></span>)
+should install a pad template in its class_init function, like so:
+|[
+static void
+my_element_class_init (GstMyElementClass *klass)
+{
+  GstElementClass *gstelement_class = GST_ELEMENT_CLASS (klass);
+  // srctemplate should be a <span class=" link"><a href="Gst.StaticPadTemplate.html" title="Gst.StaticPadTemplate">Gst.StaticPadTemplate</a></span> with direction
+  // #GST_PAD_SRC and name "src"
+  gst_element_class_add_pad_template (gstelement_class,
+      gst_static_pad_template_get (&amp;amp;srctemplate));</p>
+<p class="p">  gst_element_class_set_static_metadata (gstelement_class,
+     "Source name",
+     "Source",
+     "My Source element",
+     "The author &amp;lt;my.sink@my.email&amp;gt;");
+}
+]|</p>
+<p class="p">&lt;refsect2&gt;
+&lt;title&gt;Controlled shutdown of live sources in applications&lt;/title&gt;
+&lt;para&gt;
+Applications that record from a live source may want to stop recording
+in a controlled way, so that the recording is stopped, but the data
+already in the pipeline is processed to the end (remember that many live
+sources would go on recording forever otherwise). For that to happen the
+application needs to make the source stop recording and send an EOS
+event down the pipeline. The application would then wait for an
+EOS message posted on the pipeline's bus to know when all data has
+been processed and the pipeline can safely be stopped.</p>
+<p class="p">An application may send an EOS event to a source element to make it
+perform the EOS logic (send EOS event downstream or post a
+#GST_MESSAGE_SEGMENT_DONE on the bus). This can typically be done
+with the <span class=" link"><a href="Gst.send_event.html" title="Gst.send_event">Gst.send_event</a></span> function on the element or its parent bin.</p>
+<p class="p">After the EOS has been sent to the element, the application should wait for
+an EOS message to be posted on the pipeline's bus. Once this EOS message is
+received, it may safely shut down the entire pipeline.</p>
+<p class="p">Last reviewed on 2007-12-19 (0.10.16)
+&lt;/para&gt;
+&lt;/refsect2&gt;</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstBase.BaseSrc</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.BaseSrc.get_allocator.html" title="GstBase.BaseSrc.prototype.get_allocator">GstBase.BaseSrc.prototype.get_allocator</a></li>
+<li class="links "><a href="GstBase.BaseSrc.get_blocksize.html" title="GstBase.BaseSrc.prototype.get_blocksize">GstBase.BaseSrc.prototype.get_blocksize</a></li>
+<li class="links "><a href="GstBase.BaseSrc.get_buffer_pool.html" title="GstBase.BaseSrc.prototype.get_buffer_pool">GstBase.BaseSrc.prototype.get_buffer_pool</a></li>
+<li class="links "><a href="GstBase.BaseSrc.get_do_timestamp.html" title="GstBase.BaseSrc.prototype.get_do_timestamp">GstBase.BaseSrc.prototype.get_do_timestamp</a></li>
+<li class="links "><a href="GstBase.BaseSrc.is_async.html" title="GstBase.BaseSrc.prototype.is_async">GstBase.BaseSrc.prototype.is_async</a></li>
+<li class="links "><a href="GstBase.BaseSrc.is_live.html" title="GstBase.BaseSrc.prototype.is_live">GstBase.BaseSrc.prototype.is_live</a></li>
+<li class="links "><a href="GstBase.BaseSrc.new_seamless_segment.html" title="GstBase.BaseSrc.prototype.new_seamless_segment">GstBase.BaseSrc.prototype.new_seamless_segment</a></li>
+<li class="links "><a href="GstBase.BaseSrc.query_latency.html" title="GstBase.BaseSrc.prototype.query_latency">GstBase.BaseSrc.prototype.query_latency</a></li>
+<li class="links "><a href="GstBase.BaseSrc.set_async.html" title="GstBase.BaseSrc.prototype.set_async">GstBase.BaseSrc.prototype.set_async</a></li>
+<li class="links "><a href="GstBase.BaseSrc.set_blocksize.html" title="GstBase.BaseSrc.prototype.set_blocksize">GstBase.BaseSrc.prototype.set_blocksize</a></li>
+<li class="links "><a href="GstBase.BaseSrc.set_caps.html" title="GstBase.BaseSrc.prototype.set_caps">GstBase.BaseSrc.prototype.set_caps</a></li>
+<li class="links "><a href="GstBase.BaseSrc.set_do_timestamp.html" title="GstBase.BaseSrc.prototype.set_do_timestamp">GstBase.BaseSrc.prototype.set_do_timestamp</a></li>
+<li class="links "><a href="GstBase.BaseSrc.set_dynamic_size.html" title="GstBase.BaseSrc.prototype.set_dynamic_size">GstBase.BaseSrc.prototype.set_dynamic_size</a></li>
+<li class="links "><a href="GstBase.BaseSrc.set_format.html" title="GstBase.BaseSrc.prototype.set_format">GstBase.BaseSrc.prototype.set_format</a></li>
+<li class="links "><a href="GstBase.BaseSrc.set_live.html" title="GstBase.BaseSrc.prototype.set_live">GstBase.BaseSrc.prototype.set_live</a></li>
+<li class="links "><a href="GstBase.BaseSrc.start_complete.html" title="GstBase.BaseSrc.prototype.start_complete">GstBase.BaseSrc.prototype.start_complete</a></li>
+<li class="links "><a href="GstBase.BaseSrc.start_wait.html" title="GstBase.BaseSrc.prototype.start_wait">GstBase.BaseSrc.prototype.start_wait</a></li>
+<li class="links "><a href="GstBase.BaseSrc.wait_playing.html" title="GstBase.BaseSrc.prototype.wait_playing">GstBase.BaseSrc.prototype.wait_playing</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.BaseSrc-blocksize.html" title="GstBase.BaseSrc:blocksize">blocksize</a></li>
+<li class="links "><a href="GstBase.BaseSrc-do-timestamp.html" title="GstBase.BaseSrc:do-timestamp">do-timestamp</a></li>
+<li class="links "><a href="GstBase.BaseSrc-num-buffers.html" title="GstBase.BaseSrc:num-buffers">num-buffers</a></li>
+<li class="links "><a href="GstBase.BaseSrc-typefind.html" title="GstBase.BaseSrc:typefind">typefind</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.BaseSrc-alloc.html" title="GstBase.BaseSrc::alloc">GstBase.BaseSrc::alloc</a></li>
+<li class="links "><a href="GstBase.BaseSrc-create.html" title="GstBase.BaseSrc::create">GstBase.BaseSrc::create</a></li>
+<li class="links "><a href="GstBase.BaseSrc-decide_allocation.html" title="GstBase.BaseSrc::decide_allocation">GstBase.BaseSrc::decide_allocation</a></li>
+<li class="links "><a href="GstBase.BaseSrc-do_seek.html" title="GstBase.BaseSrc::do_seek">GstBase.BaseSrc::do_seek</a></li>
+<li class="links "><a href="GstBase.BaseSrc-event.html" title="GstBase.BaseSrc::event">GstBase.BaseSrc::event</a></li>
+<li class="links "><a href="GstBase.BaseSrc-fill.html" title="GstBase.BaseSrc::fill">GstBase.BaseSrc::fill</a></li>
+<li class="links "><a href="GstBase.BaseSrc-fixate.html" title="GstBase.BaseSrc::fixate">GstBase.BaseSrc::fixate</a></li>
+<li class="links "><a href="GstBase.BaseSrc-get_caps.html" title="GstBase.BaseSrc::get_caps">GstBase.BaseSrc::get_caps</a></li>
+<li class="links "><a href="GstBase.BaseSrc-get_size.html" title="GstBase.BaseSrc::get_size">GstBase.BaseSrc::get_size</a></li>
+<li class="links "><a href="GstBase.BaseSrc-get_times.html" title="GstBase.BaseSrc::get_times">GstBase.BaseSrc::get_times</a></li>
+<li class="links "><a href="GstBase.BaseSrc-is_seekable.html" title="GstBase.BaseSrc::is_seekable">GstBase.BaseSrc::is_seekable</a></li>
+<li class="links "><a href="GstBase.BaseSrc-negotiate.html" title="GstBase.BaseSrc::negotiate">GstBase.BaseSrc::negotiate</a></li>
+<li class="links "><a href="GstBase.BaseSrc-prepare_seek_segment.html" title="GstBase.BaseSrc::prepare_seek_segment">GstBase.BaseSrc::prepare_seek_segment</a></li>
+<li class="links "><a href="GstBase.BaseSrc-query.html" title="GstBase.BaseSrc::query">GstBase.BaseSrc::query</a></li>
+<li class="links "><a href="GstBase.BaseSrc-set_caps.html" title="GstBase.BaseSrc::set_caps">GstBase.BaseSrc::set_caps</a></li>
+<li class="links "><a href="GstBase.BaseSrc-start.html" title="GstBase.BaseSrc::start">GstBase.BaseSrc::start</a></li>
+<li class="links "><a href="GstBase.BaseSrc-stop.html" title="GstBase.BaseSrc::stop">GstBase.BaseSrc::stop</a></li>
+<li class="links "><a href="GstBase.BaseSrc-unlock.html" title="GstBase.BaseSrc::unlock">GstBase.BaseSrc::unlock</a></li>
+<li class="links "><a href="GstBase.BaseSrc-unlock_stop.html" title="GstBase.BaseSrc::unlock_stop">GstBase.BaseSrc::unlock_stop</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

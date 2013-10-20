@@ -1,0 +1,113 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstTag.TagDemux</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstTag.TagDemux</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstTag = imports.gi.GstTag;
+
+let tag_demux = new GstTag.TagDemux();
+  </pre></div></div></div></div></div>
+<p class="p">&lt;refsect2&gt;
+&lt;para&gt;
+Provides a base class for demuxing tags at the beginning or end of a
+stream and handles things like typefinding, querying, seeking, and
+different modes of operation (chain-based, pull_range-based, and providing
+downstream elements with random access if upstream supports that). The tag
+is stripped from the output, and all offsets are adjusted for the tag
+sizes, so that to the downstream element the stream will appear as if
+there was no tag at all. Also, once the tag has been parsed, GstTagDemux
+will try to determine the media type of the resulting stream and add a
+source pad with the appropriate caps in order to facilitate auto-plugging.
+&lt;/para&gt;
+&lt;title&gt;Deriving from GstTagDemux&lt;/title&gt;
+&lt;para&gt;
+Subclasses have to do four things:
+&lt;itemizedlist&gt;
+ &lt;listitem&gt;&lt;para&gt;
+ In their base init function, they must add a pad template for the sink
+ pad to the element class, describing the media type they can parse in
+ the caps of the pad template.
+ &lt;/para&gt;&lt;/listitem&gt;
+ &lt;listitem&gt;&lt;para&gt;
+ In their class init function, they must override
+ GST_TAG_DEMUX_CLASS(demux_klass)-&gt;identify_tag with their own identify
+ function.
+ &lt;/para&gt;&lt;/listitem&gt;
+ &lt;listitem&gt;&lt;para&gt;
+ In their class init function, they must override
+ GST_TAG_DEMUX_CLASS(demux_klass)-&gt;parse_tag with their own parse
+ function.
+ &lt;/para&gt;&lt;/listitem&gt;
+ &lt;listitem&gt;&lt;para&gt;
+ In their class init function, they must also set
+ GST_TAG_DEMUX_CLASS(demux_klass)-&gt;min_start_size and/or 
+ GST_TAG_DEMUX_CLASS(demux_klass)-&gt;min_end_size to the minimum size required
+ for the identify function to decide whether the stream has a supported tag
+ or not. A class parsing ID3v1 tags, for example, would set min_end_size to
+ 128 bytes.
+ &lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;
+&lt;/para&gt;
+&lt;/refsect2&gt;</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstTag.TagDemux</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstTag.TagDemux-identify_tag.html" title="GstTag.TagDemux::identify_tag">GstTag.TagDemux::identify_tag</a></li>
+<li class="links "><a href="GstTag.TagDemux-merge_tags.html" title="GstTag.TagDemux::merge_tags">GstTag.TagDemux::merge_tags</a></li>
+<li class="links "><a href="GstTag.TagDemux-parse_tag.html" title="GstTag.TagDemux::parse_tag">GstTag.TagDemux::parse_tag</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,100 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.ByteReader</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.ByteReader</span></h1></div>
+<div class="region">
+<div class="contents">
+<p class="p"><span class=" link"><a href="GstBase.ByteReader.html" title="GstBase.ByteReader">GstBase.ByteReader</a></span> provides a byte reader that can read different integer and
+floating point types from a memory buffer. It provides functions for reading
+signed/unsigned, little/big endian integers of 8, 16, 24, 32 and 64 bits
+and functions for reading little/big endian floating points numbers of
+32 and 64 bits. It also provides functions to read NUL-terminated strings
+in various character encodings.</p>
+<div class="links topiclinks"><div class="inner"><div class="region">
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.dup_data.html" title="GstBase.ByteReader.prototype.dup_data"><span class="title">GstBase.ByteReader.prototype.dup_data</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.dup_string_utf16.html" title="GstBase.ByteReader.prototype.dup_string_utf16"><span class="title">GstBase.ByteReader.prototype.dup_string_utf16</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.dup_string_utf32.html" title="GstBase.ByteReader.prototype.dup_string_utf32"><span class="title">GstBase.ByteReader.prototype.dup_string_utf32</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.dup_string_utf8.html" title="GstBase.ByteReader.prototype.dup_string_utf8"><span class="title">GstBase.ByteReader.prototype.dup_string_utf8</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.free.html" title="GstBase.ByteReader.prototype.free"><span class="title">GstBase.ByteReader.prototype.free</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_data.html" title="GstBase.ByteReader.prototype.get_data"><span class="title">GstBase.ByteReader.prototype.get_data</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_float32_be.html" title="GstBase.ByteReader.prototype.get_float32_be"><span class="title">GstBase.ByteReader.prototype.get_float32_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_float32_le.html" title="GstBase.ByteReader.prototype.get_float32_le"><span class="title">GstBase.ByteReader.prototype.get_float32_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_float64_be.html" title="GstBase.ByteReader.prototype.get_float64_be"><span class="title">GstBase.ByteReader.prototype.get_float64_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_float64_le.html" title="GstBase.ByteReader.prototype.get_float64_le"><span class="title">GstBase.ByteReader.prototype.get_float64_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_int16_be.html" title="GstBase.ByteReader.prototype.get_int16_be"><span class="title">GstBase.ByteReader.prototype.get_int16_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_int16_le.html" title="GstBase.ByteReader.prototype.get_int16_le"><span class="title">GstBase.ByteReader.prototype.get_int16_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_int24_be.html" title="GstBase.ByteReader.prototype.get_int24_be"><span class="title">GstBase.ByteReader.prototype.get_int24_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_int24_le.html" title="GstBase.ByteReader.prototype.get_int24_le"><span class="title">GstBase.ByteReader.prototype.get_int24_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_int32_be.html" title="GstBase.ByteReader.prototype.get_int32_be"><span class="title">GstBase.ByteReader.prototype.get_int32_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_int32_le.html" title="GstBase.ByteReader.prototype.get_int32_le"><span class="title">GstBase.ByteReader.prototype.get_int32_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_int64_be.html" title="GstBase.ByteReader.prototype.get_int64_be"><span class="title">GstBase.ByteReader.prototype.get_int64_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_int64_le.html" title="GstBase.ByteReader.prototype.get_int64_le"><span class="title">GstBase.ByteReader.prototype.get_int64_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_int8.html" title="GstBase.ByteReader.prototype.get_int8"><span class="title">GstBase.ByteReader.prototype.get_int8</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_pos.html" title="GstBase.ByteReader.prototype.get_pos"><span class="title">GstBase.ByteReader.prototype.get_pos</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_remaining.html" title="GstBase.ByteReader.prototype.get_remaining"><span class="title">GstBase.ByteReader.prototype.get_remaining</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_size.html" title="GstBase.ByteReader.prototype.get_size"><span class="title">GstBase.ByteReader.prototype.get_size</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_string_utf8.html" title="GstBase.ByteReader.prototype.get_string_utf8"><span class="title">GstBase.ByteReader.prototype.get_string_utf8</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_uint16_be.html" title="GstBase.ByteReader.prototype.get_uint16_be"><span class="title">GstBase.ByteReader.prototype.get_uint16_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_uint16_le.html" title="GstBase.ByteReader.prototype.get_uint16_le"><span class="title">GstBase.ByteReader.prototype.get_uint16_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_uint24_be.html" title="GstBase.ByteReader.prototype.get_uint24_be"><span class="title">GstBase.ByteReader.prototype.get_uint24_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_uint24_le.html" title="GstBase.ByteReader.prototype.get_uint24_le"><span class="title">GstBase.ByteReader.prototype.get_uint24_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_uint32_be.html" title="GstBase.ByteReader.prototype.get_uint32_be"><span class="title">GstBase.ByteReader.prototype.get_uint32_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_uint32_le.html" title="GstBase.ByteReader.prototype.get_uint32_le"><span class="title">GstBase.ByteReader.prototype.get_uint32_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_uint64_be.html" title="GstBase.ByteReader.prototype.get_uint64_be"><span class="title">GstBase.ByteReader.prototype.get_uint64_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_uint64_le.html" title="GstBase.ByteReader.prototype.get_uint64_le"><span class="title">GstBase.ByteReader.prototype.get_uint64_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.get_uint8.html" title="GstBase.ByteReader.prototype.get_uint8"><span class="title">GstBase.ByteReader.prototype.get_uint8</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.init.html" title="GstBase.ByteReader.prototype.init"><span class="title">GstBase.ByteReader.prototype.init</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.masked_scan_uint32.html" title="GstBase.ByteReader.prototype.masked_scan_uint32"><span class="title">GstBase.ByteReader.prototype.masked_scan_uint32</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_data.html" title="GstBase.ByteReader.prototype.peek_data"><span class="title">GstBase.ByteReader.prototype.peek_data</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_float32_be.html" title="GstBase.ByteReader.prototype.peek_float32_be"><span class="title">GstBase.ByteReader.prototype.peek_float32_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_float32_le.html" title="GstBase.ByteReader.prototype.peek_float32_le"><span class="title">GstBase.ByteReader.prototype.peek_float32_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_float64_be.html" title="GstBase.ByteReader.prototype.peek_float64_be"><span class="title">GstBase.ByteReader.prototype.peek_float64_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_float64_le.html" title="GstBase.ByteReader.prototype.peek_float64_le"><span class="title">GstBase.ByteReader.prototype.peek_float64_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_int16_be.html" title="GstBase.ByteReader.prototype.peek_int16_be"><span class="title">GstBase.ByteReader.prototype.peek_int16_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_int16_le.html" title="GstBase.ByteReader.prototype.peek_int16_le"><span class="title">GstBase.ByteReader.prototype.peek_int16_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_int24_be.html" title="GstBase.ByteReader.prototype.peek_int24_be"><span class="title">GstBase.ByteReader.prototype.peek_int24_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_int24_le.html" title="GstBase.ByteReader.prototype.peek_int24_le"><span class="title">GstBase.ByteReader.prototype.peek_int24_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_int32_be.html" title="GstBase.ByteReader.prototype.peek_int32_be"><span class="title">GstBase.ByteReader.prototype.peek_int32_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_int32_le.html" title="GstBase.ByteReader.prototype.peek_int32_le"><span class="title">GstBase.ByteReader.prototype.peek_int32_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_int64_be.html" title="GstBase.ByteReader.prototype.peek_int64_be"><span class="title">GstBase.ByteReader.prototype.peek_int64_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_int64_le.html" title="GstBase.ByteReader.prototype.peek_int64_le"><span class="title">GstBase.ByteReader.prototype.peek_int64_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_int8.html" title="GstBase.ByteReader.prototype.peek_int8"><span class="title">GstBase.ByteReader.prototype.peek_int8</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_string_utf8.html" title="GstBase.ByteReader.prototype.peek_string_utf8"><span class="title">GstBase.ByteReader.prototype.peek_string_utf8</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_uint16_be.html" title="GstBase.ByteReader.prototype.peek_uint16_be"><span class="title">GstBase.ByteReader.prototype.peek_uint16_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_uint16_le.html" title="GstBase.ByteReader.prototype.peek_uint16_le"><span class="title">GstBase.ByteReader.prototype.peek_uint16_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_uint24_be.html" title="GstBase.ByteReader.prototype.peek_uint24_be"><span class="title">GstBase.ByteReader.prototype.peek_uint24_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_uint24_le.html" title="GstBase.ByteReader.prototype.peek_uint24_le"><span class="title">GstBase.ByteReader.prototype.peek_uint24_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_uint32_be.html" title="GstBase.ByteReader.prototype.peek_uint32_be"><span class="title">GstBase.ByteReader.prototype.peek_uint32_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_uint32_le.html" title="GstBase.ByteReader.prototype.peek_uint32_le"><span class="title">GstBase.ByteReader.prototype.peek_uint32_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_uint64_be.html" title="GstBase.ByteReader.prototype.peek_uint64_be"><span class="title">GstBase.ByteReader.prototype.peek_uint64_be</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_uint64_le.html" title="GstBase.ByteReader.prototype.peek_uint64_le"><span class="title">GstBase.ByteReader.prototype.peek_uint64_le</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.peek_uint8.html" title="GstBase.ByteReader.prototype.peek_uint8"><span class="title">GstBase.ByteReader.prototype.peek_uint8</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.set_pos.html" title="GstBase.ByteReader.prototype.set_pos"><span class="title">GstBase.ByteReader.prototype.set_pos</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.skip.html" title="GstBase.ByteReader.prototype.skip"><span class="title">GstBase.ByteReader.prototype.skip</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.skip_string_utf16.html" title="GstBase.ByteReader.prototype.skip_string_utf16"><span class="title">GstBase.ByteReader.prototype.skip_string_utf16</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.skip_string_utf32.html" title="GstBase.ByteReader.prototype.skip_string_utf32"><span class="title">GstBase.ByteReader.prototype.skip_string_utf32</span></a></div>
+<div class="linkdiv "><a class="linkdiv" href="GstBase.ByteReader.skip_string_utf8.html" title="GstBase.ByteReader.prototype.skip_string_utf8"><span class="title">GstBase.ByteReader.prototype.skip_string_utf8</span></a></div>
+</div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

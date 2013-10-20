@@ -1,0 +1,280 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.BaseTransform</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.BaseTransform</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstBase = imports.gi.GstBase;
+
+let base_transform = new GstBase.BaseTransform({
+    <span class=" link"><a href="GstBase.BaseTransform-qos.html" title="GstBase.BaseTransform:qos">qos</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">This base class is for filter elements that process data.</p>
+<p class="p">It provides for:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;one sinkpad and one srcpad&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Possible formats on sink and source pad implemented
+     with custom transform_caps function. By default uses
+     same format on sink and source.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;Handles state changes&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;Does flushing&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;Push mode&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+      Pull mode if the sub-class transform can operate on arbitrary data
+   &lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+<p class="p">&lt;refsect2&gt;
+&lt;title&gt;Use Cases&lt;/title&gt;
+&lt;para&gt;
+&lt;orderedlist&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;&lt;title&gt;Passthrough mode&lt;/title&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Element has no interest in modifying the buffer. It may want to inspect it,
+    in which case the element should have a transform_ip function. If there
+    is no transform_ip function in passthrough mode, the buffer is pushed
+    intact.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    On the GstBaseTransformClass is the passthrough_on_same_caps variable
+    which will automatically set/unset passthrough based on whether the
+    element negotiates the same caps on both pads.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    passthrough_on_same_caps on an element that doesn't implement a
+    transform_caps function is useful for elements that only inspect data
+    (such as level)
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+  &lt;itemizedlist&gt;
+  &lt;title&gt;Example elements&lt;/title&gt;
+    &lt;listitem&gt;Level&lt;/listitem&gt;
+    &lt;listitem&gt;Videoscale, audioconvert, videoconvert, audioresample in
+    certain modes.&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;
+    &lt;title&gt;Modifications in-place - input buffer and output buffer are the
+    same thing.&lt;/title&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    The element must implement a transform_ip function.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Output buffer size must &lt;= input buffer size
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    If the always_in_place flag is set, non-writable buffers will be copied
+    and passed to the transform_ip function, otherwise a new buffer will be
+    created and the transform function called.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Incoming writable buffers will be passed to the transform_ip function
+    immediately.  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    only implementing transform_ip and not transform implies always_in_place
+    = TRUE
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+  &lt;itemizedlist&gt;
+  &lt;title&gt;Example elements&lt;/title&gt;
+    &lt;listitem&gt;Volume&lt;/listitem&gt;
+    &lt;listitem&gt;Audioconvert in certain modes (signed/unsigned
+    conversion)&lt;/listitem&gt;
+    &lt;listitem&gt;videoconvert in certain modes (endianness
+    swapping)&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+ &lt;/listitem&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;
+  &lt;title&gt;Modifications only to the caps/metadata of a buffer&lt;/title&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    The element does not require writable data, but non-writable buffers
+    should be subbuffered so that the meta-information can be replaced.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Elements wishing to operate in this mode should replace the
+    prepare_output_buffer method to create subbuffers of the input buffer
+    and set always_in_place to TRUE
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+  &lt;itemizedlist&gt;
+  &lt;title&gt;Example elements&lt;/title&gt;
+    &lt;listitem&gt;Capsfilter when setting caps on outgoing buffers that have
+    none.&lt;/listitem&gt;
+    &lt;listitem&gt;identity when it is going to re-timestamp buffers by
+    datarate.&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;&lt;title&gt;Normal mode&lt;/title&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    always_in_place flag is not set, or there is no transform_ip function
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Element will receive an input buffer and output buffer to operate on.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Output buffer is allocated by calling the prepare_output_buffer function.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+  &lt;itemizedlist&gt;
+  &lt;title&gt;Example elements&lt;/title&gt;
+    &lt;listitem&gt;Videoscale, videoconvert, audioconvert when doing
+    scaling/conversions&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;&lt;title&gt;Special output buffer allocations&lt;/title&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Elements which need to do special allocation of their output buffers
+    other than what gst_buffer_pad_alloc allows should implement a
+    prepare_output_buffer method, which calls the parent implementation and
+    passes the newly allocated buffer.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+  &lt;itemizedlist&gt;
+  &lt;title&gt;Example elements&lt;/title&gt;
+    &lt;listitem&gt;efence&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+&lt;/orderedlist&gt;
+&lt;/para&gt;
+&lt;/refsect2&gt;
+&lt;refsect2&gt;
+&lt;title&gt;Sub-class settable flags on GstBaseTransform&lt;/title&gt;
+&lt;para&gt;
+&lt;itemizedlist&gt;
+&lt;listitem&gt;&lt;para&gt;
+  &lt;itemizedlist&gt;&lt;title&gt;passthrough&lt;/title&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      Implies that in the current configuration, the sub-class is not
+      interested in modifying the buffers.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      Elements which are always in passthrough mode whenever the same caps
+      has been negotiated on both pads can set the class variable
+      passthrough_on_same_caps to have this behaviour automatically.
+    &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/para&gt;&lt;/listitem&gt;
+&lt;listitem&gt;&lt;para&gt;
+  &lt;itemizedlist&gt;&lt;title&gt;always_in_place&lt;/title&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      Determines whether a non-writable buffer will be copied before passing
+      to the transform_ip function.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      Implied TRUE if no transform function is implemented.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      Implied FALSE if ONLY transform function is implemented.
+    &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;
+&lt;/para&gt;
+&lt;/refsect2&gt;</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstBase.BaseTransform</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.BaseTransform.get_allocator.html" title="GstBase.BaseTransform.prototype.get_allocator">GstBase.BaseTransform.prototype.get_allocator</a></li>
+<li class="links "><a href="GstBase.BaseTransform.get_buffer_pool.html" title="GstBase.BaseTransform.prototype.get_buffer_pool">GstBase.BaseTransform.prototype.get_buffer_pool</a></li>
+<li class="links "><a href="GstBase.BaseTransform.is_in_place.html" title="GstBase.BaseTransform.prototype.is_in_place">GstBase.BaseTransform.prototype.is_in_place</a></li>
+<li class="links "><a href="GstBase.BaseTransform.is_passthrough.html" title="GstBase.BaseTransform.prototype.is_passthrough">GstBase.BaseTransform.prototype.is_passthrough</a></li>
+<li class="links "><a href="GstBase.BaseTransform.is_qos_enabled.html" title="GstBase.BaseTransform.prototype.is_qos_enabled">GstBase.BaseTransform.prototype.is_qos_enabled</a></li>
+<li class="links "><a href="GstBase.BaseTransform.reconfigure_sink.html" title="GstBase.BaseTransform.prototype.reconfigure_sink">GstBase.BaseTransform.prototype.reconfigure_sink</a></li>
+<li class="links "><a href="GstBase.BaseTransform.reconfigure_src.html" title="GstBase.BaseTransform.prototype.reconfigure_src">GstBase.BaseTransform.prototype.reconfigure_src</a></li>
+<li class="links "><a href="GstBase.BaseTransform.set_gap_aware.html" title="GstBase.BaseTransform.prototype.set_gap_aware">GstBase.BaseTransform.prototype.set_gap_aware</a></li>
+<li class="links "><a href="GstBase.BaseTransform.set_in_place.html" title="GstBase.BaseTransform.prototype.set_in_place">GstBase.BaseTransform.prototype.set_in_place</a></li>
+<li class="links "><a href="GstBase.BaseTransform.set_passthrough.html" title="GstBase.BaseTransform.prototype.set_passthrough">GstBase.BaseTransform.prototype.set_passthrough</a></li>
+<li class="links "><a href="GstBase.BaseTransform.set_prefer_passthrough.html" title="GstBase.BaseTransform.prototype.set_prefer_passthrough">GstBase.BaseTransform.prototype.set_prefer_passthrough</a></li>
+<li class="links "><a href="GstBase.BaseTransform.set_qos_enabled.html" title="GstBase.BaseTransform.prototype.set_qos_enabled">GstBase.BaseTransform.prototype.set_qos_enabled</a></li>
+<li class="links "><a href="GstBase.BaseTransform.update_qos.html" title="GstBase.BaseTransform.prototype.update_qos">GstBase.BaseTransform.prototype.update_qos</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstBase.BaseTransform-qos.html" title="GstBase.BaseTransform:qos">qos</a></li></ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.BaseTransform-accept_caps.html" title="GstBase.BaseTransform::accept_caps">GstBase.BaseTransform::accept_caps</a></li>
+<li class="links "><a href="GstBase.BaseTransform-before_transform.html" title="GstBase.BaseTransform::before_transform">GstBase.BaseTransform::before_transform</a></li>
+<li class="links "><a href="GstBase.BaseTransform-copy_metadata.html" title="GstBase.BaseTransform::copy_metadata">GstBase.BaseTransform::copy_metadata</a></li>
+<li class="links "><a href="GstBase.BaseTransform-decide_allocation.html" title="GstBase.BaseTransform::decide_allocation">GstBase.BaseTransform::decide_allocation</a></li>
+<li class="links "><a href="GstBase.BaseTransform-filter_meta.html" title="GstBase.BaseTransform::filter_meta">GstBase.BaseTransform::filter_meta</a></li>
+<li class="links "><a href="GstBase.BaseTransform-fixate_caps.html" title="GstBase.BaseTransform::fixate_caps">GstBase.BaseTransform::fixate_caps</a></li>
+<li class="links "><a href="GstBase.BaseTransform-get_unit_size.html" title="GstBase.BaseTransform::get_unit_size">GstBase.BaseTransform::get_unit_size</a></li>
+<li class="links "><a href="GstBase.BaseTransform-prepare_output_buffer.html" title="GstBase.BaseTransform::prepare_output_buffer">GstBase.BaseTransform::prepare_output_buffer</a></li>
+<li class="links "><a href="GstBase.BaseTransform-propose_allocation.html" title="GstBase.BaseTransform::propose_allocation">GstBase.BaseTransform::propose_allocation</a></li>
+<li class="links "><a href="GstBase.BaseTransform-query.html" title="GstBase.BaseTransform::query">GstBase.BaseTransform::query</a></li>
+<li class="links "><a href="GstBase.BaseTransform-set_caps.html" title="GstBase.BaseTransform::set_caps">GstBase.BaseTransform::set_caps</a></li>
+<li class="links "><a href="GstBase.BaseTransform-sink_event.html" title="GstBase.BaseTransform::sink_event">GstBase.BaseTransform::sink_event</a></li>
+<li class="links "><a href="GstBase.BaseTransform-src_event.html" title="GstBase.BaseTransform::src_event">GstBase.BaseTransform::src_event</a></li>
+<li class="links "><a href="GstBase.BaseTransform-start.html" title="GstBase.BaseTransform::start">GstBase.BaseTransform::start</a></li>
+<li class="links "><a href="GstBase.BaseTransform-stop.html" title="GstBase.BaseTransform::stop">GstBase.BaseTransform::stop</a></li>
+<li class="links "><a href="GstBase.BaseTransform-transform.html" title="GstBase.BaseTransform::transform">GstBase.BaseTransform::transform</a></li>
+<li class="links "><a href="GstBase.BaseTransform-transform_caps.html" title="GstBase.BaseTransform::transform_caps">GstBase.BaseTransform::transform_caps</a></li>
+<li class="links "><a href="GstBase.BaseTransform-transform_ip.html" title="GstBase.BaseTransform::transform_ip">GstBase.BaseTransform::transform_ip</a></li>
+<li class="links "><a href="GstBase.BaseTransform-transform_meta.html" title="GstBase.BaseTransform::transform_meta">GstBase.BaseTransform::transform_meta</a></li>
+<li class="links "><a href="GstBase.BaseTransform-transform_size.html" title="GstBase.BaseTransform::transform_size">GstBase.BaseTransform::transform_size</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,132 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.CollectPads</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.CollectPads</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstBase = imports.gi.GstBase;
+
+let collect_pads = new GstBase.CollectPads();
+  </pre></div></div></div></div></div>
+<p class="p">Manages a set of pads that operate in collect mode. This means that control
+is given to the manager of this object when all pads have data.
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Collectpads are created with <span class=" link"><a href="GstBase.new.html" title="GstBase.new">GstBase.new</a></span>. A callback should then
+    be installed with gst_collect_pads_set_function ().
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Pads are added to the collection with <span class=" link"><a href="GstBase.add_pad.html" title="GstBase.add_pad">GstBase.add_pad</a></span>/
+    <span class=" link"><a href="GstBase.remove_pad.html" title="GstBase.remove_pad">GstBase.remove_pad</a></span>. The pad
+    has to be a sinkpad. The chain and event functions of the pad are
+    overridden. The element_private of the pad is used to store
+    private information for the collectpads.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    For each pad, data is queued in the _chain function or by
+    performing a pull_range.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    When data is queued on all pads in waiting mode, the callback function is called.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Data can be dequeued from the pad with the <span class=" link"><a href="GstBase.pop.html" title="GstBase.pop">GstBase.pop</a></span> method.
+    One can peek at the data with the <span class=" link"><a href="GstBase.peek.html" title="GstBase.peek">GstBase.peek</a></span> function.
+    These functions will return NULL if the pad received an EOS event. When all
+    pads return NULL from a <span class=" link"><a href="GstBase.peek.html" title="GstBase.peek">GstBase.peek</a></span>, the element can emit an EOS
+    event itself.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Data can also be dequeued in byte units using the <span class=" link"><a href="GstBase.available.html" title="GstBase.available">GstBase.available</a></span>,
+    gst_collect_pads_read() and <span class=" link"><a href="GstBase.flush.html" title="GstBase.flush">GstBase.flush</a></span> calls.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Elements should call <span class=" link"><a href="GstBase.start.html" title="GstBase.start">GstBase.start</a></span> and <span class=" link"><a href="GstBase.stop.html" title="GstBase.stop">GstBase.stop</a></span> in
+    their state change functions to start and stop the processing of the collectpads.
+    The <span class=" link"><a href="GstBase.stop.html" title="GstBase.stop">GstBase.stop</a></span> call should be called before calling the parent
+    element state change function in the PAUSED_TO_READY state change to ensure
+    no pad is blocked and the element can finish streaming.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    gst_collect_pads_collect() and gst_collect_pads_collect_range() can be used by
+    elements that start a <span class=" link"><a href="Gst.Task.html" title="Gst.Task">Gst.Task</a></span> to drive the collect_pads. This feature is however
+    not yet implemented.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    <span class=" link"><a href="GstBase.set_waiting.html" title="GstBase.set_waiting">GstBase.set_waiting</a></span> sets a pad to waiting or non-waiting mode.
+    CollectPads element is not waiting for data to be collected on non-waiting pads.
+    Thus these pads may but need not have data when the callback is called.
+    All pads are in waiting mode by default.
+  &lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+<p class="p">Last reviewed on 2011-10-28 (0.10.36)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstBase.CollectPads</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.CollectPads.available.html" title="GstBase.CollectPads.prototype.available">GstBase.CollectPads.prototype.available</a></li>
+<li class="links "><a href="GstBase.CollectPads.clip_running_time.html" title="GstBase.CollectPads.prototype.clip_running_time">GstBase.CollectPads.prototype.clip_running_time</a></li>
+<li class="links "><a href="GstBase.CollectPads.event_default.html" title="GstBase.CollectPads.prototype.event_default">GstBase.CollectPads.prototype.event_default</a></li>
+<li class="links "><a href="GstBase.CollectPads.flush.html" title="GstBase.CollectPads.prototype.flush">GstBase.CollectPads.prototype.flush</a></li>
+<li class="links "><a href="GstBase.CollectPads.peek.html" title="GstBase.CollectPads.prototype.peek">GstBase.CollectPads.prototype.peek</a></li>
+<li class="links "><a href="GstBase.CollectPads.pop.html" title="GstBase.CollectPads.prototype.pop">GstBase.CollectPads.prototype.pop</a></li>
+<li class="links "><a href="GstBase.CollectPads.query_default.html" title="GstBase.CollectPads.prototype.query_default">GstBase.CollectPads.prototype.query_default</a></li>
+<li class="links "><a href="GstBase.CollectPads.read_buffer.html" title="GstBase.CollectPads.prototype.read_buffer">GstBase.CollectPads.prototype.read_buffer</a></li>
+<li class="links "><a href="GstBase.CollectPads.remove_pad.html" title="GstBase.CollectPads.prototype.remove_pad">GstBase.CollectPads.prototype.remove_pad</a></li>
+<li class="links "><a href="GstBase.CollectPads.set_flushing.html" title="GstBase.CollectPads.prototype.set_flushing">GstBase.CollectPads.prototype.set_flushing</a></li>
+<li class="links "><a href="GstBase.CollectPads.set_waiting.html" title="GstBase.CollectPads.prototype.set_waiting">GstBase.CollectPads.prototype.set_waiting</a></li>
+<li class="links "><a href="GstBase.CollectPads.start.html" title="GstBase.CollectPads.prototype.start">GstBase.CollectPads.prototype.start</a></li>
+<li class="links "><a href="GstBase.CollectPads.stop.html" title="GstBase.CollectPads.prototype.stop">GstBase.CollectPads.prototype.stop</a></li>
+<li class="links "><a href="GstBase.CollectPads.take_buffer.html" title="GstBase.CollectPads.prototype.take_buffer">GstBase.CollectPads.prototype.take_buffer</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Other</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstBase.CollectPads.new.html" title="GstBase.CollectPads.new">GstBase.CollectPads.new</a></li></ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioRingBuffer::delay</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstAudio.AudioRingBuffer.html" title="GstAudio.AudioRingBuffer">GstAudio.AudioRingBuffer</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioRingBuffer::delay</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function vfunc_delay():Number {
+}</pre></div></div></div></div></div>
+<p class="p">Get the number of samples queued in the audio device. This is
+usually less than the segment size but can be bigger when the
+implementation uses another internal buffer between the audio
+device.</p>
+<p class="p">For playback ringbuffers this is the amount of samples transfered from the
+ringbuffer to the device but still not played.</p>
+<p class="p">For capture ringbuffers this is the amount of samples in the device that are
+not yet transfered to the ringbuffer.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">The number of samples queued in the audio device.  MT safe.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstAudio.AudioRingBuffer.html" title="GstAudio.AudioRingBuffer">GstAudio.AudioRingBuffer</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

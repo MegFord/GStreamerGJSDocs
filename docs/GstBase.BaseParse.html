@@ -1,0 +1,251 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.BaseParse</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.BaseParse</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstBase = imports.gi.GstBase;
+
+let base_parse = new GstBase.BaseParse();
+  </pre></div></div></div></div></div>
+<p class="p">This base class is for parser elements that process data and splits it
+into separate audio/video/whatever frames.</p>
+<p class="p">It provides for:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;provides one sink pad and one source pad&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;handles state changes&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;can operate in pull mode or push mode&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;handles seeking in both modes&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;handles events (SEGMENT/EOS/FLUSH)&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+       handles queries (POSITION/DURATION/SEEKING/FORMAT/CONVERT)
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;handles flushing&lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+<p class="p">The purpose of this base class is to provide the basic functionality of
+a parser and share a lot of rather complex code.</p>
+<p class="p">Description of the parsing mechanism:
+&lt;orderedlist&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;&lt;title&gt;Set-up phase&lt;/title&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    GstBaseParse calls @start to inform subclass that data processing is
+    about to start now.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    GstBaseParse class calls @set_sink_caps to inform the subclass about
+    incoming sinkpad caps. Subclass could already set the srcpad caps
+    accordingly, but this might be delayed until calling
+    <span class=" link"><a href="GstBase.finish_frame.html" title="GstBase.finish_frame">GstBase.finish_frame</a></span> with a non-queued frame.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     At least at this point subclass needs to tell the GstBaseParse class
+     how big data chunks it wants to receive (min_frame_size). It can do
+     this with <span class=" link"><a href="GstBase.set_min_frame_size.html" title="GstBase.set_min_frame_size">GstBase.set_min_frame_size</a></span>.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     GstBaseParse class sets up appropriate data passing mode (pull/push)
+     and starts to process the data.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;
+  &lt;title&gt;Parsing phase&lt;/title&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      GstBaseParse gathers at least min_frame_size bytes of data either
+      by pulling it from upstream or collecting buffers in an internal
+      <span class=" link"><a href="GstBase.Adapter.html" title="GstBase.Adapter">GstBase.Adapter</a></span>.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      A buffer of (at least) min_frame_size bytes is passed to subclass with
+      @handle_frame. Subclass checks the contents and can optionally
+      return GST_FLOW_OK along with an amount of data to be skipped to find
+      a valid frame (which will result in a subsequent DISCONT).
+      If, otherwise, the buffer does not hold a complete frame,
+      @handle_frame can merely return and will be called again when additional
+      data is available.  In push mode this amounts to an
+      additional input buffer (thus minimal additional latency), in pull mode
+      this amounts to some arbitrary reasonable buffer size increase.
+      Of course, <span class=" link"><a href="GstBase.set_min_frame_size.html" title="GstBase.set_min_frame_size">GstBase.set_min_frame_size</a></span> could also be used if a
+      very specific known amount of additional data is required.
+      If, however, the buffer holds a complete valid frame, it can pass
+      the size of this frame to <span class=" link"><a href="GstBase.finish_frame.html" title="GstBase.finish_frame">GstBase.finish_frame</a></span>.
+      If acting as a converter, it can also merely indicate consumed input data
+      while simultaneously providing custom output data.
+      Note that baseclass performs some processing (such as tracking
+      overall consumed data rate versus duration) for each finished frame,
+      but other state is only updated upon each call to @handle_frame
+      (such as tracking upstream input timestamp).
+      &lt;/para&gt;&lt;para&gt;
+      Subclass is also responsible for setting the buffer metadata
+      (e.g. buffer timestamp and duration, or keyframe if applicable).
+      (although the latter can also be done by GstBaseParse if it is
+      appropriately configured, see below).  Frame is provided with
+      timestamp derived from upstream (as much as generally possible),
+      duration obtained from configuration (see below), and offset
+      if meaningful (in pull mode).
+      &lt;/para&gt;&lt;para&gt;
+      Note that @check_valid_frame might receive any small
+      amount of input data when leftover data is being drained (e.g. at EOS).
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      As part of finish frame processing,
+      just prior to actually pushing the buffer in question,
+      it is passed to @pre_push_frame which gives subclass yet one
+      last chance to examine buffer metadata, or to send some custom (tag)
+      events, or to perform custom (segment) filtering.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      During the parsing process GstBaseParseClass will handle both srcpad
+      and sinkpad events. They will be passed to subclass if @event or
+      @src_event callbacks have been provided.
+    &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;&lt;title&gt;Shutdown phase&lt;/title&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    GstBaseParse class calls @stop to inform the subclass that data
+    parsing will be stopped.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+&lt;/orderedlist&gt;</p>
+<p class="p">Subclass is responsible for providing pad template caps for
+source and sink pads. The pads need to be named "sink" and "src". It also
+needs to set the fixed caps on srcpad, when the format is ensured (e.g.
+when base class calls subclass' @set_sink_caps function).</p>
+<p class="p">This base class uses #GST_FORMAT_DEFAULT as a meaning of frames. So,
+subclass conversion routine needs to know that conversion from
+#GST_FORMAT_TIME to #GST_FORMAT_DEFAULT must return the
+frame number that can be found from the given byte position.</p>
+<p class="p">GstBaseParse uses subclasses conversion methods also for seeking (or
+otherwise uses its own default one, see also below).</p>
+<p class="p">Subclass @start and @stop functions will be called to inform the beginning
+and end of data processing.</p>
+<p class="p">Things that subclass need to take care of:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;Provide pad templates&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Fixate the source pad caps when appropriate
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Inform base class how big data chunks should be retrieved. This is
+     done with <span class=" link"><a href="GstBase.set_min_frame_size.html" title="GstBase.set_min_frame_size">GstBase.set_min_frame_size</a></span> function.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Examine data chunks passed to subclass with @handle_frame and pass
+     proper frame(s) to <span class=" link"><a href="GstBase.finish_frame.html" title="GstBase.finish_frame">GstBase.finish_frame</a></span>, and setting src pad
+     caps and timestamps on frame.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;Provide conversion functions&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Update the duration information with <span class=" link"><a href="GstBase.set_duration.html" title="GstBase.set_duration">GstBase.set_duration</a></span>
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Optionally passthrough using <span class=" link"><a href="GstBase.set_passthrough.html" title="GstBase.set_passthrough">GstBase.set_passthrough</a></span>
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Configure various baseparse parameters using
+     <span class=" link"><a href="GstBase.set_average_bitrate.html" title="GstBase.set_average_bitrate">GstBase.set_average_bitrate</a></span>, <span class=" link"><a href="GstBase.set_syncable.html" title="GstBase.set_syncable">GstBase.set_syncable</a></span>
+     and <span class=" link"><a href="GstBase.set_frame_rate.html" title="GstBase.set_frame_rate">GstBase.set_frame_rate</a></span>.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     In particular, if subclass is unable to determine a duration, but
+     parsing (or specs) yields a frames per seconds rate, then this can be
+     provided to GstBaseParse to enable it to cater for
+     buffer time metadata (which will be taken from upstream as much as
+     possible). Internally keeping track of frame durations and respective
+     sizes that have been pushed provides GstBaseParse with an estimated
+     bitrate. A default @convert (used if not overriden) will then use these
+     rates to perform obvious conversions.  These rates are also used to
+     update (estimated) duration at regular frame intervals.
+  &lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstBase.BaseParse</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.BaseParse.add_index_entry.html" title="GstBase.BaseParse.prototype.add_index_entry">GstBase.BaseParse.prototype.add_index_entry</a></li>
+<li class="links "><a href="GstBase.BaseParse.convert_default.html" title="GstBase.BaseParse.prototype.convert_default">GstBase.BaseParse.prototype.convert_default</a></li>
+<li class="links "><a href="GstBase.BaseParse.finish_frame.html" title="GstBase.BaseParse.prototype.finish_frame">GstBase.BaseParse.prototype.finish_frame</a></li>
+<li class="links "><a href="GstBase.BaseParse.push_frame.html" title="GstBase.BaseParse.prototype.push_frame">GstBase.BaseParse.prototype.push_frame</a></li>
+<li class="links "><a href="GstBase.BaseParse.set_average_bitrate.html" title="GstBase.BaseParse.prototype.set_average_bitrate">GstBase.BaseParse.prototype.set_average_bitrate</a></li>
+<li class="links "><a href="GstBase.BaseParse.set_duration.html" title="GstBase.BaseParse.prototype.set_duration">GstBase.BaseParse.prototype.set_duration</a></li>
+<li class="links "><a href="GstBase.BaseParse.set_frame_rate.html" title="GstBase.BaseParse.prototype.set_frame_rate">GstBase.BaseParse.prototype.set_frame_rate</a></li>
+<li class="links "><a href="GstBase.BaseParse.set_has_timing_info.html" title="GstBase.BaseParse.prototype.set_has_timing_info">GstBase.BaseParse.prototype.set_has_timing_info</a></li>
+<li class="links "><a href="GstBase.BaseParse.set_latency.html" title="GstBase.BaseParse.prototype.set_latency">GstBase.BaseParse.prototype.set_latency</a></li>
+<li class="links "><a href="GstBase.BaseParse.set_min_frame_size.html" title="GstBase.BaseParse.prototype.set_min_frame_size">GstBase.BaseParse.prototype.set_min_frame_size</a></li>
+<li class="links "><a href="GstBase.BaseParse.set_passthrough.html" title="GstBase.BaseParse.prototype.set_passthrough">GstBase.BaseParse.prototype.set_passthrough</a></li>
+<li class="links "><a href="GstBase.BaseParse.set_pts_interpolation.html" title="GstBase.BaseParse.prototype.set_pts_interpolation">GstBase.BaseParse.prototype.set_pts_interpolation</a></li>
+<li class="links "><a href="GstBase.BaseParse.set_syncable.html" title="GstBase.BaseParse.prototype.set_syncable">GstBase.BaseParse.prototype.set_syncable</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.BaseParse-convert.html" title="GstBase.BaseParse::convert">GstBase.BaseParse::convert</a></li>
+<li class="links "><a href="GstBase.BaseParse-detect.html" title="GstBase.BaseParse::detect">GstBase.BaseParse::detect</a></li>
+<li class="links "><a href="GstBase.BaseParse-get_sink_caps.html" title="GstBase.BaseParse::get_sink_caps">GstBase.BaseParse::get_sink_caps</a></li>
+<li class="links "><a href="GstBase.BaseParse-handle_frame.html" title="GstBase.BaseParse::handle_frame">GstBase.BaseParse::handle_frame</a></li>
+<li class="links "><a href="GstBase.BaseParse-pre_push_frame.html" title="GstBase.BaseParse::pre_push_frame">GstBase.BaseParse::pre_push_frame</a></li>
+<li class="links "><a href="GstBase.BaseParse-set_sink_caps.html" title="GstBase.BaseParse::set_sink_caps">GstBase.BaseParse::set_sink_caps</a></li>
+<li class="links "><a href="GstBase.BaseParse-sink_event.html" title="GstBase.BaseParse::sink_event">GstBase.BaseParse::sink_event</a></li>
+<li class="links "><a href="GstBase.BaseParse-src_event.html" title="GstBase.BaseParse::src_event">GstBase.BaseParse::src_event</a></li>
+<li class="links "><a href="GstBase.BaseParse-start.html" title="GstBase.BaseParse::start">GstBase.BaseParse::start</a></li>
+<li class="links "><a href="GstBase.BaseParse-stop.html" title="GstBase.BaseParse::stop">GstBase.BaseParse::stop</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

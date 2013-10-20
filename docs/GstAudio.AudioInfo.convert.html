@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioInfo.prototype.convert</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstAudio.AudioInfo.html" title="GstAudio.AudioInfo">GstAudio.AudioInfo</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioInfo.prototype.convert</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function convert(src_fmt:Gst.Format, src_val:Number, dest_fmt:Gst.Format, dest_val:Number):Boolean {
+    // Gjs wrapper for gst_audio_info_convert()
+}</pre></div></div></div></div></div>
+<p class="p">Converts among various <span class=" link"><a href="Gst.Format.html" title="Gst.Format">Gst.Format</a></span> types.  This function handles
+GST_FORMAT_BYTES, GST_FORMAT_TIME, and GST_FORMAT_DEFAULT.  For
+raw audio, GST_FORMAT_DEFAULT corresponds to audio frames.  This
+function can be used to handle pad queries of the type GST_QUERY_CONVERT.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">src_fmt</span></dt>
+<dd class="terms"><p class="p"><span class=" link"><a href="Gst.Format.html" title="Gst.Format">Gst.Format</a></span> of the <span class=" code">src_val</span></p></dd>
+<dt class="terms"><span class=" code">src_val</span></dt>
+<dd class="terms"><p class="p">value to convert</p></dd>
+<dt class="terms"><span class=" code">dest_fmt</span></dt>
+<dd class="terms"><p class="p"><span class=" link"><a href="Gst.Format.html" title="Gst.Format">Gst.Format</a></span> of the <span class=" code">dest_val</span></p></dd>
+<dt class="terms"><span class=" code">dest_val</span></dt>
+<dd class="terms"><p class="p">pointer to destination value</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">TRUE if the conversion was successful.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstAudio.AudioInfo.html" title="GstAudio.AudioInfo">GstAudio.AudioInfo</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

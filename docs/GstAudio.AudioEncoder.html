@@ -1,0 +1,244 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioEncoder</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioEncoder</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstAudio = imports.gi.GstAudio;
+
+let audio_encoder = new GstAudio.AudioEncoder({
+    <span class=" link"><a href="GstAudio.AudioEncoder-hard-resync.html" title="GstAudio.AudioEncoder:hard-resync">hard_resync</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioEncoder-perfect-timestamp.html" title="GstAudio.AudioEncoder:perfect-timestamp">perfect_timestamp</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioEncoder-tolerance.html" title="GstAudio.AudioEncoder:tolerance">tolerance</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">This base class is for audio encoders turning raw audio samples into
+encoded audio data.</p>
+<p class="p">GstAudioEncoder and subclass should cooperate as follows.
+&lt;orderedlist&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;&lt;title&gt;Configuration&lt;/title&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    Initially, GstAudioEncoder calls @start when the encoder element
+    is activated, which allows subclass to perform any global setup.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    GstAudioEncoder calls @set_format to inform subclass of the format
+    of input audio data that it is about to receive.  Subclass should
+    setup for encoding and configure various base class parameters
+    appropriately, notably those directing desired input data handling.
+    While unlikely, it might be called more than once, if changing input
+    parameters require reconfiguration.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    GstAudioEncoder calls @stop at end of all processing.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+As of configuration stage, and throughout processing, GstAudioEncoder
+maintains various parameters that provide required context,
+e.g. describing the format of input audio data.
+Conversely, subclass can and should configure these context parameters
+to inform base class of its expectation w.r.t. buffer handling.
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;
+  &lt;title&gt;Data processing&lt;/title&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      Base class gathers input sample data (as directed by the context's
+      frame_samples and frame_max) and provides this to subclass' @handle_frame.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      If codec processing results in encoded data, subclass should call
+      @gst_audio_encoder_finish_frame to have encoded data pushed
+      downstream.  Alternatively, it might also call to indicate dropped
+      (non-encoded) samples.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      Just prior to actually pushing a buffer downstream,
+      it is passed to @pre_push.
+    &lt;/para&gt;&lt;/listitem&gt;
+    &lt;listitem&gt;&lt;para&gt;
+      During the parsing process GstAudioEncoderClass will handle both
+      srcpad and sinkpad events. Sink events will be passed to subclass
+      if @event callback has been provided.
+    &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+&lt;listitem&gt;
+  &lt;itemizedlist&gt;&lt;title&gt;Shutdown phase&lt;/title&gt;
+  &lt;listitem&gt;&lt;para&gt;
+    GstAudioEncoder class calls @stop to inform the subclass that data
+    parsing will be stopped.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/itemizedlist&gt;
+&lt;/listitem&gt;
+&lt;/orderedlist&gt;</p>
+<p class="p">Subclass is responsible for providing pad template caps for
+source and sink pads. The pads need to be named "sink" and "src". It also 
+needs to set the fixed caps on srcpad, when the format is ensured.  This
+is typically when base class calls subclass' @set_format function, though
+it might be delayed until calling @gst_audio_encoder_finish_frame.</p>
+<p class="p">In summary, above process should have subclass concentrating on
+codec data processing while leaving other matters to base class,
+such as most notably timestamp handling.  While it may exert more control
+in this area (see e.g. @pre_push), it is very much not recommended.</p>
+<p class="p">In particular, base class will either favor tracking upstream timestamps
+(at the possible expense of jitter) or aim to arrange for a perfect stream of
+output timestamps, depending on <span class=" link"><a href="GstAudio.perfect-timestamp.html" title="GstAudio.perfect-timestamp">GstAudio.perfect-timestamp</a></span>.
+However, in the latter case, the input may not be so perfect or ideal, which
+is handled as follows.  An input timestamp is compared with the expected
+timestamp as dictated by input sample stream and if the deviation is less
+than <span class=" link"><a href="GstAudio.tolerance.html" title="GstAudio.tolerance">GstAudio.tolerance</a></span>, the deviation is discarded.
+Otherwise, it is considered a discontuinity and subsequent output timestamp
+is resynced to the new position after performing configured discontinuity
+processing.  In the non-perfect-timestamp case, an upstream variation
+exceeding tolerance only leads to marking DISCONT on subsequent outgoing
+(while timestamps are adjusted to upstream regardless of variation).
+While DISCONT is also marked in the perfect-timestamp case, this one
+optionally (see <span class=" link"><a href="GstAudio.hard-resync.html" title="GstAudio.hard-resync">GstAudio.hard-resync</a></span>)
+performs some additional steps, such as clipping of (early) input samples
+or draining all currently remaining input data, depending on the direction
+of the discontuinity.</p>
+<p class="p">If perfect timestamps are arranged, it is also possible to request baseclass
+(usually set by subclass) to provide additional buffer metadata (in OFFSET
+and OFFSET_END) fields according to granule defined semantics currently
+needed by oggmux.  Specifically, OFFSET is set to granulepos (= sample count
+including buffer) and OFFSET_END to corresponding timestamp (as determined
+by same sample count and sample rate).</p>
+<p class="p">Things that subclass need to take care of:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;Provide pad templates&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Set source pad caps when appropriate
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Inform base class of buffer processing needs using context's
+     frame_samples and frame_bytes.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Set user-configurable properties to sane defaults for format and
+     implementing codec at hand, e.g. those controlling timestamp behaviour
+     and discontinuity processing.
+  &lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;
+     Accept data in @handle_frame and provide encoded results to
+     @gst_audio_encoder_finish_frame.
+  &lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstAudio.AudioEncoder</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioEncoder.allocate_output_buffer.html" title="GstAudio.AudioEncoder.prototype.allocate_output_buffer">GstAudio.AudioEncoder.prototype.allocate_output_buffer</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.finish_frame.html" title="GstAudio.AudioEncoder.prototype.finish_frame">GstAudio.AudioEncoder.prototype.finish_frame</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_allocator.html" title="GstAudio.AudioEncoder.prototype.get_allocator">GstAudio.AudioEncoder.prototype.get_allocator</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_audio_info.html" title="GstAudio.AudioEncoder.prototype.get_audio_info">GstAudio.AudioEncoder.prototype.get_audio_info</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_drainable.html" title="GstAudio.AudioEncoder.prototype.get_drainable">GstAudio.AudioEncoder.prototype.get_drainable</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_frame_max.html" title="GstAudio.AudioEncoder.prototype.get_frame_max">GstAudio.AudioEncoder.prototype.get_frame_max</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_frame_samples_max.html" title="GstAudio.AudioEncoder.prototype.get_frame_samples_max">GstAudio.AudioEncoder.prototype.get_frame_samples_max</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_frame_samples_min.html" title="GstAudio.AudioEncoder.prototype.get_frame_samples_min">GstAudio.AudioEncoder.prototype.get_frame_samples_min</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_hard_min.html" title="GstAudio.AudioEncoder.prototype.get_hard_min">GstAudio.AudioEncoder.prototype.get_hard_min</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_hard_resync.html" title="GstAudio.AudioEncoder.prototype.get_hard_resync">GstAudio.AudioEncoder.prototype.get_hard_resync</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_latency.html" title="GstAudio.AudioEncoder.prototype.get_latency">GstAudio.AudioEncoder.prototype.get_latency</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_lookahead.html" title="GstAudio.AudioEncoder.prototype.get_lookahead">GstAudio.AudioEncoder.prototype.get_lookahead</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_mark_granule.html" title="GstAudio.AudioEncoder.prototype.get_mark_granule">GstAudio.AudioEncoder.prototype.get_mark_granule</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_perfect_timestamp.html" title="GstAudio.AudioEncoder.prototype.get_perfect_timestamp">GstAudio.AudioEncoder.prototype.get_perfect_timestamp</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.get_tolerance.html" title="GstAudio.AudioEncoder.prototype.get_tolerance">GstAudio.AudioEncoder.prototype.get_tolerance</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.merge_tags.html" title="GstAudio.AudioEncoder.prototype.merge_tags">GstAudio.AudioEncoder.prototype.merge_tags</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.negotiate.html" title="GstAudio.AudioEncoder.prototype.negotiate">GstAudio.AudioEncoder.prototype.negotiate</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.proxy_getcaps.html" title="GstAudio.AudioEncoder.prototype.proxy_getcaps">GstAudio.AudioEncoder.prototype.proxy_getcaps</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_drainable.html" title="GstAudio.AudioEncoder.prototype.set_drainable">GstAudio.AudioEncoder.prototype.set_drainable</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_frame_max.html" title="GstAudio.AudioEncoder.prototype.set_frame_max">GstAudio.AudioEncoder.prototype.set_frame_max</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_frame_samples_max.html" title="GstAudio.AudioEncoder.prototype.set_frame_samples_max">GstAudio.AudioEncoder.prototype.set_frame_samples_max</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_frame_samples_min.html" title="GstAudio.AudioEncoder.prototype.set_frame_samples_min">GstAudio.AudioEncoder.prototype.set_frame_samples_min</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_hard_min.html" title="GstAudio.AudioEncoder.prototype.set_hard_min">GstAudio.AudioEncoder.prototype.set_hard_min</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_hard_resync.html" title="GstAudio.AudioEncoder.prototype.set_hard_resync">GstAudio.AudioEncoder.prototype.set_hard_resync</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_headers.html" title="GstAudio.AudioEncoder.prototype.set_headers">GstAudio.AudioEncoder.prototype.set_headers</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_latency.html" title="GstAudio.AudioEncoder.prototype.set_latency">GstAudio.AudioEncoder.prototype.set_latency</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_lookahead.html" title="GstAudio.AudioEncoder.prototype.set_lookahead">GstAudio.AudioEncoder.prototype.set_lookahead</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_mark_granule.html" title="GstAudio.AudioEncoder.prototype.set_mark_granule">GstAudio.AudioEncoder.prototype.set_mark_granule</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_output_format.html" title="GstAudio.AudioEncoder.prototype.set_output_format">GstAudio.AudioEncoder.prototype.set_output_format</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_perfect_timestamp.html" title="GstAudio.AudioEncoder.prototype.set_perfect_timestamp">GstAudio.AudioEncoder.prototype.set_perfect_timestamp</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder.set_tolerance.html" title="GstAudio.AudioEncoder.prototype.set_tolerance">GstAudio.AudioEncoder.prototype.set_tolerance</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioEncoder-hard-resync.html" title="GstAudio.AudioEncoder:hard-resync">hard-resync</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-mark-granule.html" title="GstAudio.AudioEncoder:mark-granule">mark-granule</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-perfect-timestamp.html" title="GstAudio.AudioEncoder:perfect-timestamp">perfect-timestamp</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-tolerance.html" title="GstAudio.AudioEncoder:tolerance">tolerance</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioEncoder-close.html" title="GstAudio.AudioEncoder::close">GstAudio.AudioEncoder::close</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-decide_allocation.html" title="GstAudio.AudioEncoder::decide_allocation">GstAudio.AudioEncoder::decide_allocation</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-flush.html" title="GstAudio.AudioEncoder::flush">GstAudio.AudioEncoder::flush</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-getcaps.html" title="GstAudio.AudioEncoder::getcaps">GstAudio.AudioEncoder::getcaps</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-handle_frame.html" title="GstAudio.AudioEncoder::handle_frame">GstAudio.AudioEncoder::handle_frame</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-negotiate.html" title="GstAudio.AudioEncoder::negotiate">GstAudio.AudioEncoder::negotiate</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-open.html" title="GstAudio.AudioEncoder::open">GstAudio.AudioEncoder::open</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-pre_push.html" title="GstAudio.AudioEncoder::pre_push">GstAudio.AudioEncoder::pre_push</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-propose_allocation.html" title="GstAudio.AudioEncoder::propose_allocation">GstAudio.AudioEncoder::propose_allocation</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-set_format.html" title="GstAudio.AudioEncoder::set_format">GstAudio.AudioEncoder::set_format</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-sink_event.html" title="GstAudio.AudioEncoder::sink_event">GstAudio.AudioEncoder::sink_event</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-src_event.html" title="GstAudio.AudioEncoder::src_event">GstAudio.AudioEncoder::src_event</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-start.html" title="GstAudio.AudioEncoder::start">GstAudio.AudioEncoder::start</a></li>
+<li class="links "><a href="GstAudio.AudioEncoder-stop.html" title="GstAudio.AudioEncoder::stop">GstAudio.AudioEncoder::stop</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

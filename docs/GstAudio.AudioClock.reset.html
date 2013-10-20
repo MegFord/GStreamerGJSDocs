@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioClock.prototype.reset</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstAudio.AudioClock.html" title="GstAudio.AudioClock">GstAudio.AudioClock</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioClock.prototype.reset</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function reset(time:Gst.ClockTime):void {
+    // Gjs wrapper for gst_audio_clock_reset()
+}</pre></div></div></div></div></div>
+<p class="p">Inform @clock that future calls to <span class=" link"><a href="GstAudio.AudioClockGetTimeFunc.html" title="GstAudio.AudioClockGetTimeFunc">GstAudio.AudioClockGetTimeFunc</a></span> will return values
+starting from <span class=" code">time</span>. The clock will update an internal offset to make sure that
+future calls to internal_time will return an increasing result as required by
+the <span class=" link"><a href="Gst.Clock.html" title="Gst.Clock">Gst.Clock</a></span> object.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">time</span></dt>
+<dd class="terms"><p class="p">a <span class=" link"><a href="Gst.ClockTime.html" title="Gst.ClockTime">Gst.ClockTime</a></span></p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstAudio.AudioClock.html" title="GstAudio.AudioClock">GstAudio.AudioClock</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

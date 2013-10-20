@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioBaseSrc</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioBaseSrc</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstAudio = imports.gi.GstAudio;
+
+let audio_base_src = new GstAudio.AudioBaseSrc({
+    <span class=" link"><a href="GstAudio.AudioBaseSrc-buffer-time.html" title="GstAudio.AudioBaseSrc:buffer-time">buffer_time</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioBaseSrc-latency-time.html" title="GstAudio.AudioBaseSrc:latency-time">latency_time</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioBaseSrc-provide-clock.html" title="GstAudio.AudioBaseSrc:provide-clock">provide_clock</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioBaseSrc-slave-method.html" title="GstAudio.AudioBaseSrc:slave-method">slave_method</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">This is the base class for audio sources. Subclasses need to implement the
+::create_ringbuffer vmethod. This base class will then take care of
+reading samples from the ringbuffer, synchronisation and flushing.</p>
+<p class="p">Last reviewed on 2006-09-27 (0.10.12)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstBase.BaseSrc</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstBase.PushSrc</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstAudio.AudioBaseSrc</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioBaseSrc.create_ringbuffer.html" title="GstAudio.AudioBaseSrc.prototype.create_ringbuffer">GstAudio.AudioBaseSrc.prototype.create_ringbuffer</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSrc.get_provide_clock.html" title="GstAudio.AudioBaseSrc.prototype.get_provide_clock">GstAudio.AudioBaseSrc.prototype.get_provide_clock</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSrc.get_slave_method.html" title="GstAudio.AudioBaseSrc.prototype.get_slave_method">GstAudio.AudioBaseSrc.prototype.get_slave_method</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSrc.set_provide_clock.html" title="GstAudio.AudioBaseSrc.prototype.set_provide_clock">GstAudio.AudioBaseSrc.prototype.set_provide_clock</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSrc.set_slave_method.html" title="GstAudio.AudioBaseSrc.prototype.set_slave_method">GstAudio.AudioBaseSrc.prototype.set_slave_method</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioBaseSrc-actual-buffer-time.html" title="GstAudio.AudioBaseSrc:actual-buffer-time">actual-buffer-time</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSrc-actual-latency-time.html" title="GstAudio.AudioBaseSrc:actual-latency-time">actual-latency-time</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSrc-buffer-time.html" title="GstAudio.AudioBaseSrc:buffer-time">buffer-time</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSrc-latency-time.html" title="GstAudio.AudioBaseSrc:latency-time">latency-time</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSrc-provide-clock.html" title="GstAudio.AudioBaseSrc:provide-clock">provide-clock</a></li>
+<li class="links "><a href="GstAudio.AudioBaseSrc-slave-method.html" title="GstAudio.AudioBaseSrc:slave-method">slave-method</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstAudio.AudioBaseSrc-create_ringbuffer.html" title="GstAudio.AudioBaseSrc::create_ringbuffer">GstAudio.AudioBaseSrc::create_ringbuffer</a></li></ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

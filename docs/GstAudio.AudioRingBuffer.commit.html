@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioRingBuffer.prototype.commit</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstAudio.AudioRingBuffer.html" title="GstAudio.AudioRingBuffer">GstAudio.AudioRingBuffer</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioRingBuffer.prototype.commit</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function commit(sample:Number, data:guint8, in_samples:Number, out_samples:Number, accum:Number):Number {
+    // Gjs wrapper for gst_audio_ring_buffer_commit()
+}</pre></div></div></div></div></div>
+<p class="p">Commit <span class=" code">in_samples</span> samples pointed to by <span class=" code">data</span> to the ringbuffer @buf.</p>
+<p class="p"><span class=" code">in_samples</span> and <span class=" code">out_samples</span> define the rate conversion to perform on the
+samples in <span class=" code">data</span>. For negative rates, <span class=" code">out_samples</span> must be negative and
+<span class=" code">in_samples</span> positive.</p>
+<p class="p">When <span class=" code">out_samples</span> is positive, the first sample will be written at position <span class=" code">sample</span>
+in the ringbuffer. When <span class=" code">out_samples</span> is negative, the last sample will be written to
+<span class=" code">sample</span> in reverse order.</p>
+<p class="p"><span class=" code">out_samples</span> does not need to be a multiple of the segment size of the ringbuffer
+although it is recommended for optimal performance.</p>
+<p class="p"><span class=" code">accum</span> will hold a temporary accumulator used in rate conversion and should be
+set to 0 when this function is first called. In case the commit operation is
+interrupted, one can resume the processing by passing the previously returned
+<span class=" code">accum</span> value back to this function.</p>
+<p class="p">MT safe.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">sample</span></dt>
+<dd class="terms"><p class="p">the sample position of the data</p></dd>
+<dt class="terms"><span class=" code">data</span></dt>
+<dd class="terms"><p class="p">the data to commit</p></dd>
+<dt class="terms"><span class=" code">in_samples</span></dt>
+<dd class="terms"><p class="p">the number of samples in the data to commit</p></dd>
+<dt class="terms"><span class=" code">out_samples</span></dt>
+<dd class="terms"><p class="p">the number of samples to write to the ringbuffer</p></dd>
+<dt class="terms"><span class=" code">accum</span></dt>
+<dd class="terms"><p class="p">accumulator for rate conversion.</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">The number of samples written to the ringbuffer or -1 on error. The number of samples written can be less than <span class=" code">out_samples</span> when @buf was interrupted with a flush or stop.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstAudio.AudioRingBuffer.html" title="GstAudio.AudioRingBuffer">GstAudio.AudioRingBuffer</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.BaseParse.prototype.add_index_entry</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstBase.BaseParse.html" title="GstBase.BaseParse">GstBase.BaseParse</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.BaseParse.prototype.add_index_entry</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function add_index_entry(offset:Number, ts:Gst.ClockTime, key:Boolean, force:Boolean):Boolean {
+    // Gjs wrapper for gst_base_parse_add_index_entry()
+}</pre></div></div></div></div></div>
+<p class="p">Adds an entry to the index associating <span class=" code">offset</span> to <span class=" code">ts</span>.  It is recommended
+to only add keyframe entries.  <span class=" code">force</span> allows to bypass checks, such as
+whether the stream is (upstream) seekable, another entry is already "close"
+to the new entry, etc.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">offset</span></dt>
+<dd class="terms"><p class="p">offset of entry</p></dd>
+<dt class="terms"><span class=" code">ts</span></dt>
+<dd class="terms"><p class="p">timestamp associated with offset</p></dd>
+<dt class="terms"><span class=" code">key</span></dt>
+<dd class="terms"><p class="p">whether entry refers to keyframe</p></dd>
+<dt class="terms"><span class=" code">force</span></dt>
+<dd class="terms"><p class="p">add entry disregarding sanity checks</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p">#gboolean indicating whether entry was added</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstBase.BaseParse.html" title="GstBase.BaseParse">GstBase.BaseParse</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.BaseParse.prototype.set_duration</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstBase.BaseParse.html" title="GstBase.BaseParse">GstBase.BaseParse</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.BaseParse.prototype.set_duration</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function set_duration(fmt:Gst.Format, duration:Number, interval:Number):void {
+    // Gjs wrapper for gst_base_parse_set_duration()
+}</pre></div></div></div></div></div>
+<p class="p">Sets the duration of the currently playing media. Subclass can use this
+when it is able to determine duration and/or notices a change in the media
+duration.  Alternatively, if <span class=" code">interval</span> is non-zero (default), then stream
+duration is determined based on estimated bitrate, and updated every <span class=" code">interval</span>
+frames.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">fmt</span></dt>
+<dd class="terms"><p class="p"><span class=" link"><a href="Gst.Format.html" title="Gst.Format">Gst.Format</a></span>.</p></dd>
+<dt class="terms"><span class=" code">duration</span></dt>
+<dd class="terms"><p class="p">duration value.</p></dd>
+<dt class="terms"><span class=" code">interval</span></dt>
+<dd class="terms"><p class="p">how often to update the duration estimate based on bitrate, or 0.</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstBase.BaseParse.html" title="GstBase.BaseParse">GstBase.BaseParse</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

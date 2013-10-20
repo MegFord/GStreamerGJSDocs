@@ -1,0 +1,128 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioRingBuffer</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioRingBuffer</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstAudio = imports.gi.GstAudio;
+
+let audio_ring_buffer = new GstAudio.AudioRingBuffer();
+  </pre></div></div></div></div></div>
+<p class="p">&lt;refsect2&gt;
+&lt;para&gt;
+This object is the base class for audio ringbuffers used by the base
+audio source and sink classes.
+&lt;/para&gt;
+&lt;para&gt;
+The ringbuffer abstracts a circular buffer of data. One reader and
+one writer can operate on the data from different threads in a lockfree
+manner. The base class is sufficiently flexible to be used as an
+abstraction for DMA based ringbuffers as well as a pure software
+implementations.
+&lt;/para&gt;
+&lt;/refsect2&gt;</p>
+<p class="p">Last reviewed on 2006-02-02 (0.10.4)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstAudio.AudioRingBuffer</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioRingBuffer.acquire.html" title="GstAudio.AudioRingBuffer.prototype.acquire">GstAudio.AudioRingBuffer.prototype.acquire</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.activate.html" title="GstAudio.AudioRingBuffer.prototype.activate">GstAudio.AudioRingBuffer.prototype.activate</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.advance.html" title="GstAudio.AudioRingBuffer.prototype.advance">GstAudio.AudioRingBuffer.prototype.advance</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.clear.html" title="GstAudio.AudioRingBuffer.prototype.clear">GstAudio.AudioRingBuffer.prototype.clear</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.clear_all.html" title="GstAudio.AudioRingBuffer.prototype.clear_all">GstAudio.AudioRingBuffer.prototype.clear_all</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.close_device.html" title="GstAudio.AudioRingBuffer.prototype.close_device">GstAudio.AudioRingBuffer.prototype.close_device</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.commit.html" title="GstAudio.AudioRingBuffer.prototype.commit">GstAudio.AudioRingBuffer.prototype.commit</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.convert.html" title="GstAudio.AudioRingBuffer.prototype.convert">GstAudio.AudioRingBuffer.prototype.convert</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.delay.html" title="GstAudio.AudioRingBuffer.prototype.delay">GstAudio.AudioRingBuffer.prototype.delay</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.device_is_open.html" title="GstAudio.AudioRingBuffer.prototype.device_is_open">GstAudio.AudioRingBuffer.prototype.device_is_open</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.is_acquired.html" title="GstAudio.AudioRingBuffer.prototype.is_acquired">GstAudio.AudioRingBuffer.prototype.is_acquired</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.is_active.html" title="GstAudio.AudioRingBuffer.prototype.is_active">GstAudio.AudioRingBuffer.prototype.is_active</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.is_flushing.html" title="GstAudio.AudioRingBuffer.prototype.is_flushing">GstAudio.AudioRingBuffer.prototype.is_flushing</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.may_start.html" title="GstAudio.AudioRingBuffer.prototype.may_start">GstAudio.AudioRingBuffer.prototype.may_start</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.open_device.html" title="GstAudio.AudioRingBuffer.prototype.open_device">GstAudio.AudioRingBuffer.prototype.open_device</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.pause.html" title="GstAudio.AudioRingBuffer.prototype.pause">GstAudio.AudioRingBuffer.prototype.pause</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.prepare_read.html" title="GstAudio.AudioRingBuffer.prototype.prepare_read">GstAudio.AudioRingBuffer.prototype.prepare_read</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.read.html" title="GstAudio.AudioRingBuffer.prototype.read">GstAudio.AudioRingBuffer.prototype.read</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.release.html" title="GstAudio.AudioRingBuffer.prototype.release">GstAudio.AudioRingBuffer.prototype.release</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.samples_done.html" title="GstAudio.AudioRingBuffer.prototype.samples_done">GstAudio.AudioRingBuffer.prototype.samples_done</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.set_callback.html" title="GstAudio.AudioRingBuffer.prototype.set_callback">GstAudio.AudioRingBuffer.prototype.set_callback</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.set_channel_positions.html" title="GstAudio.AudioRingBuffer.prototype.set_channel_positions">GstAudio.AudioRingBuffer.prototype.set_channel_positions</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.set_flushing.html" title="GstAudio.AudioRingBuffer.prototype.set_flushing">GstAudio.AudioRingBuffer.prototype.set_flushing</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.set_sample.html" title="GstAudio.AudioRingBuffer.prototype.set_sample">GstAudio.AudioRingBuffer.prototype.set_sample</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.set_timestamp.html" title="GstAudio.AudioRingBuffer.prototype.set_timestamp">GstAudio.AudioRingBuffer.prototype.set_timestamp</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.start.html" title="GstAudio.AudioRingBuffer.prototype.start">GstAudio.AudioRingBuffer.prototype.start</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.stop.html" title="GstAudio.AudioRingBuffer.prototype.stop">GstAudio.AudioRingBuffer.prototype.stop</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioRingBuffer.debug_spec_buff.html" title="debug_spec_buff">debug_spec_buff</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.debug_spec_caps.html" title="debug_spec_caps">debug_spec_caps</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer.parse_caps.html" title="parse_caps">parse_caps</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioRingBuffer-acquire.html" title="GstAudio.AudioRingBuffer::acquire">GstAudio.AudioRingBuffer::acquire</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer-activate.html" title="GstAudio.AudioRingBuffer::activate">GstAudio.AudioRingBuffer::activate</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer-clear_all.html" title="GstAudio.AudioRingBuffer::clear_all">GstAudio.AudioRingBuffer::clear_all</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer-close_device.html" title="GstAudio.AudioRingBuffer::close_device">GstAudio.AudioRingBuffer::close_device</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer-commit.html" title="GstAudio.AudioRingBuffer::commit">GstAudio.AudioRingBuffer::commit</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer-delay.html" title="GstAudio.AudioRingBuffer::delay">GstAudio.AudioRingBuffer::delay</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer-open_device.html" title="GstAudio.AudioRingBuffer::open_device">GstAudio.AudioRingBuffer::open_device</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer-pause.html" title="GstAudio.AudioRingBuffer::pause">GstAudio.AudioRingBuffer::pause</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer-release.html" title="GstAudio.AudioRingBuffer::release">GstAudio.AudioRingBuffer::release</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer-resume.html" title="GstAudio.AudioRingBuffer::resume">GstAudio.AudioRingBuffer::resume</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer-start.html" title="GstAudio.AudioRingBuffer::start">GstAudio.AudioRingBuffer::start</a></li>
+<li class="links "><a href="GstAudio.AudioRingBuffer-stop.html" title="GstAudio.AudioRingBuffer::stop">GstAudio.AudioRingBuffer::stop</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

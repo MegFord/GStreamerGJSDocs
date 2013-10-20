@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>audio_buffer_clip</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">audio_buffer_clip</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function audio_buffer_clip(buffer:Gst.Buffer, segment:Gst.Segment, rate:Number, bpf:Number):Gst.Buffer {
+    // Gjs wrapper for gst_audio_buffer_clip()
+}</pre></div></div></div></div></div>
+<p class="p">Clip the buffer to the given %GstSegment.</p>
+<p class="p">After calling this function the caller does not own a reference to
+<span class=" code">buffer</span> anymore.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">buffer</span></dt>
+<dd class="terms"><p class="p">The buffer to clip.</p></dd>
+<dt class="terms"><span class=" code">segment</span></dt>
+<dd class="terms"><p class="p">Segment in <span class=" link"><a href="Gst.Format.html" title="Gst.Format">Gst.Format</a></span>.time or <span class=" link"><a href="Gst.Format.html" title="Gst.Format">Gst.Format</a></span>.default to which the buffer should be clipped.</p></dd>
+<dt class="terms"><span class=" code">rate</span></dt>
+<dd class="terms"><p class="p">sample rate.</p></dd>
+<dt class="terms"><span class=" code">bpf</span></dt>
+<dd class="terms"><p class="p">size of one audio frame in bytes. This is the size of one sample * channels.</p></dd>
+<dt class="terms"><span class=" code">Returns</span></dt>
+<dd class="terms"><p class="p"><span class=" code">null</span> if the buffer is completely outside the configured segment, otherwise the clipped buffer is returned.  If the buffer has no timestamp, it is assumed to be inside the segment and is not clipped</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

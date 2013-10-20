@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstApp.AppSink::pull-preroll</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstApp.AppSink.html" title="GstApp.AppSink">GstApp.AppSink</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstApp.AppSink::pull-preroll</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents syntax brush-python">function callback(app_sink, ):Gst.Sample;</pre></div></div></div></div></div>
+<p class="p">Get the last preroll sample in @appsink. This was the sample that caused the
+appsink to preroll in the PAUSED state. This sample can be pulled many times
+and remains available to the application even after EOS.</p>
+<p class="p">This function is typically used when dealing with a pipeline in the PAUSED
+state. Calling this function after doing a seek will give the sample right
+after the seek position.</p>
+<p class="p">Note that the preroll sample will also be returned as the first sample
+when calling <span class=" link"><a href="GstApp.AppSink.pull_sample.html" title="GstApp.AppSink.prototype.pull_sample">GstApp.AppSink.prototype.pull_sample</a></span> or the "pull-sample" action signal.</p>
+<p class="p">If an EOS event was received before any buffers, this function returns
+<span class=" code">null</span>. Use gst_app_sink_is_eos () to check for the EOS condition.</p>
+<p class="p">This function blocks until a preroll sample or EOS is received or the appsink
+element is set to the READY/NULL state.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">app_sink</span></dt>
+<dd class="terms"><p class="p">instance of <span class=" link"><a href="GstApp.AppSink.html" title="GstApp.AppSink">GstApp.AppSink</a></span> that is emitting the signal</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstApp.AppSink.html" title="GstApp.AppSink">GstApp.AppSink</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

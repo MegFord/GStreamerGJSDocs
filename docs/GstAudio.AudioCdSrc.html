@@ -1,0 +1,153 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioCdSrc</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioCdSrc</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstAudio = imports.gi.GstAudio;
+
+let audio_cd_src = new GstAudio.AudioCdSrc({
+    <span class=" link"><a href="GstAudio.AudioCdSrc-device.html" title="GstAudio.AudioCdSrc:device">device</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioCdSrc-mode.html" title="GstAudio.AudioCdSrc:mode">mode</a></span>: value,
+    <span class=" link"><a href="GstAudio.AudioCdSrc-track.html" title="GstAudio.AudioCdSrc:track">track</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p">&lt;para&gt;
+Provides a base class for CD digital audio (CDDA) sources, which handles
+things like seeking, querying, discid calculation, tags, and buffer
+timestamping.
+&lt;/para&gt;
+&lt;refsect2&gt;
+&lt;title&gt;Using GstAudioCdSrc-based elements in applications&lt;/title&gt;
+&lt;para&gt;
+GstAudioCdSrc registers two <span class=" link"><a href="Gst.Format.html" title="Gst.Format">Gst.Format</a></span>&lt;!-- --&gt;s of its own, namely
+the "track" format and the "sector" format. Applications will usually
+only find the "track" format interesting. You can retrieve that <span class=" link"><a href="Gst.Format.html" title="Gst.Format">Gst.Format</a></span>
+for use in seek events or queries with gst_format_get_by_nick("track").
+&lt;/para&gt;
+&lt;para&gt;
+In order to query the number of tracks, for example, an application would
+set the CDDA source element to READY or PAUSED state and then query the
+the number of tracks via <span class=" link"><a href="Gst.query_duration.html" title="Gst.query_duration">Gst.query_duration</a></span> using the track
+format acquired above. Applications can query the currently playing track
+in the same way.
+&lt;/para&gt;
+&lt;para&gt;
+Alternatively, applications may retrieve the currently playing track and
+the total number of tracks from the taglist that will posted on the bus
+whenever the CD is opened or the currently playing track changes. The
+taglist will contain GST_TAG_TRACK_NUMBER and GST_TAG_TRACK_COUNT tags.
+&lt;/para&gt;
+&lt;para&gt;
+Applications playing back CD audio using playbin and cdda://n URIs should
+issue a seek command in track format to change between tracks, rather than
+setting a new cdda://n+1 URI on playbin (as setting a new URI on playbin
+involves closing and re-opening the CD device, which is much much slower).
+&lt;/para&gt;
+&lt;refsect2&gt;
+&lt;/refsect2&gt;
+&lt;title&gt;Tags and meta-information&lt;/title&gt;
+&lt;para&gt;
+CDDA sources will automatically emit a number of tags, details about which
+can be found in the libgsttag documentation. Those tags are:
+#GST_TAG_CDDA_CDDB_DISCID, #GST_TAG_CDDA_CDDB_DISCID_FULL,
+#GST_TAG_CDDA_MUSICBRAINZ_DISCID, #GST_TAG_CDDA_MUSICBRAINZ_DISCID_FULL,
+among others.
+&lt;/para&gt;
+&lt;/refsect2&gt;
+&lt;refsect2&gt;
+&lt;title&gt;Tracks and Table of Contents (TOC)&lt;/title&gt;
+&lt;para&gt;
+Applications will be informed of the available tracks via a TOC message
+on the pipeline's <span class=" link"><a href="Gst.Bus.html" title="Gst.Bus">Gst.Bus</a></span>. The <span class=" link"><a href="Gst.Toc.html" title="Gst.Toc">Gst.Toc</a></span> will contain a <span class=" link"><a href="Gst.TocEntry.html" title="Gst.TocEntry">Gst.TocEntry</a></span> for
+each track, with information about each track. The duration for each
+track can be retrieved via the #GST_TAG_DURATION tag from each entry's
+tag list, or calculated via <span class=" link"><a href="Gst.get_start_stop_times.html" title="Gst.get_start_stop_times">Gst.get_start_stop_times</a></span>.
+The track entries in the TOC will be sorted by track number.
+&lt;/para&gt;
+&lt;/refsect2&gt;</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstBase.BaseSrc</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstBase.PushSrc</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstAudio.AudioCdSrc</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstAudio.AudioCdSrc.add_track.html" title="GstAudio.AudioCdSrc.prototype.add_track">GstAudio.AudioCdSrc.prototype.add_track</a></li></ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioCdSrc-device.html" title="GstAudio.AudioCdSrc:device">device</a></li>
+<li class="links "><a href="GstAudio.AudioCdSrc-mode.html" title="GstAudio.AudioCdSrc:mode">mode</a></li>
+<li class="links "><a href="GstAudio.AudioCdSrc-track.html" title="GstAudio.AudioCdSrc:track">track</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioCdSrc-close.html" title="GstAudio.AudioCdSrc::close">GstAudio.AudioCdSrc::close</a></li>
+<li class="links "><a href="GstAudio.AudioCdSrc-open.html" title="GstAudio.AudioCdSrc::open">GstAudio.AudioCdSrc::open</a></li>
+<li class="links "><a href="GstAudio.AudioCdSrc-read_sector.html" title="GstAudio.AudioCdSrc::read_sector">GstAudio.AudioCdSrc::read_sector</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

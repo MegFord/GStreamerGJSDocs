@@ -1,0 +1,130 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioSrc</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioSrc</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstAudio = imports.gi.GstAudio;
+
+let audio_src = new GstAudio.AudioSrc();
+  </pre></div></div></div></div></div>
+<p class="p">This is the most simple base class for audio sources that only requires
+subclasses to implement a set of simple functions:</p>
+<p class="p">&lt;variablelist&gt;
+  &lt;varlistentry&gt;
+    &lt;term&gt;open()&lt;/term&gt;
+    &lt;listitem&gt;&lt;para&gt;Open the device.&lt;/para&gt;&lt;/listitem&gt;
+  &lt;/varlistentry&gt;
+  &lt;varlistentry&gt;
+    &lt;term&gt;prepare()&lt;/term&gt;
+    &lt;listitem&gt;&lt;para&gt;Configure the device with the specified format.&lt;/para&gt;&lt;/listitem&gt;
+  &lt;/varlistentry&gt;
+  &lt;varlistentry&gt;
+    &lt;term&gt;read()&lt;/term&gt;
+    &lt;listitem&gt;&lt;para&gt;Read samples from the device.&lt;/para&gt;&lt;/listitem&gt;
+  &lt;/varlistentry&gt;
+  &lt;varlistentry&gt;
+    &lt;term&gt;reset()&lt;/term&gt;
+    &lt;listitem&gt;&lt;para&gt;Unblock reads and flush the device.&lt;/para&gt;&lt;/listitem&gt;
+  &lt;/varlistentry&gt;
+  &lt;varlistentry&gt;
+    &lt;term&gt;delay()&lt;/term&gt;
+    &lt;listitem&gt;&lt;para&gt;Get the number of samples in the device but not yet read.
+    &lt;/para&gt;&lt;/listitem&gt;
+  &lt;/varlistentry&gt;
+  &lt;varlistentry&gt;
+    &lt;term&gt;unprepare()&lt;/term&gt;
+    &lt;listitem&gt;&lt;para&gt;Undo operations done by prepare.&lt;/para&gt;&lt;/listitem&gt;
+  &lt;/varlistentry&gt;
+  &lt;varlistentry&gt;
+    &lt;term&gt;close()&lt;/term&gt;
+    &lt;listitem&gt;&lt;para&gt;Close the device.&lt;/para&gt;&lt;/listitem&gt;
+  &lt;/varlistentry&gt;
+&lt;/variablelist&gt;</p>
+<p class="p">All scheduling of samples and timestamps is done in this base class
+together with <span class=" link"><a href="GstAudio.AudioBaseSrc.html" title="GstAudio.AudioBaseSrc">GstAudio.AudioBaseSrc</a></span> using a default implementation of a
+<span class=" link"><a href="GstAudio.AudioRingBuffer.html" title="GstAudio.AudioRingBuffer">GstAudio.AudioRingBuffer</a></span> that uses threads.</p>
+<p class="p">Last reviewed on 2006-09-27 (0.10.12)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstBase.BaseSrc</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstBase.PushSrc</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstAudio.AudioBaseSrc</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstAudio.AudioSrc</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstAudio.AudioSrc-close.html" title="GstAudio.AudioSrc::close">GstAudio.AudioSrc::close</a></li>
+<li class="links "><a href="GstAudio.AudioSrc-delay.html" title="GstAudio.AudioSrc::delay">GstAudio.AudioSrc::delay</a></li>
+<li class="links "><a href="GstAudio.AudioSrc-open.html" title="GstAudio.AudioSrc::open">GstAudio.AudioSrc::open</a></li>
+<li class="links "><a href="GstAudio.AudioSrc-prepare.html" title="GstAudio.AudioSrc::prepare">GstAudio.AudioSrc::prepare</a></li>
+<li class="links "><a href="GstAudio.AudioSrc-read.html" title="GstAudio.AudioSrc::read">GstAudio.AudioSrc::read</a></li>
+<li class="links "><a href="GstAudio.AudioSrc-reset.html" title="GstAudio.AudioSrc::reset">GstAudio.AudioSrc::reset</a></li>
+<li class="links "><a href="GstAudio.AudioSrc-unprepare.html" title="GstAudio.AudioSrc::unprepare">GstAudio.AudioSrc::unprepare</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

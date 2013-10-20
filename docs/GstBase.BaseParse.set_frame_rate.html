@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.BaseParse.prototype.set_frame_rate</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstBase.BaseParse.html" title="GstBase.BaseParse">GstBase.BaseParse</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.BaseParse.prototype.set_frame_rate</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function set_frame_rate(fps_num:Number, fps_den:Number, lead_in:Number, lead_out:Number):void {
+    // Gjs wrapper for gst_base_parse_set_frame_rate()
+}</pre></div></div></div></div></div>
+<p class="p">If frames per second is configured, parser can take care of buffer duration
+and timestamping.  When performing segment clipping, or seeking to a specific
+location, a corresponding decoder might need an initial <span class=" code">lead_in</span> and a
+following <span class=" code">lead_out</span> number of frames to ensure the desired segment is
+entirely filled upon decoding.</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">fps_num</span></dt>
+<dd class="terms"><p class="p">frames per second (numerator).</p></dd>
+<dt class="terms"><span class=" code">fps_den</span></dt>
+<dd class="terms"><p class="p">frames per second (denominator).</p></dd>
+<dt class="terms"><span class=" code">lead_in</span></dt>
+<dd class="terms"><p class="p">frames needed before a segment for subsequent decode</p></dd>
+<dt class="terms"><span class=" code">lead_out</span></dt>
+<dd class="terms"><p class="p">frames needed after a segment</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstBase.BaseParse.html" title="GstBase.BaseParse">GstBase.BaseParse</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

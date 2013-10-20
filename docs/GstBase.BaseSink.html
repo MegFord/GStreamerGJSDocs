@@ -1,0 +1,238 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.BaseSink</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.BaseSink</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstBase = imports.gi.GstBase;
+
+let base_sink = new GstBase.BaseSink({
+    <span class=" link"><a href="GstBase.BaseSink-async.html" title="GstBase.BaseSink:async">async</a></span>: value,
+    <span class=" link"><a href="GstBase.BaseSink-blocksize.html" title="GstBase.BaseSink:blocksize">blocksize</a></span>: value,
+    <span class=" link"><a href="GstBase.BaseSink-enable-last-sample.html" title="GstBase.BaseSink:enable-last-sample">enable_last_sample</a></span>: value,
+    <span class=" link"><a href="GstBase.BaseSink-max-lateness.html" title="GstBase.BaseSink:max-lateness">max_lateness</a></span>: value,
+    <span class=" link"><a href="GstBase.BaseSink-qos.html" title="GstBase.BaseSink:qos">qos</a></span>: value,
+    <span class=" link"><a href="GstBase.BaseSink-render-delay.html" title="GstBase.BaseSink:render-delay">render_delay</a></span>: value,
+    <span class=" link"><a href="GstBase.BaseSink-sync.html" title="GstBase.BaseSink:sync">sync</a></span>: value,
+    <span class=" link"><a href="GstBase.BaseSink-throttle-time.html" title="GstBase.BaseSink:throttle-time">throttle_time</a></span>: value,
+    <span class=" link"><a href="GstBase.BaseSink-ts-offset.html" title="GstBase.BaseSink:ts-offset">ts_offset</a></span>: value,
+});
+  </pre></div></div></div></div></div>
+<p class="p"><span class=" link"><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></span> is the base class for sink elements in GStreamer, such as
+xvimagesink or filesink. It is a layer on top of <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> that provides a
+simplified interface to plugin writers. <span class=" link"><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></span> handles many details
+for you, for example: preroll, clock synchronization, state changes,
+activation in push or pull mode, and queries.</p>
+<p class="p">In most cases, when writing sink elements, there is no need to implement
+class methods from <span class=" link"><a href="Gst.Element.html" title="Gst.Element">Gst.Element</a></span> or to set functions on pads, because the
+<span class=" link"><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></span> infrastructure should be sufficient.</p>
+<p class="p"><span class=" link"><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></span> provides support for exactly one sink pad, which should be
+named "sink". A sink implementation (subclass of <span class=" link"><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></span>) should
+install a pad template in its class_init function, like so:
+|[
+static void
+my_element_class_init (GstMyElementClass *klass)
+{
+  GstElementClass *gstelement_class = GST_ELEMENT_CLASS (klass);</p>
+<p class="p">  // sinktemplate should be a <span class=" link"><a href="Gst.StaticPadTemplate.html" title="Gst.StaticPadTemplate">Gst.StaticPadTemplate</a></span> with direction
+  // #GST_PAD_SINK and name "sink"
+  gst_element_class_add_pad_template (gstelement_class,
+      gst_static_pad_template_get (&amp;amp;sinktemplate));</p>
+<p class="p">  gst_element_class_set_static_metadata (gstelement_class,
+      "Sink name",
+      "Sink",
+      "My Sink element",
+      "The author &amp;lt;my.sink@my.email&amp;gt;");
+}
+]|</p>
+<p class="p"><span class=" link"><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></span> will handle the prerolling correctly. This means that it will
+return #GST_STATE_CHANGE_ASYNC from a state change to PAUSED until the first
+buffer arrives in this element. The base class will call the
+<span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.preroll() vmethod with this preroll buffer and will then
+commit the state change to the next asynchronously pending state.</p>
+<p class="p">When the element is set to PLAYING, <span class=" link"><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></span> will synchronise on the
+clock using the times returned from <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.get_times(). If this
+function returns #GST_CLOCK_TIME_NONE for the start time, no synchronisation
+will be done. Synchronisation can be disabled entirely by setting the object
+<span class=" link"><a href="GstBase.sync.html" title="GstBase.sync">GstBase.sync</a></span> property to <span class=" code">false</span>.</p>
+<p class="p">After synchronisation the virtual method <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.render() will be
+called. Subclasses should minimally implement this method.</p>
+<p class="p">Subclasses that synchronise on the clock in the <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.render()
+method are supported as well. These classes typically receive a buffer in
+the render method and can then potentially block on the clock while
+rendering. A typical example is an audiosink.
+These subclasses can use <span class=" link"><a href="GstBase.wait_preroll.html" title="GstBase.wait_preroll">GstBase.wait_preroll</a></span> to perform the
+blocking wait.</p>
+<p class="p">Upon receiving the EOS event in the PLAYING state, <span class=" link"><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></span> will wait
+for the clock to reach the time indicated by the stop time of the last
+<span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.get_times() call before posting an EOS message. When the
+element receives EOS in PAUSED, preroll completes, the event is queued and an
+EOS message is posted when going to PLAYING.</p>
+<p class="p"><span class=" link"><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></span> will internally use the #GST_EVENT_SEGMENT events to schedule
+synchronisation and clipping of buffers. Buffers that fall completely outside
+of the current segment are dropped. Buffers that fall partially in the
+segment are rendered (and prerolled). Subclasses should do any subbuffer
+clipping themselves when needed.</p>
+<p class="p"><span class=" link"><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></span> will by default report the current playback position in
+#GST_FORMAT_TIME based on the current clock time and segment information.
+If no clock has been set on the element, the query will be forwarded
+upstream.</p>
+<p class="p">The <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.set_caps() function will be called when the subclass
+should configure itself to process a specific media type.</p>
+<p class="p">The <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.start() and <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.stop() virtual methods
+will be called when resources should be allocated. Any 
+<span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.preroll(), <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.render() and
+<span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.set_caps() function will be called between the
+<span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.start() and <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.stop() calls.</p>
+<p class="p">The <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.event() virtual method will be called when an event is
+received by <span class=" link"><a href="GstBase.BaseSink.html" title="GstBase.BaseSink">GstBase.BaseSink</a></span>. Normally this method should only be overriden by
+very specific elements (such as file sinks) which need to handle the
+newsegment event specially.</p>
+<p class="p">The <span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.unlock() method is called when the elements should
+unblock any blocking operations they perform in the
+<span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.render() method. This is mostly useful when the
+<span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.render() method performs a blocking write on a file
+descriptor, for example.</p>
+<p class="p">The <span class=" link"><a href="GstBase.max-lateness.html" title="GstBase.max-lateness">GstBase.max-lateness</a></span> property affects how the sink deals with
+buffers that arrive too late in the sink. A buffer arrives too late in the
+sink when the presentation time (as a combination of the last segment, buffer
+timestamp and element base_time) plus the duration is before the current
+time of the clock.
+If the frame is later than max-lateness, the sink will drop the buffer
+without calling the render method.
+This feature is disabled if sync is disabled, the
+<span class=" link"><a href="GstBase.BaseSinkClass.html" title="GstBase.BaseSinkClass">GstBase.BaseSinkClass</a></span>.get_times() method does not return a valid start time or
+max-lateness is set to -1 (the default).
+Subclasses can use <span class=" link"><a href="GstBase.set_max_lateness.html" title="GstBase.set_max_lateness">GstBase.set_max_lateness</a></span> to configure the
+max-lateness value.</p>
+<p class="p">The <span class=" link"><a href="GstBase.qos.html" title="GstBase.qos">GstBase.qos</a></span> property will enable the quality-of-service features of
+the basesink which gather statistics about the real-time performance of the
+clock synchronisation. For each buffer received in the sink, statistics are
+gathered and a QOS event is sent upstream with these numbers. This
+information can then be used by upstream elements to reduce their processing
+rate, for example.</p>
+<p class="p">The <span class=" link"><a href="GstBase.async.html" title="GstBase.async">GstBase.async</a></span> property can be used to instruct the sink to never
+perform an ASYNC state change. This feature is mostly usable when dealing
+with non-synchronized streams or sparse streams.</p>
+<p class="p">Last reviewed on 2007-08-29 (0.10.15)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstBase.BaseSink</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.BaseSink.do_preroll.html" title="GstBase.BaseSink.prototype.do_preroll">GstBase.BaseSink.prototype.do_preroll</a></li>
+<li class="links "><a href="GstBase.BaseSink.get_blocksize.html" title="GstBase.BaseSink.prototype.get_blocksize">GstBase.BaseSink.prototype.get_blocksize</a></li>
+<li class="links "><a href="GstBase.BaseSink.get_last_sample.html" title="GstBase.BaseSink.prototype.get_last_sample">GstBase.BaseSink.prototype.get_last_sample</a></li>
+<li class="links "><a href="GstBase.BaseSink.get_latency.html" title="GstBase.BaseSink.prototype.get_latency">GstBase.BaseSink.prototype.get_latency</a></li>
+<li class="links "><a href="GstBase.BaseSink.get_max_lateness.html" title="GstBase.BaseSink.prototype.get_max_lateness">GstBase.BaseSink.prototype.get_max_lateness</a></li>
+<li class="links "><a href="GstBase.BaseSink.get_render_delay.html" title="GstBase.BaseSink.prototype.get_render_delay">GstBase.BaseSink.prototype.get_render_delay</a></li>
+<li class="links "><a href="GstBase.BaseSink.get_sync.html" title="GstBase.BaseSink.prototype.get_sync">GstBase.BaseSink.prototype.get_sync</a></li>
+<li class="links "><a href="GstBase.BaseSink.get_throttle_time.html" title="GstBase.BaseSink.prototype.get_throttle_time">GstBase.BaseSink.prototype.get_throttle_time</a></li>
+<li class="links "><a href="GstBase.BaseSink.get_ts_offset.html" title="GstBase.BaseSink.prototype.get_ts_offset">GstBase.BaseSink.prototype.get_ts_offset</a></li>
+<li class="links "><a href="GstBase.BaseSink.is_async_enabled.html" title="GstBase.BaseSink.prototype.is_async_enabled">GstBase.BaseSink.prototype.is_async_enabled</a></li>
+<li class="links "><a href="GstBase.BaseSink.is_last_sample_enabled.html" title="GstBase.BaseSink.prototype.is_last_sample_enabled">GstBase.BaseSink.prototype.is_last_sample_enabled</a></li>
+<li class="links "><a href="GstBase.BaseSink.is_qos_enabled.html" title="GstBase.BaseSink.prototype.is_qos_enabled">GstBase.BaseSink.prototype.is_qos_enabled</a></li>
+<li class="links "><a href="GstBase.BaseSink.query_latency.html" title="GstBase.BaseSink.prototype.query_latency">GstBase.BaseSink.prototype.query_latency</a></li>
+<li class="links "><a href="GstBase.BaseSink.set_async_enabled.html" title="GstBase.BaseSink.prototype.set_async_enabled">GstBase.BaseSink.prototype.set_async_enabled</a></li>
+<li class="links "><a href="GstBase.BaseSink.set_blocksize.html" title="GstBase.BaseSink.prototype.set_blocksize">GstBase.BaseSink.prototype.set_blocksize</a></li>
+<li class="links "><a href="GstBase.BaseSink.set_last_sample_enabled.html" title="GstBase.BaseSink.prototype.set_last_sample_enabled">GstBase.BaseSink.prototype.set_last_sample_enabled</a></li>
+<li class="links "><a href="GstBase.BaseSink.set_max_lateness.html" title="GstBase.BaseSink.prototype.set_max_lateness">GstBase.BaseSink.prototype.set_max_lateness</a></li>
+<li class="links "><a href="GstBase.BaseSink.set_qos_enabled.html" title="GstBase.BaseSink.prototype.set_qos_enabled">GstBase.BaseSink.prototype.set_qos_enabled</a></li>
+<li class="links "><a href="GstBase.BaseSink.set_render_delay.html" title="GstBase.BaseSink.prototype.set_render_delay">GstBase.BaseSink.prototype.set_render_delay</a></li>
+<li class="links "><a href="GstBase.BaseSink.set_sync.html" title="GstBase.BaseSink.prototype.set_sync">GstBase.BaseSink.prototype.set_sync</a></li>
+<li class="links "><a href="GstBase.BaseSink.set_throttle_time.html" title="GstBase.BaseSink.prototype.set_throttle_time">GstBase.BaseSink.prototype.set_throttle_time</a></li>
+<li class="links "><a href="GstBase.BaseSink.set_ts_offset.html" title="GstBase.BaseSink.prototype.set_ts_offset">GstBase.BaseSink.prototype.set_ts_offset</a></li>
+<li class="links "><a href="GstBase.BaseSink.wait.html" title="GstBase.BaseSink.prototype.wait">GstBase.BaseSink.prototype.wait</a></li>
+<li class="links "><a href="GstBase.BaseSink.wait_clock.html" title="GstBase.BaseSink.prototype.wait_clock">GstBase.BaseSink.prototype.wait_clock</a></li>
+<li class="links "><a href="GstBase.BaseSink.wait_preroll.html" title="GstBase.BaseSink.prototype.wait_preroll">GstBase.BaseSink.prototype.wait_preroll</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Properties</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.BaseSink-async.html" title="GstBase.BaseSink:async">async</a></li>
+<li class="links "><a href="GstBase.BaseSink-blocksize.html" title="GstBase.BaseSink:blocksize">blocksize</a></li>
+<li class="links "><a href="GstBase.BaseSink-enable-last-sample.html" title="GstBase.BaseSink:enable-last-sample">enable-last-sample</a></li>
+<li class="links "><a href="GstBase.BaseSink-last-sample.html" title="GstBase.BaseSink:last-sample">last-sample</a></li>
+<li class="links "><a href="GstBase.BaseSink-max-lateness.html" title="GstBase.BaseSink:max-lateness">max-lateness</a></li>
+<li class="links "><a href="GstBase.BaseSink-qos.html" title="GstBase.BaseSink:qos">qos</a></li>
+<li class="links "><a href="GstBase.BaseSink-render-delay.html" title="GstBase.BaseSink:render-delay">render-delay</a></li>
+<li class="links "><a href="GstBase.BaseSink-sync.html" title="GstBase.BaseSink:sync">sync</a></li>
+<li class="links "><a href="GstBase.BaseSink-throttle-time.html" title="GstBase.BaseSink:throttle-time">throttle-time</a></li>
+<li class="links "><a href="GstBase.BaseSink-ts-offset.html" title="GstBase.BaseSink:ts-offset">ts-offset</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.BaseSink-activate_pull.html" title="GstBase.BaseSink::activate_pull">GstBase.BaseSink::activate_pull</a></li>
+<li class="links "><a href="GstBase.BaseSink-event.html" title="GstBase.BaseSink::event">GstBase.BaseSink::event</a></li>
+<li class="links "><a href="GstBase.BaseSink-fixate.html" title="GstBase.BaseSink::fixate">GstBase.BaseSink::fixate</a></li>
+<li class="links "><a href="GstBase.BaseSink-get_caps.html" title="GstBase.BaseSink::get_caps">GstBase.BaseSink::get_caps</a></li>
+<li class="links "><a href="GstBase.BaseSink-get_times.html" title="GstBase.BaseSink::get_times">GstBase.BaseSink::get_times</a></li>
+<li class="links "><a href="GstBase.BaseSink-prepare.html" title="GstBase.BaseSink::prepare">GstBase.BaseSink::prepare</a></li>
+<li class="links "><a href="GstBase.BaseSink-prepare_list.html" title="GstBase.BaseSink::prepare_list">GstBase.BaseSink::prepare_list</a></li>
+<li class="links "><a href="GstBase.BaseSink-preroll.html" title="GstBase.BaseSink::preroll">GstBase.BaseSink::preroll</a></li>
+<li class="links "><a href="GstBase.BaseSink-propose_allocation.html" title="GstBase.BaseSink::propose_allocation">GstBase.BaseSink::propose_allocation</a></li>
+<li class="links "><a href="GstBase.BaseSink-query.html" title="GstBase.BaseSink::query">GstBase.BaseSink::query</a></li>
+<li class="links "><a href="GstBase.BaseSink-render.html" title="GstBase.BaseSink::render">GstBase.BaseSink::render</a></li>
+<li class="links "><a href="GstBase.BaseSink-render_list.html" title="GstBase.BaseSink::render_list">GstBase.BaseSink::render_list</a></li>
+<li class="links "><a href="GstBase.BaseSink-set_caps.html" title="GstBase.BaseSink::set_caps">GstBase.BaseSink::set_caps</a></li>
+<li class="links "><a href="GstBase.BaseSink-start.html" title="GstBase.BaseSink::start">GstBase.BaseSink::start</a></li>
+<li class="links "><a href="GstBase.BaseSink-stop.html" title="GstBase.BaseSink::stop">GstBase.BaseSink::stop</a></li>
+<li class="links "><a href="GstBase.BaseSink-unlock.html" title="GstBase.BaseSink::unlock">GstBase.BaseSink::unlock</a></li>
+<li class="links "><a href="GstBase.BaseSink-unlock_stop.html" title="GstBase.BaseSink::unlock_stop">GstBase.BaseSink::unlock_stop</a></li>
+<li class="links "><a href="GstBase.BaseSink-wait_event.html" title="GstBase.BaseSink::wait_event">GstBase.BaseSink::wait_event</a></li>
+</ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

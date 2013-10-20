@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.BaseTransform.prototype.set_prefer_passthrough</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » <a class="trail" href="GstBase.BaseTransform.html" title="GstBase.BaseTransform">GstBase.BaseTransform</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.BaseTransform.prototype.set_prefer_passthrough</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">function set_prefer_passthrough(prefer_passthrough:Boolean):void {
+    // Gjs wrapper for gst_base_transform_set_prefer_passthrough()
+}</pre></div></div></div></div></div>
+<p class="p">If <span class=" code">prefer_passthrough</span> is <span class=" code">true</span> (the default), @trans will check and
+prefer passthrough caps from the list of caps returned by the
+transform_caps vmethod.</p>
+<p class="p">If set to <span class=" code">false</span>, the element must order the caps returned from the
+transform_caps function in such a way that the prefered format is
+first in the list. This can be interesting for transforms that can do
+passthrough transforms but prefer to do something else, like a
+capsfilter.</p>
+<p class="p">MT safe.</p>
+<p class="p">Since 1.0.1</p>
+<div class="terms"><div class="inner"><div class="region"><dl class="terms">
+<dt class="terms"><span class=" code">prefer_passthrough</span></dt>
+<dd class="terms"><p class="p">New state</p></dd>
+</dl></div></div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstBase.BaseTransform.html" title="GstBase.BaseTransform">GstBase.BaseTransform</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

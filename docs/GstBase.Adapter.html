@@ -1,0 +1,140 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstBase.Adapter</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstBase.Adapter</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstBase = imports.gi.GstBase;
+
+let adapter = new GstBase.Adapter();
+  </pre></div></div></div></div></div>
+<p class="p">This class is for elements that receive buffers in an undesired size.
+While for example raw video contains one image per buffer, the same is not
+true for a lot of other formats, especially those that come directly from
+a file. So if you have undefined buffer sizes and require a specific size,
+this object is for you.</p>
+<p class="p">An adapter is created with <span class=" link"><a href="GstBase.new.html" title="GstBase.new">GstBase.new</a></span>. It can be freed again with
+g_object_unref().</p>
+<p class="p">The theory of operation is like this: All buffers received are put
+into the adapter using <span class=" link"><a href="GstBase.push.html" title="GstBase.push">GstBase.push</a></span> and the data is then read back
+in chunks of the desired size using <span class=" link"><a href="GstBase.map.html" title="GstBase.map">GstBase.map</a></span>/<span class=" link"><a href="GstBase.unmap.html" title="GstBase.unmap">GstBase.unmap</a></span>
+and/or <span class=" link"><a href="GstBase.copy.html" title="GstBase.copy">GstBase.copy</a></span>. After the data has been processed, it is freed
+using <span class=" link"><a href="GstBase.unmap.html" title="GstBase.unmap">GstBase.unmap</a></span>.</p>
+<p class="p">Other methods such as <span class=" link"><a href="GstBase.take.html" title="GstBase.take">GstBase.take</a></span> and <span class=" link"><a href="GstBase.take_buffer.html" title="GstBase.take_buffer">GstBase.take_buffer</a></span>
+combine <span class=" link"><a href="GstBase.map.html" title="GstBase.map">GstBase.map</a></span> and <span class=" link"><a href="GstBase.unmap.html" title="GstBase.unmap">GstBase.unmap</a></span> in one method and are
+potentially more convenient for some use cases.</p>
+<p class="p">For example, a sink pad's chain function that needs to pass data to a library
+in 512-byte chunks could be implemented like this:
+|[
+static GstFlowReturn
+sink_pad_chain (GstPad *pad, GstObject *parent, GstBuffer *buffer)
+{
+  MyElement *this;
+  GstAdapter *adapter;
+  GstFlowReturn ret = GST_FLOW_OK;</p>
+<p class="p">  this = MY_ELEMENT (parent);</p>
+<p class="p">  adapter = this-&gt;adapter;</p>
+<p class="p">  // put buffer into adapter
+  gst_adapter_push (adapter, buffer);</p>
+<p class="p">  // while we can read out 512 bytes, process them
+  while (gst_adapter_available (adapter) &gt;= 512 &amp;&amp; ret == GST_FLOW_OK) {
+    const guint8 *data = gst_adapter_map (adapter, 512);
+    // use flowreturn as an error value
+    ret = my_library_foo (data);
+    gst_adapter_unmap (adapter);
+    gst_adapter_flush (adapter, 512);
+  }
+  return ret;
+}
+]|</p>
+<p class="p">For another example, a simple element inside GStreamer that uses GstAdapter
+is the libvisual element.</p>
+<p class="p">An element using GstAdapter in its sink pad chain function should ensure that
+when the FLUSH_STOP event is received, that any queued data is cleared using
+<span class=" link"><a href="GstBase.clear.html" title="GstBase.clear">GstBase.clear</a></span>. Data should also be cleared or processed on EOS and
+when changing state from #GST_STATE_PAUSED to #GST_STATE_READY.</p>
+<p class="p">Also check the GST_BUFFER_FLAG_DISCONT flag on the buffer. Some elements might
+need to clear the adapter after a discontinuity.</p>
+<p class="p">The adapter will keep track of the timestamps of the buffers
+that were pushed. The last seen timestamp before the current position
+can be queried with gst_adapter_prev_timestamp(). This function can
+optionally return the amount of bytes between the start of the buffer that
+carried the timestamp and the current adapter position. The distance is
+useful when dealing with, for example, raw audio samples because it allows
+you to calculate the timestamp of the current adapter position by using the
+last seen timestamp and the amount of bytes since.</p>
+<p class="p">A last thing to note is that while GstAdapter is pretty optimized,
+merging buffers still might be an operation that requires a malloc() and
+memcpy() operation, and these operations are not the fastest. Because of
+this, some functions like <span class=" link"><a href="GstBase.available_fast.html" title="GstBase.available_fast">GstBase.available_fast</a></span> are provided to help
+speed up such cases should you want to. To avoid repeated memory allocations,
+<span class=" link"><a href="GstBase.copy.html" title="GstBase.copy">GstBase.copy</a></span> can be used to copy data into a (statically allocated)
+user provided buffer.</p>
+<p class="p">GstAdapter is not MT safe. All operations on an adapter must be serialized by
+the caller. This is not normally a problem, however, as the normal use case
+of GstAdapter is inside one pad's chain function, in which case access is
+serialized via the pad's STREAM_LOCK.</p>
+<p class="p">Note that <span class=" link"><a href="GstBase.push.html" title="GstBase.push">GstBase.push</a></span> takes ownership of the buffer passed. Use
+gst_buffer_ref() before pushing it into the adapter if you still want to
+access the buffer later. The adapter will never modify the data in the
+buffer pushed in it.</p>
+<p class="p">Last reviewed on 2009-05-13 (0.10.24).</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstBase.Adapter</span>
+      </div></li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Methods</span></h2></div>
+<div class="region"><ul>
+<li class="links "><a href="GstBase.Adapter.available.html" title="GstBase.Adapter.prototype.available">GstBase.Adapter.prototype.available</a></li>
+<li class="links "><a href="GstBase.Adapter.available_fast.html" title="GstBase.Adapter.prototype.available_fast">GstBase.Adapter.prototype.available_fast</a></li>
+<li class="links "><a href="GstBase.Adapter.clear.html" title="GstBase.Adapter.prototype.clear">GstBase.Adapter.prototype.clear</a></li>
+<li class="links "><a href="GstBase.Adapter.copy.html" title="GstBase.Adapter.prototype.copy">GstBase.Adapter.prototype.copy</a></li>
+<li class="links "><a href="GstBase.Adapter.flush.html" title="GstBase.Adapter.prototype.flush">GstBase.Adapter.prototype.flush</a></li>
+<li class="links "><a href="GstBase.Adapter.map.html" title="GstBase.Adapter.prototype.map">GstBase.Adapter.prototype.map</a></li>
+<li class="links "><a href="GstBase.Adapter.masked_scan_uint32.html" title="GstBase.Adapter.prototype.masked_scan_uint32">GstBase.Adapter.prototype.masked_scan_uint32</a></li>
+<li class="links "><a href="GstBase.Adapter.masked_scan_uint32_peek.html" title="GstBase.Adapter.prototype.masked_scan_uint32_peek">GstBase.Adapter.prototype.masked_scan_uint32_peek</a></li>
+<li class="links "><a href="GstBase.Adapter.prev_dts.html" title="GstBase.Adapter.prototype.prev_dts">GstBase.Adapter.prototype.prev_dts</a></li>
+<li class="links "><a href="GstBase.Adapter.prev_pts.html" title="GstBase.Adapter.prototype.prev_pts">GstBase.Adapter.prototype.prev_pts</a></li>
+<li class="links "><a href="GstBase.Adapter.push.html" title="GstBase.Adapter.prototype.push">GstBase.Adapter.prototype.push</a></li>
+<li class="links "><a href="GstBase.Adapter.take.html" title="GstBase.Adapter.prototype.take">GstBase.Adapter.prototype.take</a></li>
+<li class="links "><a href="GstBase.Adapter.take_buffer.html" title="GstBase.Adapter.prototype.take_buffer">GstBase.Adapter.prototype.take_buffer</a></li>
+<li class="links "><a href="GstBase.Adapter.take_list.html" title="GstBase.Adapter.prototype.take_list">GstBase.Adapter.prototype.take_list</a></li>
+<li class="links "><a href="GstBase.Adapter.unmap.html" title="GstBase.Adapter.prototype.unmap">GstBase.Adapter.prototype.unmap</a></li>
+</ul></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Other</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstBase.Adapter.new.html" title="GstBase.Adapter.new">GstBase.Adapter.new</a></li></ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>

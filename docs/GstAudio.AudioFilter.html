@@ -1,0 +1,85 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>GstAudio.AudioFilter</title>
+<link rel="stylesheet" type="text/css" href="C.css">
+<script type="text/javascript" src="jquery.js"></script><script type="text/javascript" src="jquery.syntax.js"></script><script type="text/javascript" src="yelp.js"></script>
+</head>
+<body><div class="page" role="main">
+<div class="header"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Index">Index</a> » </div></div></div>
+<div class="body">
+<div class="hgroup"><h1 class="title"><span class="title">GstAudio.AudioFilter</span></h1></div>
+<div class="region">
+<div class="contents">
+<div class="synopsis"><div class="inner"><div class="region"><div class="contents"><div class="code"><pre class="contents ">const GstAudio = imports.gi.GstAudio;
+
+let audio_filter = new GstAudio.AudioFilter();
+  </pre></div></div></div></div></div>
+<p class="p"><span class=" link"><a href="GstAudio.AudioFilter.html" title="GstAudio.AudioFilter">GstAudio.AudioFilter</a></span> is a <span class=" link"><a href="GstBase.BaseTransform.html" title="GstBase.BaseTransform">GstBase.BaseTransform</a></span>&lt;!-- --&gt;-derived base class for simple audio
+filters, ie. those that output the same format that they get as input.</p>
+<p class="p"><span class=" link"><a href="GstAudio.AudioFilter.html" title="GstAudio.AudioFilter">GstAudio.AudioFilter</a></span> will parse the input format for you (with error checking)
+before calling your setup function. Also, elements deriving from
+<span class=" link"><a href="GstAudio.AudioFilter.html" title="GstAudio.AudioFilter">GstAudio.AudioFilter</a></span> may use <span class=" link"><a href="GstAudio.add_pad_templates.html" title="GstAudio.add_pad_templates">GstAudio.add_pad_templates</a></span> from
+their class_init function to easily configure the set of caps/formats that
+the element is able to handle.</p>
+<p class="p">Derived classes should override the <span class=" link"><a href="GstAudio.AudioFilterClass.html" title="GstAudio.AudioFilterClass">GstAudio.AudioFilterClass</a></span>.setup() and
+<span class=" link"><a href="GstBase.BaseTransformClass.html" title="GstBase.BaseTransformClass">GstBase.BaseTransformClass</a></span>.transform_ip() and/or
+<span class=" link"><a href="GstBase.BaseTransformClass.html" title="GstBase.BaseTransformClass">GstBase.BaseTransformClass</a></span>.transform()
+virtual functions in their class_init function.</p>
+<p class="p">Last reviewed on 2007-02-03 (0.10.11.1)</p>
+<div class="synopsis"><div class="inner">
+<div class="title title-synopsis"><h2><span class="title">Hierarchy</span></h2></div>
+<div class="region"><div class="contents"><div class="tree"><div class="inner"><div class="region"><ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GObject.InitiallyUnowned</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Object</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">Gst.Element</span>
+      
+      </div>
+<ul class="tree"><li class="tree">
+<div>
+        <span class=" code">GstBase.BaseTransform</span>
+      
+      </div>
+<ul class="tree"><li class="tree"><div>
+        <span class=" code">GstAudio.AudioFilter</span>
+      </div></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul></div></div></div></div></div>
+</div></div>
+<div class="links topiclinks"><div class="inner">
+<div class="title title-links"><h2><span class="title">Virtual functions</span></h2></div>
+<div class="region"><ul><li class="links "><a href="GstAudio.AudioFilter-setup.html" title="GstAudio.AudioFilter::setup">GstAudio.AudioFilter::setup</a></li></ul></div>
+</div></div>
+</div>
+<div class="sect sect-links" role="navigation">
+<div class="hgroup"></div>
+<div class="contents"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">More Information</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Index">Index</a></li></ul></div>
+</div></div></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="footer"></div>
+</div></body>
+</html>
